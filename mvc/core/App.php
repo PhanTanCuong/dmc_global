@@ -3,7 +3,7 @@
     
     //Http://localhost/controller/action/param1/param2
     protected $controller="Home"; //Layout (Controller) mặc định nếu enduser gõ ngẫu nhiên
-    protected $action="test";//Action mặc định nếu enduser gõ ngẫu nhiên
+    protected $action="display";//Action mặc định nếu enduser gõ ngẫu nhiên
 
     protected $params=[];
 
