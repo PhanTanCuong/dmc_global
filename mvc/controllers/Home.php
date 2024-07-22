@@ -1,7 +1,8 @@
 <?php 
-    class Home{
+    class Home extends Controller{
         function test(){
-            echo "test";
+            $user = $this->model("AccountModel");
+            echo $user->getAccount();
         }
 
         function test1(){

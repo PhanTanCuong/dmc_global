@@ -19,7 +19,7 @@
         }
 
         require_once "./mvc/controllers/". $this->controller.".php";
-
+        $this->controller= new $this->controller; //khởi tạo đối tượng controller
         //Xử lý Action
         if(isset($arr[1])){   
             if( method_exists($this->controller,$arr[1]) ){
