@@ -1,0 +1,299 @@
+/*Product*/
+
+.product1 button {
+    color: white;
+    background-color: transparent;
+    padding: 10px 10px;
+    border-color: white;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#product {
+
+    top: pading 20px;
+}
+
+/*product1 */
+.product1 {
+    height: 600px;
+    background-image: url('../images/our_product_picture.png');
+    background-size: cover;
+    /* Chỉnh kích thước ảnh để phù hợp với kích thước của div */
+    background-position: center;
+    /* width: 105em;
+    height: 35em; */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+
+
+.product1 h1 {
+    color: white;
+    font-size: 4rem;
+    text-align: center;
+}
+
+.product1 p {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+
+}
+
+.product1 button {
+    color: white;
+    background-color: transparent;
+    padding: 0.5rem 3.5rem;
+    border-color: white;
+    border-radius: 6px;
+    font-size: 1.5rem;
+}
+
+
+
+
+/* product2 */
+/* Styles for the grid */
+.product2 {
+    margin-bottom: 4em;
+    padding: 0;
+}
+
+.grid {
+    padding: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+}
+
+.btn2-container {
+    display: flex;
+    justify-content: center;
+    margin: 2em;
+}
+
+.btn2 {
+    font-size: 1em;
+    width: 11em;
+    text-transform: uppercase;
+    font-weight: 200;
+    color: white;
+    justify-content: center;
+    background-color: #CC0000;
+    border-radius: 4px;
+    /* font-weight: 100; */
+    padding: 10px 30px;
+    /* border-color: white; */
+    border: none;
+}
+
+
+.title {
+    text-transform: uppercase;
+    color: #c92027;
+    text-align: center;
+    font-size: 50px;
+    margin: 1em 0 2em 0em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+
+.pseudo {
+    background: #c92027;
+    content: "";
+    width: 1.2em;
+    height: 2px;
+    position: absolute;
+    bottom: -0.4em;
+}
+
+.pseudo::before {
+    content: "";
+}
+
+
+.comp {
+    /* width: 300px;
+    height: 200p; */
+    border: none;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    text-align: justify;
+    border-radius: 4px;
+    position: relative;
+}
+
+.comp img {
+    width: 100%;
+    border: none;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    text-align: justify;
+    border-radius: 8px;
+}
+
+.comp h2 {
+    padding-left: 10px;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.comp p {
+    font-size: 1.5em;
+    color: #666;
+    line-height: 1.5;
+    padding-left: 10px;
+}
+
+.comp .arrow {
+    content: url(../images/arrow.png);
+    visibility: hidden;
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+}
+
+
+.comp:hover h2 {
+    color: #c92027;
+}
+
+.comp:hover .arrow {
+    visibility: visible;
+}
+
+.comp:hover {
+    box-shadow: 1px -1px 17px #88888830;
+
+}
+
+.comp:hover img {
+    border-radius: 0px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* 
+product3 */
+
+.product-card {
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-info {
+    padding: 20px;
+    background: #f8f8f8;
+}
+
+.product-info h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* responsive */
+
+@media only screen and (max-width:1024px) {
+
+    /* product1 */
+    .product1 {
+        margin: 5rem 0;
+        height: auto;
+    }
+
+    .product1 h1 {
+        font-size: 2.5rem;
+    }
+
+    /* .product1 button {
+        font-size: 1rem;
+    } */
+}
+
+@media only screen and (min-width:721px) and (max-width:1024px) {
+
+    /* product2 */
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pseudo {
+        width: 1.2em;
+        height: 4px;
+        /* /* bottom: -1.4em; */
+    }
+
+    .product1 p {
+        font-size: 1.5rem;
+    }
+    .product1 button{
+        font-size: 1rem;
+        padding: 0.25rem 2.5rem;  
+        margin-bottom: 5px;
+    }
+
+
+}
+
+@media only screen and (max-width:720px) {
+
+    /* product2 */
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        margin: 1rem 0;
+    }
+
+    .pseudo {
+        width: 3.5rem;
+        height: 0.2rem;
+        bottom: -1.5rem;
+    }
+
+    .comp h2 {
+        font-size: 1.75em;
+    }
+
+    .comp p {
+        font-size: 1rem;
+    }
+    /* product1 */
+    .product1{
+        height: 190px;
+    }
+
+    .product1 p {
+        font-size: 0.75rem;
+    }
+
+    .product1 button{
+        font-size: 0.75rem;
+        padding: 0.25rem 1.5rem;  
+        margin-bottom: 5px;
+    }
+}

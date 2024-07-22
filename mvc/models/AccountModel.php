@@ -1,7 +1,7 @@
 <?php 
 class AccountModel extends DB{
     public function getAccount(){
-        $query_run="SELECT * FROM register ";
+        $query_run="SELECT * FROM register";
         return mysqli_query($this->connection,$query_run);
     }
 }
