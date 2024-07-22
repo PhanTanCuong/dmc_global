@@ -1,7 +1,8 @@
 <?php 
-class AccountModel{
+class AccountModel extends DB{
     public function getAccount(){
-        return "admin";
+        $query_run="SELECT * FROM register ";
+        return mysqli_query($this->connection,$query_run);
     }
 }
 ?>

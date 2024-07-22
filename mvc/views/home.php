@@ -7,7 +7,11 @@
 </head>
 <body>
     <h2>Test</h2>
-    <h3 style="color:<?php echo $data["color"] ?>"><?php echo $data["test"]?></h3>
+    <h3 style="color:<?php echo $data["color"] ?>"><?php 
+    while ($row = mysqli_fetch_array($data["user"])) {
+        echo $row["email"]."<br/ >";
+    }
+    ?></h3>
     
 </body>
 </html>
