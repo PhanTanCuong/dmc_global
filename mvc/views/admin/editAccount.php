@@ -1,6 +1,6 @@
 <?php
-include ('admin/includes/header.php');
-include ('admin/includes/nav.php');
+include ('includes/header.php');
+include ('includes/nav.php');
 
 ?>
 
@@ -67,6 +67,6 @@ include ('admin/includes/nav.php');
 
 
 <?php
-include ('admin/includes/scripts.php');
-include ('admin/includes/footer.php');
+include ('includes/scripts.php');
+include ('includes/footer.php');
 ?>
