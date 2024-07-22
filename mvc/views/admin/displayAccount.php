@@ -1,7 +1,6 @@
 <?php
-include ('../includes/security.php');
-include ('../includes/header.php');
-include ('../includes/nav.php');
+include ('admin/includes/header.php');
+include ('admin/includes/nav.php');
 ?>
 <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -131,6 +130,6 @@ include ('../includes/nav.php');
   </div>
 
   <?php
-  include ('../includes/scripts.php');
-  include ('../includes/footer.php');
+include ('admin/includes/scripts.php');
+include ('admin/includes/footer.php');
   ?>

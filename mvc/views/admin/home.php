@@ -1,7 +1,7 @@
 <?php
-include('../includes/security.php');
-include('../includes/header.php'); 
-include('../includes/nav.php'); 
+
+include ('admin/includes/header.php');
+include ('admin/includes/nav.php');
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -118,6 +118,6 @@ include('../includes/nav.php');
 
 
   <?php
-include('../includes/scripts.php');
-include('../includes/footer.php');
+include ('admin/includes/scripts.php');
+include ('admin/includes/footer.php');
 ?>
