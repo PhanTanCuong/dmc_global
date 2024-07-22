@@ -18,10 +18,9 @@ include ('includes/nav.php');
         if (isset($_POST['edit_btn'])) {
 
             $id = $_POST['edit_id'];
-            $query = "SELECT * FROM register WHERE id='$id'";
-            $query_run = mysqli_query($connection, $query);
 
-            foreach ($query_run as $row) {
+
+            foreach ($data["user"] as $row) {
                 ?>
 
                 <form action="../Controller/account.php" method="POST">

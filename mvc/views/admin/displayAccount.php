@@ -79,8 +79,6 @@ include ('includes/nav.php');
       ?>
       <div class="table-responsive">
         <?php
-        $query = "SELECT * FROM register";
-        $query_run = mysqli_query($connection, $query);
         ?>
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
@@ -96,8 +94,8 @@ include ('includes/nav.php');
           </thead>
           <tbody>
             <?php
-            if (mysqli_num_rows($query_run) > 0) {
-              while ($row = mysqli_fetch_array($query_run)) {
+            if (mysqli_num_rows($data["user"]) > 0) {
+              while ($row = mysqli_fetch_array($data["user"])) {
                 ?>
                 <tr>
                   <td><?php echo $row['id']; ?></td>
@@ -106,13 +104,13 @@ include ('includes/nav.php');
                   <td><?php echo substr($row['password'], 0, 10); ?></td> 
                   <td><?php echo $row['role']; ?></td>
                   <td>
-                    <form action="register_edit.php" method="POST">
+                    <form action="loadEditUserForm" method="POST">
                       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                       <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                     </form>
                   </td>
                   <td>
-                    <form action="../Controller/account.php" method="POST">
+                    <form action="../mvc/controllers/Account.php" method="POST">
                       <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                       <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                     </form>
