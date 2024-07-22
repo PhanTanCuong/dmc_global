@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('../includes/header.php');
+include ('admin/includes/header.php');
 ?>
 <div class="container">
 
@@ -57,5 +57,5 @@ include ('../includes/header.php');
 </div>
 
 <?php
-include ('../includes/scripts.php');
+include ('admin/includes/scripts.php');
 ?>
