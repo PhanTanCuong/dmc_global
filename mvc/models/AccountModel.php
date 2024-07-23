@@ -33,11 +33,26 @@ class AccountModel extends DB{
         return mysqli_query($this->connection,$query_run);
     }
 
-    public function addAccount($username,$email,$password,$role){
+    public function addAccount($username= null,$email=null,$password=null,$role=null){
+        try{
             //PASSWORD_BCRYPT: độ dài=60
             //PASSWORD_DEFAULT: độ dài=255
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
-            $query_run= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password','$role')";
+            $query= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password,'$role')";
+
+            $query_run = mysqli_query($this->connection, $query);
+
+            if($query_run){
+                return true;
+            }else{
+                return false;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+            
+            
     }
 }
 ?>

@@ -9,7 +9,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../Controller/account.php" method="POST">
+      <form action="addAccount" method="POST">
 
         <div class="modal-body">
 
@@ -40,7 +40,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="registerbtn" class="btn btn-primary">Save</button>
+          <button type="submit" name="addAccountBtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
