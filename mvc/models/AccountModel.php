@@ -38,7 +38,7 @@ class AccountModel extends DB{
             //PASSWORD_BCRYPT: độ dài=60
             //PASSWORD_DEFAULT: độ dài=255
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
-            $query= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password,'$role')";
+            $query= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password','$role')";
 
             $query_run = mysqli_query($this->connection, $query);
 
