@@ -15,6 +15,13 @@
   <script src="../public/js/admin/demo/chart-area-demo.js"></script>
   <script src="../public/js/admin/demo/chart-pie-demo.js"></script>
 
+<script>
+    function redirectTo(path) {
+        // <!-- The link that will trigger the JavaScript function to redirect -->
+        window.location.href = '/dmc_global/' + path;
+    }
+</script>
+
 
   <?php
 

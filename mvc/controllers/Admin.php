@@ -11,6 +11,7 @@
            ]);
         }
 
+        
         function displayAccount(){
             //Model
             $user=$this->model("AccountModel");
@@ -21,5 +22,8 @@
                 "page"=>"displayAccount"
             ]);
         }
+   
+
+        
     }
 ?>
