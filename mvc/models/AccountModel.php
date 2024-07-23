@@ -14,6 +14,19 @@ class AccountModel extends DB{
         return $result;
     }
 
+    //Total number of user
+    public function totalUser(){
+        $query="SELECT id FROM register ORDER BY id";
+        $result = mysqli_query($this->connection, $query);
+        
+        // Check for query execution error
+        if (!$result) {
+            die('Query failed: ' . mysqli_error($this->connection));
+        }
+        $total=mysqli_num_rows($result);
+        return $total;
+    }
+
     //get account infor by id
     public function getAccountbyId($id){
         $query_run="SELECT * FROM register where id='$id'";

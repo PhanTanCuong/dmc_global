@@ -20,12 +20,7 @@
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Registered Admin</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
-                require('../Database/dbconfig.php');
-                $query="SELECT id FROM register ORDER BY id";
-                $query_run=mysqli_query($connection,$query);
-                $row=mysqli_num_rows($query_run);
-                
-                echo ' <h4>Total Admin: '.$row.'</h4>'
+                echo ' <h4>Total Admin: '.$data["totalUser"].'</h4>'
 
                 ?>
 
