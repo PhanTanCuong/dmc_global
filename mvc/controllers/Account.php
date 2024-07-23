@@ -1,15 +1,6 @@
 <?php 
-    class Account extends Controller{
-        function display(){
-            //Model
-            $user=$this->model("AccountModel");
-            
-            //View
-            $this->view("admin/displayAccount",[
-                "user" => $user->getAccount()
-            ]);
-        }
-
+    class Account extends Admin{
+  
         function loadEditUserForm(){
             $user =$this->model("AccountModel");
             if(isset($_POST['id'])){

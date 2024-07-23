@@ -3,8 +3,15 @@ class AccountModel extends DB{
 
     //get List of accounts function
     public function getAccount(){
-        $query_run="SELECT * FROM register";
-        return mysqli_query($this->connection,$query_run);
+        $query = "SELECT * FROM register";
+        $result = mysqli_query($this->connection, $query);
+        
+        // Check for query execution error
+        if (!$result) {
+            die('Query failed: ' . mysqli_error($this->connection));
+        }
+
+        return $result;
     }
 
     //get account infor by id

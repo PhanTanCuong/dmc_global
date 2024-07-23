@@ -1,8 +1,4 @@
-<?php
-include ('includes/header.php');
-include ('includes/nav.php');
 
-?>
 
 
 <div class="container-fluid">
@@ -64,8 +60,3 @@ include ('includes/nav.php');
     </div>
 </div>
 
-
-<?php
-include ('includes/scripts.php');
-include ('includes/footer.php');
-?>

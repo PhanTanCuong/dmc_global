@@ -1,7 +1,4 @@
-<?php
-include ('includes/header.php');
-include ('includes/nav.php');
-?>
+
 <div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -127,6 +124,3 @@ include ('includes/nav.php');
     </div>
   </div>
 
-  <?php
-include ('includes/scripts.php');
-include ('includes/footer.php');
