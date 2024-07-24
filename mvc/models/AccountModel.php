@@ -33,6 +33,7 @@ class AccountModel extends DB{
         return mysqli_query($this->connection,$query_run);
     }
 
+    //add user account function
     public function addAccount($username= null,$email=null,$password=null,$role=null){
         try{
             //PASSWORD_BCRYPT: độ dài=60
@@ -54,5 +55,38 @@ class AccountModel extends DB{
             
             
     }
+
+    //edit user account function
+    public function editAccount($id=null,$username=null,$email=null,$password=null,$role=null){
+        try{
+            $hash_password = password_hash($password, PASSWORD_BCRYPT);
+            // Kiểm tra mật khẩu hiện tại
+            $result =$this->getAccountbyId($id);
+            if($result){
+            $store_password = mysqli_fetch_assoc($result)['password'];
+                if(password_verify($password, $store_password)){
+                    $query= "UPDATE  register SET username='$username', email='$email', role='$role' WHERE id='$id'  ";
+                }else{
+                    $query= "UPDATE  register SET username='$username', email='$email', password='$hash_password', role='$role' WHERE id='$id'  ";
+                }
+            }else{
+                return false;
+            }
+            $query_run = mysqli_query($this->connection, $query);
+
+            if($query_run){
+                return true;
+            }else{
+                return false;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+            
+            
+    }
+
+
 }
 ?>

@@ -19,7 +19,7 @@
             foreach ($data["user"] as $row) {
                 ?>
 
-                <form action="../Controller/account.php" method="POST">
+                <form action="editAccount" method="POST">
                     <div class="card-body">
                         <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                         <div class="form-group">
@@ -47,7 +47,7 @@
                     </div>
 
                     <div>
-                        <a href="register.php" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
+                        <a href="displayAccount" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
                         <button type="submit" name="user_updatebtn" class="btn btn-primary">Update</button>
                     </div>
                 </form>
