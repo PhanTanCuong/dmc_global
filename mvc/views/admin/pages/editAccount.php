@@ -1,8 +1,4 @@
-<?php
-include ('includes/header.php');
-include ('includes/nav.php');
 
-?>
 
 
 <div class="container-fluid">
@@ -18,13 +14,12 @@ include ('includes/nav.php');
         if (isset($_POST['edit_btn'])) {
 
             $id = $_POST['edit_id'];
-            $query = "SELECT * FROM register WHERE id='$id'";
-            $query_run = mysqli_query($connection, $query);
 
-            foreach ($query_run as $row) {
+
+            foreach ($data["user"] as $row) {
                 ?>
 
-                <form action="../Controller/account.php" method="POST">
+                <form action="editAccount" method="POST">
                     <div class="card-body">
                         <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                         <div class="form-group">
@@ -52,7 +47,7 @@ include ('includes/nav.php');
                     </div>
 
                     <div>
-                        <a href="register.php" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
+                        <a href="displayAccount" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
                         <button type="submit" name="user_updatebtn" class="btn btn-primary">Update</button>
                     </div>
                 </form>
@@ -65,8 +60,3 @@ include ('includes/nav.php');
     </div>
 </div>
 
-
-<?php
-include ('includes/scripts.php');
-include ('includes/footer.php');
-?>

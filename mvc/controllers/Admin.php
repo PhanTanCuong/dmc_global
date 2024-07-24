@@ -1,7 +1,19 @@
 <?php 
     class Admin extends Controller{
         function display(){
-           $this->view("admin/home",[]);
+            //Model
+            $total=$this->model("AccountModel");
+            //View
+           $this->view("admin/home",[
+            "totalUser"=>$total->totalUser(),
+            "page"=>"main"
+ 
+           ]);
         }
+
+        
+     
+
+
     }
 ?>

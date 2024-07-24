@@ -3,7 +3,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('Admin/');">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -15,7 +15,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/');">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -45,7 +45,7 @@
     </li>
     <!-- Nav Item - Admin Profies -->
     <li class="nav-item">
-        <a class="nav-link" href="../View/register.php">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Account/displayAccount');">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Admin Profiles</span>
         </a>
@@ -364,3 +364,5 @@
                 </div>
             </div>
         </div>
+
+     
