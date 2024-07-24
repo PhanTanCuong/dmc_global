@@ -11,5 +11,46 @@
                 "page"=>"displayProduct"
             ]);
         }
+    //Add new product function
+    function addProduct($title=null,$description=null,$link=null,$image=null){
+        //Model
+        try{
+            if(isset($_POST['addProductBtn'])){
+                $title=strip_tags($_POST['product_title']);
+                $description=strip_tags($_POST['product_description']);
+                $link=strip_tags($_POST['product_link']);
+                $image=$_FILES["product_image"]["name"];
+
+              
+
+                //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
+                if(file_exists("upload/".$_FILES["product_image"]["name"])){
+                   $image_store=$_FILES["product_image"]["name"];
+                   $_SESSION['status']="Image is already exists ".$image_store."!";
+                   header('Location:displayProduct');
+                }else{
+                    $product=$this->model("ProductModel");
+                    $result=$product->addProduct($title,$description,$link,$image);
+                    if($result){
+                        //Upload image data vào folder upload
+                        move_uploaded_file($_FILES["product_image"]["tmp_name"],"upload/".$_FILES["product_image"]["name"]);
+                        $_POST['success']="Product is added successfully";
+                        header('Location:displayProduct');
+                    }else{
+                        $_POST['status']="Product is NOT added";
+                        header('Location:displayProduct');
+                    }
+                }
+           
+            
+            }
+
+        }catch(Exception $e){
+            $_POST['status']=$e->getMessage();
+            header('Location:displayProduct');
+        }
     }
+    }
+
+    
 ?>

@@ -9,30 +9,31 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="addProduct" method="POST">
+      <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
+      <form action="addProduct" method="POST" enctype="multipart/form-data" >
 
         <div class="modal-body">
 
           <div class="form-group">
             <label> Title </label>
-            <input type="text" name="product_title" class="form-control" placeholder="Enter Username">
+            <input type="text" name="product_title" class="form-control" placeholder="Enter Product Title" required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" name="product_description" class="form-control" placeholder="Enter Email">
+            <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description" required>
           </div>
           <div class="form-group">
             <label> Link </label>
-            <input type="text" name="product_link" class="form-control" placeholder="Enter Password">
+            <input type="text" name="product_link" class="form-control" placeholder="Enter Product Link"required>
           </div>
           <div class="form-group">
             <label>Image </label>
-            <input type="text" name="product_image" class="form-control" placeholder="Confirm Password">
+            <input type="file" name="product_image" id="product_image" class="form-control" placeholder="Upload Image" required>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="addAccountBtn" class="btn btn-primary">Save</button>
+          <button type="submit" name="addProductBtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -91,7 +92,7 @@
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td><?php echo substr($row['link'], 0, 10); ?></td> 
+                  <td><?php echo $row['link'] ?></td> 
                   <td><?php echo $row['image']; ?></td>
                   <td>
                     <form action="displayDetailProduct" method="POST">
