@@ -45,7 +45,7 @@
     </li>
     <!-- Nav Item - Admin Profies -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/displayAccount');">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Account/displayAccount');">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Admin Profiles</span>
         </a>
