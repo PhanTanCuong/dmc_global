@@ -19,10 +19,8 @@
                     $role=$result['role'];
                     $_SESSION['username']=$email_login;
                     if($role==='admin'){
-                        $_SESSION['username']=$email_login;
                         header('Location: ../Admin/');
                     }else if($role==='user'){
-                        $_SESSION['username']=$email_login;
                         header('Location: ../Home/');
                     }
                    }

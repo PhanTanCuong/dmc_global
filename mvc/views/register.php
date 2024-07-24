@@ -24,7 +24,7 @@ include ('admin/includes/header.php');
                                     }
                                     ?>
                                 </div>
-                                <form class="user" action="../Controller/signup.php" method="POST">
+                                <form class="user" action="register" method="POST">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="username" 
                                         placeholder="Enter Username"></div>
