@@ -3,7 +3,7 @@
         function display(){
            $this->view("login",[]);
         }
-
+        //login account
         function login($email_login=null,$password_login=null){
             try{
                 if(isset($_POST["login_btn"])){
@@ -29,6 +29,25 @@
             }catch(Exception $e){
                 $_SESSION['status'] = $e->getMessage() ;
                 header('Location:display');
+            }
+        }
+
+        //logout account
+        function logout(){
+            if(isset($_POST['logout_btn'])){
+            // Unset all session variables
+            // $_SESSION = array();
+            session_destroy();
+            unset($_SESSION['username']);
+            
+             // Prevent caching
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
+
+            // Redirect to the login page
+            header('Location: ../Signin/');
+            exit();
             }
         }
     }
