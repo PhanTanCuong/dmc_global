@@ -92,10 +92,11 @@
           <tbody>
             <?php
             if (mysqli_num_rows($data["user"]) > 0) {
+              $counter = 1; // Initialize the counter for the sequential ID
               while ($row = mysqli_fetch_array($data["user"])) {
                 ?>
                 <tr>
-                  <td><?php echo $row['id']; ?></td>
+                  <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['email']; ?></td>
                   <td><?php echo substr($row['password'], 0, 10); ?></td> 
