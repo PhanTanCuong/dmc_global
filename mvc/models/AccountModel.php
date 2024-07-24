@@ -63,12 +63,7 @@ class AccountModel extends DB{
             // Kiểm tra mật khẩu hiện tại
             $result =$this->getAccountbyId($id);
             if($result){
-            $store_password = mysqli_fetch_assoc($result)['password'];
-                if(password_verify($password, $store_password)){
-                    $query= "UPDATE  register SET username='$username', email='$email', role='$role' WHERE id='$id'  ";
-                }else{
-                    $query= "UPDATE  register SET username='$username', email='$email', password='$hash_password', role='$role' WHERE id='$id'  ";
-                }
+                $query= "UPDATE  register SET username='$username', email='$email', password='$hash_password', role='$role' WHERE id='$id'  ";
             }else{
                 return false;
             }
@@ -85,6 +80,16 @@ class AccountModel extends DB{
         }
             
             
+    }
+
+    //delete user account function
+    public function deleteAccount($id=null){
+        try{
+        $query_run="DELETE FROM register WHERE id='$id'";
+        return mysqli_query($this->connection,$query_run);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
     }
 
 

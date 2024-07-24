@@ -86,12 +86,31 @@
 
             }catch(Exception $e){
                 $_SESSION['status'] = $e->getMessage();
-                header('Location:../View/login.php');
+                header('Location:displayAccount');
             }
         }
            
 
         //delete user account
+        public function deleteAccount(){
+            try{
+                if(isset($_POST["delete_btn"])){
+                    $id = $_POST['delete_id'];
+                    $account=$this->model('AccountModel');
+                    $result=$account->deleteAccount($id);
+                    if($result){
+                        $_SESSION['success'] = 'Your data is deleted';
+                        header('Location:displayAccount');
+                    }else{
+                        $_SESSION['status']='Your data is NOT deleted';
+                        header('Location:displayAccount');
+                    }
+                }
+            }catch(Exception $e){
+                $_SESSION['status']=$e->getMessage();
+                header('Location:displayAccount');
+            }
+        }
 
     }
 ?>
