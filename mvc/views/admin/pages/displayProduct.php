@@ -92,8 +92,8 @@
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td><?php echo $row['link'] ?></td> 
-                  <td><?php echo $row['image']; ?></td>
+                  <td><?php echo $row['link']?></td> 
+                  <td><?php echo '<img src="dmc_global/mvc/upload/'.$row['image'].'" width="200px" height="200px" alt="Product Img">'?></td>
                   <td>
                     <form action="displayDetailProduct" method="POST">
                       <input type="hidden" name="edit_product_id" value="<?php echo $row['id']; ?>">

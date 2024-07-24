@@ -46,10 +46,9 @@ class AccountModel extends DB{
             $query= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password','$role')";
 
             return mysqli_query($this->connection, $query);
-        }catch(PDOException $e){
+        }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
-            
             
     }
 
@@ -71,7 +70,7 @@ class AccountModel extends DB{
             return mysqli_query($this->connection, $query);
 
 
-        }catch(PDOException $e){
+        }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
             
@@ -83,7 +82,7 @@ class AccountModel extends DB{
         try{
         $query_run="DELETE FROM register WHERE id='$id'";
         return mysqli_query($this->connection,$query_run);
-        }catch(PDOException $e){
+        }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
     }
@@ -106,7 +105,7 @@ class AccountModel extends DB{
                 }
             }
 
-        }catch(PDOException $e){
+        }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
     }
