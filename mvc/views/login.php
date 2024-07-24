@@ -4,7 +4,7 @@
 //Muốn các file chứa biến toàn cục(global variables) liến kết với nhau thì các file đó phải có session_start()
 //Nên đặt đầu tiền của file php.
 // include('../Controller/controller.php');
-include ('admin/includes/header.php');
+include_once ('admin/includes/header.php');
 ?>
 <div class="container">
 
@@ -28,7 +28,7 @@ include ('admin/includes/header.php');
                                      }
                                     ?>
                                 </div>
-                                <form class="user" action="../controllers/Signin.php" method="POST">
+                                <form class="user" action="login" method="POST">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email"
                                             aria-describedby="emailHelp" placeholder="Enter Email Address...">
@@ -66,5 +66,5 @@ include ('admin/includes/header.php');
 </div>
 
 <?php
-include ('admin/includes/scripts.php');
+include_once ('admin/includes/scripts.php');
 ?>

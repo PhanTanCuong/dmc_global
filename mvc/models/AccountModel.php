@@ -36,19 +36,16 @@ class AccountModel extends DB{
     //add user account function
     public function addAccount($username= null,$email=null,$password=null,$role=null){
         try{
+            $username=$this->connection->real_escape_string($username);
+            $email=$this->connection->real_escape_string($email);
+            $password=$this->connection->real_escape_string($password);
+            $role=$this->connection->real_escape_string($role);
             //PASSWORD_BCRYPT: độ dài=60
             //PASSWORD_DEFAULT: độ dài=255
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
             $query= "INSERT INTO register (username,email,password,role) VALUES ('$username','$email','$hash_password','$role')";
 
-            $query_run = mysqli_query($this->connection, $query);
-
-            if($query_run){
-                return true;
-            }else{
-                return false;
-            }
-
+            return mysqli_query($this->connection, $query);
         }catch(PDOException $e){
             echo $e->getMessage();
         }
@@ -59,6 +56,10 @@ class AccountModel extends DB{
     //edit user account function
     public function editAccount($id=null,$username=null,$email=null,$password=null,$role=null){
         try{
+            $username=$this->connection->real_escape_string($username);
+            $email=$this->connection->real_escape_string($email);
+            $password=$this->connection->real_escape_string($password);
+            $role=$this->connection->real_escape_string($role);
             $hash_password = password_hash($password, PASSWORD_BCRYPT);
             // Kiểm tra mật khẩu hiện tại
             $result =$this->getAccountbyId($id);
@@ -67,13 +68,8 @@ class AccountModel extends DB{
             }else{
                 return false;
             }
-            $query_run = mysqli_query($this->connection, $query);
+            return mysqli_query($this->connection, $query);
 
-            if($query_run){
-                return true;
-            }else{
-                return false;
-            }
 
         }catch(PDOException $e){
             echo $e->getMessage();
@@ -87,6 +83,29 @@ class AccountModel extends DB{
         try{
         $query_run="DELETE FROM register WHERE id='$id'";
         return mysqli_query($this->connection,$query_run);
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    //LOGIN
+    //login function: check email query
+    public function login($email=null,$password=null){
+        try{
+            $email=$this->connection->real_escape_string($email);
+            $password=$this->connection->real_escape_string($password);
+            $query="SELECT * FROM register WHERE email='$email'";
+            $query_run= mysqli_query($this->connection,$query);
+            if($query_run->num_rows>0){
+                $row=mysqli_fetch_assoc($query_run);
+                $stored_password=$row['password'];
+                if(password_verify($password,$stored_password)){
+                    return $row;
+                } else{
+                    return false;
+                }
+            }
+
         }catch(PDOException $e){
             echo $e->getMessage();
         }
