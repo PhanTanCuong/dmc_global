@@ -8,6 +8,7 @@
     protected $params=[];
 
     function __construct(){
+
        $arr=$this->UrlProcess();
        
 
