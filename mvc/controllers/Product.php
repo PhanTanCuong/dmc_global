@@ -14,17 +14,19 @@
     //Add new product function
     function addProduct($title=null,$description=null,$link=null,$image=null){
         //Model
-        // try{
+        try{
             if(isset($_POST['addProductBtn'])){
                 $title=$_POST['product_title'];
                 $description=$_POST['product_description'];
                 $link=$_POST['product_link'];
-                $image=$_FILES["product_image"]['name'];
+                $image=$_FILES["product_image"]['name']; 
+                // $_FILES["product_image"]['name']:gán giá trị cho biến.
              
 
                 //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
                 if(file_exists("./mvc/uploads/".$_FILES["product_image"]["name"])){
                    $image_store=$_FILES["product_image"]["name"];
+                //$_FILES["product_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["product_image"].
                    $_SESSION['status']="Image is already exists ".$image_store."!";
                    header('Location:displayProduct');
                 }else{
@@ -42,10 +44,10 @@
                 } 
             }
 
-        // }catch(Exception $e){
-        //     $_POST['status']=$e->getMessage();
-        //     header('Location:displayProduct');
-        // }
+        }catch(Exception $e){
+            $_POST['status']=$e->getMessage();
+            header('Location:displayProduct');
+        }
     }
 }
 
