@@ -98,4 +98,25 @@ class Product extends Controller
             header('Location:displayProduct');
         }
     }
+
+     //delete user account
+     public function deleteProduct(){
+        try{
+            if(isset($_POST["delete_product_btn"])){
+                $id = $_POST['delete_product_id'];
+                $product=$this->model('ProductModel');
+                $result=$product->deleteProduct($id);
+                if($result){
+                    $_SESSION['success'] = 'Your data is deleted';
+                    header('Location:displayProduct');
+                }else{
+                    $_SESSION['status']='Your data is NOT deleted';
+                    header('Location:displayProduct');
+                }
+            }
+        }catch(Exception $e){
+            $_SESSION['status']=$e->getMessage();
+            header('Location:displayProduct');
+        }
+    }
 }

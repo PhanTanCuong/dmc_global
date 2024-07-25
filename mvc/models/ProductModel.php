@@ -21,9 +21,10 @@ class ProductModel extends DB
 
     //get product information by id
 
-    public function getProductbyId($id){
-        $query_run="SELECT * FROM product where id='$id'";
-        return mysqli_query($this->connection,$query_run);
+    public function getProductbyId($id)
+    {
+        $query_run = "SELECT * FROM product where id='$id'";
+        return mysqli_query($this->connection, $query_run);
     }
 
 
@@ -43,19 +44,29 @@ class ProductModel extends DB
         }
     }
 
-     //edit product function
-     public function editProduct($id=null,$title = null, $description = null, $link = null, $image = null){
-        try{
+    //edit product function
+    public function editProduct($id = null, $title = null, $description = null, $link = null, $image = null)
+    {
+        try {
             $title = $this->connection->real_escape_string($title);
             $description = $this->connection->real_escape_string($description);
             $link = $this->connection->real_escape_string($link);
             $image = $this->connection->real_escape_string($image);
-            
+
             $query = "UPDATE  product SET title='$title', description='$description', link='$link', image='$image' WHERE id='$id'";
             return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 
-
-        }catch(mysqli_sql_exception $e){
+    //delete product function
+    public function deleteProduct($id = null)
+    {
+        try {
+            $query_run = "DELETE FROM product WHERE id='$id'";
+            return mysqli_query($this->connection, $query_run);
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
