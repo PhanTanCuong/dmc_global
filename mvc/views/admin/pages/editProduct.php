@@ -32,8 +32,13 @@
                             <input type="text" name="product_link" value="<?php echo $row['link']; ?>" class="form-control" placeholder="Enter username">
                         </div>
                         <div class="form-group">
+                            <label>Current Image</label><br>
+                            <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="300px" height="300px" alt="Product Img"><br>
+                            <span>Current file: <?php echo $row['image']; ?></span>
+                        </div>
+                        <div class="form-group">
                             <label>Image</label>
-                            <input type="file" name="product_image" id="product_image" value="<?php echo $row['image']; ?>" class="form-control" placeholder="Enter username">
+                            <input type="file" name="product_image" id="product_image" class="form-control" placeholder="Enter username">
                         </div>
 
                     </div>
