@@ -73,8 +73,6 @@ class AccountModel extends DB{
         }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
-            
-            
     }
 
     //delete user account function

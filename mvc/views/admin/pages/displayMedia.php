@@ -1,6 +1,4 @@
-
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,20 +12,20 @@
         <div class="modal-body">
 
           <div class="form-group">
-            <label> Username </label>
+            <label> Title </label>
             <input type="text" name="news_title" class="form-control" placeholder="Enter Username">
           </div>
           <div class="form-group">
-            <label>Email</label>
+            <label>Description</label>
             <input type="text" name="news_description" class="form-control" placeholder="Enter Email">
           </div>
           <div class="form-group">
-            <label>Password</label>
+            <label>Link</label>
             <input type="text" name="news_link" class="form-control" placeholder="Enter Password">
           </div>
           <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="text" name="news_image" class="form-control" placeholder="Confirm Password">
+            <label>Image </label>
+            <input type="file" name="news_image" id="news_image" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -86,17 +84,17 @@
             if (mysqli_num_rows($data["news"]) > 0) {
               $counter = 1; // Initialize the counter for the sequential ID
               while ($row = mysqli_fetch_array($data["news"])) {
-                ?>
+            ?>
                 <tr>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td><?php echo $row['link']; ?></td> 
+                  <td><?php echo $row['link']; ?></td>
                   <td><?php echo $row['image']; ?></td>
                   <td>
                     <form action="displayDetailNews" method="POST">
                       <input type="hidden" name="edit_news_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="edit_news_btn" class="btn btn-success"> EDIT</button>
+                      <button type="submit" name="display_news_infor_btn" class="btn btn-success"> EDIT</button>
                     </form>
                   </td>
                   <td>
@@ -106,7 +104,7 @@
                     </form>
                   </td>
                 </tr>
-                <?php
+            <?php
               }
             }
             ?>
@@ -116,4 +114,3 @@
       </div>
     </div>
   </div>
-

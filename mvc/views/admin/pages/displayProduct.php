@@ -97,7 +97,7 @@
                   <td>
                     <form action="displayDetailProduct" method="POST">
                       <input type="hidden" name="edit_product_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="edit_product_btn" class="btn btn-success"> EDIT</button>
+                      <button type="submit" name="display_product_infor_btn" class="btn btn-success"> EDIT</button>
                     </form>
                   </td>
                   <td>
