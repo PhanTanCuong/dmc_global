@@ -10,31 +10,36 @@
 
         if (isset($_POST['display_news_infor_btn'])) {
 
-            $id = $_POST['edit_news_id'];
 
 
             foreach ($data["news"] as $row) {
         ?>
 
-                <form action="editNews" method="POST"enctype="multipart/form-data">
-                    <div class="card-body">
-                        <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                <form action="editNews" method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                        <input type="hidden" name="edit_news_id" value="<?php echo $row['id']; ?>">
                         <div class="form-group">
-                            <label> Title </label>
-                            <input type="text" name="news_title" class="form-control" placeholder="Enter Product Title" required>
+                            <label>Title</label>
+                            <input type="text" name="news_title" value="<?php echo $row['title']; ?>" class="form-control" placeholder="Enter username">
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <input type="text" name="news_description" class="form-control" placeholder="Enter Product Description" required>
+                            <input type="text" name="news_description" value="<?php echo $row['description']; ?>" class="form-control" placeholder="Enter username">
                         </div>
                         <div class="form-group">
-                            <label> Link </label>
-                            <input type="text" name="news_link" class="form-control" placeholder="Enter Product Link" required>
+                            <label>Link</label>
+                            <input type="text" name="news_link" value="<?php echo $row['link']; ?>" class="form-control" placeholder="Enter username">
                         </div>
                         <div class="form-group">
-                            <label>Image </label>
-                            <input type="file" name="news_image" id="news_image" class="form-control" required>
+                            <label>Current Image</label><br>
+                            <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="300px" height="300px" alt="Product Img"><br>
+                            <span>Current file: <?php echo $row['image']; ?></span>
                         </div>
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input type="file" name="news_image" id="news_image" class="form-control" placeholder="Enter username">
+                        </div>
+
                     </div>
 
                     <div>

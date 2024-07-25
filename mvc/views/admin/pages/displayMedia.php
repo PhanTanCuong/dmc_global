@@ -2,26 +2,26 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Admin Profile</h5>
+        <h5 class="modal-title" id="exampleModalLabel">List of blogs</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="addNews" method="POST">
+      <form action="addNews" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
 
           <div class="form-group">
             <label> Title </label>
-            <input type="text" name="news_title" class="form-control" placeholder="Enter Username">
+            <input type="text" name="news_title" class="form-control" placeholder="Enter Title" required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" name="news_description" class="form-control" placeholder="Enter Email">
+            <input type="text" name="news_description" class="form-control" placeholder="Enter Description" required>
           </div>
           <div class="form-group">
             <label>Link</label>
-            <input type="text" name="news_link" class="form-control" placeholder="Enter Password">
+            <input type="text" name="news_link" class="form-control" placeholder="Enter Link" required>
           </div>
           <div class="form-group">
             <label>Image </label>
@@ -30,7 +30,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="addAccountBtn" class="btn btn-primary">Save</button>
+          <button type="submit" name="addNewsBtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -45,9 +45,14 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of blogs
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-          Add new blog
-        </button>
+        <div>
+          <form action="multipleDeleteNews" method="POST">
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
+          </form>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+            Add new blog
+          </button>
+        </div>
       </h6>
 
     </div>
@@ -70,6 +75,7 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
+              <th>Check</th>
               <th>ID</th>
               <th>Title</th>
               <th>Description</th>
@@ -86,11 +92,15 @@
               while ($row = mysqli_fetch_array($data["news"])) {
             ?>
                 <tr>
+                  <td>
+                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>
+                    <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
+                  </td>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>
                   <td><?php echo $row['description']; ?></td>
                   <td><?php echo $row['link']; ?></td>
-                  <td><?php echo $row['image']; ?></td>
+                  <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                   <td>
                     <form action="displayDetailNews" method="POST">
                       <input type="hidden" name="edit_news_id" value="<?php echo $row['id']; ?>">
@@ -114,3 +124,30 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleCheckbox(box) {
+    var id = $(box).attr("value");
+
+    if ($(box).prop("checked") === true) {
+      var visible = 1;
+    } else {
+      var visible = 0;
+    }
+
+    var data = {
+      "search_data": 1,
+      "id": id,
+      "visible": visible
+    };
+
+    $.ajax({
+      type: "post", //method
+      url: "../Media/toggleCheckboxDelete", //URL to your controller
+      data: data,
+      success: function(response) {
+        // alert("Data Checked");
+      }
+    });
+  }
+  </script>
