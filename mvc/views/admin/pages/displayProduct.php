@@ -1,6 +1,5 @@
-
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<!-- Add new product form -->
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,7 +9,7 @@
         </button>
       </div>
       <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-      <form action="addProduct" method="POST" enctype="multipart/form-data" >
+      <form action="addProduct" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
 
@@ -24,7 +23,7 @@
           </div>
           <div class="form-group">
             <label> Link </label>
-            <input type="text" name="product_link" class="form-control" placeholder="Enter Product Link"required>
+            <input type="text" name="product_link" class="form-control" placeholder="Enter Product Link" required>
           </div>
           <div class="form-group">
             <label>Image </label>
@@ -48,9 +47,14 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-          Add new product
-        </button>
+        <div>
+          <form action="">
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
+          </form>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+            Add new product
+          </button>
+        </div>
       </h6>
 
     </div>
@@ -73,6 +77,7 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
+              <th>Check</th>
               <th>ID</th>
               <th>Title</th>
               <th>Description</th>
@@ -87,13 +92,16 @@
             if (mysqli_num_rows($data["product"]) > 0) {
               $counter = 1; // Initialize the counter for the sequential ID
               while ($row = mysqli_fetch_array($data["product"])) {
-                ?>
+            ?>
                 <tr>
+                  <td>
+                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>">
+                  </td>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>
                   <td><?php echo $row['description']; ?></td>
-                  <td><?php echo $row['link']?></td> 
-                  <td><?php echo '<img src="/dmc_global/mvc/uploads/'.$row['image'].'" width="200px" height="200px" alt="Product Img">'?></td>
+                  <td><?php echo $row['link'] ?></td>
+                  <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                   <td>
                     <form action="displayDetailProduct" method="POST">
                       <input type="hidden" name="edit_product_id" value="<?php echo $row['id']; ?>">
@@ -107,7 +115,7 @@
                     </form>
                   </td>
                 </tr>
-                <?php
+            <?php
               }
             }
             ?>
@@ -118,3 +126,4 @@
     </div>
   </div>
 
+  <script src="../public/js/admin/checkbox.js"></script>

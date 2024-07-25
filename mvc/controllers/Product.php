@@ -72,7 +72,7 @@ class Product extends Controller
 
     //Edit product function
 
-    public function editProduct()
+    function editProduct()
     {
         try {
 
@@ -99,8 +99,8 @@ class Product extends Controller
         }
     }
 
-     //delete user account
-     public function deleteProduct(){
+     //delete invidual product function
+     function deleteProduct(){
         try{
             if(isset($_POST["delete_product_btn"])){
                 $id = $_POST['delete_product_id'];
@@ -119,4 +119,24 @@ class Product extends Controller
             header('Location:displayProduct');
         }
     }
+
+
+    //delete multiple products function
+    function toggleCheckboxDelete($id=null,$visible=null)
+    {
+        try{
+            if(isset($_POST['search_data'])){
+                $id=$_POST['id'];
+                $visible=$_POST['visible'];
+
+                $product=$this->model('ProductModel');
+                $result=$product->toggleCheckboxDelete($id,$visible);
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+    }
+
+
 }

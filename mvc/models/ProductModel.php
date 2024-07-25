@@ -70,4 +70,16 @@ class ProductModel extends DB
             echo $e->getMessage();
         }
     }
+
+    //multiple delete products function
+
+    public function toggleCheckboxDelete($id = null,$visible = null)
+    {
+        try {
+            $query="UPDATE product SET visible='$visible' WHERE id ='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
