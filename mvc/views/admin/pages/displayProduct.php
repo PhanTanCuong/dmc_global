@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <label>Image </label>
-            <input type="file" name="product_image" id="product_image" class="form-control" placeholder="Upload Image" required>
+            <input type="file" name="product_image" id="product_image" class="form-control" required>
           </div>
         </div>
         <div class="modal-footer">
