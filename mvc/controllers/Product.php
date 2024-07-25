@@ -99,44 +99,63 @@ class Product extends Controller
         }
     }
 
-     //delete invidual product function
-     function deleteProduct(){
-        try{
-            if(isset($_POST["delete_product_btn"])){
+    //delete invidual product function
+    function deleteProduct()
+    {
+        try {
+            if (isset($_POST["delete_product_btn"])) {
                 $id = $_POST['delete_product_id'];
-                $product=$this->model('ProductModel');
-                $result=$product->deleteProduct($id);
-                if($result){
+                $product = $this->model('ProductModel');
+                $result = $product->deleteProduct($id);
+                if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location:displayProduct');
-                }else{
-                    $_SESSION['status']='Your data is NOT deleted';
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT deleted';
                     header('Location:displayProduct');
                 }
             }
-        }catch(Exception $e){
-            $_SESSION['status']=$e->getMessage();
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
             header('Location:displayProduct');
         }
     }
 
 
-    //delete multiple products function
-    function toggleCheckboxDelete($id=null,$visible=null)
-    {
-        try{
-            if(isset($_POST['search_data'])){
-                $id=$_POST['id'];
-                $visible=$_POST['visible'];
+    //delete multiple products functions
 
-                $product=$this->model('ProductModel');
-                $result=$product->toggleCheckboxDelete($id,$visible);
+    //toggleCheckbox()
+    function toggleCheckboxDelete($id = null, $visible = null)
+    {
+        try {
+            if (isset($_POST['search_data'])) {
+                $id = $_POST['id'];
+                $visible = $_POST['visible'];
+                $product = $this->model('ProductModel');
+                $product->toggleCheckboxDelete($id, $visible);
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
-
     }
 
-
+    //multipleDeleteProduct()
+    function multipleDeleteProduct()
+    {
+        try {
+            if (isset($_POST['delete-multiple-data'])) {
+                $product = $this->model('ProductModel');
+                $result = $product->multipleDeleteProduct();
+                if ($result) {
+                    $_SESSION['success'] = 'Your products are deleted';
+                    header('Location:displayProduct');
+                } else {
+                    $_SESSION['status'] = 'Your datas are NOT deleted';
+                    header('Location:displayProduct');
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

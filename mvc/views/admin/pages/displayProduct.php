@@ -48,7 +48,7 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
         <div>
-          <form action="">
+          <form action="multipleDeleteProduct" method="POST">
             <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
           </form>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
@@ -95,7 +95,8 @@
             ?>
                 <tr>
                   <td>
-                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>">
+                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>
+                    <?php echo $row['visible']===1?"checked":""?>">
                   </td>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>

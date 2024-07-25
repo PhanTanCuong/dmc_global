@@ -18,7 +18,7 @@ function toggleCheckbox(box) {
       url: "../Product/toggleCheckboxDelete", //URL to your controller
       data: data,
       success: function(response) {
-        alert("Data Checked");
+        // alert("Data Checked");
       }
     });
   }
