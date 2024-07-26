@@ -45,12 +45,12 @@ class Media extends Controller
 
 
                 //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
-                if (file_exists("./mvc/uploads/" . $_FILES["news_image"]["name"])) {
-                    $image_store = $_FILES["news_image"]["name"];
-                    //$_FILES["news_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["news_image"].
-                    $_SESSION['status'] = "Image is already exists " . $image_store . "!";
-                    header('Location:displayNews');
-                } else {
+                // if (file_exists("./mvc/uploads/" . $_FILES["news_image"]["name"])) {
+                //     $image_store = $_FILES["news_image"]["name"];
+                //     //$_FILES["news_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["news_image"].
+                //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
+                //     header('Location:displayNews');
+                // } else {
                     $news = $this->model("MediaModel");
                     $result = $news->addNews($title, $description, $link, $image);
                     if ($result) {
@@ -62,7 +62,7 @@ class Media extends Controller
                         $_SESSION['status'] = "News is NOT added";
                         header('Location:displayNews');
                     }
-                }
+                // }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
@@ -103,8 +103,8 @@ class Media extends Controller
     function deleteNews()
     {
         try {
-            if (isset($_POST["delete_product_btn"])) {
-                $id = $_POST['delete_product_id'];
+            if (isset($_POST["delete_news_btn"])) {
+                $id = $_POST['delete_news_id'];
                 $news = $this->model('MediaModel');
                 $result = $news->deleteNews($id);
                 if ($result) {
