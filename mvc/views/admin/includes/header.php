@@ -40,6 +40,24 @@
       display: flex;
       gap: 10px;
     }
+
+    /* colapse child item */
+    .collapse-item {
+    cursor: pointer;
+  }
+  
+  .collapse-item-child {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+  
+  .collapse-item-child:hover {
+    background-color: #f8f9fa;
+    color: #0056b3;
+  }
   </style>
 
 </head>

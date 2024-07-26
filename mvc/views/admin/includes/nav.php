@@ -46,21 +46,48 @@
         </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-pager"></i>
+            <i class="fas fa-fw fa-pager"></i>
             <span>Utilities</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
+                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
+                    About
+                    <div id="collapse-about" class="collapse">
+                        <a class="collapse-item-child">Banner</a>
+                        <a class="collapse-item-child">About 2</a>
+                        <a class="collapse-item-child">About 3</a>
+                    </div>
+                </div>
+                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-product" aria-expanded="false">
+                    Product
+                    <div id="collapse-product" class="collapse">
+                        <a class="collapse-item-child">Product 1</a>
+                        <a class="collapse-item-child">Product 2</a>
+                    </div>
+                </div>
+                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-media" aria-expanded="false">
+                    Media
+                    <div id="collapse-media" class="collapse">
+                        <a class="collapse-item-child">Media 1</a>
+                        <a class="collapse-item-child">Media 2</a>
+                    </div>
+                </div>
+                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
+                    Others
+                    <div id="collapse-others" class="collapse">
+                        <a class="collapse-item-child">Header</a>
+                        <a class="collapse-item-child">Footer</a>
+                    </div>
+                </div>
             </div>
         </div>
     </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
