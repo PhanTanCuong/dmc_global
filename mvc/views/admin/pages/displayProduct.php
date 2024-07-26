@@ -49,10 +49,10 @@
       <h6 class="m-0 font-weight-bold text-primary">List of products
         <div class="controll-btn">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-            Add new product
+          <i class="fas fa-plus"></i>
           </button>
           <form action="multipleDeleteProduct" method="POST">
-            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i class="fas fa-trash"></i></button>
           </form>
         </div>
       </h6>
@@ -106,13 +106,13 @@
                   <td>
                     <form action="displayDetailProduct" method="POST">
                       <input type="hidden" name="edit_product_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="display_product_infor_btn" class="btn btn-success"> EDIT</button>
+                      <button type="submit" name="display_product_infor_btn" class="btn btn-success"> <i class="fas fa-edit"></i></button>
                     </form>
                   </td>
                   <td>
                     <form action="deleteProduct" method="POST">
                       <input type="hidden" name="delete_product_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="delete_product_btn" class="btn btn-danger"> DELETE</button>
+                      <button type="submit" name="delete_product_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                     </form>
                   </td>
                 </tr>
