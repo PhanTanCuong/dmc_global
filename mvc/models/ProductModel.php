@@ -60,6 +60,16 @@ class ProductModel extends DB
         }
     }
 
+    public function getCurrentProductImages($id=null){
+        try{
+            $query="SELECT image FROM product WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+
     //delete product function
     public function deleteProduct($id = null)
     {

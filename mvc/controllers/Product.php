@@ -40,28 +40,18 @@ class Product extends Controller
                 $description = strip_tags($_POST['product_description']);
                 $link = strip_tags($_POST['product_link']);
                 $image = $_FILES["product_image"]['name'];
-                // $_FILES["product_image"]['name']:gán giá trị cho biến.
 
-
-                // //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
-                // if (file_exists("./mvc/uploads/" . $_FILES["product_image"]["name"])) {
-                //     $image_store = $_FILES["product_image"]["name"];
-                //     //$_FILES["product_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["product_image"].
-                //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
-                //     header('Location:displayProduct');
-                // } else {
-                    $product = $this->model("ProductModel");
-                    $result = $product->addProduct($title, $description, $link, $image);
-                    if ($result) {
-                        //Upload image data vào folder upload
-                        move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
-                        $_SESSION['success'] = "Product is added successfully";
-                        header('Location:displayProduct');
-                    } else {
-                        $_SESSION['status'] = "Product is NOT added";
-                        header('Location:displayProduct');
-                    }
-                // }
+                $product = $this->model('ProductModel');
+                $result = $product->addProduct($title, $description, $link, $image);
+                if ($result) {
+                    //Upload image data vào folder upload
+                    move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
+                    $_SESSION['success'] = "Product is added successfully";
+                    header('Location:displayProduct');
+                } else {
+                    $_SESSION['status'] = "Product is NOT added";
+                    header('Location:displayProduct');
+                }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
@@ -80,9 +70,17 @@ class Product extends Controller
                 $title = strip_tags($_POST['product_title']);
                 $description = strip_tags($_POST['product_description']);
                 $link = strip_tags($_POST['product_link']);
-                $image = $_FILES["product_image"]['name'];
+              
                 $id = $_POST['edit_product_id'];
                 $product = $this->model('ProductModel');
+
+                $data= $product->getCurrentProductImages($id);
+                $stored_image = mysqli_fetch_assoc($data);
+                if(!empty($_FILES["product_image"]['name'])){
+                    $image = $_FILES["product_image"]['name'];
+                }else{
+                    $image= $stored_image['image'];
+                }
                 $success = $product->editProduct($id, $title, $description, $link, $image);
                 if ($success) {
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';

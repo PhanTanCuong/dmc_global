@@ -58,6 +58,16 @@ class MediaModel extends DB
         }
     }
 
+    public function getCurrentNewsImages($id=null){
+        try{
+            $query="SELECT image FROM news WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+
      //delete news function
      public function deleteNews($id = null)
      {

@@ -80,9 +80,19 @@ class Media extends Controller
                 $title = strip_tags($_POST['news_title']);
                 $description = strip_tags($_POST['news_description']);
                 $link = strip_tags($_POST['news_link']);
-                $image = $_FILES["news_image"]['name'];
+               
                 $id = $_POST['edit_news_id'];
                 $news = $this->model('MediaModel');
+
+                $data=$news->getCurrentNewsImages($id);
+                $stored_image=mysqli_fetch_array($data);
+
+                //Check image is null
+                if(!empty($_FILES["news_image"]['name'])) {
+                    $image=$_FILES["news_image"]['name'];
+                }else{
+                    $image= $stored_image['image'];
+                }
                 $success = $news->editNews($id, $title, $description, $link, $image);
                 if ($success) {
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
