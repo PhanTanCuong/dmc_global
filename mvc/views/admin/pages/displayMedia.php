@@ -45,13 +45,13 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of blogs
-        <div>
-          <form action="multipleDeleteNews" method="POST">
-            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
-          </form>
+        <div class="controll-btn">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-            Add new blog
+            <i class="fas fa-plus"></i>
           </button>
+          <form action="multipleDeleteNews" method="POST">
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+          </form>
         </div>
       </h6>
 
@@ -104,13 +104,13 @@
                   <td>
                     <form action="displayDetailNews" method="POST">
                       <input type="hidden" name="edit_news_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="display_news_infor_btn" class="btn btn-success"> EDIT</button>
+                      <button type="submit" name="display_news_infor_btn" class="btn btn-success"><i class="fas fa-edit"></i></button>
                     </form>
                   </td>
                   <td>
                     <form action="deleteNews" method="POST">
                       <input type="hidden" name="delete_news_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="delete_news_btn" class="btn btn-danger"> DELETE</button>
+                      <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                     </form>
                   </td>
                 </tr>
@@ -127,27 +127,27 @@
 
   <script>
     function toggleCheckbox(box) {
-    var id = $(box).attr("value");
+      var id = $(box).attr("value");
 
-    if ($(box).prop("checked") === true) {
-      var visible = 1;
-    } else {
-      var visible = 0;
-    }
-
-    var data = {
-      "search_data": 1,
-      "id": id,
-      "visible": visible
-    };
-
-    $.ajax({
-      type: "post", //method
-      url: "../Media/toggleCheckboxDelete", //URL to your controller
-      data: data,
-      success: function(response) {
-        // alert("Data Checked");
+      if ($(box).prop("checked") === true) {
+        var visible = 1;
+      } else {
+        var visible = 0;
       }
-    });
-  }
+
+      var data = {
+        "search_data": 1,
+        "id": id,
+        "visible": visible
+      };
+
+      $.ajax({
+        type: "post", //method
+        url: "../Media/toggleCheckboxDelete", //URL to your controller
+        data: data,
+        success: function(response) {
+          // alert("Data Checked");
+        }
+      });
+    }
   </script>
