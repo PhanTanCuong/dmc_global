@@ -103,8 +103,8 @@ class Media extends Controller
     function deleteNews()
     {
         try {
-            if (isset($_POST["delete_product_btn"])) {
-                $id = $_POST['delete_product_id'];
+            if (isset($_POST["delete_news_btn"])) {
+                $id = $_POST['delete_news_id'];
                 $news = $this->model('MediaModel');
                 $result = $news->deleteNews($id);
                 if ($result) {
