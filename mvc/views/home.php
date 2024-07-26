@@ -11,11 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- .css file -->
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
-    <link rel="stylesheet" href="../public/css/about.css">
-    <link rel="stylesheet" href="../public/css/product.css">
-    <link rel="stylesheet" href="../public/css/media.css">
-    <link rel="stylesheet" href="../public/css/footer.css"> 
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
+  <link rel="stylesheet" href="../public/css/about.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/product.css">
+  <link rel="stylesheet" href="../public/css/media.css">
+  <link rel="stylesheet" href="../public/css/footer.css">
 
   <!-- lib -->
   <!-- slick -->
@@ -26,9 +26,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
   <!-- Font-awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -65,7 +63,7 @@
             <li><a href="#compliance">Compliance</a></li>
             <li></button>
               <form action="" class="search-box">
-                <input type="text" class="search-text" placeholder="Search..." required> 
+                <input type="text" class="search-text" placeholder="Search..." required>
                 <!-- required là thuộc tính bắt user nhập thông tin ới cho submit -->
                 <button class="search-btn">
                   <i class="fas fa-search"></i></button>
@@ -76,7 +74,7 @@
       </nav>
     </header>
   </div>
-    
+
   <div class="container-fluid">
 
   </div>
@@ -182,7 +180,7 @@
             <p style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quod voluptates
               reiciendis rem debitis odit veniam laborum illum, exercitationem quos at a cupiditate. Explicabo accusamus
               voluptates nam illum, commodi praesentium?</p>
-              <button>VIEW MORE</button>
+            <button>VIEW MORE</button>
           </div>
         </section>
         <section class='product2' id="product2">
@@ -192,45 +190,20 @@
             </h1>
 
             <div class="grid">
-              <div class="comp">
-                <img src="../public/images/product_1.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-              <div class="comp">
-                <img src="../public/images/product_2.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-              <div class="comp">
-                <img src="../public/images/product_3.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-              <div class="comp">
-                <img src="../public/images/product_4.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-              <div class="comp">
-                <img src="../public/images/product_5.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-              <div class="comp">
-                <img src="../public/images/product_6.png" alt="Image">
-                <h2>Title 1</h2>
-                <p>Animi sequi animi non voluptas.</p>
-                <div class="arrow"></div>
-              </div>
-            </div>
-            <div class="btn2-container">
-              <button class="btn2"><b>view more</b></button>
+              <?php
+              if (mysqli_num_rows($data["product"]) > 0) {
+                while ($rows = mysqli_fetch_array($data["product"])) {
+              ?>
+                  <div class="comp">
+                    <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="Image">
+                    <h2><?php echo $rows['title'] ?></h2>
+                    <p><?php echo $rows['description'] ?></p>
+                    <div class="arrow"></div>
+                  </div>
+              <?php
+                }
+              }
+              ?>
             </div>
           </div>
 
@@ -240,42 +213,42 @@
       </section>
       <section id="media">
         <section class="stats">
-            <div class="stat-grid">
-              <div class="stat">
-                <div class="stat-ic">
-                  <img class="flash" src="../public/images/ic_1.png" alt="Icon">
-                </div>
-                <div class="stat-text">
-                  <h3>2202</h3>
-                  <p>Lorem Ipsum</p>
-                </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <div class="stat-ic">
+                <img class="flash" src="../public/images/ic_1.png" alt="Icon">
               </div>
-              <div class="stat">
-                <div class="stat-ic">
-                  <img class="flash" src="../public/images/ic_2.png" alt="Icon">
-                </div>
-                <div class="stat-text">
-                  <h3>2202</h3>
-                  <p>Lorem Ipsum</p>
-                </div>
+              <div class="stat-text">
+                <h3>2202</h3>
+                <p>Lorem Ipsum</p>
               </div>
-              <div class="stat">
-                <div class="stat-ic">
-                  <img class="flash" src="../public/images/ic_3.png" alt="Icon">
-                </div>
-                <div class="stat-text">
-                  <h3>2202</h3>
-                  <p>Lorem Ipsum</p>
-                </div>
+            </div>
+            <div class="stat">
+              <div class="stat-ic">
+                <img class="flash" src="../public/images/ic_2.png" alt="Icon">
               </div>
-              <div class="stat">
-                <div class="stat-ic">
-                  <img class="flash" src="../public/images/ic_4.png" alt="Icon">
-                </div>
-                <div class="stat-text">
-                  <h3>2202</h3>
-                  <p>Lorem Ipsum</p>
-                </div>
+              <div class="stat-text">
+                <h3>2202</h3>
+                <p>Lorem Ipsum</p>
+              </div>
+            </div>
+            <div class="stat">
+              <div class="stat-ic">
+                <img class="flash" src="../public/images/ic_3.png" alt="Icon">
+              </div>
+              <div class="stat-text">
+                <h3>2202</h3>
+                <p>Lorem Ipsum</p>
+              </div>
+            </div>
+            <div class="stat">
+              <div class="stat-ic">
+                <img class="flash" src="../public/images/ic_4.png" alt="Icon">
+              </div>
+              <div class="stat-text">
+                <h3>2202</h3>
+                <p>Lorem Ipsum</p>
+              </div>
             </div>
         </section>
       </section>
@@ -286,21 +259,22 @@
           </h2>
 
           <div class="news-grid">
-            <div class="news-item">
-              <img src="../public/images/news_1.png" alt="News">
-              <h3>News Title 1</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="news-item">
-              <img src="../public/images/news_2.png" alt="News">
-              <h3>News Title 2</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-            <div class="news-item">
-              <img src="../public/images/news_3.png" alt="News">
-              <h3>News Title 3</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
+            <?php
+            if (mysqli_num_rows($data['news']) > 0) {
+              while ($rows = mysqli_fetch_array($data['news'])) {
+            ?>
+                <div class="news-item">
+                  <img src="/dmc_global/mvc/uploads/<?php echo $rows['image']?>" alt="News">
+                  <h3><?php echo $rows['title']?></h3>
+                  <p><?php echo $rows['description']?></p>
+                </div>
+            <?php
+              }
+            }
+            ?>
+          </div>
+          <div class="btn2-container">
+            <button class="btn2"><b>View more</b></button>
           </div>
         </div>
       </section>
@@ -390,8 +364,8 @@
   <script type="text/javascript" src="../public/js/banner.js"></script>
 
   <script>
-    $(document).ready(function () {
-      $('.toogle').click(function () {
+    $(document).ready(function() {
+      $('.toogle').click(function() {
         $('nav').slideToggle();
       })
     })

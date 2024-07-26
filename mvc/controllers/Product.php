@@ -43,13 +43,13 @@ class Product extends Controller
                 // $_FILES["product_image"]['name']:gán giá trị cho biến.
 
 
-                //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
-                if (file_exists("./mvc/uploads/" . $_FILES["product_image"]["name"])) {
-                    $image_store = $_FILES["product_image"]["name"];
-                    //$_FILES["product_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["product_image"].
-                    $_SESSION['status'] = "Image is already exists " . $image_store . "!";
-                    header('Location:displayProduct');
-                } else {
+                // //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
+                // if (file_exists("./mvc/uploads/" . $_FILES["product_image"]["name"])) {
+                //     $image_store = $_FILES["product_image"]["name"];
+                //     //$_FILES["product_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["product_image"].
+                //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
+                //     header('Location:displayProduct');
+                // } else {
                     $product = $this->model("ProductModel");
                     $result = $product->addProduct($title, $description, $link, $image);
                     if ($result) {
@@ -61,7 +61,7 @@ class Product extends Controller
                         $_SESSION['status'] = "Product is NOT added";
                         header('Location:displayProduct');
                     }
-                }
+                // }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
