@@ -47,13 +47,13 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
-        <div>
-          <form action="multipleDeleteProduct" method="POST">
-            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
-          </form>
+        <div class="controll-btn">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
             Add new product
           </button>
+          <form action="multipleDeleteProduct" method="POST">
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger">Delete</button>
+          </form>
         </div>
       </h6>
 
@@ -96,7 +96,7 @@
                 <tr>
                   <td>
                     <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>
-                    <?php echo $row['visible']===1?"checked":""?>">
+                    <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
                   </td>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['title']; ?></td>

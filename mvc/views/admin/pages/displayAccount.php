@@ -1,6 +1,4 @@
-
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -54,11 +52,12 @@
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Admin Profile
+      <h6 class="m-0 font-weight-bold text-primary">Admin Profile</h6>
+      <div class="controll-btn">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
-          Add Admin Profile
+          Add new user
         </button>
-      </h6>
+      </div>
 
     </div>
 
@@ -94,17 +93,17 @@
             if (mysqli_num_rows($data["user"]) > 0) {
               $counter = 1; // Initialize the counter for the sequential ID
               while ($row = mysqli_fetch_array($data["user"])) {
-                ?>
+            ?>
                 <tr>
                   <td><?php echo $counter++; ?></td>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['email']; ?></td>
-                  <td><?php echo substr($row['password'], 0, 10); ?></td> 
+                  <td><?php echo substr($row['password'], 0, 10); ?></td>
                   <td><?php echo $row['role']; ?></td>
                   <td>
                     <form action="displayDetailAccount" method="POST">
                       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
+                      <button type="submit" name="edit_btn" class="btn btn-success"> UPDATE </i></i></button>
                     </form>
                   </td>
                   <td>
@@ -114,7 +113,7 @@
                     </form>
                   </td>
                 </tr>
-                <?php
+            <?php
               }
             }
             ?>
@@ -124,4 +123,3 @@
       </div>
     </div>
   </div>
-

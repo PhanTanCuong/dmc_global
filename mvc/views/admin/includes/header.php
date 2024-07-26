@@ -18,6 +18,28 @@
   <!-- Custom styles for this template-->
   <link href="../public/css/admin/sb-admin-2.min.css" rel="stylesheet">
 
+  <style>
+    /* nav bar */
+    .bg-gradient-primary {
+      background-color: #444444;
+      /* Màu đen */
+      background-image: none;
+      /* Loại bỏ gradient hiện tại */
+    }
+
+
+
+    .card-header .text-primary {
+      text-transform: uppercase;
+    }
+
+    .controll-btn {
+      margin-top: 5px;
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+
 </head>
 
 <body id="page-top">

@@ -4,10 +4,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('Admin/');">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div ><img src="/dmc_global/mvc/uploads/footer.png" alt="logo" height="50px"></div>
     </a>
 
     <!-- Divider -->
