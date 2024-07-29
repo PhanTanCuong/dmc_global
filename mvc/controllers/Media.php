@@ -2,14 +2,125 @@
 class Media extends Controller
 {
     // News1
-    function displayNews1(){
-        $item=$this->model("MediaModel");
+    function displayNews1()
+    {
+        $data = $this->model("MediaModel");
 
         $this->view("admin/home", [
-            "item"=>$item->getNews1(),
+            "background" => $data->getNews1(),
+            "icon" => $data->getIconMedia1(),
             "page" => "media1"
         ]);
     }
+
+    function customNews1()
+    {
+        try {
+            if (isset($_POST['news1_updatebtn'])) {
+                $item = $this->model('MediaModel');
+                //backgrond
+                $data = $item->getCurrentBackgroundMedia1();
+                $currentBgImage = mysqli_fetch_assoc($data);
+
+                if (!empty($_FILES["news1_image"]['name'])) {
+                    $bg_image = $_FILES["news1_image"]['name'];
+                } else {
+                    $bg_image = $currentBgImage['image'];
+                }
+
+                //Icons
+                $icon_media_name = $_POST['icon_media_name'];
+                $icon_media_value = $_POST['icon_media_value'];
+                $data = $item->getIconMedia1();
+                $currentIcImage = mysqli_fetch_assoc($data);
+
+
+                if (!empty($_FILES["icon_media_image"]['name'])) {
+                    $icon_media_image = $_FILES["icon_media_image"]['name'];
+                } else {
+                    $icon_media_image = $currentIcImage['image'];
+                }
+
+                $success_icon = $item->saveIconMeida1($icon_media_name, $icon_media_value, $icon_media_image);
+                if ($success_icon) {
+                    move_uploaded_file($_FILES["icon_media_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_media_image"]["name"]);
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location: displayNews1');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location: displayNews1');
+                }
+
+                $success_bg = $item->editBackgroundMedia1($bg_image);
+                if ($success_bg) {
+                    move_uploaded_file($_FILES["news1_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news1_image"]["name"]) . '';
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location: displayNews1');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location: displayNews1');
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:displayNews1');
+        }
+    }
+
+
+    function deleteIconMedia()
+    {
+        try {
+            if (isset($_POST["delete_ic_btn"])) {
+                $id = $_POST["icon_media_id"];
+
+                $item = $this->model('MediaModel');
+                $success = $item->deleteIconMeida1($id);
+                if ($success) {
+                    $_SESSION['success'] = 'Your data is deleted';
+                    header('Location: displayNews1');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT deleted';
+                    header('Location: displayNews1');
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function updateIconMedia()
+    {
+        try {
+            if (isset($_POST["delete_ic_btn"])) {
+                $id = $_POST["icon_media_id"];
+                //Icons
+                $icon_media_name = $_POST['icon_media_name'];
+                $icon_media_value = $_POST['icon_media_value'];
+                $item=$this->model('MediaModel');
+                $data = $item->getIconMedia1();
+                $currentIcImage = mysqli_fetch_assoc($data);
+
+
+                if (!empty($_FILES["icon_media_image"]['name'])) {
+                    $icon_media_image = $_FILES["icon_media_image"]['name'];
+                } else {
+                    $icon_media_image = $currentIcImage['image'];
+                }
+                $success=$item->updateIconMedia1($id,$icon_media_name,$icon_media_value,$icon_media_image);
+                if ($success) {
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location: displayNews1');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location: displayNews1');
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // News2
     function displayNews()
     {
@@ -26,18 +137,17 @@ class Media extends Controller
     //display detail infor user account
     public function displayDetailNews()
     {
-        try{
-            if(isset($_POST["display_news_infor_btn"])){
+        try {
+            if (isset($_POST["display_news_infor_btn"])) {
                 $news = $this->model("MediaModel");
                 $this->view("admin/home", [
                     "news" => $news->getNewsbyId($_POST['edit_news_id']),
                     "page" => "editMedia"
                 ]);
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
-        
     }
 
 
@@ -61,17 +171,17 @@ class Media extends Controller
                 //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
                 //     header('Location:displayNews');
                 // } else {
-                    $news = $this->model("MediaModel");
-                    $result = $news->addNews($title, $description, $link, $image);
-                    if ($result) {
-                        //Upload image data vào folder upload
-                        move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
-                        $_SESSION['success'] = "News is added successfully";
-                        header('Location:displayNews');
-                    } else {
-                        $_SESSION['status'] = "News is NOT added";
-                        header('Location:displayNews');
-                    }
+                $news = $this->model("MediaModel");
+                $result = $news->addNews($title, $description, $link, $image);
+                if ($result) {
+                    //Upload image data vào folder upload
+                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
+                    $_SESSION['success'] = "News is added successfully";
+                    header('Location:displayNews');
+                } else {
+                    $_SESSION['status'] = "News is NOT added";
+                    header('Location:displayNews');
+                }
                 // }
             }
         } catch (Exception $e) {
@@ -90,18 +200,18 @@ class Media extends Controller
                 $title = strip_tags($_POST['news_title']);
                 $description = strip_tags($_POST['news_description']);
                 $link = strip_tags($_POST['news_link']);
-               
+
                 $id = $_POST['edit_news_id'];
                 $news = $this->model('MediaModel');
 
-                $data=$news->getCurrentNewsImages($id);
-                $stored_image=mysqli_fetch_array($data);
+                $data = $news->getCurrentNewsImages($id);
+                $stored_image = mysqli_fetch_array($data);
 
                 //Check image is null
-                if(!empty($_FILES["news_image"]['name'])) {
-                    $image=$_FILES["news_image"]['name'];
-                }else{
-                    $image= $stored_image['image'];
+                if (!empty($_FILES["news_image"]['name'])) {
+                    $image = $_FILES["news_image"]['name'];
+                } else {
+                    $image = $stored_image['image'];
                 }
                 $success = $news->editNews($id, $title, $description, $link, $image);
                 if ($success) {

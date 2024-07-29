@@ -10,7 +10,7 @@
 
         if (isset($_POST['display_product_infor_btn'])) {
 
-            $id = $_POST['edit_product_id'];
+            // $id = $_POST['edit_product_id'];
 
 
             foreach ($data["product"] as $row) {
