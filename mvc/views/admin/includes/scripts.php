@@ -1,3 +1,4 @@
+
   <!-- Bootstrap core JavaScript-->
   <script src="../public/vendor/jquery/jquery.min.js"></script>
   <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -15,9 +16,7 @@
   <script src="../public/js/admin/demo/chart-area-demo.js"></script>
   <script src="../public/js/admin/demo/chart-pie-demo.js"></script>
 
-  <!-- ajax -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
 <script>
     function redirectTo(path) {
         // <!-- The link that will trigger the JavaScript function to redirect -->
