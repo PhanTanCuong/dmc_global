@@ -1,6 +1,41 @@
 <?php
 class ProductModel extends DB
 {
+    // Product 1
+    public function getInforProduct1(){
+        try{
+            $id=1;
+            $query="SELECT * FROM product1 WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function customizeInforProduct1($title,$description,$image){
+        try{
+            $id=1;
+            $title =mysqli_real_escape_string($this->connection,$title);
+            $description =mysqli_real_escape_string($this->connection,$description);
+            $image =mysqli_real_escape_string($this->connection,$image);
+            $query="UPDATE product1 SET title='$title',description='$description',image='$image' WHERE id='$id'";
+            return mysqli_query($this->connection,$query);
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function getCurrentProduct1Images(){
+        try{
+            $id=1;
+            $query="SELECT image FROM product1 WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+    // Product 2
     //get List of products function
     public function getProduct()
     {

@@ -63,12 +63,8 @@
                         <a class="collapse-item-child">About 3</a>
                     </div>
                 </div>
-                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-product" aria-expanded="false">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Product/displayProduct1');">
                     Product
-                    <div id="collapse-product" class="collapse">
-                        <a class="collapse-item-child">Product 1</a>
-                        <a class="collapse-item-child">Product 2</a>
-                    </div>
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-media" aria-expanded="false">
                     Media
