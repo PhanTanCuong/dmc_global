@@ -33,19 +33,19 @@ class About extends Controller
                  }
                 
  
-                 $success=$item->customizeInforAbout2($title,$description,$image);
+                 $success=$item->customizeInforBanner($title,$description,$image);
                  if ($success) {
                      move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["banner_image"]["name"]) . '';
                      $_SESSION['success'] = 'Your data is updated';
-                     header('Location: displayanBanner');
+                     header('Location: displayBanner');
                  } else {
                      $_SESSION['status'] = 'Your data is NOT updated';
-                     header('Location:displayanBanner');
+                     header('Location:displayBanner');
                  }
              }
          } catch (Exception $e) {
              $_SESSION['status'] = $e->getMessage();
-             header('Location:displayanBanner');
+             header('Location:displayBanner');
          }
      }
 
