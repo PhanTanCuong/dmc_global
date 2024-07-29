@@ -1,6 +1,16 @@
 <?php
 class MediaModel extends DB
 {
+    // Media1
+    public function getNews1(){
+        try{
+            $query="SELECT * FROM news1 WHERE id =1";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
+    // Media2
     //get List of news function
     public function getNews()
     {

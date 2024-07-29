@@ -1,6 +1,16 @@
 <?php
 class Media extends Controller
 {
+    // News1
+    function displayNews1(){
+        $item=$this->model("MediaModel");
+
+        $this->view("admin/home", [
+            "item"=>$item->getNews1(),
+            "page" => "media1"
+        ]);
+    }
+    // News2
     function displayNews()
     {
         //Model
