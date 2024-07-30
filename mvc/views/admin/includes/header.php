@@ -24,6 +24,7 @@
   <!-- css -->
   <link rel="stylesheet" href="../public/css/admin/media1.css">
   <link rel="stylesheet" href="../public/css/admin/sidebar.css">
+  <link rel="stylesheet" href="../public/css/admin/navbar.css">
 
 </head>
 

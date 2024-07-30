@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Custom Navigation Bar Information</h5>
+            Custom Navbarigation Bar Information</h5>
     </div>
 
     <!-- DataTales Example -->
@@ -17,23 +17,55 @@
         }
 
         ?>
-
-            <form action="customProduct1" method="POST" enctype="multipart/form-data">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <textarea type="text" name="product1_title" class="form-control" placeholder="Enter Title"></textarea>
+        <div class="card-body">
+            <form action="customNavbar" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="navbar_name">Name</label>
+                    <div class="input-wrapper">
+                        <div class="input-field">
+                            <input type="text" name="field[]" value="" class="form-control">
+                            <a href="javascript:void(0);" class="add-input" title="Add input" style="color:#1cc88a;"> <i class="fas fa-plus-circle"></i></a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea type="text" name="product1_description" class="form-control" placeholder="Enter Description"></textarea>
-                    </div>
-                </div>
-                <div>
-                    <a href="displayProduct1" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
-                    <button type="submit" name="product1_updatebtn" class="btn btn-primary">Update</button>
+                    <button type="submit" name="add-new-field" class="btn btn-success">Submit</button>
                 </div>
             </form>
+            <div>
 
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var max_input_fields = 8;
+        var add_input = $('.add-input');
+        var input_wrapper = $('.input-wrapper');
+        var new_input = `<div class="input-field">
+                            <input type="text" name="field[]" value="" class="form-control">
+                            <a href="javascript:void(0);" class="remove-input" title="Add input"style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
+                        </div>`
+        var add_input_count = 1;
+
+        $(add_input).click(function() {
+            if(add_input_count < max_input_fields) {
+                add_input_count++;
+                $(input_wrapper).append(new_input);
+            }else{
+                alert('You can only add up to ' + max_input_fields + ' icons.');
+            }
+          
+        });
+
+        $(input_wrapper).on('click', '.remove-input', function() {
+            // e.PreventDefault(); 
+            $(this).parent('.input-field').remove();
+            add_input_count--;
+        });
+
+
+
+
+    });
+</script>
