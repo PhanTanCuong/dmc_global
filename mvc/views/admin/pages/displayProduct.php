@@ -95,7 +95,7 @@
             ?>
                 <tr>
                   <td>
-                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>
+                    <input type="checkbox" onclick="toggleCheckbox(this,'../Product/toggleCheckboxDelete')" value="<?php echo $row['id'] ?>
                     <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
                   </td>
                   <td><?php echo $counter++; ?></td>

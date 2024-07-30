@@ -93,7 +93,7 @@
             ?>
                 <tr>
                   <td>
-                    <input type="checkbox" onclick="toggleCheckbox(this)" value="<?php echo $row['id'] ?>
+                    <input type="checkbox" onclick="toggleCheckbox(this,'../Media/toggleCheckboxDelete')" value="<?php echo $row['id'] ?>
                     <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
                   </td>
                   <td><?php echo $counter++; ?></td>
@@ -125,29 +125,4 @@
     </div>
   </div>
 
-  <script>
-    function toggleCheckbox(box) {
-      var id = $(box).attr("value");
-
-      if ($(box).prop("checked") === true) {
-        var visible = 1;
-      } else {
-        var visible = 0;
-      }
-
-      var data = {
-        "search_data": 1,
-        "id": id,
-        "visible": visible
-      };
-
-      $.ajax({
-        type: "post", //method
-        url: "../Media/toggleCheckboxDelete", //URL to your controller
-        data: data,
-        success: function(response) {
-          // alert("Data Checked");
-        }
-      });
-    }
-  </script>
+  <script src="../public/js/admin/checkbox.js"></script>

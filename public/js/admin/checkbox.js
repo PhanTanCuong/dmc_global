@@ -1,4 +1,4 @@
-function toggleCheckbox(box) {
+function toggleCheckbox(box,url) {
     var id = $(box).attr("value");
 
     if ($(box).prop("checked") === true) {
@@ -15,7 +15,7 @@ function toggleCheckbox(box) {
 
     $.ajax({
       type: "post", //method
-      url: "../Product/toggleCheckboxDelete", //URL to your controller
+      url: url, //URL to your controller
       data: data,
       success: function(response) {
         // alert("Data Checked");
