@@ -33,4 +33,22 @@ class Navbar extends Controller
             header('Location: displayNavbar');
         }
     }
+
+    function deleteNavbarItems()
+    {
+        try {
+            // $id = $this->post('id');
+            // $success = $this->model('NavbarModel')->deleteInforNavbar($id);
+            // if ($success) {
+            //     $_SESSION['success'] = 'Item deleted successfully';
+            //     header('Location: displayNavbar');
+            // } else {
+            //     $_SESSION['status'] = 'Item NOT deleted';
+            //     header('Location: displayNavbar');
+            // }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location: displayNavbar');
+        }
+    }
 }
