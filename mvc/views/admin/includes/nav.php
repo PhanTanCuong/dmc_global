@@ -72,7 +72,7 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
                     Others
                     <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child">Header</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Navbar/displayNavbar');">Navbar</a>
                         <a class="collapse-item-child">Footer</a>
                     </div>
                 </div>
