@@ -77,6 +77,28 @@ class MediaModel extends DB
             echo $e->getMessage();
         }
     }
+    //multiple delete icon_medias functions
+    //toggleCheckboxDelete()
+    public function toggleCheckboxDelete($id = null,$visible = null)
+    {
+        try {
+            $query="UPDATE icon_media SET visible='$visible' WHERE id ='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //multipleDeleteProduct()
+    public function multipleDeleteStateIcon(){
+        try{
+            $id=1;
+            $query= "DELETE FROM icon_media WHERE visible='$id'";
+            return mysqli_query($this->connection, $query);
+        }catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 
     // Media2
     //get List of news function
@@ -156,27 +178,5 @@ class MediaModel extends DB
         }
     }
 
-    //multiple delete newss functions
-    //toggleCheckboxDelete()
-    public function toggleCheckboxDelete($id = null, $visible = null)
-    {
-        try {
-            $query = "UPDATE news SET visible='$visible' WHERE id ='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    //multipleDeleteNews()
-    public function multipleDeleteNews()
-    {
-        try {
-            $id = 1;
-            $query = "DELETE FROM news WHERE visible='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
+  
 }

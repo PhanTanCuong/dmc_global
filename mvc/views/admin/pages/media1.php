@@ -1,74 +1,199 @@
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Custom News1 Information</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">Update product information</h5>
     </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-            unset($_SESSION['status']);
-        }
+        foreach ($data["background"] as $row) {
         ?>
 
-        <form action="customNews1" method="POST" enctype="multipart/form-data">
-            <div class="card-body">
-                <?php
-                foreach ($data["background"] as $row) {
-                ?>
+            <form action="editStatBackground" method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                    <?php
+
+                    if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
+                        echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
+                        unset($_SESSION['success']);
+                    }
+                    if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
+                        echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
+                        unset($_SESSION['status']);
+                    }
+                    ?>
                     <div class="form-group">
-                        <label>Current Background Image</label><br>
-                        <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
+                        <label>Current State background</label><br>
+                        <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="100%" height="300px" alt="Icon"><br>
                         <span>Current file: <?php echo $row['image']; ?></span>
                     </div>
-                <?php
-                }
-                ?>
-                <div class="form-group">
-                    <label>Upload Background Image</label>
-                    <input type="file" name="news1_image" id="news_image" class="form-control">
-                </div>
-                <div class="form-group">
-                    <div style="display:flex; gap:1rem;align-items: center;">
-                        <label>Icons</label>
-                        <button type="button" id="add-icon" class="btn btn-primary mb-2">
-                            <i class="fas fa-plus-circle"></i>
-                        </button>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" name="background_image" id="background_image" class="form-control" placeholder="Enter username">
                     </div>
 
-                    <div id="icon-list">
-                        <?php
-                        foreach ($data["icon"] as $rows) {
-                        ?>
-                            <div class="icon-item">
-                                <input type="hidden" name="icon_media_id" value="<?php echo $rows['id']; ?>">
-                                <input type="text" name="icon_media_na" value="<?php echo $rows['name']; ?>" placeholder="Enter name" class="form-control mb-2">
-                                <input type="text" name="icon_media_value" value="<?php echo $rows['value']; ?>" placeholder="Enter Value" class="form-control mb-2">
-                                <label>Upload Icon Image</label>
-                                <input type="file" name="icon_media_image" id="icon_media_image" class="form-control">
-                                <img src="/dmc_global/mvc/uploads/<?php echo $rows['image']; ?>" style="background-color: #4a6fdc; margin:.5rem 0;" width="100px" height="100px"; alt="Image"><br>
-                                <div class="controll-btn">
-                                <button type="button" name="delete_ic_btn" class="btn btn-danger remove-icon"><i class="fas fa-trash"></i></button>
-                                <button type="button" name="edit_ic_btn" class="btn btn-success remove-icon"><i class="fas fa-edit"></i></button>
-                                </div>
-                                
+                </div>
+
+                <div style="margin:0 20px; margin-bottom:20px">
+                    <button type="submit" name="background_updatebtn" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        <?php
+        }
+        ?>
+        <!-- Add  form -->
+        <div class="modal fade" id="addstate-ic-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add State Icon </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
+
+                    <!-- thêm -->
+                    <form action="addStateIcon" method="POST" enctype="multipart/form-data">
+
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label> Title </label>
+                                <input type="text" name="icon_name" class="form-control" placeholder="Enter Title" required>
                             </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" name="icon_value" class="form-control" placeholder="Enter Description" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image </label>
+                                <input type="file" name="icon_image" id="icon_image" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="addStateIconBtn" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--  Edit form -->
+        <div class="modal fade" id="editstate-ic-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add State Icon </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
+
+                    <!-- thêm -->
+                    <form action="editStateIcon" method="POST" enctype="multipart/form-data">
+
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label> Title </label>
+                                <input type="text" name="icon_title" class="form-control" placeholder="Enter Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" name="icon_description" class="form-control" placeholder="Enter Description" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image </label>
+                                <input type="file" name="icon_image" id="icon_image" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="editStateIconBtn" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">List of about3 information
+                        <div class="controll-btn">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addstate-ic-form">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <form action="multipleDeleteStateIcon" method="POST">
+                                <button type="submit" name="deletemultipledata" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </h6>
+
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
                         <?php
-                        }
                         ?>
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Check</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Value</th>
+                                    <th>Image</th>
+                                    <th>EDIT</th>
+                                    <th>DELETE </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (mysqli_num_rows($data["icon"]) > 0) {
+                                    $counter = 1;
+                                    while ($row = mysqli_fetch_array($data["icon"])) {
+
+                                ?>
+
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" onclick="toggleCheckbox(this,'../Media/toggleCheckboxDeleteStateIcon')" value="<?php echo $row['id'] ?>
+                                        <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
+                                            </td>
+                                            <td><?php echo $counter++; ?></td>
+                                            <td><?php echo $row['name']; ?></td>
+                                            <td><?php echo $row['value']; ?></td>
+                                            <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" style="background:#4a6fdc;" width="200px" height="200px" alt="Icon">' ?></td>
+                                            <td>
+                                                <button type="submit" name="display_icon_infor_btn" class="btn btn-success" data-toggle="modal" data-target="#addstate-ic-form">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <form action="deleteStateIcon" method="POST">
+                                                    <input type="hidden" name="delete_icon_id" value="<?php echo $row['id']; ?>">
+                                                    <button type="submit" name="delete_icon_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
-            <div>
-                <a href="displayNews1" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
-                <button type="submit" name="news1_updatebtn" class="btn btn-primary">Update</button>
-            </div>
-        </form>
+        </div>
+
     </div>
-    <script src="../public/js/admin/dynamic_input_field.js"></script>
+
+    <script src="../public/js/admin/checkbox.js"></script>

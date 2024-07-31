@@ -166,7 +166,7 @@ class About extends Controller
     }
 
 
-    //delete multiple products functions
+    //delete multiple data functions
 
     //toggleCheckbox()
     function toggleCheckboxDelete($id = null, $visible = null)

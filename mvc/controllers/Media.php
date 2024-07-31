@@ -13,50 +13,23 @@ class Media extends Controller
         ]);
     }
 
-    function customNews1()
+    function editStatBackground()
     {
         try {
-            if (isset($_POST['news1_updatebtn'])) {
+            if (isset($_POST["background_updatebtn"])) {
                 $item = $this->model('MediaModel');
                 //backgrond
                 $data = $item->getCurrentBackgroundMedia1();
                 $currentBgImage = mysqli_fetch_assoc($data);
 
-                if (!empty($_FILES["news1_image"]['name'])) {
-                    $bg_image = $_FILES["news1_image"]['name'];
+                if (!empty($_FILES["background_image"]['name'])) {
+                    $bg_image = $_FILES["background_image"]['name'];
                 } else {
                     $bg_image = $currentBgImage['image'];
                 }
-
-                //Icons
-                $icon_media_name = $_POST['icon_media_name'];
-                $icon_media_value = $_POST['icon_media_value'];
-                $data = $item->getIconMedia1();
-                $currentIcImage = mysqli_fetch_assoc($data);
-
-
-                if (!empty($_FILES["icon_media_image"]['name'])) {
-                    $icon_media_image = $_FILES["icon_media_image"]['name'];
-                } else {
-                    $icon_media_image = $currentIcImage['image'];
-                }
-
-
-                foreach ($icon_media_name as $icon => $value) {
-                    $success_icon = $item->saveIconMeida1($icon_media_name, $icon_media_value, $icon_media_image);
-                    if ($success_icon) {
-                        move_uploaded_file($_FILES["icon_media_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_media_image"]["name"]);
-                        $_SESSION['success'] = 'Your data is updated';
-                        header('Location: displayNews1');
-                    } else {
-                        $_SESSION['status'] = 'Your data is NOT updated';
-                        header('Location: displayNews1');
-                    }
-
-                }   
                 $success_bg = $item->editBackgroundMedia1($bg_image);
                 if ($success_bg) {
-                    move_uploaded_file($_FILES["news1_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news1_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["background_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["background_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: displayNews1');
                 } else {
@@ -71,14 +44,39 @@ class Media extends Controller
     }
 
 
-    function deleteIconMedia()
+    function addStateIcon()
     {
         try {
-            if (isset($_POST["delete_ic_btn"])) {
-                $id = $_POST["icon_media_id"];
+            if (isset($_POST['addStateIconBtn'])) {
+                $name = strip_tags($_POST['icon_name']);
+                $value = strip_tags($_POST['icon-value']);
+                $image = $_FILES["icon_image"]['name'];
+
+                $success = $this->model('MediaModel')->saveIconMeida1($name, $value, $image);
+                if ($success) {
+                    move_uploaded_file($_FILES["icon_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_image"]["name"]);
+                    $_SESSION["success"] = "Your data is added";
+                    header("Location:displayNews1");
+                } else {
+                    $_SESSION["status"] = "Your data is NOT added";
+                    header("Location:displayNews1");
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:displayNews1');
+        }
+    }
+
+
+    function deleteStateIcon()
+    {
+        try {
+            if (isset($_POST["delete_icon_btn"])) {
+                $id = $_POST["delete_icon_id"];
 
                 $item = $this->model('MediaModel');
-                $success = $item->deleteIconMeida1($id);
+                $success = $item->deleteIconMedia1($id);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location: displayNews1');
@@ -100,7 +98,7 @@ class Media extends Controller
                 //Icons
                 $icon_media_name = $_POST['icon_media_name'];
                 $icon_media_value = $_POST['icon_media_value'];
-                $item=$this->model('MediaModel');
+                $item = $this->model('MediaModel');
                 $data = $item->getIconMedia1();
                 $currentIcImage = mysqli_fetch_assoc($data);
 
@@ -110,13 +108,50 @@ class Media extends Controller
                 } else {
                     $icon_media_image = $currentIcImage['image'];
                 }
-                $success=$item->updateIconMedia1($id,$icon_media_name,$icon_media_value,$icon_media_image);
+                $success = $item->updateIconMedia1($id, $icon_media_name, $icon_media_value, $icon_media_image);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: displayNews1');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
                     header('Location: displayNews1');
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //delete multiple data functions
+
+    //toggleCheckbox()
+    function toggleCheckboxDeleteStateIcon($id = null, $visible = null)
+    {
+        try {
+            if (isset($_POST['search_data'])) {
+                $id = $_POST['id'];
+                $visible = $_POST['visible'];
+                $item = $this->model('MediaModel');
+                $item->toggleCheckboxDelete($id, $visible);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //multipleDeleteAbout3Infor()
+    function multipleDeleteStateIcon()
+    {
+        try {
+            if (isset($_POST["deletemultipledata"])) {
+                $item = $this->model('MediaModel');
+                $result = $item->multipleDeleteStateIcon();
+                if ($result) {
+                    $_SESSION['success'] = 'Your datas are deleted';
+                    header('Location:displayNews1');
+                } else {
+                    $_SESSION['status'] = 'Your datas are NOT deleted';
+                    header('Location:displayNews1');
                 }
             }
         } catch (Exception $e) {
