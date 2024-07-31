@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">Update product information</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">Customize stat layout</h5>
     </div>
 
     <!-- DataTales Example -->
@@ -23,7 +23,7 @@
                     }
                     ?>
                     <div class="form-group">
-                        <label>Current State background</label><br>
+                        <label>Current Stat background</label><br>
                         <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="100%" height="300px" alt="Icon"><br>
                         <span>Current file: <?php echo $row['image']; ?></span>
                     </div>
@@ -124,7 +124,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List of about3 information
+                    <h6 class="m-0 font-weight-bold text-primary">List of stat icon
                         <div class="controll-btn">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addstate-ic-form">
                                 <i class="fas fa-plus"></i>

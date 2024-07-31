@@ -16,7 +16,7 @@
             unset($_SESSION['status']);
         }
         ?>
-        <div class="card-body">
+        <div class="card-body" id="navbar-customize" style="display:flex;">
             <form action="customNavbar" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="navbar_name">Name</label>
@@ -35,7 +35,7 @@
                         <?php
                         }
                         ?>
-                        <div class="input-field">
+                        <div class="input-field odd">
                             <input type="text" name="field[]" class="form-control">
                             <a href="javascript:void(0);" class="add-input" title="Add input" style="color:#1cc88a;"> <i class="fas fa-plus-circle"></i></a>
                         </div>
@@ -56,15 +56,15 @@
         var input_wrapper = $('.input-wrapper');
         var new_input = `<div class="input-field">
                             <input type="text" name="field[]" value="" class="form-control">
-                            <a href="javascript:void(0);" class="add-input" title="Add input" style="color:#e4b555;"> <i class="fas fa-edit"></i></a>
-                            <a href="javascript:void(0);" class="remove-input" title="Add input"style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
+                            <a href="javascript:void(0);" class="add-input" title="Add input" style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
+                            <a href="javascript:void(0);" class="remove-input" title="Add input"style="color:#e4b555;"> <i class="fas fa-edit"></i></a>
                         </div>`
         var add_input_count = 1;
 
         $(add_input).click(function() {
             if (add_input_count < max_input_fields) {
                 add_input_count++;
-                $('.input-field').first().before(new_input);
+                $('.input-field').last().before(new_input);
                 // $(input_wrapper).prepend(new_input);
                 //append: hiễn thị html sau vật thể
                 //depend: hiễn thị html trước vật thể
@@ -76,7 +76,7 @@
 
         $(input_wrapper).on('click', '.remove-input', function() {
             // e.PreventDefault(); 
-            $(this).parent('.input-field').remove();
+            $(this).parent('.input-field .odd').remove();
             add_input_count--;
         });
 
