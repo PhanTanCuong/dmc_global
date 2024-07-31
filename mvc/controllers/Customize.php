@@ -29,18 +29,6 @@ class Customize extends Controller
                     }
                 }
             }
-
-            if (isset($_POST['remove-ic-btn'])) {
-                $id = $_POST['id-ic-navbar'];
-                $success = $this->model('CustomModel')->deleteInforNavbar($id);
-                if ($success) {
-                    $_SESSION['success'] = 'Section is deleted';
-                    header('Location:displayNavbar');
-                } else {
-                    $_SESSION['status'] = 'Section is NOT deleted';
-                    header('Location:displayNavbar');
-                }
-            }
         } catch (Exception $e) {
             $_SESSION['_status'] = $e->getMessage();
             header('Location: displayNavbar');

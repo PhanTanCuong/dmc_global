@@ -60,7 +60,7 @@
                     <div id="collapse-about" class="collapse">
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayBanner');">Banner</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout2');">About 2</a>
-                        <a class="collapse-item-child">About 3</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout3');">About 3</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Product/displayProduct1');">

@@ -41,16 +41,19 @@ class Media extends Controller
                     $icon_media_image = $currentIcImage['image'];
                 }
 
-                $success_icon = $item->saveIconMeida1($icon_media_name, $icon_media_value, $icon_media_image);
-                if ($success_icon) {
-                    move_uploaded_file($_FILES["icon_media_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_media_image"]["name"]);
-                    $_SESSION['success'] = 'Your data is updated';
-                    header('Location: displayNews1');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location: displayNews1');
-                }
 
+                foreach ($icon_media_name as $icon => $value) {
+                    $success_icon = $item->saveIconMeida1($icon_media_name, $icon_media_value, $icon_media_image);
+                    if ($success_icon) {
+                        move_uploaded_file($_FILES["icon_media_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_media_image"]["name"]);
+                        $_SESSION['success'] = 'Your data is updated';
+                        header('Location: displayNews1');
+                    } else {
+                        $_SESSION['status'] = 'Your data is NOT updated';
+                        header('Location: displayNews1');
+                    }
+
+                }   
                 $success_bg = $item->editBackgroundMedia1($bg_image);
                 if ($success_bg) {
                     move_uploaded_file($_FILES["news1_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news1_image"]["name"]) . '';

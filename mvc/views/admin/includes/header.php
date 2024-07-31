@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="../public/css/admin/sidebar.css">
   <link rel="stylesheet" href="../public/css/admin/navbar.css">
 
+
 </head>
 
 <body id="page-top">

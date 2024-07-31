@@ -106,5 +106,101 @@ class About extends Controller
         }
     }
 
+    // About3
+    function displayAbout3()
+    {
+        $item = $this->model('AboutModel');
+
+        $this->view('admin/home', [
+            'item' => $item->getInforAbout3(),
+            'page' => 'about3'
+        ]);
+    }
+
+    function addAbout3Info(){
+        try{
+            if(isset($_POST['addAbout3Btn'])){
+                $title = strip_tags($_POST['about3_title']);
+                $description = strip_tags($_POST['about3_description']);
+                $image = $_FILES["about3_image"]['name'];
+
+                $item= $this->model('AboutModel');
+                $success= $item->addAbout3Info($title, $description, $image);
+                if($success){
+                    move_uploaded_file($_FILES["about3_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["about3_image"]["name"]) . '';
+                    $_SESSION['success'] = 'About3 Informations are added successfully';
+                    header('Location:displayAbout3');
+                }else{
+                    $_SESSION['status'] = 'About3 Informations are NOT  added';
+                    header('Location:displayAbout3');
+                }
+
+            }
+        }catch(Exception $e){
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:displayAbout3');
+
+        }
+    }
+
+    //delete invidual product function
+    function deleteAbout3Infor()
+    {
+        try {
+            if (isset($_POST["delete_about3_btn"])) {
+                $id = $_POST['delete_about3_id'];
+                $item = $this->model('AboutModel');
+                $result = $item->deleteInforAbout3($id);
+                if ($result) {
+                    $_SESSION['success'] = 'Your data is deleted';
+                    header('Location:displayAbout3');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT deleted';
+                    header('Location:displayAbout3');
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:displayAbout3');
+        }
+    }
+
+
+    //delete multiple products functions
+
+    //toggleCheckbox()
+    function toggleCheckboxDelete($id = null, $visible = null)
+    {
+        try {
+            if (isset($_POST['search_data'])) {
+                $id = $_POST['id'];
+                $visible = $_POST['visible'];
+                $item = $this->model('AboutModel');
+                $item->toggleCheckboxDelete($id, $visible);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //multipleDeleteAbout3Infor()
+    function multipleDeleteInforAbout3()
+    {
+        try {
+            if (isset($_POST['delete-multiple-data'])) {
+                $item = $this->model('AboutModel');
+                $result = $item->multipleDeleteInforAbout3();
+                if ($result) {
+                    $_SESSION['success'] = 'Your datas are deleted';
+                    header('Location:displayAbout3');
+                } else {
+                    $_SESSION['status'] = 'Your datas are NOT deleted';
+                    header('Location:displayAbout3');
+                }
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 
 }
