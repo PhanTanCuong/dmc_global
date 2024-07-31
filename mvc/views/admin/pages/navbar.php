@@ -26,15 +26,16 @@
                         foreach ($data["item"] as $row) {
                         ?>
                             <div class="input-field">
+                                <input type="hidden" value="<?php echo $row['id']?>" class="id-ic-navbar">
                                 <input type="text" value="<?php echo $row['name']; ?>" class="form-control">
-                                <a href="javascript:void(0);" data-id="<?php echo $row['id']?>"class="remove-ic-btn" title="Delete input" style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
-                                <a href="javascript:void(0);" data-id="<?php echo $row['id']?>"class="edit-ic-btn" title="Add input" style="color:#e4b555;"> <i class="fas fa-edit"></i></a>
+                                <a href="javascript:void(0);" class="remove-ic-btn" title="Delete input" style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
+                                <a href="javascript:void(0);" class="edit-ic-btn" title="Add input" style="color:#e4b555;"> <i class="fas fa-edit"></i></a>
                             </div>
 
                         <?php
                         }
                         ?>
-                        <div class="input-field odd">
+                        <div class="input-field">
                             <input type="text" name="field[]" class="form-control">
                             <a href="javascript:void(0);" class="add-input" title="Add input" style="color:#1cc88a;"> <i class="fas fa-plus-circle"></i></a>
                         </div>
@@ -63,7 +64,7 @@
         $(add_input).click(function() {
             if (add_input_count < max_input_fields) {
                 add_input_count++;
-                $('.input-field.odd').first().before(new_input);
+                $('.input-field').first().before(new_input);
                 // $(input_wrapper).prepend(new_input);
                 //append: hiễn thị html sau vật thể
                 //depend: hiễn thị html trước vật thể
@@ -84,7 +85,7 @@
 
 
             $.ajax({
-                url: 'Navbar/deleteNavbarItems',
+                url: 'Customize/deleteNavbarItems',
                 type: 'POST',
                 data: {id: id},
                 success: function(response) {

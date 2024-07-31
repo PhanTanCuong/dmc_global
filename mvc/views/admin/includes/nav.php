@@ -50,7 +50,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-pager"></i>
-            <span>Utilities</span>
+            <span>Customize</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -72,8 +72,8 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
                     Others
                     <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Navbar/displayNavbar');">Navbar</a>
-                        <a class="collapse-item-child">Footer</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Customize/displayNavbar');">Navbar</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Customize/displayFooter');">Footer</a>
                     </div>
                 </div>
             </div>
