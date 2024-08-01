@@ -1,4 +1,8 @@
 <?php 
+
+    namespace dmc_global\mvc\controllers;
+
+    use Core\Controller;
     class Home extends Controller{
         function display(){
             //Model

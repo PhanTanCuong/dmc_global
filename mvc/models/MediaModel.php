@@ -1,4 +1,7 @@
 <?php
+
+use Core\DB;
+
 class MediaModel extends DB
 {
     // Media1
@@ -79,10 +82,10 @@ class MediaModel extends DB
     }
     //multiple delete icon_medias functions
     //toggleCheckboxDelete()
-    public function toggleCheckboxDelete($id = null,$visible = null)
+    public function toggleCheckboxDelete($id = null, $visible = null)
     {
         try {
-            $query="UPDATE icon_media SET visible='$visible' WHERE id ='$id'";
+            $query = "UPDATE icon_media SET visible='$visible' WHERE id ='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -90,12 +93,13 @@ class MediaModel extends DB
     }
 
     //multipleDeleteProduct()
-    public function multipleDeleteStateIcon(){
-        try{
-            $id=1;
-            $query= "DELETE FROM icon_media WHERE visible='$id'";
+    public function multipleDeleteStateIcon()
+    {
+        try {
+            $id = 1;
+            $query = "DELETE FROM icon_media WHERE visible='$id'";
             return mysqli_query($this->connection, $query);
-        }catch (mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -177,6 +181,4 @@ class MediaModel extends DB
             echo $e->getMessage();
         }
     }
-
-  
 }

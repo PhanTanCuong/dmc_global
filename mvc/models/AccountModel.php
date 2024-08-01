@@ -1,4 +1,6 @@
 <?php
+
+use Core\DB;
 class AccountModel extends DB
 {
 
