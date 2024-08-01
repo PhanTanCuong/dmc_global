@@ -1,5 +1,9 @@
 <?php
-class About extends Controller
+
+namespace Mvc\Controllers;
+use Core\Controller;
+use Core\Exception;
+class About extends Controller 
 {   
     function displayBanner()
     {

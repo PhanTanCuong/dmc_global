@@ -1,4 +1,10 @@
 <?php
+
+namespace Mvc\Controllers;
+
+use Core\Controller;
+use Core\Exception;
+
 class Customize extends Controller
 {
     // Navigation bar
