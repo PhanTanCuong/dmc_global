@@ -165,7 +165,7 @@ class Media extends Controller
     }
 
     // News2
-    function displayNews()
+    function display()
     {
         //Model
         $news = $this->model("MediaModel");

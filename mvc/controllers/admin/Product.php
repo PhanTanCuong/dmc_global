@@ -8,7 +8,7 @@ class Product extends Controller
 {
 
     // Product1
-    function displayProduct1()
+    function Product1()
     {
         $item = $this->model('ProductModel');
 
@@ -44,21 +44,21 @@ class Product extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["product1_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product1_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: displayProduct1');
+                    header('Location: Product1');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:displayProduct1');
+                    header('Location:Product1');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayProduct1');
+            header('Location:Product1');
         }
     }
 
     // Product2
     //Load list of products layout
-    function displayProduct()
+    function display()
     {
         //Model
         $product = $this->model("ProductModel");
@@ -103,15 +103,15 @@ class Product extends Controller
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
                     $_SESSION['success'] = "Product is added successfully";
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 } else {
                     $_SESSION['status'] = "Product is NOT added";
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
-            header('Location:displayProduct');
+            header('Location:Product');
         }
     }
 
@@ -141,15 +141,15 @@ class Product extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: displayProduct');
+                    header('Location: Product');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location: displayProduct');
+                    header('Location: Product');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayProduct');
+            header('Location:Product');
         }
     }
 
@@ -163,15 +163,15 @@ class Product extends Controller
                 $result = $product->deleteProduct($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayProduct');
+            header('Location:Product');
         }
     }
 
@@ -202,10 +202,10 @@ class Product extends Controller
                 $result = $product->multipleDeleteProduct();
                 if ($result) {
                     $_SESSION['success'] = 'Your products are deleted';
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 } else {
                     $_SESSION['status'] = 'Your datas are NOT deleted';
-                    header('Location:displayProduct');
+                    header('Location:Product');
                 }
             }
         } catch (Exception $e) {

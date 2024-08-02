@@ -5,8 +5,7 @@
     "autoload": {
         "psr-4": {
             "Mvc\\Controllers\\": "mvc/controllers/",
-            "Mvc\\Controllers\\Admin\\":"mvc/controllers/admin/",
-            "Core\\":"mvc/core/"
+            "Mvc\\Controllers\\Admin\\":"mvc/controllers/admin/"
         }
     }
 }
