@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\Controllers;
+namespace Mvc\Controllers\Admin;
 
 use Core\Controller;
 use Core\Exception;
@@ -8,7 +8,7 @@ use Core\Exception;
 class Account extends Controller
 {
 
-    function displayAccount()
+    function display()
     {
         //Model
         $user = $this->model("AccountModel");
@@ -37,35 +37,40 @@ class Account extends Controller
                     if ($success) {
                         echo "Saved";
                         $_SESSION['success'] = 'Admin profile added';
-                        header('Location: displayAccount');
+                        header('Location: Account');
                     } else {
                         echo "Not save";
                         $_SESSION['status'] = 'Admin profile NOT added';
-                        header('Location: displayAccount');
+                        header('Location: Account');
                     }
                 } else {
                     $_SESSION['status'] = 'Password and Confirm Pass';
-                    header('Location: displayAccount');
+                    header('Location: Account');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayAccount');
+            header('Location: Account');
         }
     }
 
     //display detail infor user account
-    public function displayDetailAccount()
+    public function getAccountById()
     {
-        if (isset($_POST["edit_btn"])) {
-            //Model
-            $user = $this->model("AccountModel");
+        if(isset($_POST['checking_edit_btn'])) {
+            $account_id=$_POST['account_id'];
+            $result_array=[];
+            $account= $this->model('AccountModel');
+            $result = $account->getAccountById($account_id);
+            if(mysqli_num_rows($result) > 0) {
+                foreach ($result as $row) {
+                    array_push($result_array, $row);
+                    header('Content-Type: application/json');
+                    echo json_encode($result_array);
 
-            //View
-            $this->view("admin/home", [
-                "user" => $user->getAccountbyId($_POST['edit_id']),
-                "page" => "editAccount"
-            ]);
+                }
+
+            }
         }
     }
 
@@ -84,15 +89,15 @@ class Account extends Controller
                 $success = $account->editAccount($id, $username, $email, $password, $role);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: displayAccount');
+                    header('Location: Account');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location: displayAccount');
+                    header('Location: Account');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayAccount');
+            header('Location: Account');
         }
     }
 
@@ -107,15 +112,15 @@ class Account extends Controller
                 $result = $account->deleteAccount($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:displayAccount');
+                    header('Location: Account');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:displayAccount');
+                    header('Location: Account');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayAccount');
+            header('Location: Account');
         }
     }
 }

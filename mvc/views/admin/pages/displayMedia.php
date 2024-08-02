@@ -103,8 +103,7 @@
                   <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                   <td>
                     <form action="displayDetailNews" method="POST">
-                      <input type="hidden" name="edit_news_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="display_news_infor_btn" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                      <button type="submit" name="display_news_infor_btn" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                     </form>
                   </td>
                   <td>

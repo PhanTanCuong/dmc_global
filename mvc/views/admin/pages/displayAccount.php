@@ -46,6 +46,42 @@
   </div>
 </div>
 
+<div class="modal fade" id="editadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Admin Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="editAccount" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="hidden" name="edit_id" id="edit_id">
+            <label> Username </label>
+            <input type="text" name="edit_username" id="edit_username" class="form-control" placeholder="Enter Username">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="edit_email" id="edit_email" class="form-control" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="text" name="edit_password" id="edit_password" class="form-control" placeholder="Enter Password">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="addAccountBtn" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid">
 
@@ -101,9 +137,9 @@
                   <td><?php echo substr($row['password'], 0, 10); ?></td>
                   <td><?php echo $row['role']; ?></td>
                   <td>
-                    <form action="displayDetailAccount" method="POST">
-                      <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="edit_btn" class="btn btn-success"> <i class="fas fa-edit"></i> </i></i></button>
+                    <form action="getAccountById" method="POST">
+                      <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editadminprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
                   </td>
                   <td>
@@ -123,3 +159,35 @@
       </div>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function() {
+      $('.edit_btn').click(function(e) {
+        e.preventDefault();
+
+        var account_id = $(this).closest('tr').find('.edit_id').val();
+
+        // console.log(account_id);
+
+        $.ajax({
+          type: "POST",
+          url: 'Account/getAccountById/' + account_id,
+          data: {
+            'checking_edit_btn': true,
+            'account_id': account_id,
+          },
+          success: function(response) {
+            console.log(response);
+            $.each(response, function(key, value) {
+              $('#edit_id').val(value['id']);
+              $('#edit_username').val(value['username']);
+              $('#edit_email').val(value['email']);
+              $('#edit_password').val(value['password']);
+            });
+            $('#editadminprofile').modal('show');
+          }
+        });
+      });
+
+    });
+  </script>

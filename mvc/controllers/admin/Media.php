@@ -1,7 +1,6 @@
 <?php
 
-namespace Mvc\Controllers;
-
+namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 
