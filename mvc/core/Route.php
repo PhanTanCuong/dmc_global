@@ -23,13 +23,25 @@ class Route
             if (preg_match($route['uri'], $uri, $matches)) {
                 if (count($matches) > 0) {
                     list($controller, $method) = explode('@', $route['controller']);
-                    $controllerClass = 'Mvc\\Controllers\\' . $controller; //
+                   // Check if the URI starts with /Admin
+                   if (strpos($uri, 'Admin/') === 0) {
+                    $controllerClass = 'Mvc\\Controllers\\Admin\\' . $controller;
+                } else {
+                    $controllerClass = 'Mvc\\Controllers\\' . $controller;
+                }
+                if (class_exists($controllerClass)) {
                     $controllerInstance = new $controllerClass();
                     $controllerInstance->$method();
                     return;
+                } else {
+                    echo 'Controller class ' . $controllerClass . ' not found.';
+                    return;
+                }
+                
                 }
             }
         }
+
         echo '404 - Page not found';
     }
 }

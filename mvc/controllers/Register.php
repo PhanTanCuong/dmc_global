@@ -13,7 +13,7 @@ class Register extends Controller
     }
 
     //add new user account
-    function register($username = null, $email = null, $password = null, $role = null)
+    function signup($username = null, $email = null, $password = null, $role = null)
     {
         try {
             if (isset($_POST["signup_btn"])) {

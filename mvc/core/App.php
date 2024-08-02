@@ -4,16 +4,12 @@ class App
 {
 
     //Http://localhost/controller/action/param1/param2
-    // protected $controller = "Home"; //Layout (Controller) mặc định nếu enduser gõ ngẫu nhiên
-    // protected $action = "display"; //Action mặc định nếu enduser gõ ngẫu nhiên
-
-    // protected $params = [];
+    protected $controller = "Home"; // Default Controller
+    protected $action = "display";  // Default Action(Medthod)
+    protected $params = [];
 
     function __construct()
     {
-
-
-
         //    //Xu Ly Controller
         //    //ucfirst($arr[0]):'Make a string's first character uppercase
         //    if(file_exists("./mvc/controllers/". $arr[0].".php")){
@@ -31,11 +27,8 @@ class App
         //         unset($arr[1]);
 
         //     }
-
         //     //Xử lý Params
         //     $this->params=$arr?array_values($arr) : [];
-
-
         //     //Hàm tạo ra biến có kiểu lớp là controller(...)
         //     call_user_func_array(  [$this->controller,$this->action], $this->params);
 
