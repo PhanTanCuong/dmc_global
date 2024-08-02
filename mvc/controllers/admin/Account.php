@@ -79,14 +79,13 @@ class Account extends Controller
     {
         try {
 
-            if (isset($_POST["user_updatebtn"])) {
-                $username = strip_tags($_POST['username']);
-                $email = strip_tags($_POST['email']);
-                $role = strip_tags($_POST['role']);
-                $password = strip_tags($_POST['password']);
+            if (isset($_POST["editAccountBtn"])) {
+                $username = strip_tags($_POST['edit_username']);
+                $email = strip_tags($_POST['edit_email']);
+                $role = strip_tags($_POST['edit_role']);
                 $id = $_POST['edit_id'];
                 $account = $this->model('AccountModel');
-                $success = $account->editAccount($id, $username, $email, $password, $role);
+                $success = $account->editAccount($id, $username, $email,$role);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: Account');

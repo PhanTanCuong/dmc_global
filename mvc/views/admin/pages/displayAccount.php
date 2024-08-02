@@ -67,14 +67,16 @@
             <input type="email" name="edit_email" id="edit_email" class="form-control" placeholder="Enter Email">
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input type="text" name="edit_password" id="edit_password" class="form-control" placeholder="Enter Password">
+            <label>Role</label>
+            <select name="edit_role" id="edit_role">
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
           </div>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="addAccountBtn" class="btn btn-primary">Save</button>
+          <button type="submit" name="editAccountBtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -182,7 +184,7 @@
               $('#edit_id').val(value['id']);
               $('#edit_username').val(value['username']);
               $('#edit_email').val(value['email']);
-              $('#edit_password').val(value['password']);
+              $('#edit_role').val(value['role'])
             });
             $('#editadminprofile').modal('show');
           }

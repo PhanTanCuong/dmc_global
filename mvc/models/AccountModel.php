@@ -59,18 +59,15 @@ class AccountModel extends DB
     }
 
     //edit user account function
-    public function editAccount($id = null, $username = null, $email = null, $password = null, $role = null)
+    public function editAccount($id = null, $username = null, $email = null, $role = null)
     {
         try {
             $username = $this->connection->real_escape_string($username);
             $email = $this->connection->real_escape_string($email);
-            $password = $this->connection->real_escape_string($password);
             $role = $this->connection->real_escape_string($role);
-            $hash_password = password_hash($password, PASSWORD_BCRYPT);
-            // Kiểm tra mật khẩu hiện tại
             $result = $this->getAccountbyId($id);
             if ($result) {
-                $query = "UPDATE  register SET username='$username', email='$email', password='$hash_password', role='$role' WHERE id='$id'  ";
+                $query = "UPDATE  register SET username='$username', email='$email', role='$role' WHERE id='$id'  ";
             } else {
                 return false;
             }

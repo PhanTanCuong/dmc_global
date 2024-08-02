@@ -16,7 +16,7 @@ Route::add('Admin/addAccount','Account@addAccount');
 Route::add('Admin/deleteAccount','Account@deleteAccount');
 Route::add('Admin/Account','Account@display');
 Route::add('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
-
+Route::add('Admin/editAccount','Account@editAccount');
 
 
 ?>
