@@ -23,7 +23,7 @@ class Route
             if (preg_match($route['uri'], $uri, $matches)) {
                 if (count($matches) > 0) {
                     list($controller, $method) = explode('@', $route['controller']);
-                    $controllerClass = 'dmc_global\\mvc\\controllers\\' . $controller; //
+                    $controllerClass = 'Mvc\\Controllers\\' . $controller; //
                     $controllerInstance = new $controllerClass();
                     $controllerInstance->$method();
                     return;

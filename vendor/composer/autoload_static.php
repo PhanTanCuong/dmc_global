@@ -21,6 +21,14 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
+        'M' => 
+        array (
+            'Mvc\\Controllers\\' => 16,
+        ),
+        'C' => 
+        array (
+            'Core\\' => 5,
+        ),
         'B' => 
         array (
             'Brick\\Math\\' => 11,
@@ -39,6 +47,14 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
+        'Mvc\\Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/mvc/controllers',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/mvc/core',
         ),
         'Brick\\Math\\' => 
         array (

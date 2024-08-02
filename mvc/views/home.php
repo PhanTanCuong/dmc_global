@@ -12,10 +12,10 @@
 
   <!-- .css file -->
   <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
-  <link rel="stylesheet" href="../public/css/about.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/about.css">
   <link rel="stylesheet" href="/dmc_global/public/css/product.css">
-  <link rel="stylesheet" href="../public/css/media.css">
-  <link rel="stylesheet" href="../public/css/footer.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/media.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/footer.css">
 
   <!-- lib -->
   <!-- slick -->
@@ -45,7 +45,7 @@
       <!-- Thanh chuyển hướng -->
       <div class="logo">
         <div class="logo_ic">
-          <img src="../public/images/Logo.png" class="img-fluid" alt="DMC Global">
+          <img src="/dmc_global/public/images/Logo.png" class="img-fluid" alt="DMC Global">
         </div>
         <div class="toogle">
           <i class="fa-solid fa-bars"></i>
@@ -89,13 +89,13 @@
       <section class="about1">
         <div class="slideshow-container">
           <div class="item">
-            <img src="../public/images/banner.png" class="img-fluid">
+            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
           </div>
           <div class="item">
-            <img src="../public/images/banner.png" class="img-fluid">
+            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
           </div>
           <div class="item">
-            <img src="../public/images/banner.png" class="img-fluid">
+            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
           </div>
         </div>
         <div class="banner-text-container">
@@ -117,9 +117,9 @@
         <div class="container">
           <div class="grid-container">
             <div class="img-container">
-              <img src="../public/images/about2_img.png">
+              <img src="/dmc_global/public/images/about2_img.png">
               <div class="chld-img-container">
-                <img src="../public/images/abut2_child_img.png" class="img-fluid">
+                <img src="/dmc_global/public/images/abut2_child_img.png" class="img-fluid">
               </div>
             </div>
             <div class="txt-container">
@@ -137,7 +137,7 @@
         <div class="grid2-container">
           <div></div>
           <div class="txt2-container" style="background: transparent; color: aliceblue;">
-            <img src="../public/images/abut2_child_img.png">
+            <img src="/dmc_global/public/images/abut2_child_img.png">
             <div class="text">
               <h2>DMC Global, perfect from planning to operations.</h2>
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
@@ -152,7 +152,7 @@
 
           <div></div>
           <div class="txt2-container">
-            <img src="../public/images/abut2_child_img.png">
+            <img src="/dmc_global/public/images/abut2_child_img.png">
             <div class="text">
               <h2>DMC Global, perfect from planning to operations.</h2>
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
@@ -166,7 +166,7 @@
 
           <div></div>
           <div class="txt2-container" style="background: transparent; color: aliceblue;overflow: hidden;">
-            <img src="../public/images/abut2_child_img.png">
+            <img src="/dmc_global/public/images/abut2_child_img.png">
             <div class="text">
               <h2>DMC Global, perfect from planning to operations.</h2>
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
@@ -221,7 +221,7 @@
           <div class="stat-grid">
             <div class="stat">
               <div class="stat-ic">
-                <img class="flash" src="../public/images/ic_1.png" alt="Icon">
+                <img class="flash" src="/dmc_global/public/images/ic_1.png" alt="Icon">
               </div>
               <div class="stat-text">
                 <h3>2202</h3>
@@ -230,7 +230,7 @@
             </div>
             <div class="stat">
               <div class="stat-ic">
-                <img class="flash" src="../public/images/ic_2.png" alt="Icon">
+                <img class="flash" src="/dmc_global/public/images/ic_2.png" alt="Icon">
               </div>
               <div class="stat-text">
                 <h3>2202</h3>
@@ -239,7 +239,7 @@
             </div>
             <div class="stat">
               <div class="stat-ic">
-                <img class="flash" src="../public/images/ic_3.png" alt="Icon">
+                <img class="flash" src="/dmc_global/public/images/ic_3.png" alt="Icon">
               </div>
               <div class="stat-text">
                 <h3>2202</h3>
@@ -248,7 +248,7 @@
             </div>
             <div class="stat">
               <div class="stat-ic">
-                <img class="flash" src="../public/images/ic_4.png" alt="Icon">
+                <img class="flash" src="/dmc_global/public/images/ic_4.png" alt="Icon">
               </div>
               <div class="stat-text">
                 <h3>2202</h3>
@@ -290,7 +290,7 @@
       <div class="container-footer">
         <div class="footer-content">
           <div class="footer-logo">
-            <img src="../public/images/footer.png" class="img-fluid">
+            <img src="/dmc_global/public/images/footer.png" class="img-fluid">
           </div>
 
           <div class="footer-info">
@@ -305,11 +305,11 @@
               <p class="underline-footer"></p>
             </h3>
             <p>info.mblube@gmail.com</p>
-            <span><img src="../public/images/footer_ic1.png"></span>
-            <span><img src="../public/images/footer_ic2.png"></span>
-            <span><img src="../public/images/footer_ic3.png"></span>
-            <span><img src="../public/images/footer_ic4.png"></span>
-            <span><img src="../public/images/footer_ic5.png"></span>
+            <span><img src="/dmc_global/public/images/footer_ic1.png"></span>
+            <span><img src="/dmc_global/public/images/footer_ic2.png"></span>
+            <span><img src="/dmc_global/public/images/footer_ic3.png"></span>
+            <span><img src="/dmc_global/public/images/footer_ic4.png"></span>
+            <span><img src="/dmc_global/public/images/footer_ic5.png"></span>
 
             <p>Copyright 2024 @ all rights reserve</p>
 
@@ -346,7 +346,7 @@
             <p>Lorem, ipsum dolor sit amet consectetur<br> adipisicing elit.</p>
             <div id="phone">
               <ul>
-                <li><img src="../public/images/footer_ic6.png" class="img-fluid"></li>
+                <li><img src="/dmc_global/public/images/footer_ic6.png" class="img-fluid"></li>
                 <li>
                   <h3 class="phone-title">MORE INFORMATION</h3>
                   <p>0903754989</p>
@@ -366,7 +366,7 @@
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="../public/js/banner.js"></script>
+  <script type="text/javascript" src="/dmc_global/public/js/banner.js"></script>
 
   <script>
     $(document).ready(function() {
