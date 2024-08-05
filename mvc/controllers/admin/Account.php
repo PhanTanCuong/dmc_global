@@ -54,8 +54,8 @@ class Account extends Controller
         }
     }
 
-    //display detail infor user account
-    public function getAccountById()
+    //getAccountById()
+    function getAccountById()
     {
         if(isset($_POST['checking_edit_btn'])) {
             $account_id=$_POST['account_id'];

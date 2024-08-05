@@ -71,17 +71,22 @@ class Product extends Controller
     }
 
     //display detail infor user account
-    public function displayDetailProduct()
+    function getProductById()
     {
-        if (isset($_POST["display_product_infor_btn"])) {
-            //Model
-            $product = $this->model("ProductModel");
+        if(isset($_POST['checking_edit_btn'])) {
+            $product_id=$_POST['product_id'];
+            $result_array=[];
+            $product= $this->model('ProductModel');
+            $result = $product->getProductById($product_id);
+            if(mysqli_num_rows($result) > 0) {
+                foreach ($result as $row) {
+                    array_push($result_array, $row);
+                    header('Content-Type: application/json');
+                    echo json_encode($result_array);
 
-            //View
-            $this->view("admin/home", [
-                "product" => $product->getProductbyId($_POST['edit_product_id']),
-                "page" => "editProduct"
-            ]);
+                }
+
+            }
         }
     }
 
@@ -127,7 +132,7 @@ class Product extends Controller
                 $description = strip_tags($_POST['product_description']);
                 $link = strip_tags($_POST['product_link']);
 
-                $id = $_POST['edit_product_id'];
+                $id = $_POST['edit_id'];
                 $product = $this->model('ProductModel');
 
                 $data = $product->getCurrentProductImages($id);

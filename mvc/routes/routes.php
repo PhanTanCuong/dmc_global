@@ -25,6 +25,7 @@ Route::add('Admin/addProduct','Product@addProduct');
 Route::add('Admin/deleteProduct','Product@deleteProduct');
 Route::add('Admin/Product','Product@display');
 Route::add('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
-Route::add('Admin/editProduct','Product@editProductt');
+Route::add('Admin/editProduct','Product@editProduct');
+Route::add('Admin/toggleCheckboxDelete', 'Productr@toggleCheckboxDelete');
 
 ?>

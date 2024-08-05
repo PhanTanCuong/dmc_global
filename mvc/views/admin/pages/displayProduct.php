@@ -51,30 +51,35 @@
           </button>
         </div>
         <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-        <form action="addProduct" method="POST" enctype="multipart/form-data">
+        <form action="editProduct" method="POST" enctype="multipart/form-data">
 
           <div class="modal-body">
-
+            <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label> Title </label>
-              <input type="text" name="product_title" id="edit_title" class="form-control" placeholder="Enter Product Title" required>
+              <input type="text" name="product_title" id="edit_title" class="form-control" placeholder="Enter Title" required>
             </div>
             <div class="form-group">
               <label>Description</label>
-              <input type="text" name="product_description" id="edit_description" class="form-control" placeholder="Enter Product Description" required>
+              <input type="text" name="product_description" id="edit_description" class="form-control" placeholder="Enter Description" required>
             </div>
             <div class="form-group">
               <label> Link </label>
-              <input type="text" name="product_link" id="edit_link" class="form-control" placeholder="Enter Product Link" required>
+              <input type="text" name="product_link" id="edit_link" class="form-control" placeholder="Enter Link" required>
+            </div>
+            <div class="form-group">
+              <label>Current Image</label><br>
+              <img id="product_current_image" src="/dmc_global/mvc/uploads/" width="50%" height="auto" alt="Product Img"><br>
+              <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
               <label>Image </label>
-              <input type="file" name="product_image" id="edit_img" class="form-control" required>
+              <input type="file" name="product_image" id="edit_img" class="form-control"  >
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" name="editProductBtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="product_updatebtn" class="btn btn-primary">Save</button>
           </div>
         </form>
 
@@ -137,7 +142,7 @@
               ?>
                   <tr>
                     <td>
-                      <input type="checkbox" onclick="toggleCheckbox(this,'../Product/toggleCheckboxDelete')" value="<?php echo $row['id'] ?>
+                      <input type="checkbox" onclick="toggleCheckbox(this,'Admin/toggleCheckboxDelete/')" value="<?php echo $row['id'] ?>
                     <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
                     </td>
                     <td><?php echo $counter++; ?></td>
@@ -170,3 +175,36 @@
     </div>
 
     <script src="../public/js/admin/checkbox.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.edit_btn').click(function(e) {
+          e.preventDefault();
+
+          var product_id = $(this).closest('tr').find('.edit_id').val();
+
+          // console.log(product_id);
+
+          $.ajax({
+            type: "POST",
+            url: 'Product/getProductById/' + product_id,
+            data: {
+              'checking_edit_btn': true,
+              'product_id': product_id,
+            },
+            success: function(response) {
+              console.log(response);
+              $.each(response, function(key, value) {
+                $('#edit_id').val(value['id']);
+                $('#edit_title').val(value['title']);
+                $('#edit_description').val(value['description']);
+                $('#edit_link').val(value['link']);
+                $('#product_current_image').attr('src', '/dmc_global/mvc/uploads/' + value['image']);
+                $('#current_file').text('Current file:'+ value['image']);
+              });
+              $('#editproductprofile').modal('show');
+            }
+          });
+        });
+
+      });
+    </script>

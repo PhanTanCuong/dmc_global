@@ -179,12 +179,12 @@
             'account_id': account_id,
           },
           success: function(response) {
-            console.log(response);
+            // console.log(response);
             $.each(response, function(key, value) {
               $('#edit_id').val(value['id']);
               $('#edit_username').val(value['username']);
               $('#edit_email').val(value['email']);
-              $('#edit_role').val(value['role'])
+              $('#edit_role').val(value['role']);
             });
             $('#editadminprofile').modal('show');
           }
