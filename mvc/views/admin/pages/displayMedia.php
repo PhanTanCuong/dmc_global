@@ -1,4 +1,4 @@
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addnewsinfor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,6 +37,51 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="editnewsprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Information </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
+      <form action="editNews" method="POST" enctype="multipart/form-data">
+
+        <div class="modal-body">
+          <input type="hidden" name="edit_news_id" id="edit_id">
+          <div class="form-group">
+            <label> Title </label>
+            <input type="text" name="news_title" id="edit_title" class="form-control" placeholder="Enter Title" required>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="news_description" id="edit_description" class="form-control" placeholder="Enter Description" required>
+          </div>
+          <div class="form-group">
+            <label> Link </label>
+            <input type="text" name="news_link" id="edit_link" class="form-control" placeholder="Enter Link" required>
+          </div>
+          <div class="form-group">
+            <label>Current Image</label><br>
+            <img id="news_current_image" src="/dmc_global/mvc/uploads/" width="50%" height="auto" alt="Product Img"><br>
+            <span id="current_file">Current file: </span>
+          </div>
+          <div class="form-group">
+            <label>Image </label>
+            <input type="file" name="news_image" id="edit_img" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="news_updatebtn" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
 
 <div class="container-fluid">
@@ -46,7 +91,7 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of blogs
         <div class="controll-btn">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewsinfor">
             <i class="fas fa-plus"></i>
           </button>
           <form action="multipleDeleteNews" method="POST">
@@ -102,8 +147,9 @@
                   <td><?php echo $row['link']; ?></td>
                   <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                   <td>
-                    <form action="displayDetailNews" method="POST">
-                      <button type="submit" name="display_news_infor_btn" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                    <form action="getNewsById" method="POST">
+                      <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editnewsprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
                   </td>
                   <td>
@@ -125,3 +171,36 @@
   </div>
 
   <script src="../public/js/admin/checkbox.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.edit_btn').click(function(e) {
+        e.preventDefault();
+
+        var news_id = $(this).closest('tr').find('.edit_id').val();
+
+        // console.log(news_id);
+
+        $.ajax({
+          type: "POST",
+          url: 'News/getNewsById/' + news_id,
+          data: {
+            'checking_edit_btn': true,
+            'news_id': news_id,
+          },
+          success: function(response) {
+            console.log(response);
+            $.each(response, function(key, value) {
+              $('#edit_id').val(value['id']);
+              $('#edit_title').val(value['title']);
+              $('#edit_description').val(value['description']);
+              $('#edit_link').val(value['link']);
+              $('#news_current_image').attr('src', '/dmc_global/mvc/uploads/' + value['image']);
+              $('#current_file').text('Current file:' + value['image']);
+            });
+            $('#editproductprofile').modal('show');
+          }
+        });
+      });
+
+    });
+  </script>

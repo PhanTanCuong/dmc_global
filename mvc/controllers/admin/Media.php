@@ -44,7 +44,7 @@ class Media extends Controller
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayNews1');
+            header('Location:News1');
         }
     }
 
@@ -61,15 +61,15 @@ class Media extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["icon_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icon_image"]["name"]);
                     $_SESSION["success"] = "Your data is added";
-                    header("Location:displayNews1");
+                    header("Location:News1");
                 } else {
                     $_SESSION["status"] = "Your data is NOT added";
-                    header("Location:displayNews1");
+                    header("Location:News1");
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayNews1');
+            header('Location:News1');
         }
     }
 
@@ -153,10 +153,10 @@ class Media extends Controller
                 $result = $item->multipleDeleteStateIcon();
                 if ($result) {
                     $_SESSION['success'] = 'Your datas are deleted';
-                    header('Location:displayNews1');
+                    header('Location:News1');
                 } else {
                     $_SESSION['status'] = 'Your datas are NOT deleted';
-                    header('Location:displayNews1');
+                    header('Location:News1');
                 }
             }
         } catch (Exception $e) {
@@ -178,21 +178,24 @@ class Media extends Controller
     }
 
     //display detail infor user account
-    public function displayDetailNews()
+    function getNewsById()
     {
-        try {
-            if (isset($_POST["display_news_infor_btn"])) {
-                $news = $this->model("MediaModel");
-                $this->view("admin/home", [
-                    "news" => $news->getNewsbyId($_POST['edit_news_id']),
-                    "page" => "editMedia"
-                ]);
+        if(isset($_POST['checking_edit_btn'])) {
+            $news_id=$_POST['news_id'];
+            $result_array=[];
+            $news= $this->model('MediaModel');
+            $result = $news->getNewsbyId($news_id);
+            if(mysqli_num_rows($result) > 0) {
+                foreach ($result as $row) {
+                    array_push($result_array, $row);
+                    header('Content-Type: application/json');
+                    echo json_encode($result_array);
+
+                }
+
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
         }
     }
-
 
     //Add new product function
     function addNews($title = null, $description = null, $link = null, $image = null)
@@ -212,7 +215,7 @@ class Media extends Controller
                 //     $image_store = $_FILES["news_image"]["name"];
                 //     //$_FILES["news_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["news_image"].
                 //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
-                //     header('Location:displayNews');
+                //     header('Location:News');
                 // } else {
                 $news = $this->model("MediaModel");
                 $result = $news->addNews($title, $description, $link, $image);
@@ -220,16 +223,16 @@ class Media extends Controller
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = "News is added successfully";
-                    header('Location:displayNews');
+                    header('Location:News');
                 } else {
                     $_SESSION['status'] = "News is NOT added";
-                    header('Location:displayNews');
+                    header('Location:News');
                 }
                 // }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
-            header('Location:displayNews');
+            header('Location:News');
         }
     }
 
@@ -260,15 +263,15 @@ class Media extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: displayNews');
+                    header('Location:News');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:displayNews');
+                    header('Location:News');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayNews');
+            header('Location:News');
         }
     }
 
@@ -282,15 +285,15 @@ class Media extends Controller
                 $result = $news->deleteNews($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:displayNews');
+                    header('Location:News');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:displayNews');
+                    header('Location:News');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:displayNews');
+            header('Location:News');
         }
     }
 
@@ -321,10 +324,10 @@ class Media extends Controller
                 $result = $news->multipleDeleteNews();
                 if ($result) {
                     $_SESSION['success'] = 'Your products are deleted';
-                    header('Location:displayNews');
+                    header('Location:News');
                 } else {
                     $_SESSION['status'] = 'Your datas are NOT deleted';
-                    header('Location:displayNews');
+                    header('Location:News');
                 }
             }
         } catch (Exception $e) {

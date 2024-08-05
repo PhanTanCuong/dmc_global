@@ -174,7 +174,7 @@
       </div>
     </div>
 
-    <script src="../public/js/admin/checkbox.js"></script>
+    <script src="/public/js/admin/checkbox.js"></script>
     <script>
       $(document).ready(function() {
         $('.edit_btn').click(function(e) {
