@@ -4,42 +4,6 @@ use Core\DB;
 
 class MediaModel extends DB
 {
-    // Media1
-    public function getNews1()
-    {
-        try {
-            $id = 1;
-            $query = "SELECT * FROM news1 WHERE id ='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    // background
-    public function editBackgroundMedia1($image)
-    {
-        try {
-            $id = 1;
-            $query = "UPDATE news1 SET image='$image' WHERE id ='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function getCurrentBackgroundMedia1()
-    {
-        try {
-            $id = 1;
-            $query = "SELECT image FROM news1 WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-
     // Icons
     public function saveIconMeida1($name, $value, $image)
     {

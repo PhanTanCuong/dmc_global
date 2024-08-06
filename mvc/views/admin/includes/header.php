@@ -25,7 +25,11 @@
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css">
-
+  <style>
+    .customize-button{
+      margin-bottom: 2rem;
+    }
+  </style>
 
 
 </head>

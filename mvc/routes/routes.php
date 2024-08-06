@@ -43,6 +43,11 @@ Route::add('Admin/customizeSlider','Slider@customBanner');
 
 //Background
 Route::add('Admin/Background','Background@display');
+Route::add('Admin/addBackground','Background@addBackground');
+Route::add('Admin/Background/getBackgroundById/(\d+)', 'Background@getBackgroundById');
+Route::add('Admin/customizeBackground','Background@customizeBackground');
+Route::add('Admin/deleteBackground','Background@deleteBackground');
+
 
 
 ?>
