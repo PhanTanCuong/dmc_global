@@ -32,8 +32,13 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <style>
-    .comp img{
+    .comp img {
       height: 18rem;
+    }
+
+    .item.slick-slide img{
+      width:100%;
+      height: auto;
     }
   </style>
 </head>
@@ -87,31 +92,43 @@
   <main>
     <section id="about">
       <section class="about1">
-        <div class="slideshow-container">
-          <div class="item">
-            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
-          </div>
-          <div class="item">
-            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
-          </div>
-          <div class="item">
-            <img src="/dmc_global/public/images/banner.png" class="img-fluid">
-          </div>
-        </div>
-        <div class="banner-text-container">
-          <div class="container h-100">
-            <div class="banner-text">
-              <div class="text">
-                <h1>Sustainable<br>Development</h1>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
-                  ipsum itaque doloremque fugiat quo</p>
-                <button>View more</button>
+        <?php
+        if (mysqli_num_rows($data["banner"]) > 0) {
+          while ($rows = mysqli_fetch_array($data["banner"])) {
+
+            $banner_pic = $rows['image'];
+            $image_path = "/dmc_global/public/images/" . $banner_pic;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+        ?>
+              <div class="slideshow-container">
+                <div class="item">
+                  <img src="/dmc_global/public/images/banner.png" class="img-fluid">
+                </div>
+                <div class="item">
+                  <img src="<?php echo $image_path ?>" class="img-fluid">
+                </div>
+                <div class="item">
+                  <img src="<?php echo $image_path ?>" class="img-fluid">
+                </div>
               </div>
-              <div class="text"></div>
-            </div>
-          </div>
-        </div>
-        </div>
+              <div class="banner-text-container">
+                <div class="container h-100">
+                  <div class="banner-text">
+                    <div class="text">
+                      <h1><?php echo $rows['title'] ?></h1>
+                      <p><?php echo  $rows['description'] ?></p>
+                      <button>View more</button>
+                    </div>
+                    <div class="text"></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+        <?php
+            }
+          }
+        }
+        ?>
       </section>
       <section class="about2">
         <div class="container">
@@ -269,9 +286,9 @@
               while ($rows = mysqli_fetch_array($data['news'])) {
             ?>
                 <div class="news-item">
-                  <img src="/dmc_global/mvc/uploads/<?php echo $rows['image']?>" alt="News">
-                  <h3><?php echo $rows['title']?></h3>
-                  <p><?php echo $rows['description']?></p>
+                  <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="News">
+                  <h3><?php echo $rows['title'] ?></h3>
+                  <p><?php echo $rows['description'] ?></p>
                 </div>
             <?php
               }

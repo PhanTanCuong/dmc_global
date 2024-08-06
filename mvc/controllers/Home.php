@@ -11,9 +11,11 @@ class Home extends Controller
         //Model
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
+        $banner=$this->model("SliderModel");
 
         //View
         $this->view("home", [
+            "banner"=>$banner->getInforBanner(),
             "product" => $product->getProduct(),
             "news" => $news->getNews()
         ]);

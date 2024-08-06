@@ -3,8 +3,12 @@
 namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
+use Core\Middleware;
 class Slider extends Controller 
-{   
+{     public function __construct()
+    {
+        Middleware::checkAdmin();
+    }
     function display()
     {
         $item = $this->model('SliderModel');
