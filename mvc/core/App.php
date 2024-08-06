@@ -43,7 +43,6 @@ class App
         //lấy URL từ mảng
         $uri=implode('/',$arr);
 
-
         //Gọi phương thức dispatch của route  để điều hướng
         Route::dispatch($uri);
     }
@@ -56,3 +55,4 @@ class App
         return [];
     }
 }
+

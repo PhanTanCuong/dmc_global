@@ -3,9 +3,13 @@
 namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
-
+use Core\Middleware;
 class Media extends Controller
 {
+    public function __construct()
+    {
+        Middleware::checkAdmin();
+    }
     // News1
     function displayNews1()
     {

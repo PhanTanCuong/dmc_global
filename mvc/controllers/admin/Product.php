@@ -3,10 +3,15 @@
 namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
+use Core\Middleware;
 
 class Product extends Controller
 {
 
+    public function __construct()
+    {
+        Middleware::checkAdmin();
+    }
     // Product1
     function Product1()
     {

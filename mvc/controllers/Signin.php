@@ -28,9 +28,10 @@ class Signin extends Controller
                     $role = $result['role'];
                     $_SESSION['username'] = $email_login;
                     if ($role === 'admin') {
+                        $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {
-                        header('Location: ../Home/');
+                        header('Location: ../');
                     }
                 }
             }
@@ -55,7 +56,7 @@ class Signin extends Controller
             // header("Pragma: no-cache");
 
             // Redirect to the login page
-            header('Location: Signin');
+            header('Location: Signin/');
             exit();
         }
     }
