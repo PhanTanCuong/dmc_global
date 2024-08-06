@@ -56,15 +56,15 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
-                    About
+                    Contents
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">Banner</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout2');">About 2</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout3');">About 3</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Background');">Backgrounds</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icon');">Icons</a>
                     </div>
                 </div>
-                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Product/displayProduct1');">
-                    Product
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">
+                    Slider
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Media/displayNews1');">
                     Media

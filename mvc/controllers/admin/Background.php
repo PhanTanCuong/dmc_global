@@ -4,23 +4,23 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-class Slider extends Controller 
+class Background extends Controller 
 {     public function __construct()
     {
         Middleware::checkAdmin();
     }
     function display()
     {
-        $item = $this->model('SliderModel');
+        $item = $this->model('BackgroundModel');
 
         $this->view('admin/home', [
-            'item' => $item->getInforBanner(),
-            'page' => 'customizeBanner'
+            'item' => $item->getInforBackground(),
+            'page' => 'customizeBackground'
         ]);
     }
 
      //Customize about2 information
-     function customBanner()
+     function customBackground()
      {
          try {
  
@@ -29,7 +29,7 @@ class Slider extends Controller
                  $description = strip_tags($_POST['banner_description']);
  
                  $item = $this->model('SliderModel');
-                 $data=$item->getCurrentBannerImages();
+                 $data=$item->getCurrentBackgroundImages();
  
                  $currentImages=mysqli_fetch_array($data);
  
@@ -41,7 +41,7 @@ class Slider extends Controller
                  }
                 
  
-                 $success=$item->customizeInforBanner($title,$description,$image);
+                 $success=$item->customizeInforBackground($title,$description,$image);
                  if ($success) {
                      move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["banner_image"]["name"]) . '';
                      $_SESSION['success'] = 'Your data is updated';
