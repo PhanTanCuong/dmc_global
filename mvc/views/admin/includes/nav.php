@@ -58,7 +58,7 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     About
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayBanner');">Banner</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">Banner</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout2');">About 2</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('About/displayAbout3');">About 3</a>
                     </div>

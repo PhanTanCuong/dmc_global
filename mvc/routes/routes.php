@@ -36,5 +36,10 @@ Route::add('Admin/News','Media@display');
 Route::add('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
 Route::add('Admin/editNews','Media@editNews');
 
+//Customize
+//Slider
+Route::add('Admin/Slider','Slider@display');
+Route::add('Admin/customizeSlider','Slider@customBanner');
+
 
 ?>

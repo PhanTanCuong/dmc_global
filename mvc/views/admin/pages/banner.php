@@ -19,7 +19,7 @@
         foreach ($data["item"] as $row) {
         ?>
 
-            <form action="customBanner" method="POST" enctype="multipart/form-data">
+            <form action="customizeSlider" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group">
                         <label>Title</label>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="displaybanner" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
+                    <a href="Slider" class="btn btn-danger" style="margin-left: 20px;">Cancel</a>
                     <button type="submit" name="banner_updatebtn" class="btn btn-primary">Update</button>
                 </div>
             </form>

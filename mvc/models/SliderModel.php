@@ -1,7 +1,7 @@
 <?php
 
 use Core\DB;
-class AboutModel extends DB
+class SliderModel extends DB
 {
     // banner
     public function getInforBanner()
