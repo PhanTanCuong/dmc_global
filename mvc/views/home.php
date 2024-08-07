@@ -132,22 +132,27 @@
       </section>
       <section class="about2">
         <div class="container">
+          <?php
+          if (mysqli_num_rows($data["about2Infor"]) > 0) {
+            while ($rows = mysqli_fetch_array($data["about2Infor"])) {
+          ?>
           <div class="grid-container">
             <div class="img-container">
-              <img src="/dmc_global/public/images/about2_img.png">
+              <img src="/dmc_global/public/images/<?php echo $rows['parent_image']?>">
               <div class="chld-img-container">
-                <img src="/dmc_global/public/images/abut2_child_img.png" class="img-fluid">
+                <img src="/dmc_global/public/images/<?php echo $rows['child_image']?>" class="img-fluid">
               </div>
             </div>
             <div class="txt-container">
-              <h2>DMC Global, perfect from planning to operations.</h2>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
-                ipsum itaque doloremque fugiat quo, iusto quod repudiandae sit illo voluptatibus blanditiis placeat?
-                Quod,
-                repellendus.</p>
+              <h2><?php echo $rows['title']?></h2>
+              <p><?php echo $rows['description']?></p>
               <button>View more</button>
             </div>
           </div>
+          <?php
+            }
+          }
+          ?>
         </div>
       </section>
       <section class="about3">
