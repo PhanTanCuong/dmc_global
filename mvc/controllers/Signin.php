@@ -26,8 +26,8 @@ class Signin extends Controller
                     header('Location:display');
                 } else {
                     $role = $result['role'];
-                    $_SESSION['username'] = $email_login;
                     if ($role === 'admin') {
+                        $_SESSION['username'] = $email_login;
                         $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {

@@ -60,7 +60,7 @@
                     <div id="collapse-about" class="collapse">
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Data');">Data</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Background');">Backgrounds</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icon');">Icons</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icons');">Icons</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">
