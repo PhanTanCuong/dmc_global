@@ -78,11 +78,25 @@ class CustomizeModel extends DB
         }
     }
 
-    public function getHeadIbfor()
+    public function getHeadInfor()
     {
         try {
             $query = "SELECT icon.image, data.title FROM block JOIN icon ON block.block_id=icon.block_id JOIN data ON block.block_id=data.block_id WHERE block.block_id=1
 ";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getFooterIconInfor()
+    {
+        try {
+            $query = "SELECT image 
+                        FROM icon 
+                        WHERE block_id = 7 
+                        AND image LIKE '%ic%'";
+                        
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

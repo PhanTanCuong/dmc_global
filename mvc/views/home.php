@@ -7,11 +7,18 @@
 
 <head>
   <meta charset="utf-8">
-  <title>DMC Global</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Favicon -->
-  <link rel="icon" href="/dmc_global/public/images/abut2_child_img.png" type="image/x-icon">
-
+  <?php
+  if (mysqli_num_rows($data["head"]) > 0) {
+    while ($row = mysqli_fetch_assoc($data["head"])) {
+  ?>
+      <title><?php echo $row['title'] ?></title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Favicon -->
+      <link rel="icon" href="/dmc_global/public/images/<?php echo $row['image'] ?>" type="image/x-icon">
+  <?php
+    }
+  }
+  ?>
   <!-- .css file -->
   <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
   <link rel="stylesheet" href="/dmc_global/public/css/about.css">
@@ -376,12 +383,15 @@
               <p class="underline-footer"></p>
             </h3>
             <p>info.mblube@gmail.com</p>
-            <span><img src="/dmc_global/public/images/footer_ic1.png"></span>
-            <span><img src="/dmc_global/public/images/footer_ic2.png"></span>
-            <span><img src="/dmc_global/public/images/footer_ic3.png"></span>
-            <span><img src="/dmc_global/public/images/footer_ic4.png"></span>
-            <span><img src="/dmc_global/public/images/footer_ic5.png"></span>
-
+            <?php
+            if (mysqli_num_rows($data['icons']) > 0) {
+              while ($rows = mysqli_fetch_array($data['icons'])) {
+            ?>
+                <span><img src="/dmc_global/public/images/<?php echo $rows['image']?>"></span>
+            <?php
+              }
+            }
+            ?>
             <p>Copyright 2024 @ all rights reserve</p>
 
           </div>

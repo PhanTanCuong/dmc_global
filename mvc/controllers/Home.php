@@ -13,19 +13,17 @@ class Home extends Controller
         $news = $this->model("MediaModel");
         $banner=$this->model("SliderModel");
         $item=$this->model("CustomizeModel");
-        // $result=$item->getAboutInfor();
-        $result=$item->getAbout3Infor();
-        
-
         //View
         $this->view("home", [
             "banner"=>$banner->getInforBanner(),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
+            "head"=> $item->getHeadInfor(),
             "about2Infor" => $item->getAbout2Infor(),
             "about3Infor" => $item->getAbout3Infor(),
             "product1" => $item->getProduct1Infor(),
-            "stats"=> $item->getStatIconInfor()
+            "stats"=> $item->getStatIconInfor(),
+            "icons"=> $item->getFooterIconInfor()
         ]);
     }
 }
