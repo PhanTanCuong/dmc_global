@@ -9,6 +9,8 @@
   <meta charset="utf-8">
   <title>DMC Global</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon -->
+  <link rel="icon" href="/dmc_global/public/images/abut2_child_img.png" type="image/x-icon">
 
   <!-- .css file -->
   <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
@@ -265,10 +267,10 @@
         if (mysqli_num_rows($data["product1"]) > 0) {
           while ($rows = mysqli_fetch_array($data["product1"])) {
         ?>
-            <section class="product1" id="product1" style="background:url(/dmc_global/public/images/<?php echo $rows['image']?>)">
+            <section class="product1" id="product1" style="background:url(/dmc_global/public/images/<?php echo $rows['image'] ?>)">
               <div class="our-products">
-                <h1 style="color: white;"><?php echo $rows['title']?></h1>
-                <p style="color: white;"><?php echo $rows['description']?></p>
+                <h1 style="color: white;"><?php echo $rows['title'] ?></h1>
+                <p style="color: white;"><?php echo $rows['description'] ?></p>
                 <button>VIEW MORE</button>
               </div>
             </section>
@@ -307,42 +309,23 @@
       <section id="media">
         <section class="stats">
           <div class="stat-grid">
-            <div class="stat">
-              <div class="stat-ic">
-                <img class="flash" src="/dmc_global/public/images/ic_1.png" alt="Icon">
-              </div>
-              <div class="stat-text">
-                <h3>2202</h3>
-                <p>Lorem Ipsum</p>
-              </div>
-            </div>
-            <div class="stat">
-              <div class="stat-ic">
-                <img class="flash" src="/dmc_global/public/images/ic_2.png" alt="Icon">
-              </div>
-              <div class="stat-text">
-                <h3>2202</h3>
-                <p>Lorem Ipsum</p>
-              </div>
-            </div>
-            <div class="stat">
-              <div class="stat-ic">
-                <img class="flash" src="/dmc_global/public/images/ic_3.png" alt="Icon">
-              </div>
-              <div class="stat-text">
-                <h3>2202</h3>
-                <p>Lorem Ipsum</p>
-              </div>
-            </div>
-            <div class="stat">
-              <div class="stat-ic">
-                <img class="flash" src="/dmc_global/public/images/ic_4.png" alt="Icon">
-              </div>
-              <div class="stat-text">
-                <h3>2202</h3>
-                <p>Lorem Ipsum</p>
-              </div>
-            </div>
+            <?php
+            if (mysqli_num_rows($data["stats"]) > 0) {
+              while ($rows = mysqli_fetch_array($data["stats"])) {
+            ?>
+                <div class="stat">
+                  <div class="stat-ic">
+                    <img class="flash" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Icon">
+                  </div>
+                  <div class="stat-text">
+                    <h3><?php echo $rows['title'] ?></h3>
+                    <p><?php echo $rows['description'] ?></p>
+                  </div>
+                </div>
+            <?php
+              }
+            }
+            ?>
         </section>
       </section>
       <section class="latest-news">

@@ -24,7 +24,8 @@ class Home extends Controller
             "news" => $news->getNews(),
             "about2Infor" => $item->getAbout2Infor(),
             "about3Infor" => $item->getAbout3Infor(),
-            "product1" => $item->getProduct1Infor()
+            "product1" => $item->getProduct1Infor(),
+            "stats"=> $item->getStatIconInfor()
         ]);
     }
 }
