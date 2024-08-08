@@ -36,9 +36,85 @@
       height: 18rem;
     }
 
-    .item.slick-slide img{
-      width:100%;
+    .item.slick-slide img {
+      width: 100%;
       height: auto;
+    }
+
+    /* .about3 */
+    .about3 {
+      /* display: flex;
+    flex-direction: column; */
+      overflow: hidden;
+      display: block;
+      margin: 8em;
+      background-color: rgba(201, 32, 39, 0.95);
+
+    }
+
+    .grid2-container .odd {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      align-content: center;
+      position: relative;
+    }
+
+    .txt2-container {
+      align-content: center;
+      flex: 1;
+      background: transparent;
+      color: aliceblue;
+      padding: 40px 40px;
+      position: relative;
+
+    }
+
+    .grid2-container .odd .txt2-container img {
+      right: 0px;
+      top: 0px;
+      width: 100%;
+    }
+
+    .grid2-container .even {
+      /* background: url(../images/pic_lubri_2.png) no-repeat right; */
+      grid-template-columns: 30% 70%;
+    }
+
+    .grid2-container .even .txt2-container {
+      grid-row: 1;
+    }
+
+    .grid2-container .even .txt2-container img {
+      right: 0px;
+      top: 0px;
+      width: 100%;
+      transform: rotateY(180deg);
+    }
+
+    .text {
+      position: relative;
+
+      z-index: 1;
+    }
+
+    .txt2-container img {
+      position: absolute;
+      right: -20px;
+    }
+
+    .grid2-container .even .txt2-container img {
+      transform: rotateY(180deg);
+      left: -30px;
+      top: 10px;
+      width: 100%;
+    }
+
+    .grid2-container .even .txt2-container {
+      background: transparent;
+      color: aliceblue;
+      padding: 40px 40px;
+      position: relative;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -136,19 +212,19 @@
           if (mysqli_num_rows($data["about2Infor"]) > 0) {
             while ($rows = mysqli_fetch_array($data["about2Infor"])) {
           ?>
-          <div class="grid-container">
-            <div class="img-container">
-              <img src="/dmc_global/public/images/<?php echo $rows['parent_image']?>">
-              <div class="chld-img-container">
-                <img src="/dmc_global/public/images/<?php echo $rows['child_image']?>" class="img-fluid">
+              <div class="grid-container">
+                <div class="img-container">
+                  <img src="/dmc_global/public/images/<?php echo $rows['parent_image'] ?>">
+                  <div class="chld-img-container">
+                    <img src="/dmc_global/public/images/<?php echo $rows['child_image'] ?>" class="img-fluid">
+                  </div>
+                </div>
+                <div class="txt-container">
+                  <h2><?php echo $rows['title'] ?></h2>
+                  <p><?php echo $rows['description'] ?></p>
+                  <button>View more</button>
+                </div>
               </div>
-            </div>
-            <div class="txt-container">
-              <h2><?php echo $rows['title']?></h2>
-              <p><?php echo $rows['description']?></p>
-              <button>View more</button>
-            </div>
-          </div>
           <?php
             }
           }
@@ -156,49 +232,35 @@
         </div>
       </section>
       <section class="about3">
-        <div class="grid2-container">
-          <div></div>
-          <div class="txt2-container" style="background: transparent; color: aliceblue;">
-            <img src="/dmc_global/public/images/abut2_child_img.png">
-            <div class="text">
-              <h2>DMC Global, perfect from planning to operations.</h2>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
-                ipsum itaque doloremque fugiat quo, iusto quod repudiandae sit illo voluptatibus blanditiis placeat?
-                Quod, repellendus.</p>
+        <?php
+        $isOdd = false;
+
+        if (mysqli_num_rows($data["about3Infor"]) > 0) {
+          while ($rows = mysqli_fetch_array($data["about3Infor"])) {
+            if ($isOdd) {
+              $class = "odd";
+              $pos="right";
+            } else {
+              $class = "even";
+              $pos= "left";
+            }
+
+            $isOdd = !$isOdd;
+        ?>
+            <div class="grid2-container <?php echo $class ?>" style="background:url(/dmc_global/public/images/<?php echo $rows['image']?>) no-repeat <?php echo $pos;?> !important" >
+              <div ></div>
+              <div class="txt2-container" style="background: transparent; color: aliceblue;">
+                <div class="text">
+                  <h2><?php echo $rows['title'] ?></h2>
+                  <p><?php echo $rows['description'] ?></p>
+                </div>
+
+              </div>
             </div>
-
-          </div>
-        </div>
-
-        <div class="grid2-container odd">
-
-          <div></div>
-          <div class="txt2-container">
-            <img src="/dmc_global/public/images/abut2_child_img.png">
-            <div class="text">
-              <h2>DMC Global, perfect from planning to operations.</h2>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
-                ipsum itaque doloremque fugiat quo, iusto quod repudiandae sit illo voluptatibus blanditiis placeat?
-                Quod, repellendus.</p>
-            </div>
-
-          </div>
-        </div>
-        <div class="grid2-container">
-
-          <div></div>
-          <div class="txt2-container" style="background: transparent; color: aliceblue;overflow: hidden;">
-            <img src="/dmc_global/public/images/abut2_child_img.png">
-            <div class="text">
-              <h2>DMC Global, perfect from planning to operations.</h2>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut ab nemo commodi assumenda culpa officia
-                ipsum itaque doloremque fugiat quo, iusto quod repudiandae sit illo voluptatibus blanditiis placeat?
-                Quod, repellendus.</p>
-            </div>
-
-          </div>
-        </div>
-
+        <?php
+          }
+        }
+        ?>
       </section>
       <section id="product">
         <section class="product1" id="product1">

@@ -43,4 +43,27 @@ class CustomizeModel extends DB
             echo $e->getMessage();
         }
     }
+
+    public function getStatIconInfor()
+    {
+        try {
+            $query = "SELECT  
+                            icon.image,
+                            data.title,
+                            data.description
+                        FROM 
+                            block
+                        JOIN 
+                            icon ON block.block_id = icon.block_id
+                        JOIN 
+                            data ON block.block_id = data.block_id
+                        WHERE 
+                            block.block_id = 6
+                        GROUP BY(icon.image);x
+";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
