@@ -66,14 +66,14 @@
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">
                     Slider
                 </div>
-                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Media/displayNews1');">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/ProductCategory');">
                     Media
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
                     Others
                     <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Customize/displayNavbar');">Navbar</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Customize/displayFooter');">Footer</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/NavBar');">Navbar</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/ChildNavBar');">Setting</a>
                     </div>
                 </div>
             </div>

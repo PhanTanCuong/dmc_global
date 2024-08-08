@@ -44,7 +44,7 @@
             <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="icons_current_image" src="/dmc_global/mvc/uploads/" style="background:blue;" width="50%" height="200pxx  " alt="Icons Img"><br>
+              <img id="icons_current_image" src="/dmc_global/mvc/uploads/" style="background:blue;" width="50%" height="200px " alt="Icons Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
@@ -112,7 +112,7 @@
                   <tr>
                     <td><?php echo $counter++; ?></td>
                     <td></td>
-                    <td class="image-title" style="text-align:center;background:blue;"><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="50%" height="auto" alt="Icons Img">' ?></td>
+                    <td class="image-title"><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="50%" height="auto" alt="Icons Img">' ?></td>
                     <td>
                       <form action="getIconsById" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">

@@ -5,7 +5,7 @@ use Core\DB;
 class ProductModel extends DB
 {
     // Product 1
-   
+
     //get List of products function
     public function getProduct()
     {
@@ -104,6 +104,57 @@ class ProductModel extends DB
         try {
             $id = 1;
             $query = "DELETE FROM product WHERE visible='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //Product Category
+    public function getInforProductCategory()
+    {
+        try {
+            $query = "SELECT * FROM product_category";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function addProductCategoryInfor($name)
+    {
+        try {
+            $query = "INSERT INTO product_category (type) VALUES ('$name')";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductCategoryById($id)
+    {
+        try {
+            $query = "SELECT * FROM product_category WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function customizeInforProductCategory($id, $name)
+    {
+        try {
+            $query = "UPDATE product_category SET name='$name' WHERE id = '$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+    public function deleteProductCategory($id)
+    {
+        try {
+            $query = "UPDATE product_category SET name='' WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

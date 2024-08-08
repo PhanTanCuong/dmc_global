@@ -12,56 +12,8 @@ class Product extends Controller
     {
         Middleware::checkAdmin();
     }
-    // Product1
-    function Product1()
-    {
-        $item = $this->model('ProductModel');
+  
 
-        $this->view('admin/home', [
-            'item' => $item->getInforProduct1(),
-            'page' => 'product1'
-        ]);
-    }
-
-    //Customize about2 information
-    function customProduct1()
-    {
-        try {
-
-            if (isset($_POST["product1_updatebtn"])) {
-                $title = strip_tags($_POST['product1_title']);
-                $description = strip_tags($_POST['product1_description']);
-
-                $item = $this->model('ProductModel');
-                $data = $item->getCurrentProduct1Images();
-
-                $currentImages = mysqli_fetch_array($data);
-
-                //Check image is null
-                if (!empty($_FILES["product1_image"]['name'])) {
-                    $image = $_FILES["product1_image"]['name'];
-                } else {
-                    $image = $currentImages['image'];
-                }
-
-
-                $success = $item->customizeInforProduct1($title, $description, $image);
-                if ($success) {
-                    move_uploaded_file($_FILES["product1_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product1_image"]["name"]) . '';
-                    $_SESSION['success'] = 'Your data is updated';
-                    header('Location: Product1');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Product1');
-                }
-            }
-        } catch (Exception $e) {
-            $_SESSION['status'] = $e->getMessage();
-            header('Location:Product1');
-        }
-    }
-
-    // Product2
     //Load list of products layout
     function display()
     {
@@ -220,6 +172,39 @@ class Product extends Controller
             }
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    //Product Category
+    function displayProductCategory(){
+        $item=$this->model('ProductModel');
+
+        $this->view('admin/home',[
+            'page'=>'displayProductCategory',
+            'item'=>$item->getInforProductCategory()
+        ]);
+    }
+
+    function addProductCategory()
+    {
+        try {
+            if (isset($_POST['addProductCategoryBtn'])) {
+                $name = strip_tags($_POST['product_category_name']);
+
+                $item=$this->model('ProductModel');
+                $success = $item->addProductCategoryInfor($name);
+                if( $success ) {
+                    $_SESSION['success'] ='Your data is added';
+                    header('Location:ProductCategory'); 
+                }else{
+                    $_SESSION['status'] ='Your data is NOT added';
+                    header('Location:ProductCategory');
+                }
+                
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:ProductCategory');
         }
     }
 }

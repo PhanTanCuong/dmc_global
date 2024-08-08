@@ -62,5 +62,25 @@ Route::add('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
 Route::add('Admin/customizeData','Data@customizeData');
 Route::add('Admin/deleteData','Data@deleteData');
 
+// Navbar
+Route::add('Admin/NavBar','NavBar@display');
+Route::add('Admin/addNavBar','NavBar@addNavBar');
+Route::add('Admin/Data/getNavBarById/(\d+)', 'NavBar@getNavBarById');
+Route::add('Admin/customizeNavBar','NavBar@customizeNavBar');
+Route::add('Admin/deleteNavBar','NavBar@deleteNavBar');
+
+//Child ChildNavBar
+Route::add('Admin/ChildNavBar','NavBar@displayChildNavBar');
+Route::add('Admin/addChildNavBar','NavBar@addChildNavInfor');
+Route::add('Admin/Data/getChildNavBarById/(\d+)', 'NavBar@getChildNavBarById');
+Route::add('Admin/customizeChildNavBar','NavBar@customizeChildNavBar');
+Route::add('Admin/deleteChildNavBar','NavBar@deleteChildNavBar');
+
+//Product Category
+Route::add('Admin/ProductCategory','Product@displayProductCategory');
+Route::add('Admin/addProductCategory','Product@addProductCategory');
+Route::add('Admin/Data/getProductCategoryById/(\d+)', 'Product@getProductCategoryById');
+Route::add('Admin/customizeProductCategory','Product@customizeProductCategory');
+Route::add('Admin/deleteProductCategory','Product@deleteProductCategory');
 
 ?>
