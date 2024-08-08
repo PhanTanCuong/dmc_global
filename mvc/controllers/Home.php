@@ -23,7 +23,8 @@ class Home extends Controller
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
             "about2Infor" => $item->getAbout2Infor(),
-            "about3Infor" => $item->getAbout3Infor()
+            "about3Infor" => $item->getAbout3Infor(),
+            "product1" => $item->getProduct1Infor()
         ]);
     }
 }

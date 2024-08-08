@@ -44,6 +44,16 @@ class CustomizeModel extends DB
         }
     }
 
+    public function getProduct1Infor(){
+        try{
+            $query="SELECT background.image,data.title,data.description FROM block JOIN background ON block.block_id=background.block_id JOIN data ON block.block_id=data.block_id WHERE block.block_id=5";
+            return mysqli_query($this->connection, $query);
+        }catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
     public function getStatIconInfor()
     {
         try {
@@ -59,7 +69,7 @@ class CustomizeModel extends DB
                             data ON block.block_id = data.block_id
                         WHERE 
                             block.block_id = 6
-                        GROUP BY(icon.image);x
+                        GROUP BY(icon.image)
 ";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {

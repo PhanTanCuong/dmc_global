@@ -234,21 +234,19 @@
       <section class="about3">
         <?php
         $isOdd = false;
-
         if (mysqli_num_rows($data["about3Infor"]) > 0) {
           while ($rows = mysqli_fetch_array($data["about3Infor"])) {
             if ($isOdd) {
               $class = "odd";
-              $pos="right";
+              $pos = "right";
             } else {
               $class = "even";
-              $pos= "left";
+              $pos = "left";
             }
-
             $isOdd = !$isOdd;
         ?>
-            <div class="grid2-container <?php echo $class ?>" style="background:url(/dmc_global/public/images/<?php echo $rows['image']?>) no-repeat <?php echo $pos;?> !important" >
-              <div ></div>
+            <div class="grid2-container <?php echo $class ?>" style="background:url(/dmc_global/public/images/<?php echo $rows['image'] ?>) no-repeat <?php echo $pos; ?> !important">
+              <div></div>
               <div class="txt2-container" style="background: transparent; color: aliceblue;">
                 <div class="text">
                   <h2><?php echo $rows['title'] ?></h2>
@@ -263,15 +261,21 @@
         ?>
       </section>
       <section id="product">
-        <section class="product1" id="product1">
-          <div class="our-products">
-            <h1 style="color: white;">OUR PRODUCTS</h1>
-            <p style="color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam quod voluptates
-              reiciendis rem debitis odit veniam laborum illum, exercitationem quos at a cupiditate. Explicabo accusamus
-              voluptates nam illum, commodi praesentium?</p>
-            <button>VIEW MORE</button>
-          </div>
-        </section>
+        <?php
+        if (mysqli_num_rows($data["product1"]) > 0) {
+          while ($rows = mysqli_fetch_array($data["product1"])) {
+        ?>
+            <section class="product1" id="product1" style="background:url(/dmc_global/public/images/<?php echo $rows['image']?>)">
+              <div class="our-products">
+                <h1 style="color: white;"><?php echo $rows['title']?></h1>
+                <p style="color: white;"><?php echo $rows['description']?></p>
+                <button>VIEW MORE</button>
+              </div>
+            </section>
+        <?php
+          }
+        }
+        ?>
         <section class='product2' id="product2">
           <div class="container">
             <h1 class="title">products
