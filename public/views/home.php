@@ -71,8 +71,8 @@
     .txt2-container {
       align-content: center;
       flex: 1;
-      background: transparent;
-      color: aliceblue;
+      /* background: transparent; */
+      /* color: aliceblue; */
       padding: 40px 40px;
       position: relative;
 
@@ -155,11 +155,11 @@
             </li>
             <li><a href="#media">Media</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#compliance">Compliance</a></li>
+            <li><a href="#compliance">Compliance</a></li> -->
             <li></button>
               <form action="" class="search-box">
                 <input type="text" class="search-text" placeholder="Search..." required>
-                <!-- required là thuộc tính bắt user nhập thông tin ới cho submit -->
+                <!-- required là thuộc tính bắt user nhập thông tin khi submit -->
                 <button class="search-btn">
                   <i class="fas fa-search"></i></button>
               </form>
@@ -314,6 +314,7 @@
         </div>
       </section>
       <section id="media">
+        <a href="#" id="fetch-background" data-id="3" style="display: none;">Load Background</a>
         <section class="stats">
           <div class="stat-grid">
             <?php
@@ -387,7 +388,7 @@
             if (mysqli_num_rows($data['icons']) > 0) {
               while ($rows = mysqli_fetch_array($data['icons'])) {
             ?>
-                <span><img src="/dmc_global/public/images/<?php echo $rows['image']?>"></span>
+                <span><img src="/dmc_global/public/images/<?php echo $rows['image'] ?>"></span>
             <?php
               }
             }
