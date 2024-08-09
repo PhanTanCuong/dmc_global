@@ -1,0 +1,11 @@
+{
+    "require": {
+        "ramsey/uuid": "^4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mvc\\Controllers\\": "mvc/controllers/",
+            "Mvc\\Controllers\\Admin\\":"mvc/controllers/admin/"
+        }
+    }
+}

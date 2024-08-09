@@ -41,7 +41,6 @@ h1 {
 /* Thanh điều hướng */
 nav {
     background-color: #fff;
-    position: relative;
     display: block;
 }
 
@@ -86,12 +85,7 @@ nav ul {
 }
 
 /* nav */
-nav ul li {
-    display: block;
-    float: left;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+
 
 nav ul li a {
 
@@ -157,16 +151,14 @@ nav ul li a:hover {
 
 /* 
 dropdown */
-nav ul li:nth-child(2) a{
-    padding: 14px 0 14px 16px;
-}
+
 nav ul li .dropdown {
     z-index: 1;
     position: absolute;
     display: none;
     flex-direction: column;
-    top: 3rem;
-    left: 56rem;
+    top: 1rem;
+    left: 0;
     width: 8rem;
 }
 
@@ -251,19 +243,10 @@ reponsive */
     }
 
     /* Dropdown */
-    nav ul li .dropdown {
-        top: 6rem;
-        left: unset;
-        right: 20rem;
-    }
 
-    nav ul li a:hover {
-        color:#fff
-    }
 
-    nav ul li .dropdown li a:hover {
-        color:#fff
-    }
+
+   
 
     /* SearchBox */
     .search-box {

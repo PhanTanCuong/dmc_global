@@ -1,16 +1,21 @@
-<?php  
-    class Controller{
+<?php
 
-        //model() function
-        public function model($model){
-            require_once"./mvc/models/".$model.".php";
-            return new $model;
-        }
-        
-        //view() function
+namespace Core;
 
-        public function view($view,$data=[]){
-            require_once "./mvc/views/".$view.".php";
-        }
+class Controller
+{
+
+    //model() function
+    public function model($model)
+    {
+        require_once "./mvc/models/" . $model . ".php";
+        return new $model;
     }
-?>
+
+    //view() function
+
+    public function view($view, $data = [])
+    {
+        require_once "./public/views/" . $view . ".php";
+    }
+}
