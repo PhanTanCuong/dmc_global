@@ -96,7 +96,27 @@ class CustomizeModel extends DB
                         FROM icon 
                         WHERE block_id = 7 
                         AND image LIKE '%ic%'";
-                        
+
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductCategory()
+    {
+        try {
+            $query="SELECT * FROM product_category";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getMenuFooter(){
+
+        try {
+            $query="SELECT * FROM navbar";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

@@ -15,6 +15,7 @@ class Home extends Controller
         $item=$this->model("CustomizeModel");
         //View
         $this->view("home", [
+            "menu"=> $item->getNavbarItems(),
             "banner"=>$banner->getInforBanner(),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
@@ -23,7 +24,9 @@ class Home extends Controller
             "about3Infor" => $item->getAbout3Infor(),
             "product1" => $item->getProduct1Infor(),
             "stats"=> $item->getStatIconInfor(),
-            "icons"=> $item->getFooterIconInfor()
+            "icons"=> $item->getFooterIconInfor(),
+            "productCategory" => $item->getProductCategory(),
+            "navbar_footer" => $item->getMenuFooter()
         ]);
     }
 }
