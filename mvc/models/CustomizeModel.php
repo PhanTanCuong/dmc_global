@@ -122,4 +122,40 @@ class CustomizeModel extends DB
             echo $e->getMessage();
         }
     }
+
+    public function getBackgroundbyId($id){
+        try {
+            $query = "SELECT * FROM background WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getIconbyId($id){
+        try {
+            $query = "SELECT * FROM icon WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getDatabyId($id){
+        try {
+            $query = "SELECT * FROM data WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getDataFooter(){
+        try{
+            $query="SELECT * FROM data WHERE block_id=7";
+            return mysqli_query($this->connection, $query);
+        }catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    } 
 }

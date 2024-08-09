@@ -12,10 +12,9 @@ class Home extends Controller
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
         $banner=$this->model("SliderModel");
-        $item=$this->model("CustomizeModel");
+        $item=$this->model("CustomizeModel");   
         //View
         $this->view("home", [
-            "menu"=> $item->getNavbarItems(),
             "banner"=>$banner->getInforBanner(),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
@@ -26,7 +25,14 @@ class Home extends Controller
             "stats"=> $item->getStatIconInfor(),
             "icons"=> $item->getFooterIconInfor(),
             "productCategory" => $item->getProductCategory(),
-            "navbar_footer" => $item->getMenuFooter()
+            "navbar_footer" => $item->getMenuFooter(),
+            "bg_stat"=> $item->getBackgroundbyId(7),
+            "bg_footer"=> $item->getBackgroundbyId(8),
+            "header_icon"=>$item->getIconbyId(10),
+            "footer_icon"=>$item->getIconbyId(22),
+            "phone_icon"=>$item->getIconbyId(28),
+            "footer_data"=> $item->getDataFooter()
+
         ]);
     }
 }

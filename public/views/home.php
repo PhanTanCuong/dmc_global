@@ -21,10 +21,10 @@
   ?>
   <!-- .css file -->
   <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
-  <link rel="stylesheet" href="/dmc_global/public/css/about.css">
-  <link rel="stylesheet" href="/dmc_global/public/css/product.css">
-  <link rel="stylesheet" href="/dmc_global/public/css/media.css">
-  <link rel="stylesheet" href="/dmc_global/public/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/product.css">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/media.css">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css">
 
   <!-- lib -->
   <!-- slick -->
@@ -134,16 +134,37 @@
     <header>
       <!-- Thanh chuyển hướng -->
       <div class="logo">
-        <div class="logo_ic">
-          <img src="/dmc_global/public/images/Logo.png" class="img-fluid" alt="DMC Global">
-        </div>
+        <?php
+        if (mysqli_num_rows($data["header_icon"]) > 0) {
+          while ($rows = mysqli_fetch_array($data["header_icon"])) {
+            $header_icon = $rows['image'];
+            $image_path = "/dmc_global/public/images/" . $header_icon;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+        ?>
+              <div class="logo_ic">
+                <img src="<?php echo $image_path ?>" class="img-fluid" alt="DMC Global">
+              </div>
+        <?php
+            }
+          }
+        }
+        ?>
         <div class="toogle">
           <i class="fa-solid fa-bars"></i>
         </div>
         <nav>
 
           <ul>
-            <li><a href="#about">About</a></li>
+            <?php
+            if (mysqli_num_rows($data["navbar_footer"]) > 0) {
+              while ($row = mysqli_fetch_assoc($data["navbar_footer"])) {
+            ?>
+                <li><a href="#<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></li>
+            <?php
+              }
+            }
+            ?>
+            <!-- <li><a href="#about">About</a></li>
             <li>
               <a href="#product">Product</a>
               <i class="fa fa-caret-down"></i>
@@ -155,14 +176,14 @@
             </li>
             <li><a href="#media">Media</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#compliance">Compliance</a></li> -->
+            <li><a href="#compliance">Compliance</a></li> 
             <li></button>
               <form action="" class="search-box">
                 <input type="text" class="search-text" placeholder="Search..." required>
-                <!-- required là thuộc tính bắt user nhập thông tin khi submit -->
-                <button class="search-btn">
-                  <i class="fas fa-search"></i></button>
-              </form>
+                required là thuộc tính bắt user nhập thông tin khi submit -->
+            <button class="search-btn">
+              <i class="fas fa-search"></i></button>
+            </form>
             </li>
           </ul>
       </div>
@@ -314,27 +335,38 @@
         </div>
       </section>
       <section id="media">
-        <a href="#" id="fetch-background" data-id="3" style="display: none;">Load Background</a>
-        <section class="stats">
-          <div class="stat-grid">
-            <?php
-            if (mysqli_num_rows($data["stats"]) > 0) {
-              while ($rows = mysqli_fetch_array($data["stats"])) {
-            ?>
-                <div class="stat">
-                  <div class="stat-ic">
-                    <img class="flash" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Icon">
-                  </div>
-                  <div class="stat-text">
-                    <h3><?php echo $rows['title'] ?></h3>
-                    <p><?php echo $rows['description'] ?></p>
-                  </div>
-                </div>
-            <?php
-              }
+        <?php
+        if (mysqli_num_rows($data["bg_stat"]) > 0) {
+          while ($rows = mysqli_fetch_array($data["bg_stat"])) {
+            $stat_bg = $rows['image'];
+            $image_path = "/dmc_global/public/images/" . $stat_bg;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+        ?>
+              <section class="stats" style="background:url(<?php echo $image_path ?>); ">
+                <div class="stat-grid">
+                  <?php
+                  if (mysqli_num_rows($data["stats"]) > 0) {
+                    while ($rows = mysqli_fetch_array($data["stats"])) {
+                  ?>
+                      <div class="stat">
+                        <div class="stat-ic">
+                          <img class="flash" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Icon">
+                        </div>
+                        <div class="stat-text">
+                          <h3><?php echo $rows['title'] ?></h3>
+                          <p><?php echo $rows['description'] ?></p>
+                        </div>
+                      </div>
+                  <?php
+                    }
+                  }
+                  ?>
+              </section>
+        <?php
             }
-            ?>
-        </section>
+          }
+        }
+        ?>
       </section>
       <section class="latest-news">
         <div class="container">
@@ -364,82 +396,137 @@
       </section>
 
   </main>
-  <footer>
-    <section id="contact">
-      <div class="container-footer">
-        <div class="footer-content">
-          <div class="footer-logo">
-            <img src="/dmc_global/public/images/footer.png" class="img-fluid">
-          </div>
+  <?php
+  if (mysqli_num_rows($data["bg_footer"]) > 0) {
+    while ($rows = mysqli_fetch_array($data["bg_footer"])) {
+      $footer_bg = $rows['image'];
+      $image_path = "/dmc_global/public/images/" . $footer_bg;
+      if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+  ?>
+        <footer style="background:url(<?php echo $image_path ?>) cover no-repeat;">
+          <section id="contact">
+            <div class="container-footer">
+              <div class="footer-content">
+                <div class="footer-logo">
+                  <?php
+                  if (mysqli_num_rows($data["footer_icon"]) > 0) {
+                    while ($rows = mysqli_fetch_array($data["footer_icon"])) {
+                      $footer_icon = $rows['image'];
+                      $path = "/dmc_global/public/images/" . $footer_icon;
+                      if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) {
+                  ?>
+                        <img src="<?php echo $path?>" class="img-fluid">
+                  <?php
+                      }
+                    }
+                  }
+                  ?>
+                </div>
+                <div class="footer-info">
+                <?php
+                    $titles = [];
+                    $descriptions = [];
+                    
+                    // Fetch all rows from the result
+                    while ($row = mysqli_fetch_array($data['footer_data'])) {
+                        $titles[] = $row['title'];
+                        $descriptions[] = $row['description'];
+                    }
+                    // print_r($titles);
+                    // print_r($descriptions);
+                    ?>
+                  <h3 class="footer-title">
+                    <?php  echo $titles[0] ?>
+                    <p class="underline-footer"></p>
+                  </h3>
 
-          <div class="footer-info">
-            <h3 class="footer-title">
-              office
-              <p class="underline-footer"></p>
-            </h3>
+                  <p><?php echo $descriptions[0]?></p>
+                  <h3 class="footer-title">
+                  <?php  echo $titles[1] ?>
+                    <p class="underline-footer"></p>
+                  </h3>
+                  <p><?php echo $descriptions[1]?></p>
+                  <?php
+                  if (mysqli_num_rows($data['icons']) > 0) {
+                    while ($rows = mysqli_fetch_array($data['icons'])) {
+                  ?>
+                      <span><img src="/dmc_global/public/images/<?php echo $rows['image'] ?>"></span>
+                  <?php
+                    }
+                  }
+                  ?>
+                  <p><?php echo $descriptions[6]?></p>
 
-            <p>337-339 Pham Van Bach Street,<br>Ward 15, Tan Binh District, HCMC</p>
-            <h3 class="footer-title">
-              support
-              <p class="underline-footer"></p>
-            </h3>
-            <p>info.mblube@gmail.com</p>
-            <?php
-            if (mysqli_num_rows($data['icons']) > 0) {
-              while ($rows = mysqli_fetch_array($data['icons'])) {
-            ?>
-                <span><img src="/dmc_global/public/images/<?php echo $rows['image'] ?>"></span>
-            <?php
-              }
-            }
-            ?>
-            <p>Copyright 2024 @ all rights reserve</p>
+                </div>
+                <div class="footer-links">
+                  <h3 class="footer-title">
+                  <?php  echo $titles[2] ?>
+                    <p class="underline-footer"></p>
+                  </h3>
+                  <?php
+                  if (mysqli_num_rows($data['productCategory']) > 0) {
+                    while ($rows = mysqli_fetch_array($data['productCategory'])) {
+                  ?>
+                      <ul>
+                        <li><a href="#"><?php echo $rows['type'] ?></a></li>
+                      </ul>
+                  <?php
+                    }
+                  }
+                  ?>
+                </div>
+                <div class="footer-links">
+                  <h3 class="footer-title">
+                  <?php  echo $titles[3] ?>
+                    <p class="underline-footer"></p>
+                  </h3>
+                  <?php
+                  if (mysqli_num_rows($data['productCategory']) > 0) {
+                    while ($rows = mysqli_fetch_array($data['productCategory'])) {
+                  ?>
+                      <ul>
+                        <li><a href="#"><?php echo $rows['type'] ?></a></li>
+                      </ul>
+                  <?php
+                    }
+                  }
+                  ?>
+                </div>
+                <div class="footer-phone">
+                  <h3 class="footer-title">
+                  <?php  echo $titles[2] ?>
+                    <p class="underline-footer"></p>
+                  </h3>
 
-          </div>
-          <div class="footer-links">
-            <h3 class="footer-title">
-              product
-              <p class="underline-footer"></p>
-            </h3>
-            <ul>
-              <li><a href="#">Premium Engine Oil</a></li>
-              <li><a href="#">Lubricants</a></li>
-              <li><a href="#">Additives</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h3 class="footer-title">
-              quick links
-              <p class="underline-footer"></p>
-            </h3>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Media</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Compliance</a></li>
-            </ul>
-          </div>
-          <div class="footer-phone">
-            <h3 class="footer-title">
-              make an appointment
-              <p class="underline-footer"></p>
-            </h3>
-
-            <p>Lorem, ipsum dolor sit amet consectetur<br> adipisicing elit.</p>
-            <div id="phone">
-              <ul>
-                <li><img src="/dmc_global/public/images/footer_ic6.png" class="img-fluid"></li>
-                <li>
-                  <h3 class="phone-title">MORE INFORMATION</h3>
-                  <p>0903754989</p>
-                </li>
-              </ul>
+                  <p><?php echo $descriptions[4]?></p>
+                  <div id="phone">
+                    <ul>
+                      <?php
+                      if (mysqli_num_rows($data['phone_icon']) > 0) {
+                        while ($rows = mysqli_fetch_array($data['phone_icon'])) {
+                      ?>
+                      <li><img src="/dmc_global/public/images/<?php echo $rows['image']?>" class="img-fluid"></li>
+                      <?php
+                        }
+                      }
+                      ?>
+                      <li>
+                        <h3 class="phone-title"><?php  echo $titles[5] ?></h3>
+                        <p><?php echo $descriptions[5]?></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </footer>
+          </section>
+        </footer>
+  <?php
+      }
+    }
+  }
+
+  ?>
 
 
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
