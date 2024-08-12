@@ -33,11 +33,11 @@ class Register extends Controller
                     } else {
                         echo "Not save";
                         $_SESSION['status'] = 'Fail create a new account';
-                        header('Location: display');
+                        header('Location: ');
                     }
                 } else {
                     $_SESSION['status'] = 'Password and Confirm Pass';
-                    header('Location: display');
+                    header('Location: ');
                 }
             }
         } catch (Exception $e) {
