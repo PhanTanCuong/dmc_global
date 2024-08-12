@@ -34,14 +34,15 @@ class ProductModel extends DB
 
 
     //add new product function
-    public function addProduct($title = null, $description = null, $link = null, $image = null)
+    public function addProduct($title = null, $description = null, $link = null, $image = null,$visibl=null)
     {
         try {
             $title = $this->connection->real_escape_string($title);
             $description = $this->connection->real_escape_string($description);
             $link = $this->connection->real_escape_string($link);
             $image = $this->connection->real_escape_string($image);
-            $query = "INSERT INTO product (title,description,link,image) VALUES ('$title','$description','$link','$image')";
+            $visible = 0;
+            $query = "INSERT INTO product (title,description,link,image,visible) VALUES ('$title','$description','$link','$image',$visible)";
 
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {

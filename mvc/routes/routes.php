@@ -27,6 +27,9 @@ Route::add('Admin/deleteProduct','Product@deleteProduct');
 Route::add('Admin/Product','Product@display');
 Route::add('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
 Route::add('Admin/editProduct','Product@editProduct');
+// Route::add('Admin/multipleDeleteProduct','Product@multipleDeleteProduct');
+// Route::add('Admin/toggleCheckboxDelete','Product@toggleCheckboxDelete');
+
 // Route::add('Admin/toggleCheckboxDelete', 'Productr@toggleCheckboxDelete');
 
 //Admin Media routes
