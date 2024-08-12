@@ -47,7 +47,6 @@
 
 .latest-news .pseudo {
   width: 1em;
-
 }
 
 .latest-news h2 {
@@ -94,17 +93,15 @@
 .news-item h3 {
   padding-left: 20px;
   font-weight: bold;
-  font-size: 1.75em;
+  font-size: 1.5em;
   margin-bottom: 10px;
-
 }
 
 .news-item p {
   padding: 0 20px;
-  font-size: 1.5em;
+  font-size: 1.25em;
   color: #666;
   line-height: 1;
-
 }
 
 .new-title {
@@ -115,17 +112,14 @@
   color: #c92027;
 }
 
-
-
 /* reponsive */
-@media only screen and (max-width:720px) {
-
+@media only screen and (max-width: 720px) {
   /* media */
-  .stat:first-child img{
+  .stat:first-child img {
     width: 50%;
   }
 
-  .stat:nth-child(3) img{
+  .stat:nth-child(3) img {
     width: 74%;
   }
   .stat img {
@@ -148,13 +142,12 @@
     font-size: 2.25em;
   }
 
-  .stat-grid{
+  .stat-grid {
     gap: 2px;
   }
-
 }
 
-@media only screen and (min-width:721px) and (max-width:1024px) {
+@media only screen and (min-width: 721px) and (max-width: 1024px) {
   .news-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -164,13 +157,12 @@
     font-size: 2.5em;
   }
 
-  .stat-grid{
+  .stat-grid {
     gap: 5rem;
   }
 }
 
-@media only screen and (max-width:1024px) {
-
+@media only screen and (max-width: 1024px) {
   /* news */
   .latest-news .pseudo {
     width: 1.2em;
@@ -194,8 +186,7 @@
     padding: 0;
   }
 
-  .stat{
-    gap:10px;
-
+  .stat {
+    gap: 10px;
   }
 }

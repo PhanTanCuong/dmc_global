@@ -155,7 +155,7 @@ dropdown */
       padding: 0.5rem;
       border-bottom: 1px solid #fff;
       background-color: #c92027;
-      width: 100px;
+      width: 10rem;
 
     }
 
@@ -172,8 +172,8 @@ dropdown */
       }
 
       nav ul li .dropdown li a:hover {
-        color:#fff
-    }
+        color: #fff
+      }
 
     }
   </style>
@@ -463,11 +463,10 @@ dropdown */
   if (mysqli_num_rows($data["bg_footer"]) > 0) {
     while ($rows = mysqli_fetch_array($data["bg_footer"])) {
       $footer_bg = $rows['image'];
-      $image_path = "/dmc_global/public/images/" . $footer_bg;
-      if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+      $image_footer_path = "/dmc_global/public/images/" . $footer_bg;
+      if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_footer_path)) {
   ?>
-        <footer style="background:url(<?php echo $image_path ?>) cover no-repeat;">
-          <section id="contact">
+        <footer style="background:url(<?php echo $image_footer_path ?>)no-repeat center/cover;">
             <div class="container-footer">
               <div class="footer-content">
                 <div class="footer-logo">
