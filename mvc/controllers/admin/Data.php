@@ -15,40 +15,32 @@ class Data extends Controller
     }
     function display()
     {
-        //Model
+        // Model
         $item = $this->model("DataModel");
+        $data = null;
+        // Check if a radio button is selected
+        $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
 
-        //View
+        // Model
+        $item = $this->model("DataModel");
+        $data = null;
+
+        if ($selected_id !== null) {
+            // Fetch data by the selected ID
+            $data = $item->getData($selected_id);
+        } else {
+            // Default behavior if no radio button is selected
+            $data = $item->getData(3);
+        }
+
+        // View
         $this->view("admin/home", [
-            "item" => $item->getData(),
+            "item" => $data,
             "page" => "customizeData"
         ]);
     }
-    //add new user account
-    function addData()
-    {
-        try {
-            if (isset($_POST["addDataBtn"])) {
-                $title = strip_tags($_POST['title']);
-                $description = strip_tags($_POST['description']);
 
-                $item = $this->model('DataModel');
-                $success = $item->addData($title, $description);
-                if ($success) {
-                    echo "Saved";
-                    $_SESSION['success'] = 'Your data is added';
-                    header('Location: Data');
-                } else {
-                    echo "Not save";
-                    $_SESSION['status'] = 'Your data is NOT added';
-                    header('Location: Data');
-                }
-            }
-        } catch (Exception $e) {
-            $_SESSION['status'] = $e->getMessage();
-            header('Location: Data');
-        }
-    }
+
 
     //getDataById()
     function getDataById()
@@ -78,8 +70,22 @@ class Data extends Controller
                 $description = strip_tags($_POST['edit_description']);
                 $id = $_POST['edit_id'];
                 $item = $this->model('DataModel');
-                $success = $item->editData($id, $title, $description);
+                $result = $item->getDataById($id);
+                $image = $_FILES["edit_image"]['name'];
+
+                $data = mysqli_fetch_assoc($result);
+
+                $currentImage = $data['image'];
+
+                // if (!empty($_FILES["image"]['name'])) {
+                //     $image = $_FILES["image"]['name'];
+                // } else {
+                //     $image = $currentImage;
+                // }
+
+                $success = $item->editData($id, $title, $description, $image);
                 if ($success) {
+                    move_uploaded_file($_FILES["image"]["tmp_name"], "./mvc/uploads/" . $_FILES["image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: Data');
                 } else {

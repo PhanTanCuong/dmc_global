@@ -73,7 +73,7 @@
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
-              <label>Image </label>
+              <label>Upload Image </label>
               <input type="file" name="product_image" id="edit_img" class="form-control"  >
             </div>
           </div>

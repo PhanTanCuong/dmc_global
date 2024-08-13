@@ -10,25 +10,27 @@ class CustomizeModel extends DB
 
             $this->connection->query("SET @row_number := 0");
             $query = "SELECT
-                MAX(CASE WHEN row_num = 1 THEN image END) AS parent_image,
-                MAX(CASE WHEN row_num = 2 THEN image END) AS child_image,
-                data.title,
-                data.description
-            FROM (
-                SELECT 
-                    image,
-                    block_id,
-                    (@row_number := @row_number + 1) AS row_num
-                FROM 
-                    background
-                WHERE 
-                    block_id = 3
-                ORDER BY 
-                    id
-            ) AS numbered_images
-            JOIN data ON numbered_images.block_id = data.block_id
-            WHERE data.block_id = 3
-            GROUP BY data.title, data.description";
+                                data.block_id,
+                                MAX(CASE WHEN row_num = 1 THEN image END) AS parent_image,
+                                MAX(CASE WHEN row_num = 2 THEN image END) AS child_image,
+                                data.title,
+                                data.description
+                                
+                            FROM (
+                                SELECT 
+                                    image,
+                                    block_id,
+                                    (@row_number := @row_number + 1) AS row_num
+                                FROM 
+                                    background
+                                WHERE 
+                                    block_id = 3
+                                ORDER BY 
+                                    id
+                            ) AS numbered_images
+                            JOIN data ON numbered_images.block_id = data.block_id
+                            WHERE data.block_id = 3
+                            GROUP BY data.title, data.description";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
