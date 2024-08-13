@@ -35,7 +35,7 @@ class Home extends Controller
             "bg_footer" => $item->getBackgroundbyId(8),
             "header_icon" => $item->getIconbyId(2),
             "footer_icon" => $item->getIconbyId(14),
-            "phone_icon" => $item->getIconbyId(13),
+            "phone_icon" => $item->getIconbyId(16),
             "footer_data" => $item->getDataFooter()
 
         ]);

@@ -42,6 +42,12 @@
       height: auto;
       background-color: black;
     }
+    
+    #icons_current_image{
+      width: 50%;
+      height: auto;
+      background-color: black;
+    }
   </style>
 
 

@@ -44,7 +44,7 @@
             <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="icons_current_image" src="/dmc_global/mvc/uploads/" style="background:blue;" width="50%" height="200px " alt="Icons Img"><br>
+              <img id="icons_current_image" src="/dmc_global/mvc/uploads/"  alt="Icons Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
