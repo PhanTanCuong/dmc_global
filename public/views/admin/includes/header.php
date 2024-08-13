@@ -38,7 +38,7 @@
     }
 
     .footer-icon {
-      width: 50%;
+      width: 20%;
       height: auto;
       background-color: black;
     }
