@@ -45,7 +45,7 @@ Route::add('Admin/Slider','Slider@display');
 Route::add('Admin/customizeSlider','Slider@customBanner');
 
 Route::add('Admin/Customize','Customize@display');
-Route::add('Admin/customizeAbout2','Customize@customizeAbout2');
+Route::add('Admin/customizeTab','Customize@customizeTab');
 //Background
 Route::add('Admin/Background','Background@display');
 Route::add('Admin/addBackground','Background@addBackground');

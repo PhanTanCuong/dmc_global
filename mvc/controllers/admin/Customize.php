@@ -15,15 +15,19 @@ class Customize extends Controller
 
     function display(){
         $item = $this->model('CustomizeModel');
+        $data=$this->model('DataModel');
 
         $this->view('admin/home', [
             'page'=>'customizeContent',
-            'about2' => $item->getAbout2Infor(),
-            'product1' => $item->getProduct1Infor()
+            'head' => $item->getHeadInfor(),
+            "header_icon" => $item->getIconbyId(2),
+            "footer_icon" => $item->getIconbyId(14),
+            "bg_footer" => $item->getBackgroundbyId(8),
+            "item" => $data->getData(7),
         ]);
     }
 
-    function customizeAbout2()
+    function customizeTab()
     {
         try {
 

@@ -7,7 +7,9 @@ class IconsModel extends DB
     public function getInforIcons()
     {
         try {
-            $query = "SELECT * FROM icon";
+            $query = "SELECT * FROM icon
+                        WHERE block_id = 7
+                        AND image <> 'footer.png'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

@@ -557,11 +557,11 @@ dropdown */
                 </div>
                 <div class="footer-phone">
                   <h3 class="footer-title">
-                    <?php echo $titles[4] ?>
+                    <?php echo $titles[5] ?>
                     <p class="underline-footer"></p>
                   </h3>
 
-                  <p><?php echo $descriptions[4] ?></p>
+                  <p><?php echo $descriptions[5] ?></p>
                   <div id="phone">
                     <ul>
                       <?php
@@ -574,8 +574,8 @@ dropdown */
                       }
                       ?>
                       <li>
-                        <h3 class="phone-title"><?php echo $titles[5] ?></h3>
-                        <p><?php echo $descriptions[5] ?></p>
+                        <h3 class="phone-title"><?php echo $titles[4] ?></h3>
+                        <p><?php echo $descriptions[4] ?></p>
                       </li>
                     </ul>
                   </div>
