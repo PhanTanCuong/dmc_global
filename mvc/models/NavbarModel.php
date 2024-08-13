@@ -56,17 +56,17 @@ class NavBarModel extends DB
     public function getInforChildNavBar()
     {
         try {
-            $query = "SELECT * FROM child_navbar";
+            $query = "SELECT *,child_navbar.name AS child,navbar.name AS parent FROM child_navbar JOIN navbar ON child_navbar.navbar_id=navbar.id";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function addChildNavBar($name)
+    public function addChildNavBar($nav_parent_id,$name)
     {
         try {
-            $query = "INSERT INTO child_navbar (name) VALUES ('$name')";
+            $query = "INSERT INTO child_navbar (navbar_id,name) VALUES ($nav_parent_id,'$name')";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
