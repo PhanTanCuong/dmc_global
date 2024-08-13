@@ -44,6 +44,14 @@ Route::add('Admin/editNews','Media@editNews');
 Route::add('Admin/Slider','Slider@display');
 Route::add('Admin/customizeSlider','Slider@customBanner');
 
+Route::add('Admin/Customize','Customize@display');
+Route::add('Admin/customizeTab','Customize@customizeTab');
+Route::add('Admin/customizeLogo','Customize@customizeLogo');
+Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
+Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
+Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
+Route::add('Admin/editFooterData','Customize@editFooterData');
+
 //Background
 Route::add('Admin/Background','Background@display');
 Route::add('Admin/addBackground','Background@addBackground');
@@ -72,17 +80,17 @@ Route::add('Admin/Data/getNavBarById/(\d+)', 'NavBar@getNavBarById');
 Route::add('Admin/customizeNavBar','NavBar@customizeNavBar');
 Route::add('Admin/deleteNavBar','NavBar@deleteNavBar');
 
-//Child ChildNavBar
+// ChildNavBar
 Route::add('Admin/ChildNavBar','NavBar@displayChildNavBar');
 Route::add('Admin/addChildNavBar','NavBar@addChildNavInfor');
-Route::add('Admin/Data/getChildNavBarById/(\d+)', 'NavBar@getChildNavBarById');
+Route::add('Admin/ChildNavBar/getChildNavBarById/(\d+)', 'NavBar@getChildNavBarById');
 Route::add('Admin/customizeChildNavBar','NavBar@customizeChildNavBar');
 Route::add('Admin/deleteChildNavBar','NavBar@deleteChildNavBar');
 
 //Product Category
 Route::add('Admin/ProductCategory','Product@displayProductCategory');
 Route::add('Admin/addProductCategory','Product@addProductCategory');
-Route::add('Admin/Data/getProductCategoryById/(\d+)', 'Product@getProductCategoryById');
+Route::add('Admin/ProductCategory/getProductCategoryById/(\d+)', 'Product@getProductCategoryById');
 Route::add('Admin/customizeProductCategory','Product@customizeProductCategory');
 Route::add('Admin/deleteProductCategory','Product@deleteProductCategory');
 

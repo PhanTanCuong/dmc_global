@@ -64,7 +64,7 @@ class Icons extends Controller
         }
     }
 
-    //Customize backgrounds information
+    //Customize footer icons information
     function customizeIcons()
     {
         try {

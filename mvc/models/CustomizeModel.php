@@ -10,25 +10,27 @@ class CustomizeModel extends DB
 
             $this->connection->query("SET @row_number := 0");
             $query = "SELECT
-                MAX(CASE WHEN row_num = 1 THEN image END) AS parent_image,
-                MAX(CASE WHEN row_num = 2 THEN image END) AS child_image,
-                data.title,
-                data.description
-            FROM (
-                SELECT 
-                    image,
-                    block_id,
-                    (@row_number := @row_number + 1) AS row_num
-                FROM 
-                    background
-                WHERE 
-                    block_id = 3
-                ORDER BY 
-                    id
-            ) AS numbered_images
-            JOIN data ON numbered_images.block_id = data.block_id
-            WHERE data.block_id = 3
-            GROUP BY data.title, data.description";
+                                data.block_id,
+                                MAX(CASE WHEN row_num = 1 THEN image END) AS parent_image,
+                                MAX(CASE WHEN row_num = 2 THEN image END) AS child_image,
+                                data.title,
+                                data.description
+                                
+                            FROM (
+                                SELECT 
+                                    image,
+                                    block_id,
+                                    (@row_number := @row_number + 1) AS row_num
+                                FROM 
+                                    background
+                                WHERE 
+                                    block_id = 3
+                                ORDER BY 
+                                    id
+                            ) AS numbered_images
+                            JOIN data ON numbered_images.block_id = data.block_id
+                            WHERE data.block_id = 3
+                            GROUP BY data.title, data.description";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -102,6 +104,8 @@ class CustomizeModel extends DB
         }
     }
 
+    //Tab Head
+
     public function getHeadInfor()
     {
         try {
@@ -122,6 +126,19 @@ class CustomizeModel extends DB
         }
     }
 
+    public function customizeHeaderInfor($name, $image)
+    {
+        try {
+            $query = "UPDATE icon 
+                        JOIN data ON icon.block_id = data.block_id  
+                        SET data.title = '$name', icon.image = '$image' 
+                        WHERE icon.block_id = 1
+";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
     public function getFooterIconInfor()
     {
         try {
@@ -200,6 +217,16 @@ class CustomizeModel extends DB
         }
     }
 
+
+    public function customizeBackgroundbyId($id,$image)
+    {
+        try {
+            $query = "UPDATE background SET image='$image' WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
     public function getIconbyId($id)
     {
         try {
@@ -209,6 +236,17 @@ class CustomizeModel extends DB
             echo $e->getMessage();
         }
     }
+
+    public function customizeIconbyId($id,$image)
+    {
+        try {
+            $query = "UPDATE icon SET image='$image' WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
     public function getDatabyId($id)
     {
@@ -224,6 +262,16 @@ class CustomizeModel extends DB
     {
         try {
             $query = "SELECT * FROM data WHERE block_id=7";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function editData($id, $title, $description)
+    {
+        try {
+            $query = "UPDATE data SET title='$title', description='$description' WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

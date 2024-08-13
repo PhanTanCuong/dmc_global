@@ -28,8 +28,25 @@
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css">
   <style>
-    .customize-button{
+    .customize-button {
       margin-bottom: 2rem;
+    }
+
+    .icon_logo {
+      width: 20%;
+      height: auto;
+    }
+
+    .footer-icon {
+      width: 50%;
+      height: auto;
+      background-color: black;
+    }
+    
+    #icons_current_image{
+      width: 50%;
+      height: auto;
+      background-color: black;
     }
   </style>
 

@@ -44,7 +44,7 @@
                     <input type="hidden" name="edit_id" id="edit_id">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="file" name="product_category_name" id="edit_product_category" class="form-control">
+                        <input type="text" name="product_category_name" id="edit_product_category" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -148,7 +148,7 @@
                         console.log(response);
                         $.each(response, function(key, value) {
                             $('#edit_id').val(value['id']);
-                            $('#edit_product_category').val(value['name'])
+                            $('#edit_product_category').val(value['type'])
 
                         });
                         $('#editProductCategory').modal('show');

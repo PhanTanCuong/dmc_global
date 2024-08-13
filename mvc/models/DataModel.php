@@ -1,13 +1,27 @@
-<?php
+x<?php
 
 use Core\DB;
 
 class DataModel extends DB
 {
     //get List of datas function
-    public function getData()
+    public function getData($id)
     {
-        $query = "SELECT * FROM data";
+        $query = "SELECT DISTINCT 
+                        background.id,
+                        background.image,
+                        background.block_id,
+                        data.title,
+                        data.description
+                    FROM 
+                        background
+                    RIGHT JOIN 
+                        data 
+                    ON 
+                        background.block_id = data.block_id
+                    WHERE
+                    	background.block_id='$id'
+                    ";
         $result = mysqli_query($this->connection, $query);
 
         // Check for query execution error
@@ -22,43 +36,46 @@ class DataModel extends DB
     //get data infor by id
     public function getDataById($id)
     {
-        $query_run = "SELECT * FROM data where id='$id'";
+        $query_run = "SELECT DISTINCT 
+                        background.id,
+                        background.image,
+                        background.block_id,
+                        data.title,
+                        data.description
+                    FROM 
+                        background
+                    RIGHT JOIN 
+                        data 
+                    ON 
+                        background.block_id = data.block_id
+                    WHERE
+                        background.id = '$id'";
         return mysqli_query($this->connection, $query_run);
     }
 
-    //add user data function
-    public function addData($title, $description)
-    {
-        try {
-            $title = $this->connection->real_escape_string($title);
-            $description = $this->connection->real_escape_string($description);
-            $query = "INSERT INTO data (title,description) VALUES ('$title','$description')";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
+
 
     //edit user data function
-    public function editData($id, $title, $description)
+    public function editData($id, $title, $description, $image)
     {
         try {
             $title = $this->connection->real_escape_string($title);
             $description = $this->connection->real_escape_string($description);
-
-            $query = "UPDATE  data SET title='$title', description='$description' WHERE id='$id'  ";
+            $image = $this->connection->real_escape_string($image);
+            $query = "UPDATE data
+                        JOIN 
+                            background 
+                        ON 
+                            background.block_id = data.block_id
+                        SET 
+                            background.image = '$image',
+                            data.title = '$title', 
+                            data.description = '$description'
+                            
+                        WHERE 
+                        background.id = '$id';
+";
             return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    //delete user data function
-    public function deleteData($id)
-    {
-        try {
-            $query_run = "UPDATE data SET title='',description='' WHERE id='$id'";
-            return mysqli_query($this->connection, $query_run);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
