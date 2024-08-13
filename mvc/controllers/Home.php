@@ -33,9 +33,9 @@ class Home extends Controller
             "navbar_footer" => $item->getMenuFooter(),
             "bg_stat" => $item->getBackgroundbyId(7),
             "bg_footer" => $item->getBackgroundbyId(8),
-            "header_icon" => $item->getIconbyId(10),
-            "footer_icon" => $item->getIconbyId(22),
-            "phone_icon" => $item->getIconbyId(28),
+            "header_icon" => $item->getIconbyId(2),
+            "footer_icon" => $item->getIconbyId(14),
+            "phone_icon" => $item->getIconbyId(13),
             "footer_data" => $item->getDataFooter()
 
         ]);

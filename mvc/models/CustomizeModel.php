@@ -38,7 +38,18 @@ class CustomizeModel extends DB
     public function getAbout3Infor()
     {
         try {
-            $query = "SELECT DISTINCT background.image,data.title,data.description FROM block JOIN background ON block.block_id=background.block_id JOIN data ON block.block_id=data.block_id WHERE background.block_id=4";
+            $query = "SELECT DISTINCT 
+                            background.image, 
+                            data.title, 
+                            data.description 
+                        FROM 
+                            background 
+                        JOIN 
+                            data 
+                            ON background.block_id = data.block_id 
+                        WHERE 
+                            background.block_id = 4;
+";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -48,7 +59,18 @@ class CustomizeModel extends DB
     public function getProduct1Infor()
     {
         try {
-            $query = "SELECT background.image,data.title,data.description FROM block JOIN background ON block.block_id=background.block_id JOIN data ON block.block_id=data.block_id WHERE block.block_id=5";
+            $query = "SELECT 
+                            background.image, 
+                            data.title, 
+                            data.description 
+                        FROM 
+                            background 
+                        JOIN 
+                            data 
+                            ON background.block_id = data.block_id 
+                        WHERE 
+                            background.block_id = 5;
+";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -60,8 +82,8 @@ class CustomizeModel extends DB
         try {
             $query = "SELECT  
                             icon.image,
-                            data.title,
-                            data.description
+                            MAX(data.title) AS title,
+                            MAX(data.description) AS description
                         FROM 
                             block
                         JOIN 
@@ -70,7 +92,9 @@ class CustomizeModel extends DB
                             data ON block.block_id = data.block_id
                         WHERE 
                             block.block_id = 6
-                        GROUP BY(icon.image)
+                        GROUP BY 
+                            icon.image;
+
 ";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
@@ -81,7 +105,16 @@ class CustomizeModel extends DB
     public function getHeadInfor()
     {
         try {
-            $query = "SELECT icon.image, data.title FROM block JOIN icon ON block.block_id=icon.block_id JOIN data ON block.block_id=data.block_id WHERE block.block_id=1
+            $query = "SELECT 
+                            icon.image, 
+                            data.title 
+                        FROM 
+                            icon 
+                        JOIN 
+                            data 
+                            ON icon.block_id = data.block_id 
+                        WHERE 
+                            icon.block_id = 1;
 ";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
@@ -146,7 +179,8 @@ class CustomizeModel extends DB
         }
     }
 
-    public function getChildNavbarbyId($id){
+    public function getChildNavbarbyId($id)
+    {
         try {
             $query = "SELECT * FROM child_navbar WHERE navbar_id='$id'";
             return mysqli_query($this->connection, $query);
