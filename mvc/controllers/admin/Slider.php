@@ -19,7 +19,7 @@ class Slider extends Controller
         ]);
     }
 
-     //Customize about2 information
+     //Customize banner information
      function customBanner()
      {
          try {

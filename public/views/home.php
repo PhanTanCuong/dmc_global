@@ -213,7 +213,7 @@ dropdown */
             ?>
                 <li><a href="#<?php echo $row['name'] ?>"><?php echo $row['name'] ?>
                     <?php if (in_array($id_dropdown, explode(',', $data["checkDropdownMenu"]))) { ?>
-                      <i class="fa fa-caret-down"></i>
+                      <i class="fa fa-caret-down"></i></a>
                       <ul class="dropdown">
                         <?php
                         // Fetch child_navbar items based on navbar_id
