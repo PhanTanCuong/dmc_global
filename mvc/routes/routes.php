@@ -49,7 +49,9 @@ Route::add('Admin/customizeTab','Customize@customizeTab');
 Route::add('Admin/customizeLogo','Customize@customizeLogo');
 Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
 Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
-Route::add('Admin/Customize/getDataById','Customize@customizeFooterBackground');
+Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
+Route::add('Admin/editFooterData','Customize@editFooterData');
+
 //Background
 Route::add('Admin/Background','Background@display');
 Route::add('Admin/addBackground','Background@addBackground');

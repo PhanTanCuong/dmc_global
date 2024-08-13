@@ -16,15 +16,13 @@ class Customize extends Controller
     function display()
     {
         $item = $this->model('CustomizeModel');
-        $data = $this->model('DataModel');
-
         $this->view('admin/home', [
             'page' => 'customizeContent',
             'head' => $item->getHeadInfor(),
             "header_icon" => $item->getIconbyId(2),
             "footer_icon" => $item->getIconbyId(14),
             "bg_footer" => $item->getBackgroundbyId(8),
-            "item" => $data->getData(7),
+            "item" => $item->getDataFooter()
         ]);
     }
 
@@ -147,6 +145,47 @@ class Customize extends Controller
                 $result = $item->customizeBackgroundbyId(8, $footer_bg);
                 if ($result) {
                     move_uploaded_file($_FILES["footer_bg_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["footer_bg_image"]["name"]) . '';
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location:Customize');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location:Customize');
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:Customize');
+        }
+    }
+
+    //Footer data
+    function getDataById(){
+        if (isset($_POST['checking_edit_btn'])) {
+            $item_id = $_POST['data_id'];
+            $result_array = [];
+            $item = $this->model('CustomizeModel');
+            $result = $item->getDataById($item_id);
+            if (mysqli_num_rows($result) > 0) {
+                foreach ($result as $row) {
+                    array_push($result_array, $row);
+                    header('Content-Type: application/json');
+                    echo json_encode($result_array);
+                }
+            }
+        }
+    }
+
+    function editFooterData(){
+        try {
+
+            if (isset($_POST["editDataBtn"])) {
+                $title = strip_tags($_POST['edit_title']);
+                $description = strip_tags($_POST['edit_description']);
+                $id = $_POST['edit_id'];
+                $item = $this->model('CustomizeModel');
+
+                $success = $item->editData($id, $title, $description);
+                if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {

@@ -267,4 +267,14 @@ class CustomizeModel extends DB
             echo $e->getMessage();
         }
     }
+
+    public function editData($id, $title, $description)
+    {
+        try {
+            $query = "UPDATE data SET title='$title', description='$description' WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

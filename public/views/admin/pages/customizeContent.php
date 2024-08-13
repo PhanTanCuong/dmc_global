@@ -201,7 +201,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="customizeData" method="POST">
+            <form action="editFooterData" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="edit_id" id="edit_id">
@@ -268,7 +268,7 @@
                                     <td><?php echo $row['description'] ?></td>
                                     <td>
                                         <form action="getDataById" method="POST">
-                                            <input type="block" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                                            <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
                                             <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></i></button>
                                         </form>
                                     </td>
