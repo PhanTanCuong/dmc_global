@@ -23,7 +23,7 @@ class Signin extends Controller
                 $result = $account->login($email_login, $password_login);
                 if (!$result) {
                     $_SESSION['status'] = 'Wrong email and password';
-                    header('Location:display');
+                    header('Location:../Signin/');
                 } else {
                     $role = $result['role'];
                     if ($role === 'admin') {
@@ -31,13 +31,13 @@ class Signin extends Controller
                         $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {
-                        header('Location: ../');
+                        header('Location: ../Signin/');
                     }
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:display');
+            header('Location:../Signin');
         }
     }
 

@@ -56,7 +56,7 @@ class NavBarModel extends DB
     public function getInforChildNavBar()
     {
         try {
-            $query = "SELECT *,child_navbar.name AS child,navbar.name AS parent FROM child_navbar JOIN navbar ON child_navbar.navbar_id=navbar.id";
+            $query = "SELECT child_navbar.id,child_navbar.name AS child,navbar.name AS parent FROM child_navbar JOIN navbar ON child_navbar.navbar_id=navbar.id";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
