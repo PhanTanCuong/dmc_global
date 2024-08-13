@@ -1,3 +1,4 @@
+<!-- Head Tab -->
 <div class="container-fluid">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
@@ -32,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Image</label>
-                        <input type="file" name="image" id="image" class="form-control">
+                        <input type="file" name="head_image" id="image" class="form-control">
                     </div>
                 </div>
                 <div>
@@ -44,7 +45,7 @@
         ?>
     </div>
 </div>
-
+<!-- Head Logo -->
 <div class="container-fluid">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
@@ -66,7 +67,7 @@
 
         ?>
 
-        <form action="customizeSlider" method="POST" enctype="multipart/form-data">
+        <form action="customizeLogo" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <?php
                 foreach ($data["header_icon"] as $row) {
@@ -80,10 +81,40 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>
-                        <input type="file" name="product1_image" id="product1_image" class="form-control">
+                        <input type="file" name="header_icon" class="form-control">
                     </div>
                 <?php
                 }
+                ?>
+            </div>
+            <div>
+                <button type="submit" name="head_logo_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+<!-- Footer logo -->
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4" style="padding: 2em 0;">
+        <?php
+        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
+            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
+            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
+            unset($_SESSION['status']);
+        }
+
+        ?>
+
+        <form action="customizeFooterLogo" method="POST" enctype="multipart/form-data">
+            <div class="card-body">
+                <?php
                 foreach ($data["footer_icon"] as $row) {
 
                 ?>
@@ -95,14 +126,14 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>
-                        <input type="file" name="product1_image" id="product1_image" class="form-control">
+                        <input type="file" name="footer_icon" class="form-control">
                     </div>
                 <?php
                 }
                 ?>
             </div>
             <div>
-                <button type="submit" name="product1_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
+                <button type="submit" name="footer_logo_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
             </div>
         </form>
 
@@ -110,10 +141,11 @@
     </div>
 </div>
 
+<!-- Footer background -->
 <div class="container-fluid">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Customize Background Footer
+            Customize Footer Background
         </h5>
     </div>
 
@@ -131,7 +163,7 @@
 
         ?>
 
-        <form action="customizeSlider" method="POST" enctype="multipart/form-data">
+        <form action="customizeFooterBackground" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <?php
                 foreach ($data["bg_footer"] as $row) {
@@ -145,14 +177,14 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>
-                        <input type="file" name="product1_image" id="product1_image" class="form-control">
+                        <input type="file" name="footer_bg_image"  class="form-control">
                     </div>
                 <?php
                 }
                 ?>
             </div>
             <div>
-                <button type="submit" name="product1_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
+                <button type="submit" name="footer_bg_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
             </div>
         </form>
 
@@ -236,7 +268,7 @@
                                     <td><?php echo $row['description'] ?></td>
                                     <td>
                                         <form action="getDataById" method="POST">
-                                            <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                                            <input type="block" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
                                             <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></i></button>
                                         </form>
                                     </td>
@@ -262,7 +294,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'Data/getDataById/' + account_id,
+                    url: 'Customize/getDataById/' + account_id,
                     data: {
                         'checking_edit_btn': true,
                         'data_id': account_id,

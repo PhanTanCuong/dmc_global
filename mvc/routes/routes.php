@@ -46,6 +46,10 @@ Route::add('Admin/customizeSlider','Slider@customBanner');
 
 Route::add('Admin/Customize','Customize@display');
 Route::add('Admin/customizeTab','Customize@customizeTab');
+Route::add('Admin/customizeLogo','Customize@customizeLogo');
+Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
+Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
+Route::add('Admin/Customize/getDataById','Customize@customizeFooterBackground');
 //Background
 Route::add('Admin/Background','Background@display');
 Route::add('Admin/addBackground','Background@addBackground');
