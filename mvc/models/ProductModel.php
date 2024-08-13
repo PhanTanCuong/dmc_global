@@ -144,7 +144,7 @@ class ProductModel extends DB
     public function customizeInforProductCategory($id, $name)
     {
         try {
-            $query = "UPDATE product_category SET name='$name' WHERE id = '$id'";
+            $query = "UPDATE product_category SET type='$name' WHERE id = '$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -155,7 +155,7 @@ class ProductModel extends DB
     public function deleteProductCategory($id)
     {
         try {
-            $query = "UPDATE product_category SET name='' WHERE id='$id'";
+            $query = "DELETE FROM product_category WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
