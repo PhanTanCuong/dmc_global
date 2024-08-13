@@ -45,7 +45,7 @@ class NavBarModel extends DB
     public function deleteNavBar($id)
     {
         try {
-            $query = "UPDATE navbar SET name='' WHERE id='$id'";
+            $query = "DELETE FROM navbar WHERE id = '$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

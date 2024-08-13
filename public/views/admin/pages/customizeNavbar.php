@@ -3,13 +3,13 @@
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">List of Product Category</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Navbar Item Information</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>
               <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-              <form action="addNavbarItem" method="POST" enctype="multipart/form-data">
+              <form action="addNavBar" method="POST" enctype="multipart/form-data">
 
                   <div class="modal-body">
                       <div class="form-group">
@@ -38,13 +38,13 @@
                   </button>
               </div>
               <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-              <form action="customizeNavbarItem" method="POST" enctype="multipart/form-data">
+              <form action="customizeNavBar" method="POST" enctype="multipart/form-data">
 
                   <div class="modal-body">
                       <input type="hidden" name="edit_id" id="edit_id">
                       <div class="form-group">
                           <label>Item</label>
-                          <input type="file" name="navbar_name" id="edit_navbar" class="form-control">
+                          <input type="text" name="edit_navbar_name" id="edit_navbar" class="form-control">
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -63,7 +63,7 @@
       <!-- DataTales Example -->
       <div class="card shadow mb-4">
           <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">List of Product Category</h6>
+              <h6 class="m-0 font-weight-bold text-primary">List of NavBar Items</h6>
               <div class="controll-btn">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNavbarItem">
                       <i class="fas fa-plus"></i>
@@ -109,7 +109,7 @@
                                           </form>
                                       </td>
                                       <td>
-                                          <form action="deleteNavbarItem" method="POST">
+                                          <form action="deleteNavBar" method="POST">
                                               <input type="hidden" name="delete_navbar_id" value="<?php echo $row['id']; ?>">
                                               <button type="submit" name="delete_navbar_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                                           </form>
@@ -137,7 +137,7 @@
 
                   $.ajax({
                       type: "POST",
-                      url: 'NavbarItem/getNavbarItemById/' + navbar_id,
+                      url: 'NavBar/getNavBarById/' + navbar_id,
                       data: {
                           'checking_edit_btn': true,
                           'navbar_id': navbar_id,
@@ -146,7 +146,7 @@
                           console.log(response);
                           $.each(response, function(key, value) {
                               $('#edit_id').val(value['id']);
-                              $('edit_navbar').val(value['name']);
+                              $('#edit_navbar').val(value['name']);
                           });
                           $('#editNavbarItem').modal('show');
                       }
