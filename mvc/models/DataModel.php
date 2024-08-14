@@ -7,21 +7,25 @@ class DataModel extends DB
     //get List of datas function
     public function getData($id)
     {
-        $query = "SELECT DISTINCT 
-                        background.id,
-                        background.image,
-                        background.block_id,
-                        data.title,
-                        data.description
-                    FROM 
-                        background
-                    RIGHT JOIN 
-                        data 
-                    ON 
-                        background.block_id = data.block_id
-                    WHERE
-                    	background.block_id='$id'
-                    ";
+        
+            $query = "SELECT DISTINCT 
+            background.id,
+            background.image,
+            background.block_id,
+            data.title,
+            data.description
+        FROM 
+            background
+        RIGHT JOIN 
+            data 
+        ON 
+            background.block_id = data.block_id
+        WHERE
+            background.block_id='$id'
+        ";
+        
+
+
         $result = mysqli_query($this->connection, $query);
 
         // Check for query execution error

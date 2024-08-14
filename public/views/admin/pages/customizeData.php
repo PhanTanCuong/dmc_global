@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -25,7 +25,7 @@
           </div>
           <div class="form-group">
             <label>Upload Image </label>
-            <input type="file" name="data_image"  class="form-contfooterrol">
+            <input type="file" name="data_image" id="data_image"  class="form-contfooterrol">
           </div>
         </div>
         <div class="modal-footer">
@@ -111,6 +111,7 @@
     </div>
   </div>
 
+  <script src="/dmc_global/public/js/admin/checkImageFiles.js"> setupFormValidation('customizeData',['data_image']); </script>
   <script>
     $(document).ready(function() {
       $('.edit_btn').click(function(e) {

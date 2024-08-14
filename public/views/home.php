@@ -129,9 +129,10 @@
 
     /* Từ tablet trở xuống (kích thước màn hình 768px và nhỏ hơn) */
     @media screen and (max-width: 1024px) {
-      .about3{
-        margin: 8rem 2rem;
+      .about3 {
+        margin: 8rem 6rem;
       }
+
       .grid2-container {
         flex-direction: column;
         /* Chuyển từ bố cục hàng ngang sang hàng dọc */
@@ -142,6 +143,7 @@
       .grid2-container.odd {
         flex-direction: column !important;
       }
+
       .grid2-container div {
         width: 100%;
         /* Chiếm 100% chiều rộng của thẻ cha */
@@ -152,23 +154,42 @@
       .grid2-container img {
         width: 130%;
         /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ cha */
-        height: auto;
+        height: 15rem !important;
         /* Tự động điều chỉnh chiều cao theo tỷ lệ */
       }
 
-      
+
       .grid2-container.odd img {
         transform: rotateY(180deg);
       }
-      
+
       .txt2-container {
         padding: 1rem;
         /* Thêm khoảng cách bên trong */
       }
+
+      /* Media */
+      .news-item h3 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        /* Hiển thị tối đa 2 dòng (ẩn từ hàng 3 trở đi) */
+        line-height: 1.5em;
+        /* Điều chỉnh chiều cao dòng */
+        max-height: 3em;
+        /* Chiều cao tối đa cho 2 dòng */
+        white-space: normal;
+      }
+
     }
 
     /* Điều chỉnh thêm cho màn hình nhỏ hơn như điện thoại di động */
     @media screen and (max-width: 480px) {
+      .about3 {
+        margin: 8rem 2rem;
+      }
       .grid2-container {
         gap: 0.5rem;
         /* Giảm khoảng cách giữa các phần tử */
@@ -420,10 +441,10 @@ dropdown */
         if (mysqli_num_rows($data["product1"]) > 0) {
           while ($rows = mysqli_fetch_array($data["product1"])) {
         ?>
-            <section class="product1" id="product1" style="background:url(/dmc_global/public/images/<?php echo $rows['image'] ?>)">
-              <div class="our-products">
-                <h1 style="color: white;"><?php echo $rows['title'] ?></h1>
-                <p style="color: white;"><?php echo $rows['description'] ?></p>
+            <section class="product1" id="product1" style="background-image:url(/dmc_global/public/images/<?php echo $rows['image'] ?>)">
+              <div class="our-products cover">
+                <h1><?php echo $rows['title'] ?></h1>
+                <p><?php echo $rows['description'] ?></p>
                 <button>VIEW MORE</button>
               </div>
             </section>
