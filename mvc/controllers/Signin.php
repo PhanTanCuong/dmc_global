@@ -31,13 +31,13 @@ class Signin extends Controller
                         $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {
-                        header('Location: ../Signin/');
+                        header('Location: ../');
                     }
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:../Signin');
+            header('Location:../Signin/');
         }
     }
 

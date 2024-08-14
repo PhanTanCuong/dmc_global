@@ -31,6 +31,7 @@
 }
 
 .product1 h1 {
+  text-transform:uppercase;
   color: white;
   font-size: 4rem;
   text-align: center;

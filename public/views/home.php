@@ -338,7 +338,7 @@ dropdown */
         ?>
             <div class="grid2-container <?php echo $class ?>">
               <div>
-                <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
+                <img style="height:27rem;"  src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
               </div>
               <div class="txt2-container" style="background: transparent; color: aliceblue;">
                 <div class="text">

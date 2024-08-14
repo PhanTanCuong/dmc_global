@@ -218,7 +218,7 @@ class CustomizeModel extends DB
     }
 
 
-    public function customizeBackgroundbyId($id,$image)
+    public function customizeBackgroundbyId($id, $image)
     {
         try {
             $query = "UPDATE background SET image='$image' WHERE id='$id'";
@@ -237,7 +237,7 @@ class CustomizeModel extends DB
         }
     }
 
-    public function customizeIconbyId($id,$image)
+    public function customizeIconbyId($id, $image)
     {
         try {
             $query = "UPDATE icon SET image='$image' WHERE id='$id'";

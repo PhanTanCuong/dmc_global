@@ -71,21 +71,19 @@ class Data extends Controller
                 $id = $_POST['edit_id'];
                 $item = $this->model('DataModel');
                 $result = $item->getDataById($id);
-                $image = $_FILES["edit_image"]['name'];
-
                 $data = mysqli_fetch_assoc($result);
 
                 $currentImage = $data['image'];
 
-                // if (!empty($_FILES["image"]['name'])) {
-                //     $image = $_FILES["image"]['name'];
-                // } else {
-                //     $image = $currentImage;
-                // }
+                if (!empty($_FILES["data_image"]['name'])) {
+                    $image = $_FILES["data_image"]['name'];
+                } else {
+                    $image = $currentImage;
+                }
 
                 $success = $item->editData($id, $title, $description, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["image"]["tmp_name"], "./mvc/uploads/" . $_FILES["image"]["name"]) . '';
+                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["data_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: Data');
                 } else {

@@ -1,4 +1,4 @@
-x<?php
+<?php
 
 use Core\DB;
 
@@ -68,7 +68,7 @@ class DataModel extends DB
                         ON 
                             background.block_id = data.block_id
                         SET 
-                            background.image = '$image',
+                            image = '$image',
                             data.title = '$title', 
                             data.description = '$description'
                             
