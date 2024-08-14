@@ -127,6 +127,69 @@
       overflow: hidden;
     }
 
+    /* Từ tablet trở xuống (kích thước màn hình 768px và nhỏ hơn) */
+    @media screen and (max-width: 1024px) {
+      .about3{
+        margin: 8rem 2rem;
+      }
+      .grid2-container {
+        flex-direction: column;
+        /* Chuyển từ bố cục hàng ngang sang hàng dọc */
+        align-items: center;
+        /* Canh giữa các phần tử theo chiều dọc */
+      }
+
+      .grid2-container.odd {
+        flex-direction: column !important;
+      }
+      .grid2-container div {
+        width: 100%;
+        /* Chiếm 100% chiều rộng của thẻ cha */
+        text-align: center;
+        /* Canh giữa nội dung */
+      }
+
+      .grid2-container img {
+        width: 130%;
+        /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ cha */
+        height: auto;
+        /* Tự động điều chỉnh chiều cao theo tỷ lệ */
+      }
+
+      
+      .grid2-container.odd img {
+        transform: rotateY(180deg);
+      }
+      
+      .txt2-container {
+        padding: 1rem;
+        /* Thêm khoảng cách bên trong */
+      }
+    }
+
+    /* Điều chỉnh thêm cho màn hình nhỏ hơn như điện thoại di động */
+    @media screen and (max-width: 480px) {
+      .grid2-container {
+        gap: 0.5rem;
+        /* Giảm khoảng cách giữa các phần tử */
+      }
+
+      .grid2-container img {
+        height: auto;
+        /* Cho phép chiều cao tự động điều chỉnh */
+      }
+
+      .txt2-container h2 {
+        font-size: 1.5rem;
+        /* Giảm kích thước font chữ tiêu đề */
+      }
+
+      .txt2-container p {
+        font-size: 1rem;
+        /* Giảm kích thước font chữ đoạn văn */
+      }
+    }
+
     /* 
 dropdown */
     nav ul li {
@@ -338,14 +401,13 @@ dropdown */
         ?>
             <div class="grid2-container <?php echo $class ?>">
               <div>
-                <img style="height:27rem;"  src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
+                <img style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
               </div>
               <div class="txt2-container" style="background: transparent; color: aliceblue;">
                 <div class="text">
                   <h2><?php echo $rows['title'] ?></h2>
                   <p><?php echo $rows['description'] ?></p>
                 </div>
-
               </div>
             </div>
         <?php
@@ -391,6 +453,11 @@ dropdown */
               }
               ?>
             </div>
+            <div class="btn2-container">
+              <button class="btn2"><b>View more</b></button>
+            </div>
+          </div>
+          </div>
           </div>
 
         </section>
@@ -451,11 +518,6 @@ dropdown */
               }
             }
             ?>
-          </div>
-          <div class="btn2-container">
-            <button class="btn2"><b>View more</b></button>
-          </div>
-        </div>
       </section>
 
   </main>

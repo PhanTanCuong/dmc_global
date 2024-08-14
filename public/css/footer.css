@@ -155,7 +155,7 @@ footer p {
 
 @media only screen and (max-width:1024px) {
   footer {
-    background: #c92027;
+    background: #c92027 !important;
     background-size: cover;
     padding: 10px
   }

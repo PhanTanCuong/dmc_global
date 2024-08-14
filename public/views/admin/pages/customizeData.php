@@ -25,7 +25,7 @@
           </div>
           <div class="form-group">
             <label>Upload Image </label>
-            <input type="file" name="data_image"  class="form-control">
+            <input type="file" name="data_image"  class="form-contfooterrol">
           </div>
         </div>
         <div class="modal-footer">
