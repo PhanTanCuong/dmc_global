@@ -44,7 +44,7 @@
             <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="icons_current_image" src="/dmc_global/mvc/uploads/"  alt="Icons Img"><br>
+              <img id="icons_current_image" src="/dmc_global/mvc/uploads/" alt="Icons Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
@@ -90,6 +90,12 @@
           unset($_SESSION['status']);
         }
         ?>
+        <form action="Icons" method="POST">
+          <input type="radio" name="radio_option" value="7" onclick="this.form.submit();"> Footer
+          <input type="radio" name="radio_option" value="6" onclick="this.form.submit();"> Stat
+
+        </form>
+
         <div class="table-responsive">
           <?php
           ?>
@@ -110,7 +116,7 @@
               ?>
                   <tr>
                     <td><?php echo $counter++; ?></td>
-                    <td ><?php echo '<img class="footer-icon" src="/dmc_global/mvc/uploads/' . $row['image'] . '"  alt="Icons Img">' ?></td>
+                    <td><?php echo '<img class="footer-icon" src="/dmc_global/mvc/uploads/' . $row['image'] . '"  alt="Icons Img">' ?></td>
                     <td>
                       <form action="getIconsById" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">

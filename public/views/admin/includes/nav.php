@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('Admin/');">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('Admin/dashboard');">
         <div><img src="/dmc_global/mvc/uploads/footer.png" alt="logo" height="50px"></div>
     </a>
 
@@ -11,7 +11,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/');">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/dashboard');">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -56,26 +56,26 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
-                    Contents
+                    Layouts
                     <div id="collapse-about" class="collapse">
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Data');">Data</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Background');">Backgrounds</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icons');">Icons</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Customize');">Customize</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icons');">Footer Icons</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">Banner</a>
                     </div>
-                </div>
-                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">
-                    Slider
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/ProductCategory');">
-                    Media
+                    Product Category
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
-                    Others
+                    Menu
                     <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/NavBar');">Navbar</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/ChildNavBar');">Setting</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/NavBar');">Items</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/ChildNavBar');">Child Items</a>
                     </div>
+                </div>
+                <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('Admin/Customize');">
+                    Setting
                 </div>
             </div>
         </div>

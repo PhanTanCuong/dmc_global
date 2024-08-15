@@ -4,11 +4,11 @@ use Core\DB;
 
 class IconsModel extends DB
 {
-    public function getInforIcons()
+    public function getInforIcons($id)
     {
         try {
             $query = "SELECT * FROM icon
-                        WHERE block_id = 7
+                        WHERE block_id = '$id'
                         AND image <> 'footer.png'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {

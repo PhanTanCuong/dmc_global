@@ -177,7 +177,7 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>
-                        <input type="file" name="footer_bg_image"  class="form-control">
+                        <input type="file" name="footer_bg_image" class="form-control">
                     </div>
                 <?php
                 }

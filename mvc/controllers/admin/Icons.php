@@ -15,9 +15,19 @@ class Icons extends Controller
     function display()
     {
         $item = $this->model('IconsModel');
+        $data = null;
+        // Check if a radio button is selected
+        $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
 
+        if ($selected_id !== null) {
+            // Fetch data by the selected ID
+            $data = $item->getInforIcons($selected_id);
+        } else {
+            // Default behavior if no radio button is selected
+            $data = $item->getInforIcons(7);
+        }
         $this->view('admin/home', [
-            'item' => $item->getInforIcons(),
+            'item' => $data,
             'page' => 'customizeIcons'
         ]);
     }
