@@ -211,6 +211,7 @@
                 <img style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
               </div>
               <div class="txt2-container" style="background: transparent; color: aliceblue;">
+                <div class="image"><img src="/dmc_global/public/images/backgrud_banner.png" alt="img"></div>
                 <div class="text">
                   <h2><?php echo $rows['title'] ?></h2>
                   <p><?php echo $rows['description'] ?></p>

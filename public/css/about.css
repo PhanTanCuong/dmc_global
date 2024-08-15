@@ -66,11 +66,9 @@ li {
   display: grid;
   width: 40%;
   grid-template-rows: minmax(0, 30em);
-  /* align-items: center; */
 }
 
 .banner-text-container {
-  /* width: 100%; */
   color: white;
   position: absolute;
   top: 6em;
@@ -123,7 +121,6 @@ li {
 
 .chld-img-container {
   height: auto;
-  /* width: 40%; */
   position: absolute;
   top: -64px;
   left: -25px;
@@ -164,7 +161,7 @@ li {
   overflow: hidden;
   display: block;
   margin: 8em;
-  background-color: rgba(201, 32, 39, 0.95);
+  background-color: rgba(201, 32, 39, 1);
 }
 
 .grid2-container {
@@ -207,16 +204,18 @@ li {
   z-index: 1;
 }
 
-.txt2-container img {
+.grid2-container.even .txt2-container img {
   position: absolute;
-  right: -20px;
+  bottom: -50px;
+  right: 20px;
 }
 
-.grid2-container .even .txt2-container img {
-  transform: rotateY(180deg);
-  left: -30px;
-  top: 10px;
-  width: 100%;
+.grid2-container.odd .txt2-container img {
+  transform:rotateY(180deg);
+  position: absolute;
+  bottom: -50px;
+  left: -20px;
+   right: unset;
 }
 
 .grid2-container .even .txt2-container {
@@ -291,6 +290,9 @@ li {
   }
 
   /* about3 */
+  .image img{
+    
+  }
   .about3 {
     border-radius: 60px;
     margin: 4rem 4rem;
@@ -325,6 +327,11 @@ li {
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .txt2-container img{
+    display:none;
+  }
+}
 @media only screen and (max-width: 720px) {
   .about3 {
     margin: 4rem 4rem;
@@ -363,17 +370,7 @@ li {
     border-bottom-right-radius: 60px;
   }
 
-  .grid2-container .txt2-container img {
-    right: 0px;
-    top: 10em;
-    width: 70%;
-  }
 
-  .grid2-container.odd .txt2-container img {
-    right: 0px;
-    top: 10em;
-    width: 70%;
-  }
 
   .grid-container {
     margin: 0;
@@ -382,17 +379,6 @@ li {
 }
 
 @media only screen and (min-width: 721px) and (max-width: 1024px) {
-  .grid2-container .txt2-container img {
-    right: 22em;
-    top: 0em;
-    width: 20%;
-  }
-
-  .grid2-container.odd .txt2-container img {
-    right: 22em;
-    top: 0em;
-    width: 20%;
-  }
 
   .banner-text-container {
     padding: 0 1rem;
