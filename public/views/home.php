@@ -20,13 +20,15 @@
   }
   ?>
   <!-- .css file -->
-  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css">
-  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css">
-  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/product.css">
-  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/media.css">
-  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css?v=<?php echo microtime() ?>">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css?v=<?php echo microtime() ?>">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/product.css?v=<?php echo microtime() ?>">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/media.css?v=<?php echo microtime() ?>">
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css?v=<?php echo microtime() ?>">
 
   <!-- lib -->
+  <!-- WoW -->
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/lib/WOW-master/css/animate.css" />
   <!-- slick -->
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
@@ -41,223 +43,14 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <style>
-    .comp img {
-      height: 18rem;
-    }
-
     .item.slick-slide img {
       width: 100%;
       height: auto;
     }
 
-    /* .about3 */
-    .about3 {
-      /* display: flex;
-    flex-direction: column; */
-      overflow: hidden;
-      display: block;
-      margin: 8em;
-      background-color: rgba(201, 32, 39, 0.95);
-
-    }
-
-    .grid2-container {
-      display: flex;
-      align-content: center;
-      position: relative;
-
-    }
-
-    .grid2-container.odd {
-      flex-direction: row-reverse;
-    }
-
-    .txt2-container {
-      align-content: center;
-      flex: 1;
-      /* background: transparent; */
-      /* color: aliceblue; */
-      padding: 40px 40px;
-      position: relative;
-
-    }
-
-    .grid2-container .odd .txt2-container img {
-      right: 0px;
-      top: 0px;
-      width: 100%;
-    }
-
-
-
-    .grid2-container .even .txt2-container {
-      grid-row: 1;
-    }
-
-    .grid2-container .even .txt2-container img {
-      right: 0px;
-      top: 0px;
-      width: 100%;
-      transform: rotateY(180deg);
-    }
-
-    .text {
-      position: relative;
-
-      z-index: 1;
-    }
-
-    .txt2-container img {
-      position: absolute;
-      right: -20px;
-    }
-
-    .grid2-container .even .txt2-container img {
-      transform: rotateY(180deg);
-      left: -30px;
-      top: 10px;
-      width: 100%;
-    }
-
-    .grid2-container .even .txt2-container {
-      background: transparent;
-      color: aliceblue;
-      padding: 40px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Từ tablet trở xuống (kích thước màn hình 768px và nhỏ hơn) */
-    @media screen and (max-width: 1024px) {
-      .about3 {
-        margin: 8rem 6rem;
-      }
-
-      .grid2-container {
-        flex-direction: column;
-        /* Chuyển từ bố cục hàng ngang sang hàng dọc */
-        align-items: center;
-        /* Canh giữa các phần tử theo chiều dọc */
-      }
-
-      .grid2-container.odd {
-        flex-direction: column !important;
-      }
-
-      .grid2-container div {
-        width: 100%;
-        /* Chiếm 100% chiều rộng của thẻ cha */
-        text-align: center;
-        /* Canh giữa nội dung */
-      }
-
-      .grid2-container img {
-        width: 130%;
-        /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ cha */
-        height: 15rem !important;
-        /* Tự động điều chỉnh chiều cao theo tỷ lệ */
-      }
-
-
-      .grid2-container.odd img {
-        transform: rotateY(180deg);
-      }
-
-      .txt2-container {
-        padding: 1rem;
-        /* Thêm khoảng cách bên trong */
-      }
-
-      /* Media */
-      .news-item h3 {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 2;
-        /* Hiển thị tối đa 2 dòng (ẩn từ hàng 3 trở đi) */
-        line-height: 1.5em;
-        /* Điều chỉnh chiều cao dòng */
-        max-height: 3em;
-        /* Chiều cao tối đa cho 2 dòng */
-        white-space: normal;
-      }
-
-    }
-
-    /* Điều chỉnh thêm cho màn hình nhỏ hơn như điện thoại di động */
-    @media screen and (max-width: 480px) {
-      .about3 {
-        margin: 8rem 2rem;
-      }
-      .grid2-container {
-        gap: 0.5rem;
-        /* Giảm khoảng cách giữa các phần tử */
-      }
-
-      .grid2-container img {
-        height: auto;
-        /* Cho phép chiều cao tự động điều chỉnh */
-      }
-
-      .txt2-container h2 {
-        font-size: 1.5rem;
-        /* Giảm kích thước font chữ tiêu đề */
-      }
-
-      .txt2-container p {
-        font-size: 1rem;
-        /* Giảm kích thước font chữ đoạn văn */
-      }
-    }
-
-    /* 
-dropdown */
-    nav ul li {
-      display: block;
-      position: relative;
-      float: left;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-
-    nav ul li .dropdown {
-      z-index: 1;
-      position: absolute;
-      display: none;
-      flex-direction: column;
-      top: 3rem;
-      left: 0;
-    }
-
-    nav ul li:hover .dropdown {
-      display: block;
-    }
-
-    nav ul li .dropdown li {
-      padding: 0.5rem;
-      border-bottom: 1px solid #fff;
-      background-color: #c92027;
-      width: 8rem;
-
-    }
-
-
-    nav ul li .dropdown li:hover {
-      opacity: 0.5;
-      background-color: #fff;
-      color: #c92027;
-    }
-
-    @media only screen and (max-width: 1024px) {
-      nav ul li a:hover {
-        color: #fff
-      }
-
-      nav ul li .dropdown li a:hover {
-        color: #fff
-      }
-
+    .flipInYRepeat {
+      animation: flipInYRepeat 1s ease-in-out 3;
+      /* Lặp lại 3 lần */
     }
   </style>
 </head>
@@ -387,14 +180,14 @@ dropdown */
           if (mysqli_num_rows($data["about2Infor"]) > 0) {
             while ($rows = mysqli_fetch_array($data["about2Infor"])) {
           ?>
-              <div class="grid-container">
+              <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
                 <div class="img-container">
                   <img src="/dmc_global/public/images/<?php echo $rows['parent_image'] ?>">
                   <div class="chld-img-container">
-                    <img src="/dmc_global/public/images/<?php echo $rows['child_image'] ?>" class="img-fluid">
+                    <img src="/dmc_global/public/images/<?php echo $rows['child_image'] ?>" class="lazy img-fluid">
                   </div>
                 </div>
-                <div class="txt-container">
+                <div class="txt-container wow pulse" data-wow-delay="400ms">
                   <h2><?php echo $rows['title'] ?></h2>
                   <p><?php echo $rows['description'] ?></p>
                   <button>View more</button>
@@ -414,17 +207,20 @@ dropdown */
             if ($isOdd) {
               $class = "odd";
               $pos = "right";
+              $animation = "fadeInRight";
             } else {
               $class = "even";
               $pos = "left";
+              $animation = "fadeInLeft";
             }
             $isOdd = !$isOdd;
         ?>
             <div class="grid2-container <?php echo $class ?>">
               <div>
-                <img style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
+                <img class="wow <?php echo $animation; ?>" data-wow-delay="400ms" style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
               </div>
-              <div class="txt2-container" style="background: transparent; color: aliceblue;">
+              <div class="txt2-container wow <?php echo $animation; ?>" data-wow-delay="400ms" style="background: transparent; color: aliceblue;">
+                <div class="image"><img src="/dmc_global/public/images/backgrud_banner.png" alt="img"></div>
                 <div class="text">
                   <h2><?php echo $rows['title'] ?></h2>
                   <p><?php echo $rows['description'] ?></p>
@@ -442,7 +238,7 @@ dropdown */
           while ($rows = mysqli_fetch_array($data["product1"])) {
         ?>
             <section class="product1" id="product1" style="background-image:url(/dmc_global/public/images/<?php echo $rows['image'] ?>)">
-              <div class="our-products cover">
+              <div class="our-products wow pulse">
                 <h1><?php echo $rows['title'] ?></h1>
                 <p><?php echo $rows['description'] ?></p>
                 <button>VIEW MORE</button>
@@ -454,7 +250,7 @@ dropdown */
         ?>
         <section class='product2' id="product2">
           <div class="container">
-            <h1 class="title">products
+            <h1 class="title  wow slideInLeft">products
               <p class="pseudo"></p>
             </h1>
 
@@ -463,8 +259,8 @@ dropdown */
               if (mysqli_num_rows($data["product"]) > 0) {
                 while ($rows = mysqli_fetch_array($data["product"])) {
               ?>
-                  <div class="comp">
-                    <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="Image">
+                  <div class="comp wow fadeIn">
+                    <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Image">
                     <h2><?php echo $rows['title'] ?></h2>
                     <p><?php echo $rows['description'] ?></p>
                     <div class="arrow"></div>
@@ -494,16 +290,16 @@ dropdown */
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
         ?>
               <section class="stats" style="background:url(<?php echo $image_path ?>); ">
-                <div class="stat-grid">
+                <div class="stat-grid wow fadeI">
                   <?php
                   if (mysqli_num_rows($data["stats"]) > 0) {
                     while ($rows = mysqli_fetch_array($data["stats"])) {
                   ?>
                       <div class="stat">
-                        <div class="stat-ic">
+                        <div class="stat-ic wow flipInY">
                           <img class="flash" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Icon">
                         </div>
-                        <div class="stat-text">
+                        <div class="stat-text wow fadeInDown">
                           <h3><?php echo $rows['title'] ?></h3>
                           <p><?php echo $rows['description'] ?></p>
                         </div>
@@ -521,17 +317,17 @@ dropdown */
       </section>
       <section class="latest-news">
         <div class="container">
-          <h2 class="title">our latest news
+          <h2 class="title wow slideInLeft">our latest news
             <p class="pseudo"></p>
           </h2>
 
-          <div class="news-grid">
+          <div class="news-grid wow fadeIn">
             <?php
             if (mysqli_num_rows($data['news']) > 0) {
               while ($rows = mysqli_fetch_array($data['news'])) {
             ?>
-                <div class="news-item">
-                  <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="News">
+                <div class="news-item ">
+                  <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="News">
                   <h3><?php echo $rows['title'] ?></h3>
                   <p><?php echo $rows['description'] ?></p>
                 </div>
@@ -577,8 +373,7 @@ dropdown */
                   $titles[] = $row['title'];
                   $descriptions[] = $row['description'];
                 }
-                // print_r($titles);
-                // print_r($descriptions);
+
                 ?>
                 <h3 class="footer-title">
                   <?php echo $titles[0] ?>
@@ -682,6 +477,49 @@ dropdown */
   <!-- Latest compiled JavaScript -->
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/dmc_global/public/js/banner.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="/dmc_global/public/lib/WOW-master/js/wow.js"></script>
+  <script>
+    $(document).ready(function() {
+      document.addEventListener('DOMContentLoaded', function() {
+        let lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+        if ('IntersectionObserver' in window) {
+          let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                let lazyImage = entry.target;
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.classList.remove('lazy');
+                lazyImageObserver.unobserve(lazyImage);
+              }
+            });
+          });
+
+          lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+          });
+        }
+      });
+
+      new WOW().init();
+    })
+  </script>
+  <!-- <script>
+    $(document).ready(function() {
+      ScrollReveal().reveal('.logo');
+      ScrollReveal().reveal('.grid-container', {
+        delay: 500
+      });
+      ScrollReveal().reveal('.comp', {
+        delay: 200
+      });
+      ScrollReveal().reveal('.news-item ', {
+        delay: 200
+      });
+
+    })
+  </script> -->
 
   <script>
     $(document).ready(function() {

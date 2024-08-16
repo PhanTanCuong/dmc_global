@@ -51,9 +51,9 @@ class Signin extends Controller
             unset($_SESSION['username']);
 
             // Prevent caching
-            // header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            // header("Cache-Control: post-check=0, pre-check=0", false);
-            // header("Pragma: no-cache");
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
 
             // Redirect to the login page
             header('Location: Signin/');

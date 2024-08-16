@@ -4,3 +4,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 
 
 RewriteRule ^(.+)$  index.php?url=$1
+
+DocumentRoot "dmc_global/public"
+<Directory "dmc_global/public">
+    AllowOverride All
+    Require all granted
+</Directory>

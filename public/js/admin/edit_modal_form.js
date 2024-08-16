@@ -22,7 +22,7 @@ function populateModalFields(buttonSelector, urlPrefix, fieldMapping, modalSelec
                             if (fieldMapping.hasOwnProperty(field)) {
                                 var selector = fieldMapping[field];
                                 if (field === 'image') {
-                                    $(modalSelector).find(selector).attr('src', '/dmc_global/mvc/uploads/' + value[field]);
+                                    $(modalSelector).find(selector).attr('src', '/dmc_global/public/images/' + value[field]);
                                 } else {
                                     $(modalSelector).find(selector).val(value[field]);
                                 }

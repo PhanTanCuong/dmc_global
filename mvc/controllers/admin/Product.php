@@ -63,7 +63,7 @@ class Product extends Controller
                 $result = $product->addProduct($title, $description, $link, $image);
                 if ($result) {
                     //Upload image data vào folder upload
-                    move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["product_image"]["tmp_name"], "./public/images/" . $_FILES["product_image"]["name"]) . '';
                     $_SESSION['success'] = "Product is added successfully";
                     header('Location:Product');
                 } else {
@@ -101,7 +101,7 @@ class Product extends Controller
                 }
                 $success = $product->editProduct($id, $title, $description, $link, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["product_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["product_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["product_image"]["tmp_name"], "./public/images/" . $_FILES["product_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: Product');
                 } else {

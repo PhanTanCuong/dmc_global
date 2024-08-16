@@ -53,22 +53,12 @@ class Media extends Controller
                 $description = strip_tags($_POST['news_description']);
                 $link = strip_tags($_POST['news_link']);
                 $image = $_FILES["news_image"]['name'];
-              
-                // $_FILES["news_image"]['name']:gán giá trị cho biến.
 
-
-                //Kiểm tra xem ảnh có tồn tại trong kho lưu trữ ko
-                // if (file_exists("./mvc/uploads/" . $_FILES["news_image"]["name"])) {
-                //     $image_store = $_FILES["news_image"]["name"];
-                //     //$_FILES["news_image"]["name"]: truy cập trực tiếp vào phần tử name của mảng $_FILES["news_image"].
-                //     $_SESSION['status'] = "Image is already exists " . $image_store . "!";
-                //     header('Location:News');
-                // } else {
                 $news = $this->model("MediaModel");
                 $result = $news->addNews($title, $description, $link, $image);
                 if ($result) {
                     //Upload image data vào folder upload
-                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = "News is added successfully";
                     header('Location:News');
                 } else {
@@ -108,7 +98,7 @@ class Media extends Controller
                 }
                 $success = $news->editNews($id, $title, $description, $link, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["news_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:News');
                 } else {

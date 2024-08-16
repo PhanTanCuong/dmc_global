@@ -69,7 +69,7 @@
             </div>
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="product_current_image" src="/dmc_global/mvc/uploads/" width="50%" height="auto" alt="Product Img"><br>
+              <img id="product_current_image" src="/dmc_global/public/images/" width="50%" height="auto" alt="Product Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
@@ -149,7 +149,7 @@
                     <td><?php echo $row['title']; ?></td>
                     <td><?php echo $row['description']; ?></td>
                     <td><?php echo $row['link'] ?></td>
-                    <td><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
+                    <td><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                     <td>
                       <form action="getProductById" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
@@ -198,7 +198,7 @@
                 $('#edit_title').val(value['title']);
                 $('#edit_description').val(value['description']);
                 $('#edit_link').val(value['link']);
-                $('#product_current_image').attr('src', '/dmc_global/mvc/uploads/' + value['image']);
+                $('#product_current_image').attr('src', '/dmc_global/public/images/' + value['image']);
                 $('#current_file').text('Current file:'+ value['image']);
               });
               $('#editproductprofile').modal('show');

@@ -47,7 +47,7 @@ class Customize extends Controller
 
                 $success = $item->customizeHeaderInfor($name, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["head_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["head_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["head_image"]["tmp_name"], "./public/images/" . $_FILES["head_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -80,7 +80,7 @@ class Customize extends Controller
                 }
                 $result = $item->customizeIconbyId(2, $head_logo);
                 if ($result) {
-                    move_uploaded_file($_FILES["header_icon"]["tmp_name"], "./mvc/uploads/" . $_FILES["header_icon"]["name"]) . '';
+                    move_uploaded_file($_FILES["header_icon"]["tmp_name"], "./public/images/" . $_FILES["header_icon"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -113,7 +113,7 @@ class Customize extends Controller
                 }
                 $result = $item->customizeIconbyId(14, $footer_logo);
                 if ($result) {
-                    move_uploaded_file($_FILES["footer_icon"]["tmp_name"], "./mvc/uploads/" . $_FILES["footer_icon"]["name"]) . '';
+                    move_uploaded_file($_FILES["footer_icon"]["tmp_name"], "./public/images/" . $_FILES["footer_icon"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -144,7 +144,7 @@ class Customize extends Controller
                 }
                 $result = $item->customizeBackgroundbyId(8, $footer_bg);
                 if ($result) {
-                    move_uploaded_file($_FILES["footer_bg_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["footer_bg_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["footer_bg_image"]["tmp_name"], "./public/images/" . $_FILES["footer_bg_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {

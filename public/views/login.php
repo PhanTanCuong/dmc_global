@@ -44,7 +44,7 @@ include_once ('admin/includes/header.php');
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="javascript:void(0)" onclick="redirectTo('Register/')">Create an Account!</a>
+                                    <a class="small" href="javascript:void(0)" onclick="redirectTo('public/Register/')">Create an Account!</a>
                                 </div>
                             </div>
                         </div>

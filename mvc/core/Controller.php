@@ -8,7 +8,7 @@ class Controller
     //model() function
     public function model($model)
     {
-        require_once "./mvc/models/" . $model . ".php";
+        require_once "../mvc/models/" . $model . ".php";
         return new $model;
     }
 
@@ -16,6 +16,6 @@ class Controller
 
     public function view($view, $data = [])
     {
-        require_once "./public/views/" . $view . ".php";
+        require_once "../public/views/" . $view . ".php";
     }
 }

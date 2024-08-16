@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label>Current Background Image</label><br>
-                        <img src="/dmc_global/mvc/uploads/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
+                        <img src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
                         <span>Current file: <?php echo $row['image']; ?></span>
                     </div>
                     <div class="form-group">
