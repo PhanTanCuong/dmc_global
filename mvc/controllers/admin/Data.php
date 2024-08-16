@@ -83,7 +83,7 @@ class Data extends Controller
 
                 $success = $item->editData($id, $title, $description, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["data_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location: Data');
                 } else {

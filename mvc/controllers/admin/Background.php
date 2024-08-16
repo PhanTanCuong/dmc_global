@@ -32,7 +32,7 @@ class Background extends Controller
                 $item = $this->model('BackgroundModel');
                 $success = $item->addBackgroundImages($image);
                 if ($success) {
-                    move_uploaded_file($_FILES["background_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["background_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["background_image"]["tmp_name"], "./public/images/" . $_FILES["background_image"]["name"]) . '';
                     $_SESSION['success'] = 'Background image added successfully';
                     header('Location:Background');
                 } else {
@@ -86,7 +86,7 @@ class Background extends Controller
 
                 $success = $item->customizeInforBackground($id, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["background_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["background_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["background_image"]["tmp_name"], "./public/images/" . $_FILES["background_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Background');
                 } else {

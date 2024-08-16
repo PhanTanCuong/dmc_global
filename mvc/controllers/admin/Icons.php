@@ -42,7 +42,7 @@ class Icons extends Controller
                 $item = $this->model('IconsModel');
                 $success = $item->addIconsImages($image);
                 if ($success) {
-                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icons_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
                     $_SESSION['success'] = 'Icons image added successfully';
                     header('Location:Icons');
                 } else {
@@ -96,7 +96,7 @@ class Icons extends Controller
 
                 $success = $item->customizeInforIcons($id, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["icons_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Icons');
                 } else {

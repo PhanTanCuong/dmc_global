@@ -43,7 +43,7 @@ class Slider extends Controller
  
                  $success=$item->customizeInforBanner($title,$description,$image);
                  if ($success) {
-                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./mvc/uploads/" . $_FILES["banner_image"]["name"]) . '';
+                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]) . '';
                      $_SESSION['success'] = 'Your data is updated';
                      header('Location:Slider');
                  } else {
