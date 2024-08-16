@@ -260,7 +260,7 @@
                 while ($rows = mysqli_fetch_array($data["product"])) {
               ?>
                   <div class="comp wow fadeIn">
-                    <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="Image">
+                    <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Image">
                     <h2><?php echo $rows['title'] ?></h2>
                     <p><?php echo $rows['description'] ?></p>
                     <div class="arrow"></div>
@@ -327,7 +327,7 @@
               while ($rows = mysqli_fetch_array($data['news'])) {
             ?>
                 <div class="news-item ">
-                  <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="News">
+                  <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="News">
                   <h3><?php echo $rows['title'] ?></h3>
                   <p><?php echo $rows['description'] ?></p>
                 </div>

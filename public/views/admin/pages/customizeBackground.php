@@ -44,7 +44,7 @@
             <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="background_current_image" src="/dmc_global/mvc/uploads/" width="50%" height="auto" alt="Background Img"><br>
+              <img id="background_current_image" src="/dmc_global/public/images/" width="50%" height="auto" alt="Background Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
@@ -115,7 +115,7 @@
                   <tr>
                     <td><?php echo $counter++; ?></td>
                     <td></td>
-                    <td class="image-title" style="text-align:right;"><?php echo '<img src="/dmc_global/mvc/uploads/' . $row['image'] . '" width="50%" height="auto" alt="Background Img">' ?></td>
+                    <td class="image-title" style="text-align:right;"><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="50%" height="auto" alt="Background Img">' ?></td>
                     <td>
                       <form action="getBackgroundById" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
@@ -160,7 +160,7 @@
               console.log(response);
               $.each(response, function(key, value) {
                 $('#edit_id').val(value['id']);
-                $('#background_current_image').attr('src', '/dmc_global/mvc/uploads/' + value['image']);
+                $('#background_current_image').attr('src', '/dmc_global/public/images/' + value['image']);
                 $('#current_file').text('Current file:' + value['image']);
               });
               $('#editbackgroundprofile').modal('show');

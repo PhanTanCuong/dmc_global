@@ -2,8 +2,8 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('Admin/dashboard');">
-        <div><img src="/dmc_global/mvc/uploads/footer.png" alt="logo" height="50px"></div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:void(0);" onclick="redirectTo('public/Admin/dashboard');">
+        <div><img src="/dmc_global/public/images/footer.png" alt="logo" height="50px"></div>
     </a>
 
     <!-- Divider -->
@@ -11,7 +11,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/dashboard');">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/dashboard');">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -33,14 +33,14 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Item:</h6>
-                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/Product');">Products</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/News');">Media</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Product');">Products</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/News');">Media</a>
             </div>
         </div>
     </li>
     <!-- Nav Item - Admin Profies -->
     <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('Admin/Account');">
+        <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/Account');">
             <i class="fas fa-fw fa-user"></i>
             <span>Admin Profiles</span>
         </a>
@@ -58,23 +58,23 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Data');">Data</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Background');">Backgrounds</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Icons');">Footer Icons</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/Slider');">Banner</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Background');">Backgrounds</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Icons');">Footer Icons</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
-                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('Admin/ProductCategory');">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/ProductCategory');">
                     Product Category
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
                     Menu
                     <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/NavBar');">Items</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('Admin/ChildNavBar');">Child Items</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">Items</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/ChildNavBar');">Child Items</a>
                     </div>
                 </div>
-                <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('Admin/Customize');">
+                <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('public/Admin/Customize');">
                     Setting
                 </div>
             </div>
@@ -254,10 +254,10 @@
                             Message Center
                         </h6>
                         <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="dropdown-list-image mr-3">
+                            <!-- <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                 <div class="status-indicator bg-success"></div>
-                            </div>
+                            </div> -->
                             <div class="font-weight-bold">
                                 <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                     problem I've been having.</div>
@@ -357,7 +357,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <form action="../Signout" method="POST">
+                        <form action="../../Signout" method="POST">
                             <button type="submit" name="logout_btn" class="btn btn-primary" name="" href="../View/login.php">Logout</button>
                         </form>
 

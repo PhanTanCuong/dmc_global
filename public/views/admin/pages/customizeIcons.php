@@ -44,7 +44,7 @@
             <input type="hidden" name="edit_id" id="edit_id">
             <div class="form-group">
               <label>Current Image</label><br>
-              <img id="icons_current_image" src="/dmc_global/mvc/uploads/" alt="Icons Img"><br>
+              <img id="icons_current_image" src="/dmc_global/public/images/" alt="Icons Img"><br>
               <span id="current_file">Current file: </span>
             </div>
             <div class="form-group">
@@ -116,7 +116,7 @@
               ?>
                   <tr>
                     <td><?php echo $counter++; ?></td>
-                    <td><?php echo '<img class="footer-icon" src="/dmc_global/mvc/uploads/' . $row['image'] . '"  alt="Icons Img">' ?></td>
+                    <td><?php echo '<img class="footer-icon" src="/dmc_global/public/images/' . $row['image'] . '"  alt="Icons Img">' ?></td>
                     <td>
                       <form action="getIconsById" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
@@ -161,7 +161,7 @@
               console.log(response);
               $.each(response, function(key, value) {
                 $('#edit_id').val(value['id']);
-                $('#icons_current_image').attr('src', '/dmc_global/mvc/uploads/' + value['image']);
+                $('#icons_current_image').attr('src', '/dmc_global/public/images/' + value['image']);
                 $('#current_file').text('Current file:' + value['image']);
               });
               $('#editiconsprofile').modal('show');
