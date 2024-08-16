@@ -27,6 +27,8 @@
   <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css?v=<?php echo microtime() ?>">
 
   <!-- lib -->
+  <!-- WoW -->
+  <link rel="stylesheet" type="text/css" href="/dmc_global/public/lib/WOW-master/css/animate.css" />
   <!-- slick -->
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
@@ -44,6 +46,11 @@
     .item.slick-slide img {
       width: 100%;
       height: auto;
+    }
+
+    .flipInYRepeat {
+      animation: flipInYRepeat 1s ease-in-out 3;
+      /* Lặp lại 3 lần */
     }
   </style>
 </head>
@@ -173,14 +180,14 @@
           if (mysqli_num_rows($data["about2Infor"]) > 0) {
             while ($rows = mysqli_fetch_array($data["about2Infor"])) {
           ?>
-              <div class="grid-container">
+              <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
                 <div class="img-container">
                   <img src="/dmc_global/public/images/<?php echo $rows['parent_image'] ?>">
                   <div class="chld-img-container">
-                    <img src="/dmc_global/public/images/<?php echo $rows['child_image'] ?>" class="img-fluid">
+                    <img src="/dmc_global/public/images/<?php echo $rows['child_image'] ?>" class="lazy img-fluid">
                   </div>
                 </div>
-                <div class="txt-container">
+                <div class="txt-container wow pulse" data-wow-delay="400ms">
                   <h2><?php echo $rows['title'] ?></h2>
                   <p><?php echo $rows['description'] ?></p>
                   <button>View more</button>
@@ -200,17 +207,19 @@
             if ($isOdd) {
               $class = "odd";
               $pos = "right";
+              $animation = "fadeInRight";
             } else {
               $class = "even";
               $pos = "left";
+              $animation = "fadeInLeft";
             }
             $isOdd = !$isOdd;
         ?>
             <div class="grid2-container <?php echo $class ?>">
               <div>
-                <img style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
+                <img class="wow <?php echo $animation; ?>" data-wow-delay="400ms" style="height:27rem;" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="about3_image">
               </div>
-              <div class="txt2-container" style="background: transparent; color: aliceblue;">
+              <div class="txt2-container wow <?php echo $animation; ?>" data-wow-delay="400ms" style="background: transparent; color: aliceblue;">
                 <div class="image"><img src="/dmc_global/public/images/backgrud_banner.png" alt="img"></div>
                 <div class="text">
                   <h2><?php echo $rows['title'] ?></h2>
@@ -229,7 +238,7 @@
           while ($rows = mysqli_fetch_array($data["product1"])) {
         ?>
             <section class="product1" id="product1" style="background-image:url(/dmc_global/public/images/<?php echo $rows['image'] ?>)">
-              <div class="our-products cover">
+              <div class="our-products wow pulse">
                 <h1><?php echo $rows['title'] ?></h1>
                 <p><?php echo $rows['description'] ?></p>
                 <button>VIEW MORE</button>
@@ -241,7 +250,7 @@
         ?>
         <section class='product2' id="product2">
           <div class="container">
-            <h1 class="title">products
+            <h1 class="title  wow slideInLeft">products
               <p class="pseudo"></p>
             </h1>
 
@@ -250,7 +259,7 @@
               if (mysqli_num_rows($data["product"]) > 0) {
                 while ($rows = mysqli_fetch_array($data["product"])) {
               ?>
-                  <div class="comp">
+                  <div class="comp wow fadeIn">
                     <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="Image">
                     <h2><?php echo $rows['title'] ?></h2>
                     <p><?php echo $rows['description'] ?></p>
@@ -281,16 +290,16 @@
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
         ?>
               <section class="stats" style="background:url(<?php echo $image_path ?>); ">
-                <div class="stat-grid">
+                <div class="stat-grid wow fadeI">
                   <?php
                   if (mysqli_num_rows($data["stats"]) > 0) {
                     while ($rows = mysqli_fetch_array($data["stats"])) {
                   ?>
                       <div class="stat">
-                        <div class="stat-ic">
+                        <div class="stat-ic wow flipInY">
                           <img class="flash" src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Icon">
                         </div>
-                        <div class="stat-text">
+                        <div class="stat-text wow fadeInDown">
                           <h3><?php echo $rows['title'] ?></h3>
                           <p><?php echo $rows['description'] ?></p>
                         </div>
@@ -308,16 +317,16 @@
       </section>
       <section class="latest-news">
         <div class="container">
-          <h2 class="title">our latest news
+          <h2 class="title wow slideInLeft">our latest news
             <p class="pseudo"></p>
           </h2>
 
-          <div class="news-grid">
+          <div class="news-grid wow fadeIn">
             <?php
             if (mysqli_num_rows($data['news']) > 0) {
               while ($rows = mysqli_fetch_array($data['news'])) {
             ?>
-                <div class="news-item">
+                <div class="news-item ">
                   <img src="/dmc_global/mvc/uploads/<?php echo $rows['image'] ?>" alt="News">
                   <h3><?php echo $rows['title'] ?></h3>
                   <p><?php echo $rows['description'] ?></p>
@@ -364,8 +373,7 @@
                   $titles[] = $row['title'];
                   $descriptions[] = $row['description'];
                 }
-                // print_r($titles);
-                // print_r($descriptions);
+
                 ?>
                 <h3 class="footer-title">
                   <?php echo $titles[0] ?>
@@ -469,6 +477,49 @@
   <!-- Latest compiled JavaScript -->
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/dmc_global/public/js/banner.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="/dmc_global/public/lib/WOW-master/js/wow.js"></script>
+  <script>
+    $(document).ready(function() {
+      document.addEventListener('DOMContentLoaded', function() {
+        let lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+        if ('IntersectionObserver' in window) {
+          let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                let lazyImage = entry.target;
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.classList.remove('lazy');
+                lazyImageObserver.unobserve(lazyImage);
+              }
+            });
+          });
+
+          lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+          });
+        }
+      });
+
+      new WOW().init();
+    })
+  </script>
+  <!-- <script>
+    $(document).ready(function() {
+      ScrollReveal().reveal('.logo');
+      ScrollReveal().reveal('.grid-container', {
+        delay: 500
+      });
+      ScrollReveal().reveal('.comp', {
+        delay: 200
+      });
+      ScrollReveal().reveal('.news-item ', {
+        delay: 200
+      });
+
+    })
+  </script> -->
 
   <script>
     $(document).ready(function() {

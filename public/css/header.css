@@ -146,9 +146,8 @@ nav ul li .dropdown {
   position: absolute;
   display: none;
   flex-direction: column;
-  top: 1rem;
-  left: 0;
-  width: 8rem;
+  top: 4rem;
+  width: 10rem;
 }
 
 nav ul li:hover .dropdown {
