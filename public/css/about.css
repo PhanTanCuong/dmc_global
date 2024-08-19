@@ -3,7 +3,7 @@ li {
 }
 
 #about {
-  background: #ffff;
+  background: #f5f5f5;
 }
 
 /* .about1 */
@@ -96,7 +96,7 @@ li {
 
 /* .about2 */
 .about2 {
-  background-color: #fff;
+  background-color: #f5f5f5;
   margin-top: 6em;
 }
 
@@ -124,7 +124,7 @@ li {
   position: absolute;
   top: -64px;
   left: -25px;
-  background: white;
+  background: #f5f5f5;
   border-bottom-right-radius: 85px;
   padding: 30px;
 }

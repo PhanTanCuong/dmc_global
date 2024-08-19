@@ -5,7 +5,10 @@ $jq(document).ready(function() {
         infinite: true,
         speed: 300,
         slidesToShow: 1,
-        arrows:false
+        arrows:false,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
 
     });
 });
@@ -13,12 +16,12 @@ $jq(document).ready(function() {
 // slick lấy đúng kích thước của phần tử trong slider
 
 //scroll down
-window.onscroll = function() {scrollFunction()};
+// window.onscroll = function() {scrollFunction()};
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("navbar").style.top = "0";
-  } else {
-    document.getElementById("navbar").style.top = "-50px";
-  }
-}
+// function scrollFunction() {
+//   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+//     document.getElementById("nav").style.top = "0";
+//   } else {
+//     document.getElementById("nav").style.top = "-50px";
+//   }
+// }

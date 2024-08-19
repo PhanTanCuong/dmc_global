@@ -59,7 +59,6 @@
                     Layouts
                     <div id="collapse-about" class="collapse">
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data');">Data</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Background');">Backgrounds</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Icons');">Footer Icons</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
                     </div>

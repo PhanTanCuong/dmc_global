@@ -25,7 +25,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
   <!-- css -->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css">
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?php echo microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css">
   <style>
     .customize-button {
@@ -42,11 +42,16 @@
       height: auto;
       background-color: black;
     }
-    
-    #icons_current_image{
+
+    #icons_current_image {
       width: 50%;
       height: auto;
       background-color: black;
+    }
+
+    #dataTable tbody tr td img {
+      width: 120px;
+      height: 120px;
     }
   </style>
 

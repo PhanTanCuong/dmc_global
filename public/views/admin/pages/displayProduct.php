@@ -22,10 +22,6 @@
               <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description" required>
             </div>
             <div class="form-group">
-              <label> Link </label>
-              <input type="text" name="product_link" class="form-control" placeholder="Enter Product Link" required>
-            </div>
-            <div class="form-group">
               <label>Image </label>
               <input type="file" name="product_image" id="product_image" class="form-control" required>
             </div>
@@ -62,10 +58,6 @@
             <div class="form-group">
               <label>Description</label>
               <input type="text" name="product_description" id="edit_description" class="form-control" placeholder="Enter Description" required>
-            </div>
-            <div class="form-group">
-              <label> Link </label>
-              <input type="text" name="product_link" id="edit_link" class="form-control" placeholder="Enter Link" required>
             </div>
             <div class="form-group">
               <label>Current Image</label><br>
@@ -128,7 +120,6 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Link</th>
                 <th>Image</th>
                 <th>EDIT</th>
                 <th>DELETE </th>
@@ -148,7 +139,6 @@
                     <td><?php echo $counter++; ?></td>
                     <td><?php echo $row['title']; ?></td>
                     <td><?php echo $row['description']; ?></td>
-                    <td><?php echo $row['link'] ?></td>
                     <td><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                     <td>
                       <form action="getProductById" method="POST">
