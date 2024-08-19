@@ -31,7 +31,7 @@ class Signin extends Controller
                         $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {
-                        header('Location: ../');
+                        header('Location: ../Product');
                     }
                 }
             }
@@ -57,7 +57,7 @@ class Signin extends Controller
             header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
             // Redirect to the login page
-            header('Location: ../public/Signin/');
+            header('Location: Signin/');
             exit();
         }
     }
