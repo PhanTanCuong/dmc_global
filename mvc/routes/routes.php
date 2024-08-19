@@ -53,6 +53,8 @@ Route::add('Admin/customizeTab','Customize@customizeTab');
 Route::add('Admin/customizeLogo','Customize@customizeLogo');
 Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
 Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
+
+Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
 Route::add('Admin/editFooterData','Customize@editFooterData');
 

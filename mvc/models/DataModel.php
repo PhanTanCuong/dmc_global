@@ -4,6 +4,19 @@ use Core\DB;
 
 class DataModel extends DB
 {
+    // public function getItem(){
+
+    // }
+
+    public function addData($title, $description, $image, $block_id, $page_id){
+        try{
+            $query = "INSERT INTO item (title, description, image, block_id, page_id) VALUES ('$title', '$description', '$image', '$block_id', '$page_id')";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+
+            echo "Error: ". $e->getMessage();
+        }
+    }
     //get List of datas function
     public function getData($id)
     {

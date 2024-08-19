@@ -17,6 +17,7 @@ class Data extends Controller
     {
         // Model
         $item = $this->model("DataModel");
+        $product_category=$this->model("ProductModel");
         $data = null;
         // Check if a radio button is selected
         $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
@@ -36,11 +37,38 @@ class Data extends Controller
         // View
         $this->view("admin/home", [
             "item" => $data,
+            "product_categories" => $product_category->getInforProductCategory(),
             "page" => "customizeData"
         ]);
     }
 
 
+    function addData(){
+        try{
+            if (isset($_POST['addDataBtn'])) {
+                $title = strip_tags($_POST['data_title']);
+                $description = strip_tags($_POST['data_description']);
+                $image = $_FILES["data_image"]['name'];
+                $selected_block_id= isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
+                $selected_page_id=1;
+                $product = $this->model('DataModel');
+                $result = $product->addData($title, $description,$image,1,$selected_page_id);
+                if ($result) {
+                    //Upload image data vào folder upload
+                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
+                    $_SESSION['success'] = "Data is added successfully";
+                    header('Location:Data');
+                } else {
+                    $_SESSION['status'] = "Data is NOT added";
+                    header('Location:Data');
+                }
+            }
+
+        }catch (Exception $e) {
+            $_SESSION['status']=$e->getMessage();
+            header('Location: Data');
+        }
+    }
 
     //getDataById()
     function getDataById()

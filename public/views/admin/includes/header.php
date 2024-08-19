@@ -53,6 +53,11 @@
       width: 120px;
       height: 120px;
     }
+
+    #current_image{
+      width: 120px;
+      height: 120px;
+    }
   </style>
 
 
