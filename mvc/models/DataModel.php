@@ -22,6 +22,35 @@ class DataModel extends DB
             echo "Error: ". $e->getMessage();
         }
     }
+
+        public function editItem($id,$title, $description, $image){
+        try{
+            $query = "UPDATE item SET title='$title', description='$description', image='$image' WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function deleteItem($id){
+        try{
+            $query = "DELETE FROM item WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getItemById($id){
+        try{
+            $query="SELECT * FROM item WHERE id='$id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
     //get List of datas function
     public function getData($id)
     {

@@ -110,9 +110,9 @@
             </button>
             <?php
             // Kiểm tra nếu đã có giá trị radio_option trong POST request
-            $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
+            $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : '3'; // Mặc định là '3' (About2)
             ?>
-            <form action="Data" method="POST">
+            <form action="Data" method="GET">
               <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
                   <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
@@ -167,7 +167,10 @@
                       <td><?php echo $counter++; ?></td>
                       <td><?php echo $row['title'] ?></td>
                       <td><?php echo $row['description'] ?></td>
-                      <td><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="100%" height="auto" alt="Img">' ?></td>
+                      <td><?php if($_GET['radio_option']==4) {
+                      echo '<img class="icon" src="/dmc_global/public/images/' . $row['image'] . ' alt="Img">';  
+                      }
+                      echo '<img src="/dmc_global/public/images/' . $row['image'] . ' alt="Img">' ?></td>
                       <td>
                         <form action="getDataById" method="POST">
                           <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
@@ -175,7 +178,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="deleteAccount" method="POST">
+                        <form action="deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>

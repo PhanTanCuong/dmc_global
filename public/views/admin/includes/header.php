@@ -58,9 +58,10 @@
       width: 120px;
       height: 120px;
     }
+    .icon{
+      background-color: blue;
+    }
   </style>
-
-
 </head>
 
 <body id="page-top">

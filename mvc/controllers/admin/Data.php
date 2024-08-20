@@ -83,7 +83,7 @@ class Data extends Controller
             $item_id = $_POST['data_id'];
             $result_array = [];
             $item = $this->model('DataModel');
-            $result = $item->getDataById($item_id);
+            $result = $item->getItemById($item_id);
             if (mysqli_num_rows($result) > 0) {
                 foreach ($result as $row) {
                     array_push($result_array, $row);
@@ -104,7 +104,7 @@ class Data extends Controller
                 $description = strip_tags($_POST['edit_description']);
                 $id = $_POST['edit_id'];
                 $item = $this->model('DataModel');
-                $result = $item->getDataById($id);
+                $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
 
                 $currentImage = $data['image'];
@@ -115,7 +115,7 @@ class Data extends Controller
                     $image = $currentImage;
                 }
 
-                $success = $item->editData($id, $title, $description, $image);
+                $success = $item->editItem($id, $title, $description, $image);
                 if ($success) {
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
@@ -139,7 +139,7 @@ class Data extends Controller
             if (isset($_POST["delete_btn"])) {
                 $id = $_POST['delete_id'];
                 $item = $this->model('DataModel');
-                $result = $item->deleteData($id);
+                $result = $item->deleteItem($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location: Data');
