@@ -46,12 +46,7 @@
             width: 100%;
             height: auto;
         }
-
-        .flipInYRepeat {
-            animation: flipInYRepeat 1s ease-in-out 3;
-            /* Lặp lại 3 lần */
-        }
-    </style>
+</style>
 </head>
 
 <body>

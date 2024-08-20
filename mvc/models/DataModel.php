@@ -4,13 +4,18 @@ use Core\DB;
 
 class DataModel extends DB
 {
-    // public function getItem(){
-
-    // }
+    public function getItem($block_id,$page_id){
+        try{
+            $query = "SELECT * FROM item WHERE block_id='$block_id' AND product_category_id	='$page_id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
 
     public function addData($title, $description, $image, $block_id, $page_id){
         try{
-            $query = "INSERT INTO item (title, description, image, block_id, page_id) VALUES ('$title', '$description', '$image', '$block_id', '$page_id')";
+            $query = "INSERT INTO item (title, description, image, block_id, product_category_id) VALUES ('$title', '$description', '$image', '$block_id', '$page_id')";
             return mysqli_query($this->connection, $query);
         }catch(mysqli_sql_exception $e){
 

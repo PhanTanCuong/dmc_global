@@ -1,16 +1,17 @@
-<div class="modal fade" id="addadminprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Data Information</h5>
+        <h5 class="modal-title" id="addDataModalLabel">Data Information</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="addData" method="POST">
+      <form action="addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
+          <input type="hidden" name="selected_radio_option" id="selected_radio_option" value="">
             <label> Title </label>
             <textarea name="data_title" id="data_title"  class="form-control" placeholder="Enter Title" rows="2"></textarea>
           </div>
@@ -104,7 +105,7 @@
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">List of data</h6>
           <div class="controll-btn">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">
               <i class="fas fa-plus"> Add data</i>
             </button>
             <?php
@@ -228,4 +229,13 @@
     });
 
   });
+</script>
+<script>
+$(document).ready(function() {
+  $('#addDataModal').on('show.bs.modal', function (e) {
+    // Set the selected radio option in the hidden input
+    var selectedOption = $('input[name="radio_option"]:checked').val();
+    $('#selected_radio_option').val(selectedOption);
+  });
+});
 </script>

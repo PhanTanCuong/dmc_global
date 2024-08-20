@@ -13,11 +13,11 @@ class Data extends Controller
     {
         Middleware::checkAdmin();
     }
-    function display()
+    public function display()
     {
         // Model
         $item = $this->model("DataModel");
-        $product_category=$this->model("ProductModel");
+        $product_category = $this->model("ProductModel");
         $data = null;
         // Check if a radio button is selected
         $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
@@ -28,10 +28,10 @@ class Data extends Controller
 
         if ($selected_id !== null) {
             // Fetch data by the selected ID
-            $data = $item->getData($selected_id);
+            $data = $item->getItem($selected_id,1);
         } else {
             // Default behavior if no radio button is selected
-            $data = $item->getData(3);
+            $data = $item->getItem(3,1);
         }
 
         // View
@@ -43,16 +43,22 @@ class Data extends Controller
     }
 
 
-    function addData(){
-        try{
+    function addData()
+    {
+        try {
+            $selected_block_id = isset($_POST['selected_radio_option']) ? (int)$_POST['selected_radio_option'] : null;
             if (isset($_POST['addDataBtn'])) {
                 $title = strip_tags($_POST['data_title']);
                 $description = strip_tags($_POST['data_description']);
                 $image = $_FILES["data_image"]['name'];
-                $selected_block_id= isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
-                $selected_page_id=1;
-                $product = $this->model('DataModel');
-                $result = $product->addData($title, $description,$image,1,$selected_page_id);
+                $selected_page_id = 1;
+                if($selected_block_id===null){
+                    $selected_id=3;
+                }else{
+                    $selected_id=$selected_block_id;
+                }
+                $data = $this->model('DataModel');
+                $result = $data->addData($title, $description, $image, $selected_id, $selected_page_id);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
@@ -64,8 +70,8 @@ class Data extends Controller
                 }
             }
 
-        }catch (Exception $e) {
-            $_SESSION['status']=$e->getMessage();
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
             header('Location: Data');
         }
     }
