@@ -55,7 +55,7 @@
           </div>
           <div class="form-group">
             <label>Current Image</label><br>
-            <img id="current_image" src="/dmc_global/public/images/" alt="Img"><br>
+            <img <?php if($_POST['radio_option']==6){echo 'class="icon"';}?>id="current_image" src="/dmc_global/public/images/" alt="Img"><br>
             <span id="current_file">Current file: </span>
           </div>
           <div class="form-group">
@@ -110,9 +110,9 @@
             </button>
             <?php
             // Kiểm tra nếu đã có giá trị radio_option trong POST request
-            $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : '3'; // Mặc định là '3' (About2)
+            $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
             ?>
-            <form action="Data" method="GET">
+            <form action="Data" method="POST">
               <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
                   <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
@@ -167,10 +167,13 @@
                       <td><?php echo $counter++; ?></td>
                       <td><?php echo $row['title'] ?></td>
                       <td><?php echo $row['description'] ?></td>
-                      <td><?php if($_GET['radio_option']==4) {
-                      echo '<img class="icon" src="/dmc_global/public/images/' . $row['image'] . ' alt="Img">';  
+                      <td><?php 
+                      $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : 3;
+                      if($selected_option==6) {
+                      echo '<img class="icon" src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">';  
                       }
-                      echo '<img src="/dmc_global/public/images/' . $row['image'] . ' alt="Img">' ?></td>
+                      echo '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">' ;                        
+                      ?></td>
                       <td>
                         <form action="getDataById" method="POST">
                           <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
