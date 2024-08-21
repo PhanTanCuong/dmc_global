@@ -14,8 +14,15 @@ class Data extends Controller
     public function __construct()
     {
         Middleware::checkAdmin();
-        $this->selected_id=isset($_POST['radio_option'])? (int) $_POST['radio_option'] : 3;
-        $this->product_category_id = isset($_POST['product_category_id']) ? $_POST['product_category_id'] : 1;
+        $this->selected_id = isset($_POST['radio_option']) ? (int) $_POST['radio_option'] : 3;
+        // Initialize or retrieve the previous product_category_id from the session
+        if (isset($_POST['product_category_id'])) {
+            $this->product_category_id = (int) $_POST['product_category_id'];
+            $_SESSION['product_category_id'] = $this->product_category_id; // Store in session
+        } else {
+            // Use the stored session value if POST is not set
+            $this->product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
+        }
     }
     public function display()
     {
@@ -23,7 +30,7 @@ class Data extends Controller
         $item = $this->model("DataModel");
         $product_category = $this->model("ProductModel");
         // View
-        $data=$item->getItem($this->selected_id, $this->product_category_id);
+        $data = $item->getItem($this->selected_id, $this->product_category_id);
         $this->view("admin/home", [
             "item" => $data,
             "product_categories" => $product_category->getInforProductCategory(),
