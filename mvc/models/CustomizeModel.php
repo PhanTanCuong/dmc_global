@@ -277,4 +277,13 @@ class CustomizeModel extends DB
             echo $e->getMessage();
         }
     }
+
+    public function getLayoutbyId($block_id,$page_id){
+        try{
+            $query="SELECT * FROM item WHERE block_id='$block_id' AND product_category_id='$page_id'";
+            return mysqli_query($this->connection, $query);
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
 }

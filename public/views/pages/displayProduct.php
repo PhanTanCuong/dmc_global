@@ -48,7 +48,7 @@
                 ?>
                         <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
                             <div class="img-container">
-                                <img src="/dmc_global/public/images/<?php echo $rows['parent_image'] ?>" class="lazy"   alt="image">
+                                <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" class="lazy"   alt="image">
                                 <div class="chld-img-container">
                                     <img src="/dmc_global/public/images/5-canh.gif" class="lazy img-fluid"  alt="image">
                                 </div>
