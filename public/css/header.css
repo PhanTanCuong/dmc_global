@@ -1,3 +1,10 @@
+:root {
+  font-size: 16px;
+}
+
+section{
+  background-color:#f5f5f5;
+}
 /* Body */
 body {
   font-family: Arial, sans-serif;
@@ -81,6 +88,9 @@ nav ul {
 
 /* nav */
 
+nav ul li {
+  position: relative;
+}
 nav ul li a {
   color: #111;
   text-align: center;
@@ -146,7 +156,7 @@ nav ul li .dropdown {
   position: absolute;
   display: none;
   flex-direction: column;
-  top: 4rem;
+  left: -1.25rem;
   width: 10rem;
 }
 
@@ -157,12 +167,13 @@ nav ul li:hover .dropdown {
 nav ul li .dropdown li {
   padding: 0.5rem;
   border-bottom: 1px solid #fff;
-  background-color: #c92027;
+  text-transform: capitalize;
+  background-color: #fff;
 }
 
 nav ul li .dropdown li:hover {
   opacity: 0.5;
-  background-color: #fff;
+  background-color: #e4e4e4;
   color: #c92027;
 }
 
@@ -170,7 +181,7 @@ nav ul li .dropdown li:hover {
 main {
   padding: 0;
   margin: 0;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
 }
 
 section {
@@ -184,7 +195,7 @@ reponsive */
   nav ul {
     flex-direction: column;
     align-items: center;
-    background: #c92027;
+    background: #fff;
   }
 
   /* logo */
@@ -218,10 +229,6 @@ reponsive */
 
   nav ul li a {
     padding: 14px 7px;
-    color: #fff;
-  }
-  nav ul li i {
-    color: #fff;
   }
 
   nav ul li button i {
@@ -253,16 +260,20 @@ reponsive */
   nav ul li .dropdown li {
     padding: 0.5rem;
     border-bottom: 1px solid #fff;
-    background-color: #c92027;
+    /* background-color: #fff; */
     width: 8rem;
   }
 
   nav ul li .dropdown li:hover {
-    opacity: 0.5;
-    background-color: #fff;
+    /* opacity: 0.5; */
+    background-color: #e4e4e4;
     color: #c92027;
   }
 
+
+  nav ul li .dropdown li a:hover {
+    color: #c92027;
+  }
   /* SearchBox */
   .search-box {
     display: flex;
@@ -270,15 +281,6 @@ reponsive */
   }
 }
 
-@media only screen and (max-width: 1024px) {
-  nav ul li a:hover {
-    color: #fff;
-  }
-
-  nav ul li .dropdown li a:hover {
-    color: #fff;
-  }
-}
 @media only screen and (max-width: 720px) {
   .search-box:hover .search-text,
   .search-box .search-text:valid {

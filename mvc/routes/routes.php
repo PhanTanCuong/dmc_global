@@ -1,12 +1,16 @@
 <?php
 use Core\Route;
 Route::add('/','Home@display');
+
 Route::add('Signin','Signin@display');
 Route::add('Signout','Signin@logout');
 Route::add('Register','Register@display');
 Route::add('Register/signup','Register@signup');
 Route::add('Signin/login','Signin@login');
 
+
+//User routes
+Route::add('Product','Product@display');
 
 // Admin routes
 Route::add('Admin/dashboard','Home@display');
@@ -49,6 +53,8 @@ Route::add('Admin/customizeTab','Customize@customizeTab');
 Route::add('Admin/customizeLogo','Customize@customizeLogo');
 Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
 Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
+
+Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
 Route::add('Admin/editFooterData','Customize@editFooterData');
 
@@ -67,7 +73,7 @@ Route::add('Admin/customizeIcons','Icons@customizeIcons');
 Route::add('Admin/deleteIcons','Icons@deleteIcons');
 
 //Data
-Route::add('Admin/Data','Data@display');
+Route::add('Admin/Data/(\d+)','Data@display');
 Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
 Route::add('Admin/customizeData','Data@customizeData');
