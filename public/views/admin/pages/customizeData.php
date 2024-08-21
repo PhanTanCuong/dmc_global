@@ -123,10 +123,11 @@
             <?php
             // Kiểm tra nếu đã có giá trị radio_option trong POST request
             $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
+            unset($_SESSION['radio_option']); // Xóa session radiooption)
             $product_category_id = isset($_POST['product_category_id']) ? (int) $_POST['product_category_id'] : 
             (isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1);
             ?>
-            <form action="../Data/<?php echo $product_category_id; ?>" method="POST">
+            <form action="../<?php echo $product_category_id; ?>/<?php echo $selected_option ;?>" method="POST">
               <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
                   <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
