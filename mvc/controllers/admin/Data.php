@@ -8,33 +8,22 @@ use Core\Middleware;
 
 class Data extends Controller
 {
+    private $selected_id;
+    private $product_category_id;
 
     public function __construct()
     {
         Middleware::checkAdmin();
+        $this->selected_id=isset($_POST['radio_option'])? (int) $_POST['radio_option'] : 3;
+        $this->product_category_id = isset($_POST['product_category_id']) ? $_POST['product_category_id'] : 1;
     }
     public function display()
     {
         // Model
         $item = $this->model("DataModel");
         $product_category = $this->model("ProductModel");
-        $data = null;
-        // Check if a radio button is selected
-        $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
-
-        // Model
-        $item = $this->model("DataModel");
-        $data = null;
-
-        if ($selected_id !== null) {
-            // Fetch data by the selected ID
-            $data = $item->getItem($selected_id,1);
-        } else {
-            // Default behavior if no radio button is selected
-            $data = $item->getItem(3,1);
-        }
-
         // View
+        $data=$item->getItem($this->selected_id, $this->product_category_id);
         $this->view("admin/home", [
             "item" => $data,
             "product_categories" => $product_category->getInforProductCategory(),
@@ -46,16 +35,16 @@ class Data extends Controller
     function addData()
     {
         try {
-            $selected_block_id = isset($_POST['selected_radio_option']) ? (int)$_POST['selected_radio_option'] : null;
+            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : null;
             if (isset($_POST['addDataBtn'])) {
                 $title = strip_tags($_POST['data_title']);
                 $description = strip_tags($_POST['data_description']);
                 $image = $_FILES["data_image"]['name'];
                 $selected_page_id = 1;
-                if($selected_block_id===null){
-                    $selected_id=3;
-                }else{
-                    $selected_id=$selected_block_id;
+                if ($selected_block_id === null) {
+                    $selected_id = 3;
+                } else {
+                    $selected_id = $selected_block_id;
                 }
                 $data = $this->model('DataModel');
                 $result = $data->addData($title, $description, $image, $selected_id, $selected_page_id);

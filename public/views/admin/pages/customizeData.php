@@ -88,9 +88,12 @@
         if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
         ?>
-            <div class="list-group list-group-flush">
-              <a href="#" class="list-group-item list-group-item-action"><?php echo $row['type'] ?></a>
-            </div>
+              <form action="../Data/<?php echo $row['id']; ?>" method="POST">
+                <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
+                <button type="submit" class="list-group-item list-group-item-action">
+                    <?php echo $row['type']; ?>
+                </button>
+            </form>
         <?php
           }
         }
