@@ -220,7 +220,7 @@ li {
 .grid2-container.odd .txt2-container img {
   transform: rotateY(180deg);
   bottom: -3.25rem;
-  left: .5rem;
+  left: 3.5rem;
   right: unset;
 }
 

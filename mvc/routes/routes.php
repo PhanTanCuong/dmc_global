@@ -10,7 +10,7 @@ Route::add('Signin/login','Signin@login');
 
 
 //User routes
-Route::add('Product','Product@display');
+Route::add('Product/(\d+)','Product@display');
 
 // Admin routes
 Route::add('Admin/dashboard','Home@display');

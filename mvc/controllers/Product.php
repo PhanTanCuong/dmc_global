@@ -8,6 +8,11 @@ class Product extends Controller
 {
     function display()
     {
+        $url = $_SERVER['REQUEST_URI']; // Lấy toàn bộ URL sau domain
+        $url_components = explode('/', $url); // Tách URL thành các phần dựa trên dấu '/'
+
+        // Giả sử URL có dạng: /dmc_global/public/Product/1
+        $product_category_id = end($url_components); // Lấy phần cuối cùng của URL
         //Model
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
@@ -15,19 +20,19 @@ class Product extends Controller
         $item = $this->model("CustomizeModel");
         //View
         $this->view("home", [
-            "menu_items"=>$item->getMenuFooter(),
+            "menu_items" => $item->getMenuFooter(),
             "checkDropdownMenu" => $item->getIdDropdownMenu(),
             "getChildNavbarbyId" => function ($id) use ($item) {
-                return $item->getChildNavbarbyId($id);
+                return $item->getProductCategory();
             },
             "banner" => $banner->getInforBanner(),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
             "head" => $item->getHeadInfor(),
-            "about2Infor" => $item->getLayoutbyId(3,1),
-            "about3Infor" => $item->getLayoutbyId(4,1),
-            "product1" => $item->getLayoutbyId(5,1),
-            "stats" => $item->getLayoutbyId(6,1),
+            "about2Infor" => $item->getLayoutbyId(3, $product_category_id),
+            "about3Infor" => $item->getLayoutbyId(4, $product_category_id),
+            "product1" => $item->getLayoutbyId(5, $product_category_id),
+            "stats" => $item->getLayoutbyId(6, $product_category_id),
             // "about2Infor" => $item->getAbout2Infor(),
             // "about3Infor" => $item->getAbout3Infor(),
             // "product1" => $item->getProduct1Infor(),
