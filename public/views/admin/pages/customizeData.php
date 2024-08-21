@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../addData" method="POST" enctype="multipart/form-data">
+      <form action="../../addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="../../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -95,8 +95,9 @@
         <?php
         if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
+            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
         ?>
-              <form action="../Data/<?php echo $row['id']; ?>" method="POST">
+              <form action="../<?php echo $row['id']; ?>/<?php echo $selected_option?>" method="POST">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -194,7 +195,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="../deleteData" method="POST">
+                        <form action="../../deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>
@@ -228,7 +229,7 @@
 
       $.ajax({
         type: "POST",
-        url: '../Data/getDataById/' + account_id,
+        url: '../../Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'data_id': account_id,

@@ -15,6 +15,10 @@ class Data extends Controller
     {
         Middleware::checkAdmin();
         $this->selected_id = isset($_POST['radio_option']) ? (int) $_POST['radio_option'] : 3;
+        $url = $_SERVER['REQUEST_URI'];
+        $url_components = explode('/', $url);
+        $_SESSION['radio_option'] = end($url_components);
+
         // Initialize or retrieve the previous product_category_id from the session
         if (isset($_POST['product_category_id'])) {
             $this->product_category_id = (int) $_POST['product_category_id'];
