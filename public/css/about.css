@@ -1,6 +1,15 @@
+/* *
+Kiểm tra vỡ màn hình
+ {
+  outline: 1px solid red;
+}
+
+html, body {
+  overflow-x: block;
+}
 li {
   list-style: none;
-}
+} */
 
 #about {
   background: #f5f5f5;
