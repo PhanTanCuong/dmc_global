@@ -42,7 +42,7 @@ class Data extends Controller
     function addData()
     {
         try {
-            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : null;
+            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
             if (isset($_POST['addDataBtn'])) {
                 $title = strip_tags($_POST['data_title']);
                 $description = strip_tags($_POST['data_description']);
@@ -52,19 +52,19 @@ class Data extends Controller
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
-                    $_POST['radio_option']=$selected_block_id;
+                    $_POST['radio_option'] = $selected_block_id;
                     $_SESSION['success'] = "Data is added successfully";
-                    header('Location:Data/'.$this->product_category_id);
+                    header('Location:Data/' . $this->product_category_id);
                 } else {
-                    $_POST['radio_option']=$selected_block_id;
+                    $_POST['radio_option'] = $selected_block_id;
                     $_SESSION['status'] = "Data is NOT added";
-                    header('Location:Data/'.$this->product_category_id);
+                    header('Location:Data/' . $this->product_category_id);
                 }
             }
 
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Data/'.$this->product_category_id);
+            header('Location:Data/' . $this->product_category_id);
         }
     }
 
@@ -111,14 +111,14 @@ class Data extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: Data');
+                    header('Location:Data/' . $this->product_category_id);
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location: Data');
+                    header('Location:Data/' . $this->product_category_id);
                 }
             }
         } catch (Exception $e) {
-            $_SESSION['status'] = $e->getMessage();
+            header('Location:Data/' . $this->product_category_id);
             header('Location: Data');
         }
     }
@@ -134,15 +134,15 @@ class Data extends Controller
                 $result = $item->deleteItem($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:Data/'.$this->product_category_id);
+                    header('Location:Data/' . $this->product_category_id);
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:Data/'.$this->product_category_id);
+                    header('Location:Data/' . $this->product_category_id);
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Data/'.$this->product_category_id);
+            header('Location:Data/' . $this->product_category_id);
         }
     }
 }

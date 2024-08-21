@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -55,7 +55,15 @@
           </div>
           <div class="form-group">
             <label>Current Image</label><br>
-            <img <?php if($_POST['radio_option']==6){echo 'class="icon"';}?>id="current_image" src="/dmc_global/public/images/" alt="Img"><br>
+            <img 
+            <?php 
+            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
+            if($selected_option==6)
+            {
+              echo 'class="icon"';
+            }
+            ?>
+            id="current_image" src="/dmc_global/public/images/" alt="Img"><br>
             <span id="current_file">Current file: </span>
           </div>
           <div class="form-group">
@@ -180,7 +188,7 @@
                       echo '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">' ;                        
                       ?></td>
                       <td>
-                        <form action="getDataById" method="POST">
+                        <form action="../getDataById" method="POST">
                           <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
                           <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
                         </form>
@@ -220,7 +228,7 @@
 
       $.ajax({
         type: "POST",
-        url: 'Data/getDataById/' + account_id,
+        url: '../Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'data_id': account_id,
