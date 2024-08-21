@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="addData" method="POST" enctype="multipart/form-data">
+      <form action="../addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
@@ -186,7 +186,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="deleteData" method="POST">
+                        <form action="../deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>

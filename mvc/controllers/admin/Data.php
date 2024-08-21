@@ -47,28 +47,24 @@ class Data extends Controller
                 $title = strip_tags($_POST['data_title']);
                 $description = strip_tags($_POST['data_description']);
                 $image = $_FILES["data_image"]['name'];
-                $selected_page_id = 1;
-                if ($selected_block_id === null) {
-                    $selected_id = 3;
-                } else {
-                    $selected_id = $selected_block_id;
-                }
                 $data = $this->model('DataModel');
-                $result = $data->addData($title, $description, $image, $selected_id, $selected_page_id);
+                $result = $data->addData($title, $description, $image, $selected_block_id, $this->product_category_id);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
+                    $_POST['radio_option']=$selected_block_id;
                     $_SESSION['success'] = "Data is added successfully";
-                    header('Location:Data');
+                    header('Location:Data/'.$this->product_category_id);
                 } else {
+                    $_POST['radio_option']=$selected_block_id;
                     $_SESSION['status'] = "Data is NOT added";
-                    header('Location:Data');
+                    header('Location:Data/'.$this->product_category_id);
                 }
             }
 
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location: Data');
+            header('Location:Data/'.$this->product_category_id);
         }
     }
 
@@ -138,15 +134,15 @@ class Data extends Controller
                 $result = $item->deleteItem($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location: Data');
+                    header('Location:Data/'.$this->product_category_id);
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location: Data');
+                    header('Location:Data/'.$this->product_category_id);
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location: Data');
+            header('Location:Data/'.$this->product_category_id);
         }
     }
 }
