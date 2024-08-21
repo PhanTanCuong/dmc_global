@@ -182,6 +182,11 @@ li {
   position: relative;
 }
 
+.grid2-container .wow {
+  width: 50rem;
+  height: 25rem;
+}
+
 .grid2-container .odd .txt2-container img {
   right: 0px;
   top: 0px;
@@ -203,19 +208,20 @@ li {
 
   z-index: 1;
 }
-
-.grid2-container.even .txt2-container img {
+.txt2-container img {
+  width: 120%;
   position: absolute;
+}
+.grid2-container.even .txt2-container img {
   bottom: -50px;
   right: 20px;
 }
 
 .grid2-container.odd .txt2-container img {
-  transform:rotateY(180deg);
-  position: absolute;
-  bottom: -50px;
-  left: -20px;
-   right: unset;
+  transform: rotateY(180deg);
+  bottom: -3.25rem;
+  left: .5rem;
+  right: unset;
 }
 
 .grid2-container .even .txt2-container {
@@ -290,8 +296,7 @@ li {
   }
 
   /* about3 */
-  .image img{
-    
+  .image img {
   }
   .about3 {
     border-radius: 60px;
@@ -328,8 +333,8 @@ li {
 }
 
 @media only screen and (max-width: 1024px) {
-  .txt2-container img{
-    display:none;
+  .txt2-container img {
+    display: none;
   }
 }
 @media only screen and (max-width: 720px) {
@@ -370,8 +375,6 @@ li {
     border-bottom-right-radius: 60px;
   }
 
-
-
   .grid-container {
     margin: 0;
     padding: 0;
@@ -379,7 +382,6 @@ li {
 }
 
 @media only screen and (min-width: 721px) and (max-width: 1024px) {
-
   .banner-text-container {
     padding: 0 1rem;
     top: 6rem;
