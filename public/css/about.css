@@ -1,6 +1,16 @@
+/* *
+Kiểm tra vỡ màn hình */
+/* * {
+  outline: 1px solid red;
+}
+
+html,
+body {
+  overflow-x: block;
+}
 li {
   list-style: none;
-}
+} */
 
 #about {
   background: #f5f5f5;
@@ -101,7 +111,6 @@ li {
 }
 
 .grid-container {
-  margin: 10em 4em;
   display: flex;
   gap: 40px;
   padding: 20px;
@@ -109,13 +118,13 @@ li {
 
 .img-container {
   position: relative;
-  width: 100%;
+  width: 60%;
   height: auto;
 }
 
 .img-container img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -138,10 +147,12 @@ li {
 
 .txt-container h2 {
   font-size: 2em;
+  margin-bottom: 1.5rem;
 }
 
 .txt-container p {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  margin-bottom: 2.25rem;
 }
 
 .txt-container button {
@@ -152,8 +163,7 @@ li {
   border: none;
   border-radius: 4px;
   font-size: 1em;
-  padding: 10px;
-  text-transform: uppercase;
+  padding: 10px 20px;
 }
 
 /* .about3 */
@@ -182,6 +192,11 @@ li {
   position: relative;
 }
 
+.grid2-container .wow {
+  width: 50rem;
+  height: 25rem;
+}
+
 .grid2-container .odd .txt2-container img {
   right: 0px;
   top: 0px;
@@ -203,19 +218,20 @@ li {
 
   z-index: 1;
 }
-
-.grid2-container.even .txt2-container img {
+.txt2-container img {
+  width: 120%;
   position: absolute;
+}
+.grid2-container.even .txt2-container img {
   bottom: -50px;
   right: 20px;
 }
 
 .grid2-container.odd .txt2-container img {
-  transform:rotateY(180deg);
-  position: absolute;
-  bottom: -50px;
-  left: -20px;
-   right: unset;
+  transform: rotateY(180deg);
+  bottom: -3.25rem;
+  left: 3.5rem;
+  right: unset;
 }
 
 .grid2-container .even .txt2-container {
@@ -264,7 +280,6 @@ li {
 
   .grid-container {
     flex-direction: column;
-    margin: 4em;
   }
 
   .txt-container p {
@@ -290,8 +305,7 @@ li {
   }
 
   /* about3 */
-  .image img{
-    
+  .image img {
   }
   .about3 {
     border-radius: 60px;
@@ -328,8 +342,12 @@ li {
 }
 
 @media only screen and (max-width: 1024px) {
-  .txt2-container img{
-    display:none;
+  .txt2-container img {
+    display: none;
+  }
+
+  .img-container {
+    width: 100%;
   }
 }
 @media only screen and (max-width: 720px) {
@@ -370,20 +388,20 @@ li {
     border-bottom-right-radius: 60px;
   }
 
-
-
   .grid-container {
-    margin: 0;
     padding: 0;
   }
 }
 
 @media only screen and (min-width: 721px) and (max-width: 1024px) {
-
   .banner-text-container {
     padding: 0 1rem;
     top: 6rem;
     left: 0em;
+  }
+  .txt-container p {
+    margin-bottom: 1.25rem;
+    padding: 5px 10px;
   }
 }
 
@@ -410,4 +428,7 @@ li {
   .txt2-container p {
     font-size: 1rem;
   }
+}
+
+@media screen and(min-width:1400) {
 }

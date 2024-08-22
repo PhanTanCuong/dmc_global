@@ -40,7 +40,7 @@
                       if (mysqli_num_rows($childItems) > 0) {
                         while ($child = mysqli_fetch_assoc($childItems)) {
                     ?>
-                        <li><a href="#<?php echo $child['name'] ?>"><?php echo $child['name'] ?></a></li>
+                        <li><a href="../Product/<?php echo $child['id'] ?>"><?php echo $child['type'] ?></a></li>
                     <?php
                         }
                       }

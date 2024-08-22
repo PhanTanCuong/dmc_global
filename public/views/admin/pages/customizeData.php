@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../addData" method="POST" enctype="multipart/form-data">
+      <form action="../../addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="../../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -95,8 +95,9 @@
         <?php
         if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
+            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
         ?>
-              <form action="../Data/<?php echo $row['id']; ?>" method="POST">
+              <form action="../<?php echo $row['id']; ?>/<?php echo $selected_option?>" method="POST">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -122,10 +123,11 @@
             <?php
             // Kiểm tra nếu đã có giá trị radio_option trong POST request
             $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
+            unset($_SESSION['radio_option']); // Xóa session radiooption)
             $product_category_id = isset($_POST['product_category_id']) ? (int) $_POST['product_category_id'] : 
             (isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1);
             ?>
-            <form action="../Data/<?php echo $product_category_id; ?>" method="POST">
+            <form action="../<?php echo $product_category_id; ?>/<?php echo $selected_option ;?>" method="POST">
               <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
                   <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
@@ -194,7 +196,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="../deleteData" method="POST">
+                        <form action="../../deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>
@@ -228,7 +230,7 @@
 
       $.ajax({
         type: "POST",
-        url: '../Data/getDataById/' + account_id,
+        url: '../../Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'data_id': account_id,

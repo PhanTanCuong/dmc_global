@@ -58,7 +58,7 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data/1');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data/1/3');">Data</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Icons');">Footer Icons</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
                     </div>

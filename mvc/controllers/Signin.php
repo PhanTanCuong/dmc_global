@@ -31,7 +31,7 @@ class Signin extends Controller
                         $_SESSION['isLogin'] = true;
                         header('Location: ../Admin/dashboard/');
                     } else if ($role === 'user') {
-                        header('Location: ../Product');
+                        header('Location: ../Product/1');
                     }
                 }
             }

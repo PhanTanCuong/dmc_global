@@ -15,6 +15,8 @@ class DataModel extends DB
 
     public function addData($title, $description, $image, $block_id, $page_id){
         try{
+            $title = $this->connection->real_escape_string($title);
+            $description = $this->connection->real_escape_string($description);
             $query = "INSERT INTO item (title, description, image, block_id, product_category_id) VALUES ('$title', '$description', '$image', '$block_id', '$page_id')";
             return mysqli_query($this->connection, $query);
         }catch(mysqli_sql_exception $e){
@@ -25,6 +27,8 @@ class DataModel extends DB
 
         public function editItem($id,$title, $description, $image){
         try{
+            $title = $this->connection->real_escape_string($title);
+            $description = $this->connection->real_escape_string($description);
             $query = "UPDATE item SET title='$title', description='$description', image='$image' WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         }catch(mysqli_sql_exception $e){

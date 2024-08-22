@@ -145,7 +145,7 @@
   }
 
   .stat-grid {
-    gap: 5rem;
+    gap: 3.5rem;
     grid-template-columns: 1fr 1fr;
     display:grid;
   }
@@ -162,7 +162,7 @@
   }
 
   .stat-grid {
-    gap: 7rem;
+    gap: 4.5rem;
   }
 }
 

@@ -203,6 +203,9 @@ product3 */
 /* responsive */
 
 @media only screen and (max-width: 1024px) {
+  .our-products{
+    padding: 0px;
+  }
   /* product1 */
   .product1 {
     margin: 4rem 0;
