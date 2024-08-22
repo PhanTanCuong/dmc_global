@@ -20,13 +20,15 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?php echo microtime()?>">
   <link href="/dmc_global/public/css/admin/sb-admin-2.min.css" rel="stylesheet">
   <!-- ajax -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
   <!-- css -->
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?php echo microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?php echo microtime() ?>">
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?php echo microtime() ?>">
+
   <style>
     .customize-button {
       margin-bottom: 2rem;
