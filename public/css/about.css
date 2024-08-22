@@ -1,10 +1,11 @@
 /* *
-Kiểm tra vỡ màn hình
- {
+Kiểm tra vỡ màn hình */
+/* * {
   outline: 1px solid red;
 }
 
-html, body {
+html,
+body {
   overflow-x: block;
 }
 li {
@@ -110,7 +111,6 @@ li {
 }
 
 .grid-container {
-  margin: 10em 4em;
   display: flex;
   gap: 40px;
   padding: 20px;
@@ -118,13 +118,13 @@ li {
 
 .img-container {
   position: relative;
-  width: 100%;
+  width: 60%;
   height: auto;
 }
 
 .img-container img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -147,10 +147,12 @@ li {
 
 .txt-container h2 {
   font-size: 2em;
+  margin-bottom: 1.5rem;
 }
 
 .txt-container p {
-  font-size: 1.5em;
+  font-size: 1.2em;
+  margin-bottom: 2.25rem;
 }
 
 .txt-container button {
@@ -161,8 +163,7 @@ li {
   border: none;
   border-radius: 4px;
   font-size: 1em;
-  padding: 10px;
-  text-transform: uppercase;
+  padding: 10px 20px;
 }
 
 /* .about3 */
@@ -279,7 +280,6 @@ li {
 
   .grid-container {
     flex-direction: column;
-    margin: 4em;
   }
 
   .txt-container p {
@@ -345,6 +345,10 @@ li {
   .txt2-container img {
     display: none;
   }
+
+  .img-container {
+    width: 100%;
+  }
 }
 @media only screen and (max-width: 720px) {
   .about3 {
@@ -385,7 +389,6 @@ li {
   }
 
   .grid-container {
-    margin: 0;
     padding: 0;
   }
 }
@@ -395,6 +398,10 @@ li {
     padding: 0 1rem;
     top: 6rem;
     left: 0em;
+  }
+  .txt-container p {
+    margin-bottom: 1.25rem;
+    padding: 5px 10px;
   }
 }
 
@@ -421,4 +428,7 @@ li {
   .txt2-container p {
     font-size: 1rem;
   }
+}
+
+@media screen and(min-width:1400) {
 }
