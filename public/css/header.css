@@ -49,8 +49,10 @@ nav {
   display: block;
 }
 
+.slick-dots li, nav ul{
+  list-style-type:none;
+}
 nav ul {
-  list-style-type: none;
   margin: 0;
   padding-bottom: 20px;
   display: flex;
