@@ -1,13 +1,6 @@
-# .htaccess in /public directory
-
 
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?url=$1
 
-# DocumentRoot "/laragon/www/dmc_global/public"
-# <Directory "/laragon/www/dmc_global/public">
-#     AllowOverride All
-#     Require all granted
-# </Directory>
