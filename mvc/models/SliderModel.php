@@ -15,24 +15,42 @@ class SliderModel extends DB
         }
     }
 
-    public function customizeInforBanner($title, $description, $image)
+    public function addInoforbanner($title,$description,$image,$product_category_id){
+        try{
+            $query="INSERT INTO banner (title,description,image,product_category_id) VALUES (?,?,?,?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("sssi", $title, $description, $image, $product_category_id);
+            $stmt->execute();
+            return $stmt;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+
+    }
+    public function customizeInforBanner($id,$title, $description, $image)
     {
         try {
-            $id = 1;
-            $title = mysqli_real_escape_string($this->connection, $title);
-            $description = mysqli_real_escape_string($this->connection, $description);
-            $image = mysqli_real_escape_string($this->connection, $image);
-            $query = "UPDATE banner SET title='$title',description='$description',image='$image' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE banner SET title=?,description=?,image=? WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("sssi", $title, $description, $image, $id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getCurrentBannerImages()
+    public function deleteInforBanner($id){
+        try{
+            $query="DELETE FROM banner WHERE id='$id'";
+            return mysqli_query($this->connection,$query);
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
+    public function getCurrentBannerImages($id)
     {
         try {
-            $id = 1;
             $query = "SELECT image FROM banner WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {

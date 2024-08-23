@@ -21,15 +21,20 @@ class AccountModel extends DB
     //Total number of user
     public function totalUser()
     {
-        $query = "SELECT id FROM register ORDER BY id";
-        $result = mysqli_query($this->connection, $query);
-
-        // Check for query execution error
-        if (!$result) {
-            die('Query failed: ' . mysqli_error($this->connection));
+        try{
+            $query = "SELECT id FROM register ORDER BY id";
+            $result = mysqli_query($this->connection, $query);
+    
+            // Check for query execution error
+            if (!$result) {
+                die('Query failed: ' . mysqli_error($this->connection));
+            }
+            $total = mysqli_num_rows($result);
+            return $total;
+        }catch(mysqli_sql_exception $e) {
+            echo $e->getMessage();
         }
-        $total = mysqli_num_rows($result);
-        return $total;
+        
     }
 
     //get account infor by id
@@ -62,8 +67,7 @@ class AccountModel extends DB
     public function editAccount($id, $username, $email, $role)
     {
         try {
-
-            $query = "UPDATE  register SET username=?, email=?, role=? WHERE id=?  ";
+            $query = "UPDATE  register SET username=?, email=?, role=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("sssi", $username, $email, $role, $id);
             $result = $stmt->execute();

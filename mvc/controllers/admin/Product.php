@@ -49,7 +49,7 @@ class Product extends Controller
 
 
     //Add new product function
-    function addProduct($title, $description, $link, $image)
+    function addProduct()
     {
         //Model
         try {
@@ -60,7 +60,7 @@ class Product extends Controller
                 $image = $_FILES["product_image"]['name'];
 
                 $product = $this->model('ProductModel');
-                $result = $product->addProduct($title, $description, $link, $image);
+                $result = $product->addProduct($title, $description, $image);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./public/images/" . $_FILES["product_image"]["name"]) . '';

@@ -109,7 +109,7 @@ class CustomizeModel extends DB
     public function getHeadInfor()
     {
         try {
-            $query = "SELECT 
+            $query = "SELECT DISTINCT 
                             icon.image, 
                             data.title 
                         FROM 
