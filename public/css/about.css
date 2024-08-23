@@ -349,6 +349,11 @@ li {
   .img-container {
     width: 100%;
   }
+
+  .grid2-container .wow {
+    width: 100%;
+    height: auto;
+  }
 }
 @media only screen and (max-width: 720px) {
   .about3 {
