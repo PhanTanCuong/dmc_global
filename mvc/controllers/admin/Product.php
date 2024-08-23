@@ -49,7 +49,7 @@ class Product extends Controller
 
 
     //Add new product function
-    function addProduct($title = null, $description = null, $link = null, $image = null)
+    function addProduct($title, $description, $link, $image)
     {
         //Model
         try {
@@ -141,7 +141,7 @@ class Product extends Controller
     //delete multiple products functions
 
     //toggleCheckbox()
-    function toggleCheckboxDelete($id = null, $visible = null)
+    function toggleCheckboxDelete($id, $visible)
     {
         try {
             if (isset($_POST['search_data'])) {

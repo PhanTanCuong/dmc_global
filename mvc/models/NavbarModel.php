@@ -17,8 +17,11 @@ class NavBarModel extends DB
     public function addNavBarInfor($name)
     {
         try {
-            $query = "INSERT INTO navbar (name) VALUES ('$name')";
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO navbar (name) VALUES (?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -36,8 +39,11 @@ class NavBarModel extends DB
     public function customizeInforNavBar($id, $name)
     {
         try {
-            $query = "UPDATE navbar SET name='$name' WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE navbar SET name=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $name, $id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -63,11 +69,14 @@ class NavBarModel extends DB
         }
     }
 
-    public function addChildNavBar($nav_parent_id,$name)
+    public function addChildNavBar($nav_parent_id, $name)
     {
         try {
-            $query = "INSERT INTO child_navbar (navbar_id,name) VALUES ($nav_parent_id,'$name')";
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO child_navbar (navbar_id,name) VALUES (?,?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("is", $nav_parent_id,$name);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -85,8 +94,11 @@ class NavBarModel extends DB
     public function customizeInforChildNavBar($id, $name)
     {
         try {
-            $query = "UPDATE child_navbar SET name='$name' WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE child_navbar SET name=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $name,$id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

@@ -8,18 +8,16 @@ class MediaModel extends DB
     //get List of news function
     public function getNews()
     {
-        $query = "SELECT * FROM news";
-        $result = mysqli_query($this->connection, $query);
-
-        // Check for query execution error
-        if (!$result) {
-            die('Query failed: ' . mysqli_error($this->connection));
+        try {
+            $query = "SELECT * FROM news";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
 
-        return $result;
     }
 
-    public function getNewsbyId($id = null)
+    public function getNewsbyId($id)
     {
         try {
             $query = "SELECT * FROM news WHERE id='$id'";
@@ -30,39 +28,37 @@ class MediaModel extends DB
     }
 
     //add new news function
-    public function addNews($title = null, $description = null, $link = null, $image = null)
+    public function addNews($title, $description, $image)
     {
         try {
-            $title = $this->connection->real_escape_string($title);
-            $description = $this->connection->real_escape_string($description);
-            $link = $this->connection->real_escape_string($link);
-            $image = $this->connection->real_escape_string($image);
-            $visible = 0;
-            $query = "INSERT INTO news (title,description,link,image,visible) VALUES ('$title','$description','$link','$image',$visible)";
 
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO news (title,description,image,visible) VALUES (?,?,?,?)";
+            $stmt = $this->connection->prepare($query);
+            $visible = 0;
+            $stmt->bind_param("sssi", $title, $description, $image, $visible);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
     //edit news function
-    public function editNews($id = null, $title = null, $description = null, $link = null, $image = null)
+    public function editNews($id, $title, $description, $image)
     {
         try {
-            $title = $this->connection->real_escape_string($title);
-            $description = $this->connection->real_escape_string($description);
-            $link = $this->connection->real_escape_string($link);
-            $image = $this->connection->real_escape_string($image);
 
-            $query = "UPDATE  news SET title='$title', description='$description', link='$link', image='$image' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE product SET title=?, description=?, image=? WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("sss", $title, $description, $image);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getCurrentNewsImages($id = null)
+    public function getCurrentNewsImages($id)
     {
         try {
             $query = "SELECT image FROM news WHERE id='$id'";
@@ -73,7 +69,7 @@ class MediaModel extends DB
     }
 
     //delete news function
-    public function deleteNews($id = null)
+    public function deleteNews($id)
     {
         try {
             $query_run = "DELETE FROM news WHERE id='$id'";

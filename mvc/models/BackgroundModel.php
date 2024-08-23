@@ -17,8 +17,11 @@ class BackgroundModel extends DB
     public function addBackgroundImages($image)
     {
         try {
-            $query = "INSERT INTO background (image) VALUES ('$image')";
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO background (image) VALUES (?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $image);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -35,8 +38,11 @@ class BackgroundModel extends DB
     public function customizeInforBackground($id, $image)
     {
         try {
-            $query = "UPDATE background SET image='$image' WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE icon SET image=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $image, $id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

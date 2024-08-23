@@ -45,8 +45,8 @@ class Data extends Controller
         try {
             $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
             if (isset($_POST['addDataBtn'])) {
-                $title = strip_tags($_POST['data_title']);
-                $description = strip_tags($_POST['data_description']);
+                $title = $_POST['data_title'];
+                $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
                 $result = $data->addData($title, $description, $image, $selected_block_id, $this->product_category_id);
@@ -93,8 +93,8 @@ class Data extends Controller
         try {
 
             if (isset($_POST["editDataBtn"])) {
-                $title = strip_tags($_POST['edit_title']);
-                $description = strip_tags($_POST['edit_description']);
+                $title = $_POST['edit_title'];
+                $description = $_POST['edit_description'];
                 $id = $_POST['edit_id'];
                 $item = $this->model('DataModel');
                 $result = $item->getItemById($id);
