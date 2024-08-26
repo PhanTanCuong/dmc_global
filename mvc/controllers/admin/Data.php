@@ -8,8 +8,7 @@ use Core\Middleware;
 
 class Data extends Controller
 {
-    // protected $selected_block_id;
-    // protected $product_category_id;
+    
 
 
     public function __construct()
