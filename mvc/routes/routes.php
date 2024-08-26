@@ -73,7 +73,7 @@ Route::add('Admin/customizeIcons','Icons@customizeIcons');
 Route::add('Admin/deleteIcons','Icons@deleteIcons');
 
 //Data
-Route::add('Admin/Data/(\d+)/(\d+)','Data@display');
+Route::add('Admin/Data/{product_category_id}/{block_id}', 'Data@display');
 Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
 Route::add('Admin/customizeData','Data@customizeData');

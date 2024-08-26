@@ -15,12 +15,12 @@ class Data extends Controller
     {
         Middleware::checkAdmin();
     }
-    public function display()
+    public function display($product_category_id, $block_id)
     {
         // Model
         $item = $this->model("DataModel");
         $product_category = $this->model("ProductModel");
-        $selected_block_id = isset($_POST['radio_option']) ? (int) $_POST['radio_option'] : 3;
+        $block_id = isset($_POST['radio_option']) ? (int) $_POST['radio_option'] : 3;
 
         // Initialize or retrieve the previous product_category_id from the session
         if (isset($_POST['product_category_id'])) {
@@ -31,7 +31,7 @@ class Data extends Controller
             $product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
         }
         // View
-        $data = $item->getItem($selected_block_id, $product_category_id);
+        $data = $item->getItem($block_id, $product_category_id);
         $this->view("admin/home", [
             "item" => $data,
             "product_categories" => $product_category->getInforProductCategory(),
@@ -43,7 +43,7 @@ class Data extends Controller
     function addData()
     {
         try {
-            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
             if (isset($_POST['product_category_id'])) {
                 $product_category_id = (int) $_POST['product_category_id'];
@@ -57,23 +57,23 @@ class Data extends Controller
                 $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
-                $result = $data->addData($title, $description, $image, $selected_block_id, $product_category_id);
+                $result = $data->addData($title, $description, $image, $block_id, $product_category_id);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
-                    $_POST['radio_option'] = $selected_block_id;
+                    $_POST['radio_option'] = $block_id;
                     $_SESSION['success'] = "Data is added successfully";
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 } else {
-                    $_POST['radio_option'] = $selected_block_id;
+                    $_POST['radio_option'] = $block_id;
                     $_SESSION['status'] = "Data is NOT added";
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 }
             }
 
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+            header('Location:Data/' . $product_category_id . '/' . $block_id);
         }
     }
 
@@ -99,7 +99,7 @@ class Data extends Controller
     public function customizeData()
     {
         try {
-            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
             if (isset($_POST['product_category_id'])) {
                 $product_category_id = (int) $_POST['product_category_id'];
@@ -128,14 +128,14 @@ class Data extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 }
             }
         } catch (Exception $e) {
-            header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+            header('Location:Data/' . $product_category_id . '/' . $block_id);
             header('Location: Data');
         }
     }
@@ -145,7 +145,7 @@ class Data extends Controller
     public function deleteData()
     {
         try {
-            $selected_block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
             if (isset($_POST['product_category_id'])) {
                 $product_category_id = (int) $_POST['product_category_id'];
@@ -160,15 +160,15 @@ class Data extends Controller
                 $result = $item->deleteItem($id);
                 if ($result) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+                    header('Location:Data/' . $product_category_id . '/' . $block_id);
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Data/' . $product_category_id . '/' . $selected_block_id);
+            header('Location:Data/' . $product_category_id . '/' . $block_id);
         }
     }
 }
