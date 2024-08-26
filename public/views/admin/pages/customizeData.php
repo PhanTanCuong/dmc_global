@@ -95,9 +95,8 @@
         <?php
         if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
-            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
         ?>
-              <form action="../<?php echo $row['id']; ?>/<?php echo $selected_option?>" method="POST">
+              <form action="../<?php echo isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1; ?>/<?php echo isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3; ?>" method="POST">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -120,15 +119,8 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">
               <i class="fas fa-plus"> Add data</i>
             </button>
-            <?php
-            // Kiểm tra nếu đã có giá trị radio_option trong POST request
-            $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
-            unset($_SESSION['radio_option']); // Xóa session radiooption)
-            $product_category_id = isset($_POST['product_category_id']) ? (int) $_POST['product_category_id'] : 
-            (isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1);
-            ?>
-            <form action="../<?php echo $product_category_id; ?>/<?php echo $selected_option ;?>" method="POST">
-              <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
+            <form action="../<?php echo isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1; ?>/<?php echo isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3; ?>" method="POST">
+            <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
                   <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About2

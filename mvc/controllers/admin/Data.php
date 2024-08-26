@@ -8,7 +8,7 @@ use Core\Middleware;
 
 class Data extends Controller
 {
-    
+
 
 
     public function __construct()
@@ -20,24 +20,29 @@ class Data extends Controller
         // Model
         $item = $this->model("DataModel");
         $product_category = $this->model("ProductModel");
-        $block_id = isset($_POST['radio_option']) ? (int) $_POST['radio_option'] : 3;
-
-        // Initialize or retrieve the previous product_category_id from the session
-        if (isset($_POST['product_category_id'])) {
-            $product_category_id = (int) $_POST['product_category_id'];
-            $_SESSION['product_category_id'] = $product_category_id; // Store in session
-        } else {
-            // Use the stored session value if POST is not set
-            $product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
+        if(isset($_POST['radio_option'])){
+            $block_id= $_POST['radio_option'];
+            setcookie("block_id", $block_id, time()+3600);  // Set cookie for 1 hour
         }
+
+        $selected_block_id = isset($_COOKIE['block_id']) ? $_COOKIE['block_id']:3;
+
+        if(isset($_POST['product_category_id'])){
+            $product_category_id=$_POST['product_category_id'];
+            setcookie("product_category_id", $product_category_id, time()+3600);  // Set cookie for 1 hour
+        }
+
+        $selected_product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id']:1;
+
         // View
-        $data = $item->getItem($block_id, $product_category_id);
+        $data = $item->getItem($selected_block_id, $selected_product_category_id);
         $this->view("admin/home", [
             "item" => $data,
             "product_categories" => $product_category->getInforProductCategory(),
             "page" => "customizeData"
         ]);
     }
+
 
 
     function addData()
