@@ -11,14 +11,8 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT * FROM product";
-            $result = mysqli_query($this->connection, $query);
+            return mysqli_query($this->connection, $query);
 
-            // Check for query execution error
-            if (!$result) {
-                die('Query failed: ' . mysqli_error($this->connection));
-            }
-
-            return $result;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -34,39 +28,35 @@ class ProductModel extends DB
 
 
     //add new product function
-    public function addProduct($title = null, $description = null, $link = null, $image = null,$visibl=null)
+    public function addProduct($title, $description, $image, $visible)
     {
         try {
-            $title = $this->connection->real_escape_string($title);
-            $description = $this->connection->real_escape_string($description);
-            $link = $this->connection->real_escape_string($link);
-            $image = $this->connection->real_escape_string($image);
+            $query = "INSERT INTO product (title, description,  image, visible) VALUES (?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($query);
             $visible = 0;
-            $query = "INSERT INTO product (title,description,link,image,visible) VALUES ('$title','$description','$link','$image',$visible)";
-
-            return mysqli_query($this->connection, $query);
+            $stmt->bind_param("sssi", $title, $description, $image, $visible);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
     //edit product function
-    public function editProduct($id = null, $title = null, $description = null, $link = null, $image = null)
+    public function editProduct($id, $title, $description, $image)
     {
         try {
-            $title = $this->connection->real_escape_string($title);
-            $description = $this->connection->real_escape_string($description);
-            $link = $this->connection->real_escape_string($link);
-            $image = $this->connection->real_escape_string($image);
-
-            $query = "UPDATE  product SET title='$title', description='$description', link='$link', image='$image' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE product SET title=?, description=?, image=? WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("sss", $title, $description, $image);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getCurrentProductImages($id = null)
+    public function getCurrentProductImages($id)
     {
         try {
             $query = "SELECT image FROM product WHERE id='$id'";
@@ -77,7 +67,7 @@ class ProductModel extends DB
     }
 
     //delete product function
-    public function deleteProduct($id = null)
+    public function deleteProduct($id)
     {
         try {
             $query_run = "DELETE FROM product WHERE id='$id'";
@@ -89,7 +79,7 @@ class ProductModel extends DB
 
     //multiple delete products functions
     //toggleCheckboxDelete()
-    public function toggleCheckboxDelete($id = null, $visible = null)
+    public function toggleCheckboxDelete($id, $visible)
     {
         try {
             $query = "UPDATE product SET visible='$visible' WHERE id ='$id'";
@@ -103,8 +93,7 @@ class ProductModel extends DB
     public function multipleDeleteProduct()
     {
         try {
-            $id = 1;
-            $query = "DELETE FROM product WHERE visible='$id'";
+            $query = "DELETE FROM product WHERE visible=1";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -125,8 +114,11 @@ class ProductModel extends DB
     public function addProductCategoryInfor($name)
     {
         try {
-            $query = "INSERT INTO product_category (type) VALUES ('$name')";
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO product_category (type) VALUES ('?')";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -144,8 +136,11 @@ class ProductModel extends DB
     public function customizeInforProductCategory($id, $name)
     {
         try {
-            $query = "UPDATE product_category SET type='$name' WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE product_category SET type=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $name,$id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

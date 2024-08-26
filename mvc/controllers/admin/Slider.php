@@ -12,8 +12,10 @@ class Slider extends Controller
     function display()
     {
         $item = $this->model('SliderModel');
+        $product_category=$this->model('ProductModel');
 
         $this->view('admin/home', [
+            'product_categories'=> $product_category->getInforProductCategory(),
             'item' => $item->getInforBanner(),
             'page' => 'customizeBanner'
         ]);

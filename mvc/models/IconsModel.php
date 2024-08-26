@@ -19,15 +19,19 @@ class IconsModel extends DB
     public function addIconsImages($image)
     {
         try {
-            
-            $query = "INSERT INTO icon (block_id,image) VALUES (7,'$image')";
-            return mysqli_query($this->connection, $query);
+            $query = "INSERT INTO icon (block_id,image) VALUES (?,?)";
+            $stmt = $this->connection->prepare($query);
+            $id = 7;
+            $stmt->bind_param("is", $id, $image);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
-    
-    public function getIconsById($id){
+
+    public function getIconsById($id)
+    {
         try {
             $query = "SELECT * FROM icon WHERE id='$id'";
             return mysqli_query($this->connection, $query);
@@ -38,8 +42,11 @@ class IconsModel extends DB
     public function customizeInforIcons($id, $image)
     {
         try {
-            $query = "UPDATE icon SET image='$image' WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "UPDATE icon SET image=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $image, $id);
+            $stmt->execute();
+            return $stmt;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -55,15 +62,12 @@ class IconsModel extends DB
         }
     }
 
-    public function deleteIcons($id){
-        try{
-            if($id==16){
-                $query = "UPDATE icon SET image='' WHERE id='$id'";
-            }else{
-                $query = "DELETE FROM icon WHERE id='$id'";
-            }
+    public function deleteIcons($id)
+    {
+        try {
+            $query = "DELETE FROM icon WHERE id='$id'";
             return mysqli_query($this->connection, $query);
-        }catch (mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }

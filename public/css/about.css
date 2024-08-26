@@ -151,6 +151,7 @@ li {
 }
 
 .txt-container p {
+  text-align: justify;
   font-size: 1.2em;
   margin-bottom: 2.25rem;
 }
@@ -177,7 +178,6 @@ li {
 .grid2-container {
   display: flex;
   align-content: center;
-  position: relative;
 }
 
 .grid2-container.odd {
@@ -195,6 +195,7 @@ li {
 .grid2-container .wow {
   width: 50rem;
   height: 25rem;
+  position: relative;
 }
 
 .grid2-container .odd .txt2-container img {
@@ -215,22 +216,21 @@ li {
 
 .text {
   position: relative;
-
   z-index: 1;
 }
 .txt2-container img {
-  width: 120%;
+  width: 115%;
   position: absolute;
 }
 .grid2-container.even .txt2-container img {
-  bottom: -50px;
-  right: 20px;
+  top: 0;
+  right: 90px;
 }
 
 .grid2-container.odd .txt2-container img {
   transform: rotateY(180deg);
-  bottom: -3.25rem;
-  left: 3.5rem;
+  top: 0;
+  left: 90px;
   right: unset;
 }
 
@@ -348,6 +348,11 @@ li {
 
   .img-container {
     width: 100%;
+  }
+
+  .grid2-container .wow {
+    width: 100%;
+    height: auto;
   }
 }
 @media only screen and (max-width: 720px) {
