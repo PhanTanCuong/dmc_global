@@ -72,4 +72,14 @@ class DataModel extends DB
         }
     }
 
+    public function getBlock()
+    {
+        try {
+            $query = "SELECT * FROM block WHERE block_id<7";
+            return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
 }

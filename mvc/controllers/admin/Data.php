@@ -15,62 +15,76 @@ class Data extends Controller
     {
         Middleware::checkAdmin();
     }
-    public function display($product_category_id, $block_id)
+    public function display()
     {
         // Model
         $item = $this->model("DataModel");
         $product_category = $this->model("ProductModel");
-        if(isset($_POST['radio_option'])){
-            $block_id= $_POST['radio_option'];
-            setcookie("block_id", $block_id, time()+3600);  // Set cookie for 1 hour
+        if (isset($_GET['radio_option'])) {
+            // Set new block_id and expire the old one
+            setcookie("block_id", "", time() - 3600); // Expire old block_id cookie
+            setcookie("block_id", $_GET['radio_option'], time() + 3600); // Set new block_id cookie
+            $block_id = $_GET['radio_option'];
+        } else {
+            $block_id = isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3;
         }
 
-        $selected_block_id = isset($_COOKIE['block_id']) ? $_COOKIE['block_id']:3;
-
-        if(isset($_POST['product_category_id'])){
-            $product_category_id=$_POST['product_category_id'];
-            setcookie("product_category_id", $product_category_id, time()+3600);  // Set cookie for 1 hour
+        // $block_id = isset($_GET['block_id']) ? $_GET['block_id'] : 3;
+    
+        // Handle product_category_id
+        if (isset($_GET['product_category_id'])) {
+            // Set new product_category_id and expire the old one
+            setcookie("product_category_id", "", time() - 3600); // Expire old product_category_id cookie
+            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600); // Set new product_category_id cookie
+            $product_category_id = $_GET['product_category_id'];
+            $block_id=3;
+        } else {
+            $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
         }
 
-        $selected_product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id']:1;
+
 
         // View
-        $data = $item->getItem($selected_block_id, $selected_product_category_id);
+        $data = $item->getItem($block_id, $product_category_id);
         $this->view("admin/home", [
             "item" => $data,
             "product_categories" => $product_category->getInforProductCategory(),
+            "block"=>$item->getBlock(),
+            "radio_button"=>$block_id,
             "page" => "customizeData"
         ]);
     }
 
 
 
+
+
     function addData()
     {
         try {
-            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_GET['selected_radio_option']) ? (int) $_GET['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
-            if (isset($_POST['product_category_id'])) {
-                $product_category_id = (int) $_POST['product_category_id'];
+            if (isset($_GET['product_category_id'])) {
+                $product_category_id = (int) $_GET['product_category_id'];
                 $_SESSION['product_category_id'] = $product_category_id; // Store in session
             } else {
                 // Use the stored session value if POST is not set
                 $product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
             }
-            if (isset($_POST['addDataBtn'])) {
-                $title = $_POST['data_title'];
-                $description = $_POST['data_description'];
+            if (isset($_GET['addDataBtn'])) {
+                $title = $_GET['data_title'];
+                $description = $_GET['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
                 $result = $data->addData($title, $description, $image, $block_id, $product_category_id);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
-                    $_POST['radio_option'] = $block_id;
+                    $_GET['radio_option'] = $block_id;
                     $_SESSION['success'] = "Data is added successfully";
                     header('Location:Data/' . $product_category_id . '/' . $block_id);
                 } else {
-                    $_POST['radio_option'] = $block_id;
+                    $_GET['radio_option'] = $block_id;
                     $_SESSION['status'] = "Data is NOT added";
                     header('Location:Data/' . $product_category_id . '/' . $block_id);
                 }
@@ -85,8 +99,8 @@ class Data extends Controller
     //getDataById()
     function getDataById()
     {
-        if (isset($_POST['checking_edit_btn'])) {
-            $item_id = $_POST['data_id'];
+        if (isset($_GET['checking_edit_btn'])) {
+            $item_id = $_GET['data_id'];
             $result_array = [];
             $item = $this->model('DataModel');
             $result = $item->getItemById($item_id);
@@ -104,19 +118,19 @@ class Data extends Controller
     public function customizeData()
     {
         try {
-            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_GET['selected_radio_option']) ? (int) $_GET['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
-            if (isset($_POST['product_category_id'])) {
-                $product_category_id = (int) $_POST['product_category_id'];
+            if (isset($_GET['product_category_id'])) {
+                $product_category_id = (int) $_GET['product_category_id'];
                 $_SESSION['product_category_id'] = $product_category_id; // Store in session
             } else {
                 // Use the stored session value if POST is not set
                 $product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
             }
-            if (isset($_POST["editDataBtn"])) {
-                $title = $_POST['edit_title'];
-                $description = $_POST['edit_description'];
-                $id = $_POST['edit_id'];
+            if (isset($_GET["editDataBtn"])) {
+                $title = $_GET['edit_title'];
+                $description = $_GET['edit_description'];
+                $id = $_GET['edit_id'];
                 $item = $this->model('DataModel');
                 $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
@@ -150,17 +164,17 @@ class Data extends Controller
     public function deleteData()
     {
         try {
-            $block_id = isset($_POST['selected_radio_option']) ? (int) $_POST['selected_radio_option'] : 3;
+            $block_id = isset($_GET['selected_radio_option']) ? (int) $_GET['selected_radio_option'] : 3;
             // Initialize or retrieve the previous product_category_id from the session
-            if (isset($_POST['product_category_id'])) {
-                $product_category_id = (int) $_POST['product_category_id'];
+            if (isset($_GET['product_category_id'])) {
+                $product_category_id = (int) $_GET['product_category_id'];
                 $_SESSION['product_category_id'] = $product_category_id; // Store in session
             } else {
                 // Use the stored session value if POST is not set
                 $product_category_id = isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1;
             }
-            if (isset($_POST["delete_btn"])) {
-                $id = $_POST['delete_id'];
+            if (isset($_GET["delete_btn"])) {
+                $id = $_GET['delete_id'];
                 $item = $this->model('DataModel');
                 $result = $item->deleteItem($id);
                 if ($result) {

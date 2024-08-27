@@ -58,7 +58,7 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data/1/3');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data');">Data</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Icons');">Footer Icons</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
                     </div>
@@ -356,7 +356,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <form action="../../Signout" method="POST">
+                        <form action="../Signout" method="POST">
                             <button type="submit" name="logout_btn" class="btn btn-primary" name="" href="../View/login.php">Logout</button>
                         </form>
 

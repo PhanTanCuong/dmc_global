@@ -57,7 +57,7 @@
             <label>Current Image</label><br>
             <img 
             <?php 
-            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
+            $selected_option= isset($_GET['radio_option']) ? $_GET['radio_option'] : '3';
             if($selected_option==6)
             {
               echo 'class="icon"';
@@ -93,10 +93,10 @@
           <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
         </div>
         <?php
-        if (mysqli_num_rows($data["product_categories"]) > 0) {
+          if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
         ?>
-              <form action="../<?php echo isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1; ?>/<?php echo isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3; ?>" method="POST">
+              <form action="Data" method="GET">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -119,19 +119,19 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">
               <i class="fas fa-plus"> Add data</i>
             </button>
-            <form action="../<?php echo isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1; ?>/<?php echo isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3; ?>" method="POST">
+            <form action="Data" method="GET">
             <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
-                  <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '3') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About2
                 <input type="radio" name="radio_option" value="4"
-                  <?php echo ($selected_option == '4') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '4') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About3
                 <input type="radio" name="radio_option" value="5"
-                  <?php echo ($selected_option == '5') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '5') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Product1
                 <input type="radio" name="radio_option" value="6"
-                  <?php echo ($selected_option == '6') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '6') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Stat
               </div>
             </form>
@@ -175,7 +175,7 @@
                       <td><?php echo $row['title'] ?></td>
                       <td><?php echo $row['description'] ?></td>
                       <td><?php 
-                      $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : 3;
+                      $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : 3;
                       if($selected_option==6) {
                       echo '<img class="icon" src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">';  
                       }
@@ -221,7 +221,7 @@
       // console.log(account_id);
 
       $.ajax({
-        type: "POST",
+        type: "GET",
         url: '../../Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
