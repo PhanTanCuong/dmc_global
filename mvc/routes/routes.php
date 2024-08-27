@@ -46,7 +46,7 @@ Route::add('Admin/editNews','Media@editNews');
 //Customize
 //Slider
 Route::add('Admin/Slider','Slider@display');
-Route::add('Admin/customizeSlider','Slider@customBanner');
+Route::add('Admin/addBanner','Slider@addBanner');
 
 Route::add('Admin/Customize','Customize@display');
 Route::add('Admin/customizeTab','Customize@customizeTab');

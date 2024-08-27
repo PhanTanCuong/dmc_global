@@ -4,11 +4,10 @@ use Core\DB;
 class SliderModel extends DB
 {
     // banner
-    public function getInforBanner()
+    public function getInforBanner($id)
     {
         try {
-            $id = 2;
-            $query = "SELECT * FROM banner WHERE id='$id'";
+            $query = "SELECT * FROM banner WHERE product_category_id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

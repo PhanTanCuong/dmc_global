@@ -13,10 +13,10 @@ class Slider extends Controller
     {
         $item = $this->model('SliderModel');
         $product_category=$this->model('ProductModel');
-
+        $product_category_id=isset($_GET['product_category_id'])?$_GET['product_category_id']:1;
         $this->view('admin/home', [
             'product_categories'=> $product_category->getInforProductCategory(),
-            'item' => $item->getInforBanner(),
+            'item' => $item->getInforBanner($product_category_id),
             'page' => 'customizeBanner'
         ]);
     }
