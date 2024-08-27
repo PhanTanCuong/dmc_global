@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../../addData" method="POST" enctype="multipart/form-data">
+      <form action="addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -57,7 +57,7 @@
             <label>Current Image</label><br>
             <img 
             <?php 
-            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
+            $selected_option= isset($_GET['radio_option']) ? $_GET['radio_option'] : '3';
             if($selected_option==6)
             {
               echo 'class="icon"';
@@ -93,11 +93,10 @@
           <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
         </div>
         <?php
-        if (mysqli_num_rows($data["product_categories"]) > 0) {
+          if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
-            $selected_option= isset($_POST['radio_option']) ? $_POST['radio_option'] : '3';
         ?>
-              <form action="../<?php echo $row['id']; ?>/<?php echo $selected_option?>" method="POST">
+              <form action="Data" method="GET">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -120,26 +119,19 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDataModal">
               <i class="fas fa-plus"> Add data</i>
             </button>
-            <?php
-            // Kiểm tra nếu đã có giá trị radio_option trong POST request
-            $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : '3'; // Mặc định là '3' (About2)
-            unset($_SESSION['radio_option']); // Xóa session radiooption)
-            $product_category_id = isset($_POST['product_category_id']) ? (int) $_POST['product_category_id'] : 
-            (isset($_SESSION['product_category_id']) ? $_SESSION['product_category_id'] : 1);
-            ?>
-            <form action="../<?php echo $product_category_id; ?>/<?php echo $selected_option ;?>" method="POST">
-              <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
+            <form action="Data" method="GET">
+            <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
-                  <?php echo ($selected_option == '3') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '3') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About2
                 <input type="radio" name="radio_option" value="4"
-                  <?php echo ($selected_option == '4') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '4') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About3
                 <input type="radio" name="radio_option" value="5"
-                  <?php echo ($selected_option == '5') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '5') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Product1
                 <input type="radio" name="radio_option" value="6"
-                  <?php echo ($selected_option == '6') ? 'checked' : ''; ?>
+                  <?php echo ($data['radio_button'] == '6') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Stat
               </div>
             </form>
@@ -175,7 +167,7 @@
               <tbody>
                 <?php
                 if (mysqli_num_rows($data["item"]) > 0) {
-                  $counter = 1; // Initialize the counter for the sequential ID
+                  $counter = 1; 
                   while ($row = mysqli_fetch_array($data["item"])) {
                 ?>
                     <tr>
@@ -183,20 +175,20 @@
                       <td><?php echo $row['title'] ?></td>
                       <td><?php echo $row['description'] ?></td>
                       <td><?php 
-                      $selected_option = isset($_POST['radio_option']) ? $_POST['radio_option'] : 3;
+                      $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : 3;
                       if($selected_option==6) {
                       echo '<img class="icon" src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">';  
                       }
                       echo '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">' ;                        
                       ?></td>
                       <td>
-                        <form action="../getDataById" method="POST">
-                          <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                        <form action="getDataById" method="POST">
+                          <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id'];?>">
                           <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
                         </form>
                       </td>
                       <td>
-                        <form action="../../deleteData" method="POST">
+                        <form action="deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>
@@ -230,7 +222,7 @@
 
       $.ajax({
         type: "POST",
-        url: '../../Data/getDataById/' + account_id,
+        url: 'Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'data_id': account_id,
