@@ -25,7 +25,7 @@ class Product extends Controller
             "getChildNavbarbyId" => function ($id) use ($item) {
                 return $item->getProductCategory();
             },
-            "banner" => $banner->getInforBanner(),
+            "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
             "head" => $item->getHeadInfor(),
