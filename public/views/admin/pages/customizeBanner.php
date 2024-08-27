@@ -33,7 +33,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="editBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="customizeBanner" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -65,7 +65,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="editDataBtn" class="btn btn-primary">Save</button>
+          <button type="submit" name="editBannerBtn" class="btn btn-primary">Save</button>
         </div>
       </form>
 
@@ -88,7 +88,7 @@
           if (mysqli_num_rows($data["product_categories"]) > 0) {
           while ($row = mysqli_fetch_array($data["product_categories"])) {
         ?>
-              <form action="Data" method="GET">
+              <form action="Slider" method="GET">
                 <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
                     <?php echo $row['type']; ?>
@@ -192,7 +192,7 @@
 
       $.ajax({
         type: "POST",
-        url: 'BaBanner/getBaBannerById/' + account_id,
+        url: 'Slider/getBannerById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'banner_id': account_id,

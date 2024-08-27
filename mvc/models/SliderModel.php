@@ -14,7 +14,7 @@ class SliderModel extends DB
         }
     }
 
-    public function addInoforbanner($title,$description,$image,$product_category_id){
+    public function addInforbanner($title,$description,$image,$product_category_id){
         try{
             $query="INSERT INTO banner (title,description,image,product_category_id) VALUES (?,?,?,?)";
             $stmt = $this->connection->prepare($query);
@@ -54,6 +54,15 @@ class SliderModel extends DB
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function getBannerInforById($id){
+        try{
+            $query="SELECT * FROM banner WHERE id='$id'";
+            return mysqli_query($this->connection,$query);
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
         }
     }
   
