@@ -68,7 +68,7 @@ Route::add('Admin/deleteBackground','Background@deleteBackground');
 //Icons
 Route::add('Admin/Icons','Icons@display');
 Route::add('Admin/addIcons','Icons@addIcons');
-Route::add('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
+Route::add('Admin/Icons/getIconsById/{id}', 'Icons@getIconsById');
 Route::add('Admin/customizeIcons','Icons@customizeIcons');
 Route::add('Admin/deleteIcons','Icons@deleteIcons');
 

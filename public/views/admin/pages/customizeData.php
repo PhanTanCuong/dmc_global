@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../../addData" method="POST" enctype="multipart/form-data">
+      <form action="addData" method="POST" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="form-group">
@@ -42,7 +42,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="../../customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
+      <form action="customizeData" id="customizeData" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <input type="hidden" name="edit_id" id="edit_id">
@@ -167,7 +167,7 @@
               <tbody>
                 <?php
                 if (mysqli_num_rows($data["item"]) > 0) {
-                  $counter = 1; // Initialize the counter for the sequential ID
+                  $counter = 1; 
                   while ($row = mysqli_fetch_array($data["item"])) {
                 ?>
                     <tr>
@@ -182,13 +182,13 @@
                       echo '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">' ;                        
                       ?></td>
                       <td>
-                        <form action="../getDataById" method="POST">
-                          <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                        <form action="getDataById" method="POST">
+                          <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id'];?>">
                           <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
                         </form>
                       </td>
                       <td>
-                        <form action="../../deleteData" method="POST">
+                        <form action="deleteData" method="POST">
                           <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>
@@ -221,8 +221,8 @@
       // console.log(account_id);
 
       $.ajax({
-        type: "GET",
-        url: '../../Data/getDataById/' + account_id,
+        type: "POST",
+        url: 'Data/getDataById/' + account_id,
         data: {
           'checking_edit_btn': true,
           'data_id': account_id,

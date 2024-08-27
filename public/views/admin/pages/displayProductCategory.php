@@ -98,7 +98,7 @@
                     <tbody>
                         <?php
                         if (mysqli_num_rows($data["item"]) > 0) {
-                            $counter = 1; // Initialize the counter for the sequential ID
+                            $counter = 1; 
                             while ($row = mysqli_fetch_array($data["item"])) {
                         ?>
                                 <tr>
