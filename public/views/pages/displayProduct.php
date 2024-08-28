@@ -14,7 +14,7 @@
                             ?>
                             <div class="item" style="position:relative;">
                                 <img src="<?php echo $image_path ?>" class="img-fluid">
-                                <div class="text" style="position:absolute;top:10rem;left:15rem">
+                                <div class="text-banner">
                                     <h1><?php echo $rows['title'] ?></h1>
                                     <p><?php echo $rows['description'] ?></p>
                                     <button>View more</button>
