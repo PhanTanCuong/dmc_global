@@ -39,9 +39,11 @@ class Slider extends Controller
                 $description = strip_tags($_POST['banner_description']);
                 $item = $this->model('SliderModel');
                 $image = $_FILES["banner_image"]['name'];
-                if (!$this->isImageFile($image)) {
-                    $_SESSION['status'] = 'Wrong type image file';
+
+                if ($this->isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
                     header('Location:Slider');
+                    die();
                 }
                 $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
 
@@ -93,6 +95,12 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $result = $item->getBannerInforById($id);
                 $data = mysqli_fetch_assoc($result);
+
+                if ($this->isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    header('Location:Slider');
+                    die();
+                }
 
                 $currentImage = $data['image'];
                 if (!empty($_FILES["banner_image"]['name'])) {
