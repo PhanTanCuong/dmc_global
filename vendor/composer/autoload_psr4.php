@@ -9,8 +9,8 @@ return array(
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
+    'Mvc\\Libraries\\' => array($baseDir . '/mvc/libs'),
     'Mvc\\Controllers\\Admin\\' => array($baseDir . '/mvc/controllers/admin'),
     'Mvc\\Controllers\\' => array($baseDir . '/mvc/controllers'),
-    'Core\\' => array($baseDir . '/mvc/core'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
 );

@@ -4,6 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
+use Mvc\Libraries\Image;
 class Slider extends Controller
 {
     public function __construct()
@@ -40,7 +41,7 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $image = $_FILES["banner_image"]['name'];
 
-                if ($this->isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Please upload a pdf or an image ';
                     header('Location:Slider');
                     die();
@@ -51,7 +52,7 @@ class Slider extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]) . '';
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
-                    $this->resize_image($filepath, 1920, 860);
+                    Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is added successfully';
                     header('Location:Slider');
                 } else {
@@ -96,7 +97,7 @@ class Slider extends Controller
                 $result = $item->getBannerInforById($id);
                 $data = mysqli_fetch_assoc($result);
 
-                if ($this->isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Please upload a pdf or an image ';
                     header('Location:Slider');
                     die();
@@ -112,7 +113,7 @@ class Slider extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]);
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
-                    $this->resize_image($filepath, 1920, 860);
+                    Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Slider');
                 } else {
@@ -149,103 +150,4 @@ class Slider extends Controller
         }
     }
 
-    public function resize_image($file, $newWidth, $newHeight)
-    {
-        try {
-            if (file_exists($file)) {
-                // echo "File path: " . $file;
-                $info = getimagesize($file);
-                $mime = $info['mime'];//MIME (Multipurpose Internet Mail Extensions)
-                switch ($mime) {
-                    case 'image/jpeg':
-                        $original_image = imagecreatefromjpeg($file);
-                        break;
-                    case 'image/png':
-                        $original_image = imagecreatefrompng($file);
-                        break;
-                    case 'image/gif':
-                        $original_image = imagecreatefromgif($file);
-                        break;
-                    default:
-                        throw new Exception('Unsupported image format');
-                }
-
-                // Lấy kích thước cũ của ảnh(resolution)
-                $original_width = imagesx($original_image);
-                $original_height = imagesy($original_image);
-
-                // //Làm chiều dài trước
-                // $ratio = $max_resolution / $original_width;
-                // $new_width = $max_resolution;
-                // $new_height = $original_height * $ratio;
-
-                // if ($new_height > $max_resolution) {
-                //     $ratio = $max_resolution / $original_height;
-                //     $new_width = $original_width * $ratio;
-                //     $new_height = $max_resolution;
-                // }
-
-
-                // Tạo ảnh mới với kích thước mới
-                $newImage = imagecreatetruecolor($newWidth, $newHeight);
-
-                // Sao chép và thay đổi kích thước ảnh cũ sang ảnh mới
-                imagecopyresampled(
-                    $newImage,
-                    $original_image,
-                    0,
-                    0,
-                    0,
-                    0,
-                    $newWidth,
-                    $newHeight,
-                    $original_width,
-                    $original_height
-                );
-
-                // Lưu ảnh mới
-                switch ($mime) {
-                    case 'image/jpeg':
-                        imagejpeg($newImage, $file, 90);
-                        break;
-                    case 'image/png':
-                        imagepng($newImage, $file);
-                        break;
-                    case 'image/gif':
-                        imagegif($newImage, $file);
-                        break;
-                }
-
-                // Giải phóng bộ nhớ
-                imagedestroy($original_image);
-                imagedestroy($newImage);
-            } else {
-                throw new Exception('File does not exist');
-            }
-        } catch (Exception $e) {
-            echo "Message:" . $e->getMessage();
-        }
-    }
-
-    public function isImageFile($file)
-    {
-        // Check if the file is uploaded and exists
-        if (isset($file) && file_exists($file['tmp_name'])) {
-            // Get image size and type information
-            $info = getimagesize($file['tmp_name']);
-
-            // If getimagesize returns false, it's not a valid image
-            if ($info === false) {
-                return false;
-            }
-
-            // Validate the MIME type to ensure it's an image
-            $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-            if (in_array($info['mime'], $validMimeTypes)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 }

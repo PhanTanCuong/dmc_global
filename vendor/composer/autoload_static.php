@@ -23,12 +23,9 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         ),
         'M' => 
         array (
+            'Mvc\\Libraries\\' => 14,
             'Mvc\\Controllers\\Admin\\' => 22,
             'Mvc\\Controllers\\' => 16,
-        ),
-        'C' => 
-        array (
-            'Core\\' => 5,
         ),
         'B' => 
         array (
@@ -49,6 +46,10 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
+        'Mvc\\Libraries\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/mvc/libs',
+        ),
         'Mvc\\Controllers\\Admin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/mvc/controllers/admin',
@@ -56,10 +57,6 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         'Mvc\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/mvc/controllers',
-        ),
-        'Core\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/mvc/core',
         ),
         'Brick\\Math\\' => 
         array (
