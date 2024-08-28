@@ -71,30 +71,24 @@ li {
   height: 100%;
 }
 
-.banner-text {
-  padding-left: 8em;
-  display: grid;
-  width: 40%;
-  grid-template-rows: minmax(0, 30em);
-}
-
-.banner-text-container {
+.text-banner {
   color: white;
   position: absolute;
-  top: 6em;
-  left: 5em;
-  height: 100%;
+  top: 20%;
+  left: 20%;
+  right: 9%;
 }
 
-.banner-text-container h1 {
-  font-size: 5em;
+.text-banner h1 {
+  font-size: 5rem;
 }
 
-.banner-text-container p {
-  font-size: 1.5em;
+.text-banner p {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 
-.banner-text-container button {
+.text-banner button {
   padding: 0 2.5rem;
   text-transform: uppercase;
   font-size: 1.5em;
@@ -263,19 +257,7 @@ li {
     text-align: center;
   }
 
-  /* banner */
-  .banner-text p {
-    display: none;
-  }
-
-  .banner-text h1 {
-    font-size: 2em;
-  }
-
-  .banner-text button {
-    font-size: 1em;
-  }
-
+ 
   /* about2 */
 
   .grid-container {
@@ -339,9 +321,7 @@ li {
   .txt2-container {
     padding: 1rem;
   }
-}
 
-@media only screen and (max-width: 1024px) {
   .txt2-container img {
     display: none;
   }
@@ -360,12 +340,12 @@ li {
     margin: 4rem 4rem;
   }
   /* banner */
-  .banner-text-container {
+  .text-container {
     top: 0rem;
     left: -6rem;
   }
 
-  .banner-text-container button {
+  .text-container button {
     padding: 0 1.5rem;
   }
 
@@ -399,7 +379,22 @@ li {
 }
 
 @media only screen and (min-width: 721px) and (max-width: 1024px) {
-  .banner-text-container {
+   /* banner */
+   .text-banner {
+    top: 25%;
+  }
+  .text-banner p {
+    font-size: 1rem;
+  }
+
+  .text-banner h1 {
+    font-size: 3rem;
+  }
+
+  .text-banner button {
+    font-size: 1rem ;
+  }
+  .text-container {
     padding: 0 1rem;
     top: 6rem;
     left: 0em;
@@ -411,6 +406,24 @@ li {
 }
 
 @media screen and (max-width: 480px) {
+   /* banner */
+   .text-banner {
+    top: 30%;
+    left:5%;
+    right:20%;
+  }
+  .text-banner p {
+    display: none;
+  }
+
+  .text-banner h1 {
+    font-size: 20px;
+  }
+
+  .text-banner button {
+    font-size: 1em;
+  }
+
   .txt-container h2 {
     font-size: 1.5rem;
   }
@@ -435,5 +448,3 @@ li {
   }
 }
 
-@media screen and(min-width:1400) {
-}

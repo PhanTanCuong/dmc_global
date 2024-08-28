@@ -8,9 +8,6 @@ use Core\Middleware;
 
 class Data extends Controller
 {
-
-
-
     public function __construct()
     {
         Middleware::checkAdmin();
@@ -28,23 +25,16 @@ class Data extends Controller
         } else {
             $block_id = isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3;
         }
-
-        // $block_id = isset($_GET['block_id']) ? $_GET['block_id'] : 3;
-
-        // Handle product_category_id
         if (isset($_GET['product_category_id'])) {
-            // Set new product_category_id and expire the old one
-            setcookie("product_category_id", "", time() - 3600); // Expire old product_category_id cookie
-            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600); // Set new product_category_id cookie
+            setcookie("product_category_id", "", time() - 3600); 
+            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600); 
             $product_category_id = $_GET['product_category_id'];
             $block_id = 3;
-            setcookie("block_id", "", time() - 3600); // Expire old block_id cookie
-            setcookie("block_id",$block_id, time() + 3600); // Set new block_id cookie
+            setcookie("block_id", "", time() - 3600);
+            setcookie("block_id", $block_id, time() + 3600);
         } else {
             $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
         }
-
-
 
         // View
         $data = $item->getItem($block_id, $product_category_id);
