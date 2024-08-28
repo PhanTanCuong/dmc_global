@@ -26,7 +26,7 @@ class SliderModel extends DB
         }
 
     }
-    public function customizeInforBanner($id,$title, $description, $image)
+    function customizeInforBanner($id,$title, $description, $image)
     {
         try {
             $query = "UPDATE banner SET title=?,description=?,image=? WHERE id=?";
@@ -39,7 +39,7 @@ class SliderModel extends DB
         }
     }
 
-    public function deleteInforBanner($id){
+    function deleteInforBanner($id){
         try{
             $query="DELETE FROM banner WHERE id='$id'";
             return mysqli_query($this->connection,$query);

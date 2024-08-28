@@ -106,7 +106,7 @@ class Account extends Controller
 
 
     //delete user account
-    public function deleteAccount()
+    function deleteAccount()
     {
         try {
             if (isset($_POST["delete_btn"])) {

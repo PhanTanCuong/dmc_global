@@ -94,7 +94,7 @@ class Data extends Controller
     }
 
     //edit  
-    public function customizeData()
+    function customizeData()
     {
         try {
             if (isset($_POST["editDataBtn"])) {
@@ -131,7 +131,7 @@ class Data extends Controller
 
 
     //delete user account
-    public function deleteData()
+    function deleteData()
     {
         try {
             if (isset($_POST["delete_btn"])) {
