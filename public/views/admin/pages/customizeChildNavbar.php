@@ -119,7 +119,7 @@
                       <tbody>
                           <?php
                             if (mysqli_num_rows($data["item"]) > 0) {
-                                $counter = 1; // Initialize the counter for the sequential ID
+                                $counter = 1; 
                                 while ($row = mysqli_fetch_array($data["item"])) {
                             ?>
                                   <tr>
@@ -161,7 +161,7 @@
 
                   $.ajax({
                       type: "POST",
-                      url: 'ChildNavInfor/getChildNavInforById/' + child_nav_id,
+                      url: 'ChildNavBar/getChildNavBarById/' + child_nav_id,
                       data: {
                           'checking_edit_btn': true,
                           'child_nav_id': child_nav_id,
@@ -171,7 +171,7 @@
                           $.each(response, function(key, value) {
                               $('#edit_id').val(value['id']);
                               $('#edit_name').val(value['name']);
-                            //   $('#edit_parent_nav').val(value['navbar_id']);
+                              $('#edit_parent_nav').val(value['navbar_id']);
                             
                           });
                           $('#editChildNav').modal('show');
