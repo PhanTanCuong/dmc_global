@@ -110,15 +110,16 @@ class Data extends Controller
                 $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
 
-                if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Please upload a pdf or an image ';
-                    header('Location:Data');
-                    die();
-                }
+              
                 $currentImage = $data['image'];
 
                 if (!empty($_FILES["data_image"]['name'])) {
                     $image = $_FILES["data_image"]['name'];
+                    if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Data');
+                        die();
+                    }
                 } else {
                     $image = $currentImage;
                 }
