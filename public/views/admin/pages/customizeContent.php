@@ -151,18 +151,6 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="padding: 2em 0;">
-        <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-            unset($_SESSION['status']);
-        }
-
-        ?>
-
         <form action="customizeFooterBackground" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <?php
@@ -233,17 +221,6 @@
         </div>
 
         <div class="card-body">
-            <?php
-
-            if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-                echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-                unset($_SESSION['success']);
-            }
-            if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-                echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-                unset($_SESSION['status']);
-            }
-            ?>
             <div class="table-responsive">
                 <?php
                 ?>
