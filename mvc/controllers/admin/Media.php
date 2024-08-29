@@ -4,6 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
+use Mvc\Libraries\Image;
 class Media extends Controller
 {
     public function __construct()
@@ -26,12 +27,12 @@ class Media extends Controller
     //display detail infor user account
     function getNewsById()
     {
-        if(isset($_POST['checking_edit_btn'])) {
-            $news_id=$_POST['news_id'];
-            $result_array=[];
-            $news= $this->model('MediaModel');
+        if (isset($_POST['checking_edit_btn'])) {
+            $news_id = $_POST['news_id'];
+            $result_array = [];
+            $news = $this->model('MediaModel');
             $result = $news->getNewsbyId($news_id);
-            if(mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result) > 0) {
                 foreach ($result as $row) {
                     array_push($result_array, $row);
                     header('Content-Type: application/json');
@@ -53,7 +54,11 @@ class Media extends Controller
                 $description = strip_tags($_POST['news_description']);
                 $link = strip_tags($_POST['news_link']);
                 $image = $_FILES["news_image"]['name'];
-
+                if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Incorrect image type';
+                    header('Location:News');
+                    die();
+                }
                 $news = $this->model("MediaModel");
                 $result = $news->addNews($title, $description, $link, $image);
                 if ($result) {
@@ -92,6 +97,11 @@ class Media extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["news_image"]['name'])) {
+                    if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type';
+                        header('Location:News');
+                        die();
+                    }
                     $image = $_FILES["news_image"]['name'];
                 } else {
                     $image = $stored_image['image'];

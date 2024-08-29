@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-
+use Mvc\Libraries\Image;
 class Product extends Controller
 {
 
@@ -58,7 +58,11 @@ class Product extends Controller
                 $description = strip_tags($_POST['product_description']);
                 $link = strip_tags($_POST['product_link']);
                 $image = $_FILES["product_image"]['name'];
-
+                if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Incorrect image type';
+                    header('Location:Product');
+                    die();
+                }
                 $product = $this->model('ProductModel');
                 $result = $product->addProduct($title, $description, $image);
                 if ($result) {
@@ -91,10 +95,15 @@ class Product extends Controller
 
                 $id = $_POST['edit_id'];
                 $product = $this->model('ProductModel');
-
+              
                 $data = $product->getCurrentProductImages($id);
                 $stored_image = mysqli_fetch_assoc($data);
                 if (!empty($_FILES["product_image"]['name'])) {
+                    if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type';
+                        header('Location:Product');
+                        die();
+                    }
                     $image = $_FILES["product_image"]['name'];
                 } else {
                     $image = $stored_image['image'];

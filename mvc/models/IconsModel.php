@@ -51,18 +51,7 @@ class IconsModel extends DB
             echo $e->getMessage();
         }
     }
-
-    public function getCurrentIconsImages($id)
-    {
-        try {
-            $query = "SELECT image FROM icon WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function deleteIcons($id)
+        public function deleteIcons($id)
     {
         try {
             $query = "DELETE FROM icon WHERE id='$id'";

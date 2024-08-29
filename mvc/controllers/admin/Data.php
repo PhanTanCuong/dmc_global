@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-
+use Mvc\Libraries\Image;
 class Data extends Controller
 {
     public function __construct()
@@ -55,6 +55,11 @@ class Data extends Controller
                 $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
+                if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Incorrect image type';
+                    header('Location:Data');
+                    die();
+                }
                 $result = $data->addData($title, $description, $image, $_COOKIE['block_id'], $_COOKIE['product_category_id']);
                 if ($result) {
                     //Upload image data vào folder upload
@@ -94,7 +99,7 @@ class Data extends Controller
     }
 
     //edit  
-    public function customizeData()
+    function customizeData()
     {
         try {
             if (isset($_POST["editDataBtn"])) {
@@ -105,10 +110,16 @@ class Data extends Controller
                 $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
 
+              
                 $currentImage = $data['image'];
 
                 if (!empty($_FILES["data_image"]['name'])) {
                     $image = $_FILES["data_image"]['name'];
+                    if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Data');
+                        die();
+                    }
                 } else {
                     $image = $currentImage;
                 }
@@ -131,7 +142,7 @@ class Data extends Controller
 
 
     //delete user account
-    public function deleteData()
+    function deleteData()
     {
         try {
             if (isset($_POST["delete_btn"])) {

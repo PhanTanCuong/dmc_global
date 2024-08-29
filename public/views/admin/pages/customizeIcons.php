@@ -79,23 +79,24 @@
       </div>
 
       <div class="card-body">
-        <?php
-
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-          echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-          unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-          echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-          unset($_SESSION['status']);
-        }
-        ?>
-        <form action="Icons" method="POST">
-          <input type="radio" name="radio_option" value="7" onclick="this.form.submit();"> Footer
-          <input type="radio" name="radio_option" value="6" onclick="this.form.submit();"> Stat
-
-        </form>
-
+      <?php
+          if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
+            echo '
+            <div class="alert icon-alert with-arrow alert-success form-alter" role="alert">
+              <i class="fa fa-fw fa-check-circle"></i>
+              <strong> Success !</strong> <span class="success-message">' . $_SESSION['success'] . '</span>
+            </div>';
+            unset($_SESSION['success']);
+          }
+          if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
+            echo '
+            <div class="alert icon-alert with-arrow alert-danger form-alter" role="alert">
+              <i class="fa fa-fw fa-times-circle"></i>
+              <strong> Warning !</strong> <span class="warning-message">' . $_SESSION['status'] . '</span>
+            </div>';
+            unset($_SESSION['status']);
+          }
+          ?>
         <div class="table-responsive">
           <?php
           ?>
@@ -111,7 +112,7 @@
             <tbody>
               <?php
               if (mysqli_num_rows($data["item"]) > 0) {
-                $counter = 1; // Initialize the counter for the sequential ID
+                $counter = 1; 
                 while ($row = mysqli_fetch_array($data["item"])) {
               ?>
                   <tr>

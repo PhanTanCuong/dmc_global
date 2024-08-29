@@ -5,6 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
+use Mvc\Libraries\Image;
 
 class Icons extends Controller
 {
@@ -15,19 +16,8 @@ class Icons extends Controller
     function display()
     {
         $item = $this->model('IconsModel');
-        $data = null;
-        // Check if a radio button is selected
-        $selected_id = isset($_POST['radio_option']) ? $_POST['radio_option'] : null;
-
-        if ($selected_id !== null) {
-            // Fetch data by the selected ID
-            $data = $item->getInforIcons($selected_id);
-        } else {
-            // Default behavior if no radio button is selected
-            $data = $item->getInforIcons(7);
-        }
         $this->view('admin/home', [
-            'item' => $data,
+            'item' => $item->getInforIcons(7),
             'page' => 'customizeIcons'
         ]);
     }
@@ -38,7 +28,11 @@ class Icons extends Controller
         try {
             if (isset($_POST["addIconsBtn"])) {
                 $image = $_FILES["icons_image"]['name'];
-
+                if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Incorrect image type.';
+                    header('Location:Icons');
+                    die();
+                }
                 $item = $this->model('IconsModel');
                 $success = $item->addIconsImages($image);
                 if ($success) {
@@ -57,7 +51,7 @@ class Icons extends Controller
     }
 
 
-    function getIconsbyID()
+    function getIconsById()
     {
         if (isset($_POST['checking_edit_btn'])) {
             $id = $_POST['icons_id'];
@@ -83,15 +77,21 @@ class Icons extends Controller
 
                 $item = $this->model('IconsModel');
                 $id = $_POST['edit_id'];
-                $data = $item->getCurrentIconsImages($id);
+                $result = $item->getIconsById($id);
+                $data=mysqli_fetch_assoc($result);// fetch mysqli_result into array data
 
-                $currentImages = mysqli_fetch_array($data);
+                $currentImages = $data['image'];
 
                 //Check image is null
                 if (!empty($_FILES["icons_image"]['name'])) {
+                    if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Icons');
+                        die();
+                    }
                     $image = $_FILES["icons_image"]['name'];
                 } else {
-                    $image = $currentImages['image'];
+                    $image = $currentImages;
                 }
 
                 $success = $item->customizeInforIcons($id, $image);

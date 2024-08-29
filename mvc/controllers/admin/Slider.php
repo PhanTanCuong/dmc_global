@@ -4,6 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
+use Mvc\Libraries\Image;
 class Slider extends Controller
 {
     public function __construct()
@@ -15,8 +16,8 @@ class Slider extends Controller
         $item = $this->model('SliderModel');
         $product_category = $this->model('ProductModel');
         if (isset($_GET['product_category_id'])) {
-            setcookie("product_category_id", "", time() - 3600); 
-            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600); 
+            setcookie("product_category_id", "", time() - 3600);
+            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600);
             $product_category_id = $_GET['product_category_id'];
         } else {
             $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
@@ -39,11 +40,19 @@ class Slider extends Controller
                 $description = strip_tags($_POST['banner_description']);
                 $item = $this->model('SliderModel');
                 $image = $_FILES["banner_image"]['name'];
-                $product_category_id=isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id']:1;
 
-                $success = $item->addInforbanner($title, $description, $image,$product_category_id);
+                if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Incorrect image type';
+                    header('Location:Slider');
+                    die();
+                }
+                $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
+
+                $success = $item->addInforbanner($title, $description, $image, $product_category_id);
                 if ($success) {
                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]) . '';
+                    $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
+                    Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is added successfully';
                     header('Location:Slider');
                 } else {
@@ -76,8 +85,9 @@ class Slider extends Controller
     }
 
     //edit Banner
-    public function customizeBanner()
+    function customizeBanner()
     {
+
         try {
             if (isset($_POST["editBannerBtn"])) {
                 $title = $_POST['edit_title'];
@@ -86,18 +96,24 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $result = $item->getBannerInforById($id);
                 $data = mysqli_fetch_assoc($result);
-
-                $currentImage = $data['image'];
-
+                    $currentImage = $data['image'];
                 if (!empty($_FILES["banner_image"]['name'])) {
+                    if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Please upload a correct image type ';
+                        header('Location:Slider');
+                        die();
+                    }
                     $image = $_FILES["banner_image"]['name'];
                 } else {
                     $image = $currentImage;
                 }
 
+
                 $success = $item->customizeInforBanner($id, $title, $description, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]) . '';
+                    move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]);
+                    $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
+                    Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Slider');
                 } else {
@@ -113,7 +129,7 @@ class Slider extends Controller
 
 
     //delete Banner
-    public function deleteBanner()
+    function deleteBanner()
     {
         try {
             if (isset($_POST["delete_btn"])) {
