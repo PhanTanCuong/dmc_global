@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-
+use Mvc\Libraries\Image;
 class Data extends Controller
 {
     public function __construct()
@@ -55,6 +55,11 @@ class Data extends Controller
                 $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
+                if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    header('Location:Data');
+                    die();
+                }
                 $result = $data->addData($title, $description, $image, $_COOKIE['block_id'], $_COOKIE['product_category_id']);
                 if ($result) {
                     //Upload image data vào folder upload
@@ -105,6 +110,11 @@ class Data extends Controller
                 $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
 
+                if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    header('Location:Data');
+                    die();
+                }
                 $currentImage = $data['image'];
 
                 if (!empty($_FILES["data_image"]['name'])) {

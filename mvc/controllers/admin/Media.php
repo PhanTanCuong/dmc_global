@@ -4,6 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
+use Mvc\Libraries\Image;
 class Media extends Controller
 {
     public function __construct()
@@ -53,7 +54,11 @@ class Media extends Controller
                 $description = strip_tags($_POST['news_description']);
                 $link = strip_tags($_POST['news_link']);
                 $image = $_FILES["news_image"]['name'];
-
+                if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    header('Location:News');
+                    die();
+                }
                 $news = $this->model("MediaModel");
                 $result = $news->addNews($title, $description, $link, $image);
                 if ($result) {
@@ -89,7 +94,11 @@ class Media extends Controller
 
                 $data = $news->getCurrentNewsImages($id);
                 $stored_image = mysqli_fetch_array($data);
-
+                if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    header('Location:News');
+                    die();
+                }
                 //Check image is null
                 if (!empty($_FILES["news_image"]['name'])) {
                     $image = $_FILES["news_image"]['name'];
