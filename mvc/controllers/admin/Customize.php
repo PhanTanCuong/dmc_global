@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-
+use Mvc\Libraries\Image;
 class Customize extends Controller
 {
     function __construct()
@@ -36,12 +36,15 @@ class Customize extends Controller
                 $data = $item->getHeadInfor();
                 foreach ($data as $row) {
                     $currentImage = $row['image'];
-                };
+                }
                 if (!empty($_FILES["head_image"]["name"])) {
-                    // If a new image is uploaded, use it
+                    if (Image::isImageFile($_FILES["head_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Customize');
+                        die();
+                    }
                     $image = $_FILES["head_image"]["name"];
                 } else {
-                    // If no new image, retain the existing one
                     $image = $currentImage;
                 }
 
@@ -72,10 +75,14 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["header_icon"]["name"])) {
-                    // If a new image is uploaded, use it
+                    if (Image::isImageFile($_FILES["header_icon"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Customize');
+                        die();
+                    }
                     $head_logo = $_FILES["header_icon"]["name"];
+                
                 } else {
-                    // If no new image, retain the existing one
                     $head_logo = $currentImage;
                 }
                 $result = $item->customizeIconbyId(2, $head_logo);
@@ -105,10 +112,13 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_icon"]["name"])) {
-                    // If a new image is uploaded, use it
+                    if (Image::isImageFile($_FILES["footer_icon"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Customize');
+                        die();
+                    }
                     $footer_logo = $_FILES["footer_icon"]["name"];
                 } else {
-                    // If no new image, retain the existing one
                     $footer_logo = $currentImage;
                 }
                 $result = $item->customizeIconbyId(14, $footer_logo);
@@ -138,6 +148,11 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_bg_image"]["name"])) {
+                    if (Image::isImageFile($_FILES["footer_bg_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type ';
+                        header('Location:Customize');
+                        die();
+                    }
                     $footer_bg = $_FILES["footer_bg_image"]["name"];
                 } else {
                     $footer_bg = $currentImage;
@@ -159,7 +174,8 @@ class Customize extends Controller
     }
 
     //Footer data
-    function getDataById(){
+    function getDataById()
+    {
         if (isset($_POST['checking_edit_btn'])) {
             $item_id = $_POST['data_id'];
             $result_array = [];
@@ -175,7 +191,8 @@ class Customize extends Controller
         }
     }
 
-    function editFooterData(){
+    function editFooterData()
+    {
         try {
 
             if (isset($_POST["editDataBtn"])) {

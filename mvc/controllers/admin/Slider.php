@@ -42,7 +42,7 @@ class Slider extends Controller
                 $image = $_FILES["banner_image"]['name'];
 
                 if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Slider');
                     die();
                 }

@@ -56,7 +56,7 @@ class Data extends Controller
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
                 if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Data');
                     die();
                 }

@@ -59,7 +59,7 @@ class Product extends Controller
                 $link = strip_tags($_POST['product_link']);
                 $image = $_FILES["product_image"]['name'];
                 if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Please upload a pdf or an image ';
+                    $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Product');
                     die();
                 }
@@ -95,14 +95,15 @@ class Product extends Controller
 
                 $id = $_POST['edit_id'];
                 $product = $this->model('ProductModel');
-                if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Please upload a pdf or an image ';
-                    header('Location:Product');
-                    die();
-                }
+              
                 $data = $product->getCurrentProductImages($id);
                 $stored_image = mysqli_fetch_assoc($data);
                 if (!empty($_FILES["product_image"]['name'])) {
+                    if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
+                        $_SESSION['status'] = 'Incorrect image type';
+                        header('Location:Product');
+                        die();
+                    }
                     $image = $_FILES["product_image"]['name'];
                 } else {
                     $image = $stored_image['image'];

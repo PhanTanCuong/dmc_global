@@ -29,7 +29,7 @@ class Icons extends Controller
             if (isset($_POST["addIconsBtn"])) {
                 $image = $_FILES["icons_image"]['name'];
                 if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
-                    $_SESSION['status'] = 'Incorrect image type ';
+                    $_SESSION['status'] = 'Incorrect image type.';
                     header('Location:Icons');
                     die();
                 }
