@@ -96,10 +96,7 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $result = $item->getBannerInforById($id);
                 $data = mysqli_fetch_assoc($result);
-
-               
-
-                $currentImage = $data['image'];
+                    $currentImage = $data['image'];
                 if (!empty($_FILES["banner_image"]['name'])) {
                     if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
                         $_SESSION['status'] = 'Please upload a correct image type ';
@@ -111,7 +108,7 @@ class Slider extends Controller
                     $image = $currentImage;
                 }
 
-                
+
                 $success = $item->customizeInforBanner($id, $title, $description, $image);
                 if ($success) {
                     move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]);
