@@ -95,17 +95,6 @@
     </div>
 
     <div class="card-body">
-      <?php
-
-      if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-        echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-        unset($_SESSION['success']);
-      }
-      if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-        echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-        unset($_SESSION['status']);
-      }
-      ?>
       <div class="table-responsive">
         <?php
         ?>
@@ -124,7 +113,7 @@
           <tbody>
             <?php
             if (mysqli_num_rows($data["news"]) > 0) {
-              $counter = 1; // Initialize the counter for the sequential ID
+              $counter = 1; 
               while ($row = mysqli_fetch_array($data["news"])) {
             ?>
                 <tr>
