@@ -166,7 +166,7 @@ class CustomizeModel extends DB
     public function getNavBarItem()
     {
         try {
-            $query = "SELECT * FROM navbar ORDER BY navbar_id ASC";
+            $query = "SELECT * FROM navbar ORDER BY display_order ASC";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
