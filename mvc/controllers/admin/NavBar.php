@@ -29,9 +29,10 @@ class NavBar extends Controller
         try {
             if (isset($_POST['addNavbarItemBtn'])) {
                 $name = strip_tags($_POST['navbar_name']);
-
+                $status=$_POST['navbar_status'];
+                $link=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->addNavBarInfor($name);
+                $success = $item->addNavBarInfor($name,$link,$status);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:NavBar');

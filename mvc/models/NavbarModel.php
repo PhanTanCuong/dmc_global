@@ -14,7 +14,7 @@ class NavBarModel extends DB
         }
     }
 
-    public function addNavBarInfor($name)
+    public function addNavBarInfor($name,$status,$link)
     {
         try {
             // Get the current maximum display_order value
