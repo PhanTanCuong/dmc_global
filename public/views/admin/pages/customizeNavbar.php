@@ -74,7 +74,7 @@
           <div class="card-body">
               <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                      <thead>11
+                      <thead>
                           <tr>
                               <th>No.</th>
                               <th>Item</th>
@@ -82,13 +82,13 @@
                               <th>DELETE </th>
                           </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="sortable">
                           <?php
                             if (mysqli_num_rows($data["item"]) > 0) {
                                 $counter = 1; // Initialize the counter for the sequential ID
                                 while ($row = mysqli_fetch_array($data["item"])) {
                             ?>
-                                  <tr>
+                                  <tr id="<?php echo $row['id']?>">
                                       <td><?php echo $counter++; ?></td>
                                       <td><?php echo $row['name']?></td>
                                       <td>

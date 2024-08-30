@@ -7,7 +7,7 @@ class NavBarModel extends DB
     public function getInforNavBar()
     {
         try {
-            $query = "SELECT * FROM navbar";
+            $query = "SELECT * FROM navbar ORDER BY navbar_id ASC";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -58,6 +58,17 @@ class NavBarModel extends DB
         }
     }
 
+    public function sortNavbarItem($id,$navbar_id){
+        try{
+            $query = "UPDATE navbar SET navbar_id=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ii", $navbar_id, $id);
+            $stmt->execute();
+            return $stmt;
+        }catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
     //Child NavBar
     public function getInforChildNavBar()
     {

@@ -181,4 +181,32 @@ class NavBar extends Controller
             header('Location:ChildNavBar');
         }
     }
+
+    // sorting navbar Item
+    function sortNavbarItem() {
+        if (isset($_POST['ids'])) {
+            $ids = $_POST['ids'];
+            $array = explode(',', $ids);
+            
+            $allSuccess = true;
+            
+            for ($i = 1; $i <= count($array); $i++) {
+                $success = $this->model('NavbarModel')->sortNavbarItem((int)$i, (int)$array[$i-1]);
+                
+                if (!$success) {
+                    $allSuccess = false;
+                    break;
+                }
+            }
+            
+            if ($allSuccess) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update navbar items']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'No IDs received']);
+        }
+    }
+    
 }
