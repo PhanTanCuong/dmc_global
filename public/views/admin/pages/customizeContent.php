@@ -1,5 +1,6 @@
 <!-- Head Tab -->
 <div class="container-fluid">
+
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
             Customize Tab</h5>
