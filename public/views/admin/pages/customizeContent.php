@@ -1,5 +1,6 @@
 <!-- Head Tab -->
 <div class="container-fluid">
+
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
             Customize Tab</h5>
@@ -8,15 +9,6 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-            unset($_SESSION['status']);
-        }
-
         foreach ($data["head"] as $row) {
         ?>
 
@@ -55,23 +47,10 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="padding: 2em 0;">
-        <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-            unset($_SESSION['status']);
-        }
-
-        ?>
-
         <form action="customizeLogo" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <?php
                 foreach ($data["header_icon"] as $row) {
-
                 ?>
                     <div class="form-group">
                         <label>Header</label><br>
@@ -100,23 +79,10 @@
 <div class="container-fluid">
     <!-- DataTales Example -->
     <div class="card shadow mb-4" style="padding: 2em 0;">
-        <?php
-        if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-            echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';
-            unset($_SESSION['success']);
-        }
-        if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-            echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-            unset($_SESSION['status']);
-        }
-
-        ?>
-
         <form action="customizeFooterLogo" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <?php
                 foreach ($data["footer_icon"] as $row) {
-
                 ?>
                     <div class="form-group">
                         <label>Footer</label><br>
@@ -155,7 +121,6 @@
             <div class="card-body">
                 <?php
                 foreach ($data["bg_footer"] as $row) {
-
                 ?>
                     <div class="form-group">
                         <label>Header</label><br>

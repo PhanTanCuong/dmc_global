@@ -160,7 +160,7 @@
                     <tr>
                       <td><?php echo $counter++; ?></td>
                       <td><?php echo $row['title'] ?></td>
-                      <td><?php echo $row['description'] ?></td>
+                      <td><?php echo substr($row['description'],0,200).'...' ?></td>
                       <td><?php 
                       $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : 3;
                       if($selected_option==6) {

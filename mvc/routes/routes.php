@@ -85,9 +85,10 @@ Route::add('Admin/deleteData','Data@deleteData');
 // Navbar
 Route::add('Admin/NavBar','NavBar@display');
 Route::add('Admin/addNavBar','NavBar@addNavBar');
-Route::add('Admin/Data/getNavBarById/(\d+)', 'NavBar@getNavBarById');
+Route::add('Admin/NavBar/getNavBarById/(\d+)', 'NavBar@getNavBarById');
 Route::add('Admin/customizeNavBar','NavBar@customizeNavBar');
 Route::add('Admin/deleteNavBar','NavBar@deleteNavBar');
+Route::add('Admin/sortNavbarItem','NavBar@sortNavbarItem');
 
 // ChildNavBar
 Route::add('Admin/ChildNavBar','NavBar@displayChildNavBar');

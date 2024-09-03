@@ -22,6 +22,8 @@
   <!-- Custom styles for this template-->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?php echo microtime()?>">
   <link href="/dmc_global/public/css/admin/sb-admin-2.min.css" rel="stylesheet">
+  <!-- jquery_ui -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
   <!-- ajax -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
   <!-- css -->

@@ -20,7 +20,7 @@ class Product extends Controller
         $item = $this->model("CustomizeModel");
         //View
         $this->view("home", [
-            "menu_items" => $item->getMenuFooter(),
+            "menu_items" => $item->getNavBarItem(),
             "checkDropdownMenu" => $item->getIdDropdownMenu(),
             "getChildNavbarbyId" => function ($id) use ($item) {
                 return $item->getProductCategory();

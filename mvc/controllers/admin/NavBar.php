@@ -29,9 +29,10 @@ class NavBar extends Controller
         try {
             if (isset($_POST['addNavbarItemBtn'])) {
                 $name = strip_tags($_POST['navbar_name']);
-
+                $status=$_POST['navbar_status'];
+                $link=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->addNavBarInfor($name);
+                $success = $item->addNavBarInfor($name,$link,$status);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:NavBar');
@@ -181,4 +182,32 @@ class NavBar extends Controller
             header('Location:ChildNavBar');
         }
     }
+
+    // sorting navbar Item
+    function sortNavbarItem() {
+        if (isset($_POST['ids'])) {
+            $ids = $_POST['ids'];
+            $array = explode(',', $ids);
+            
+            $allSuccess = true;
+            
+            for ($i = 1; $i <= count($array); $i++) {
+                $success = $this->model('NavbarModel')->sortNavbarItem((int)$i, (int)$array[$i-1]);
+                
+                if (!$success) {
+                    $allSuccess = false;
+                    break;
+                }
+            }
+            
+            if ($allSuccess) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to update navbar items']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'No IDs received']);
+        }
+    }
+    
 }

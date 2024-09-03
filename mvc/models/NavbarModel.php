@@ -7,19 +7,25 @@ class NavBarModel extends DB
     public function getInforNavBar()
     {
         try {
-            $query = "SELECT * FROM navbar";
+            $query = "SELECT * FROM navbar ORDER BY display_order ASC";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function addNavBarInfor($name)
+    public function addNavBarInfor($name,$status,$link)
     {
         try {
-            $query = "INSERT INTO navbar (name) VALUES (?)";
-            $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("s", $name);
+            // Get the current maximum display_order value
+            $query = "SELECT IFNULL(MAX(display_order), 0) + 1 as new_display_order FROM navbar";
+            $result = $this->connection->query($query);
+            $row = $result->fetch_assoc();
+            $new_display_order = $row['new_display_order'];
+
+            // Insert the new navbar item with the calculated display_order
+            $stmt = $this->connection->prepare("INSERT INTO navbar (name, link, status, display_order) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sssi", $name, $link, $status, $new_display_order);
             $stmt->execute();
             return $stmt;
         } catch (mysqli_sql_exception $e) {
@@ -58,6 +64,18 @@ class NavBarModel extends DB
         }
     }
 
+    public function sortNavbarItem($id, $display_order)
+    {
+        try {
+            $query = "UPDATE navbar SET display_order=? WHERE id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ii", $display_order, $id);
+            $stmt->execute();
+            return $stmt;
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
     //Child NavBar
     public function getInforChildNavBar()
     {
@@ -74,7 +92,7 @@ class NavBarModel extends DB
         try {
             $query = "INSERT INTO child_navbar (navbar_id,name) VALUES (?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("is", $nav_parent_id,$name);
+            $stmt->bind_param("is", $nav_parent_id, $name);
             $stmt->execute();
             return $stmt;
         } catch (mysqli_sql_exception $e) {
@@ -96,7 +114,7 @@ class NavBarModel extends DB
         try {
             $query = "UPDATE child_navbar SET name=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("si", $name,$id);
+            $stmt->bind_param("si", $name, $id);
             $stmt->execute();
             return $stmt;
         } catch (mysqli_sql_exception $e) {
