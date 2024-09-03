@@ -14,7 +14,7 @@ class NavBarModel extends DB
         }
     }
 
-    public function addNavBarInfor($name,$status,$link)
+    public function addNavBarInfor($name, $link, $status)
     {
         try {
             // Get the current maximum display_order value
@@ -42,12 +42,12 @@ class NavBarModel extends DB
             echo $e->getMessage();
         }
     }
-    public function customizeInforNavBar($id, $name)
+    public function customizeInforNavBar($id, $name, $link, $status)
     {
         try {
-            $query = "UPDATE navbar SET name=? WHERE id = ?";
+            $query = "UPDATE navbar SET name=?, link=?, status=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("si", $name, $id);
+            $stmt->bind_param("si", $$name, $link, $status, $id);
             $stmt->execute();
             return $stmt;
         } catch (mysqli_sql_exception $e) {
