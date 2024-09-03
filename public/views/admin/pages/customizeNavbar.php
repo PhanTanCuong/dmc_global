@@ -65,8 +65,8 @@
                 <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
             </div>
             <div class="card-body">
-                <form action="editNavBar" method="POST">
-                    <input type="hidden" id="edit_navbar_id" name="edit_navbar_id">
+                <form action="customizeNavBar" method="POST">
+                    <input type="hidden" id="edit_navbar_id" name="edit_navbar_id" value="">
                     <div class="form-group">
                         <label for="edit_navbar_name">Item Name</label>
                         <input type="text" class="form-control" id="edit_navbar_name" name="edit_navbar_name" required>
@@ -80,7 +80,22 @@
                     </div>
                     <div class="form-group">
                         <label for="edit_navbar_link">Link</label>
-                        <input type="text" class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
+                        <select class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
+                            <optgroup label="Static Pages">
+                                <?php foreach ($static_pages as $page): ?>
+                                    <option value="<?php echo $page['link']; ?>">
+                                        <?php echo $page['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                            <optgroup label="Dynamic Pages">
+                                <?php foreach ($dynamic_pages as $page): ?>
+                                    <option value="<?php echo $page['link']; ?>">
+                                        <?php echo $page['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                        </select>
                     </div>
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
                 </form>
@@ -156,15 +171,18 @@
                 success: function (response) {
                     // Assuming response is JSON and contains the data
                     if (response) {
-                        // Populate edit form fields with the response data
-                        $('#edit_id').val(response.id);
-                        $('#edit_navbar_name').val(response.name);
-                        $('#edit_navbar_status').val(response.status);
-                        $('#edit_navbar_link').val(response.link);
-                        console.log('check');
+                        $.each(response, function (key, value) {
+                            // Populate edit form fields with the response data
+                            $('#edit_navbar_id').val(value['id']);
+                            $('#edit_navbar_name').val(value['name']);
+                            $('#edit_navbar_status').val(value['status']);
+                            $('#edit_navbar_link').val(value['link']);
+                        });
+
                         // Hide the add form and show the edit form
                         $('#addNavbarForm').hide();
                         $('#editNavbarForm').show();
+
                     } else {
                         alert('Error fetching data.');
                     }
@@ -193,10 +211,10 @@
         $("#navbar_status").selectmenu();
     });
 
-   
+
 </script>
 
-<script>
+<!-- <script>
     const dynamicPages = <?php echo json_encode($dynamic_pages); ?>;
 
     $(function () {
@@ -222,4 +240,4 @@
             }
         });
     });
-</script>
+</script> -->
