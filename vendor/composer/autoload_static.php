@@ -48,7 +48,7 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         ),
         'Mvc\\Libraries\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/mvc/libkss',
+            0 => __DIR__ . '/../..' . '/mvc/libs',
         ),
         'Mvc\\Controllers\\Admin\\' => 
         array (

@@ -6,7 +6,7 @@
         "psr-4": {
             "Mvc\\Controllers\\": "mvc/controllers/",
             "Mvc\\Controllers\\Admin\\":"mvc/controllers/admin/",
-            "Mvc\\Libraries\\": "mvc/libkss/"
+            "Mvc\\Libraries\\": "mvc/libs/"
         }
     }
 }
