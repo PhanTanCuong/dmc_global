@@ -9,7 +9,7 @@ return array(
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
-    'Mvc\\Libraries\\' => array($baseDir . '/mvc/libs'),
+    'Mvc\\Libraries\\' => array($baseDir . '/mvc/libkss'),
     'Mvc\\Controllers\\Admin\\' => array($baseDir . '/mvc/controllers/admin'),
     'Mvc\\Controllers\\' => array($baseDir . '/mvc/controllers'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),

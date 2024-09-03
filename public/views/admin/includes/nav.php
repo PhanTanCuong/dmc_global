@@ -63,7 +63,7 @@
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
-                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/ProductCategory');">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
                     Product Category
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">

@@ -5,7 +5,7 @@ use Core\DB;
 class CategoryModel extends DB
 {
     //Product Category
-    public function getInforProductCategory()
+    public function getInforCategory()
     {
         try {
             $query = "SELECT * FROM product_category";
@@ -15,7 +15,7 @@ class CategoryModel extends DB
         }
     }
 
-    public function addProductCategoryInfor($name)
+    public function addCategoryInfor($name)
     {
         try {
             $query = "INSERT INTO product_category (type) VALUES (?)";
@@ -28,7 +28,7 @@ class CategoryModel extends DB
         }
     }
 
-    public function getProductCategoryById($id)
+    public function getCategoryById($id)
     {
         try {
             $query = "SELECT * FROM product_category WHERE id='$id'";
@@ -37,7 +37,7 @@ class CategoryModel extends DB
             echo $e->getMessage();
         }
     }
-    public function customizeInforProductCategory($id, $name)
+    public function customizeInforCategory($id, $name)
     {
         try {
             $query = "UPDATE product_category SET type=? WHERE id = ?";
@@ -51,7 +51,7 @@ class CategoryModel extends DB
     }
 
 
-    public function deleteProductCategory($id)
+    public function deleteCategory($id)
     {
         try {
             $query = "DELETE FROM product_category WHERE id='$id'";

@@ -1,5 +1,5 @@
 <!-- Add new icons form -->
-<div class="modal fade" id="addProductCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-            <form action="addProductCategory" method="POST" enctype="multipart/form-data">
+            <form action="addCategory" method="POST" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     <div class="form-group">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="addProductCategoryBtn" class="btn btn-primary">Save</button>
+                    <button type="submit" name="addCategoryBtn" class="btn btn-primary">Save</button>
                 </div>
             </form>
 
@@ -28,17 +28,17 @@
 </div>
 
 <!-- Edit new icons form -->
-<div class="modal fade" id="editProductCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ProductCategory Information </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Category Information </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-            <form action="customizeProductCategory" method="POST" enctype="multipart/form-data">
+            <form action="customizeCategory" method="POST" enctype="multipart/form-data">
 
                 <div class="modal-body">
                     <input type="hidden" name="edit_id" id="edit_id">
@@ -65,7 +65,7 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">List of Product Category</h6>
             <div class="controll-btn">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductCategory">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -94,13 +94,13 @@
                                     <td><?php echo $counter++; ?></td>
                                     <td><?php echo $row['type'] ?></td>
                                     <td>
-                                        <form action="getProductCategoryById" method="POST">
+                                        <form action="getCategoryById" method="POST">
                                             <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
-                                            <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editProductCategory"> <i class="fas fa-edit"></i> </i></i></button>
+                                            <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editCategory"> <i class="fas fa-edit"></i> </i></i></button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="deleteProductCategory" method="POST">
+                                        <form action="deleteCategory" method="POST">
                                             <input type="hidden" name="delete_product_category_id" value="<?php echo $row['id']; ?>">
                                             <button type="submit" name="delete_product_category_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                                         </form>
@@ -128,7 +128,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: 'ProductCategory/getProductCategoryById/' + product_category_id,
+                    url: 'Category/getCategoryById/' + product_category_id,
                     data: {
                         'checking_edit_btn': true,
                         'product_category_id': product_category_id,
@@ -140,7 +140,7 @@
                             $('#edit_product_category').val(value['type'])
 
                         });
-                        $('#editProductCategory').modal('show');
+                        $('#editCategory').modal('show');
                     }
                 });
             });
