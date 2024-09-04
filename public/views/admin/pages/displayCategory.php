@@ -63,13 +63,7 @@
         <div class="card shadow mb-4 flex-fill ml-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List of Category</h6>
-                <div class="controll-btn">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
             </div>
-
             <div class="card-body">
                 <div class="table-responsive">
                     <?php

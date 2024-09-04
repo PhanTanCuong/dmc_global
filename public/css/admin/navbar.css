@@ -24,3 +24,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+#addNavbarForm {
+  width: 5%;
+  height: fit-content;
+}
