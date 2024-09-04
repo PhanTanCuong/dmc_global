@@ -62,7 +62,6 @@
         <div id="editNavbarForm" class="card shadow mb-4 flex-fill mr-3" style="display:none;">
             <div class="edit-navbar card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Edit Navigation Item Information</h6>
-                <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
             </div>
             <div class="card-body">
                 <form action="customizeNavBar" method="POST">

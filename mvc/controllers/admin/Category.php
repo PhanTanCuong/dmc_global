@@ -8,7 +8,7 @@ use Core\Middleware;
 class Category extends Controller
 {
     //Product Category
-    function displayCategory()
+    function display()
     {
         $item = $this->model('CategoryModel');
 
