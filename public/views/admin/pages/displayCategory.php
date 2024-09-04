@@ -1,6 +1,8 @@
+<script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
+
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
-        <div id="addNavbarForm" class="card shadow mb-4 flex-fill mr-3">
+        <div id="addCategoryForm" class="card shadow mb-4 flex-fill mr-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Add Category Information</h6>
             </div>
@@ -43,20 +45,28 @@
                     <input type="hidden" id="edit_category_id" name="edit_category_id" value="">
                     <div class="form-group">
                         <label for="edit_category_name">Name</label>
-                        <input type="text" class="form-control" id="edit_category_name" name="edit_category_name"
-                            required>
+                        <input type="text" class="form-control" id="edit_category_name" name="edit_category_name" required>
                     </div>
                     <div class="form-group">
                         <label for="category_slug">Slug</label>
-                        <input type="text" class="form-control" id="category_slug" name="category_slug" required>
+                        <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug" required>
                     </div>
                     <div class="form-group">
                         <label for="category_parent">Parent</label>
-                        <select name="category_parent" id="category_parent" class="form-control">
-                            <option value="">-- Select Parent --</option>
+                        <select name="edit_category_parent" id="edit_category_parent" class="form-control">
+                            <option value="0">None</option>
+                            <?php if (mysqli_num_rows($data["slug_parent"]) > 0) {
+                                while ($options = mysqli_fetch_array($data["slug_parent"])) {
+                                    ?>
+                                    <option value="<?php echo $options['id'] ?>"><?php echo $options['type'] ?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
+                    <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
                 </form>
             </div>
         </div>
@@ -136,15 +146,29 @@
                     'category_id': category_id,
                 },
                 success: function (response) {
-                    console.log(response);
-                    $.each(response, function (key, value) {
-                        $('#edit_id').val(value['id']);
-                        $('#edit_category').val(value['type'])
+                    if (response) {
+                        $.each(response, function (key, value) {
+                            $('#edit_id').val(value['id']);
+                            $('#edit_category_name').val(value['type'])
+                            $('#edit_category_slug').val(value['slug'])
+                            $('#edit_category_parent').val(value['parent_id'])
 
-                    });
-                    $('#editCategory').modal('show');
+                        });
+                        $('#addCategoryForm').hide();
+                        $('#editCategoryForm').show();
+                    } else {
+                        alert('Error fetching data.');
+                    }
+                },
+                error: function () {
+                    alert('An error occurred.');
                 }
             });
+        });
+        $('#cancelEdit').click(function () {
+            // Hide the edit form and show the add form
+            $('#editCategoryForm').hide();
+            $('#addCategoryForm').show();
         });
 
         $('#category_name').on('input', function () {

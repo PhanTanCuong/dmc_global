@@ -25,7 +25,7 @@
   justify-content: space-between;
 }
 
-#addNavbarForm {
+#addNavbarForm,#editNavbarForm,#addCategoryForm,#editCategoryForm {
   width: 5%;
   height: fit-content;
 }

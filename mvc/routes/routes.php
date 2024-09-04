@@ -98,9 +98,9 @@ Route::add('Admin/customizeChildNavBar','NavBar@customizeChildNavBar');
 Route::add('Admin/deleteChildNavBar','NavBar@deleteChildNavBar');
 
 //Category
-Route::add('Admin/Category','Category@displayCategory');
+Route::add('Admin/Category','Category@display');
 Route::add('Admin/addCategory','Category@addCategory');
-Route::add('Admin/Category/getCategoryById/(\d+)', 'Product@getCategoryById');
+Route::add('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::add('Admin/customizeCategory','Category@customizeCategory');
 Route::add('Admin/deleteCategory','Category@deleteCategory');
 

@@ -84,7 +84,7 @@ class CategoryModel extends DB
         }
         // parent_id=0==>reached the root==>return the current level
         if ($category['parent_id'] == 0) {
-            return $level+1;
+        return $level+1;
         } else {
             // parent_id <> 0, continue trace the parent category
             return $this->traceParent($category['parent_id'], $level + 1);

@@ -98,6 +98,7 @@
                         </select>
                     </div>
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
+                    <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
                 </form>
             </div>
         </div>
