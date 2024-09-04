@@ -32,7 +32,11 @@ class NavBar extends Controller
                 $status=$_POST['navbar_status'];
                 $link=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
+<<<<<<< HEAD
                 $success = $item->addNavBarInfor($name,$link,$status);
+=======
+                $success = $item->addNavBarInfor($name,$status,$link);
+>>>>>>> navigation
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:NavBar');
@@ -67,12 +71,13 @@ class NavBar extends Controller
     {
         try {
 
-            if (isset($_POST["navbar_updatebtn"])) {
+            if (isset($_POST["editNavbarItemBtn"])) {
+                $id = $_POST['edit_navbar_id'];
                 $name = $_POST['edit_navbar_name'];
-                $id = $_POST['edit_id'];
-
+                $status=$_POST['edit_navbar_status'];
+                $link=$_POST['edit_navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->customizeInforNavBar($id, $name);
+                $success = $item->customizeInforNavBar($id, $name,$status,$link);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:NavBar');
@@ -85,7 +90,7 @@ class NavBar extends Controller
             $_SESSION['status'] = $e->getMessage();
             header('Location:NavBar');
         }
-    }
+}
 
     function deleteNavBar()
     {

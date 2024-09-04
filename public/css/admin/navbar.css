@@ -1,6 +1,6 @@
+/* sidebar in control panner */
 
-
-#navbar-customize{
+#navbar-customize {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -16,5 +16,16 @@
 
 .input-field i {
   font-size: 1.5rem;
+}
 
+/* edit navbar user items */
+.edit-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#addNavbarForm,#editNavbarForm,#addCategoryForm,#editCategoryForm {
+  width: 5%;
+  height: fit-content;
 }

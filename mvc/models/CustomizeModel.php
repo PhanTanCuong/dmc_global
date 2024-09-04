@@ -153,7 +153,7 @@ class CustomizeModel extends DB
         }
     }
 
-    public function getProductCategory()
+    public function getCategory()
     {
         try {
             $query = "SELECT * FROM product_category";
