@@ -14,6 +14,7 @@ class Category extends Controller
 
         $this->view('admin/home', [
             'page' => 'displayCategory',
+            'edit_slug_parent'=>$item->getSlugParent(),
             'slug_parent'=> $item-> getSlugParent(),
             'item' => $item->getInforCategory()
         ]);
@@ -69,11 +70,13 @@ class Category extends Controller
         try {
 
             if (isset($_POST["category_updatebtn"])) {
-                $name = $_POST['category_name'];
-                $id = $_POST['edit_id'];
+                $id = $_POST['edit_category_id'];
+                $name = strip_tags($_POST['edit_category_name']);
+                $slug = strip_tags($_POST['edit_category_slug']);
+                $parent_id=(int)$_POST['edit_category_parent'];
 
                 $item = $this->model('CategoryModel');
-                $success = $item->customizeInforCategory($id, $name);
+                $success = $item->customizeInforCategory($id, $name,$slug,$parent_id);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');

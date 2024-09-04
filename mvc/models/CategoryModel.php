@@ -48,14 +48,17 @@ class CategoryModel extends DB
             echo $e->getMessage();
         }
     }
-    public function customizeInforCategory($id, $name)
+    public function customizeInforCategory($id, $name,$slug,$parent_id)
     {
         try {
-            $query = "UPDATE product_category SET type=? WHERE id = ?";
+            $query = "UPDATE product_category SET type=?,slug=?,parent_id=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("si", $name,$id);
-            $stmt->execute();
-            return $stmt;
+            $stmt->bind_param("ssii", $name,$slug,$parent_id,$id);
+            if(!$stmt->execute()){
+                return false;
+            };
+
+            return true;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

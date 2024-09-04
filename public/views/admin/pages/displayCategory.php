@@ -40,7 +40,7 @@
             </div>
 
             <div class="card-body">
-                <form action="customizeNavBar" method="POST">
+                <form action="customizeCategory" method="POST">
                     <input type="hidden" id="edit_category_id" name="edit_category_id" value="">
                     <div class="form-group">
                         <label for="edit_category_name">Name</label>
@@ -54,8 +54,8 @@
                         <label for="category_parent">Parent</label>
                         <select name="edit_category_parent" id="edit_category_parent" class="form-control">
                             <option value="0">None</option>
-                            <?php if (mysqli_num_rows($data["slug_parent"]) > 0) {
-                                while ($options = mysqli_fetch_array($data["slug_parent"])) {
+                            <?php if (mysqli_num_rows($data["edit_slug_parent"]) > 0) {
+                                while ($options = mysqli_fetch_array($data["edit_slug_parent"])) {
                                     ?>
                                     <option value="<?php echo $options['id'] ?>"><?php echo $options['type'] ?></option>
                                     <?php
@@ -64,7 +64,7 @@
                             ?>
                         </select>
                     </div>
-                    <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
+                    <button type="submit" name="category_updatebtn" class="btn btn-primary">Update</button>
                     <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
                 </form>
             </div>
@@ -147,7 +147,7 @@
                 success: function (response) {
                     if (response) {
                         $.each(response, function (key, value) {
-                            $('#edit_id').val(value['id']);
+                            $('#edit_category_id').val(value['id']);
                             $('#edit_category_name').val(value['type'])
                             $('#edit_category_slug').val(value['slug'])
                             $('#edit_category_parent').val(value['parent_id'])

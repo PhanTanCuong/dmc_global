@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
-                    Product Category
+                    Category
                 </div>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
                     Menu
