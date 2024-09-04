@@ -14,6 +14,7 @@ class Category extends Controller
 
         $this->view('admin/home', [
             'page' => 'displayCategory',
+            'slug_parent'=> $item-> getSlugParent(),
             'item' => $item->getInforCategory()
         ]);
     }
@@ -22,10 +23,17 @@ class Category extends Controller
     {
         try {
             if (isset($_POST['addCategoryBtn'])) {
-                $name = strip_tags($_POST['product_category_name']);
+                
+                $slug = strip_tags($_POST['category_slug']);
+                $parent_id=(int)$_POST['category_parent'];
 
                 $item = $this->model('CategoryModel');
-                $success = $item->addCategoryInfor($name);
+                $category_level = $item->traceParent($parent_id);
+                $prefix =str_repeat('|---',$category_level);
+                $name = $prefix.strip_tags($_POST['category_name']);
+
+
+                $success = $item->addCategoryInfor($name,$slug,$parent_id);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:Category');
@@ -43,7 +51,7 @@ class Category extends Controller
     function getCategoryById()
     {
         if (isset($_POST['checking_edit_btn'])) {
-            $item_id = $_POST['product_category_id'];
+            $item_id = $_POST['category_id'];
             $result_array = [];
             $item = $this->model('CategoryModel');
             $result = $item->getCategoryById($item_id);
@@ -60,8 +68,8 @@ class Category extends Controller
     {
         try {
 
-            if (isset($_POST["product_category_updatebtn"])) {
-                $name = $_POST['product_category_name'];
+            if (isset($_POST["category_updatebtn"])) {
+                $name = $_POST['category_name'];
                 $id = $_POST['edit_id'];
 
                 $item = $this->model('CategoryModel');
@@ -83,8 +91,8 @@ class Category extends Controller
     function deleteCategory()
     {
         try {
-            if (isset($_POST['delete_product_category_btn'])) {
-                $id = $_POST['delete_product_category_id'];
+            if (isset($_POST['delete_category_btn'])) {
+                $id = $_POST['delete_category_id'];
                 $item = $this->model('CategoryModel');
                 $success = $item->deleteCategory($id);
                 if ($success) {
@@ -100,6 +108,8 @@ class Category extends Controller
             header('Location:Category');
         }
     }
+
+    
 
 }
 ?>
