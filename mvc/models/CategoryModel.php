@@ -23,25 +23,16 @@ class CategoryModel extends DB
         }
     }
 
-
-    public function getSlugParent()
-    {
-        try {
-            $query = "SELECT id,type FROM product_category";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
     public function addCategoryInfor($name, $slug, $parent_id)
     {
         try {
             $query = "INSERT INTO product_category (type,slug,parent_id) VALUES (?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssi", $name, $slug, $parent_id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -62,12 +53,10 @@ class CategoryModel extends DB
             $query = "UPDATE product_category SET type=?,slug=?,parent_id=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssii", $name, $slug, $parent_id, $id);
-            if (!$stmt->execute()) {
-                return false;
+            if ($stmt->execute()) {
+                return true;
             }
-            ;
-
-            return true;
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

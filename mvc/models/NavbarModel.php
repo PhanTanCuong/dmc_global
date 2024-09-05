@@ -26,8 +26,10 @@ class NavBarModel extends DB
             // Insert the new navbar item with the calculated display_order
             $stmt = $this->connection->prepare("INSERT INTO navbar (name, status,link, display_order) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("sssi", $name, $status,$link, $new_display_order);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -48,8 +50,10 @@ class NavBarModel extends DB
             $query = "UPDATE navbar SET name=?, status=?, link=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("sssi", $name, $status,$link, $id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -70,8 +74,10 @@ class NavBarModel extends DB
             $query = "UPDATE navbar SET display_order=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ii", $display_order, $id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -93,8 +99,10 @@ class NavBarModel extends DB
             $query = "INSERT INTO child_navbar (navbar_id,name) VALUES (?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("is", $nav_parent_id, $name);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -115,8 +123,10 @@ class NavBarModel extends DB
             $query = "UPDATE child_navbar SET name=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $name, $id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

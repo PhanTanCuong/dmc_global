@@ -14,8 +14,8 @@ class Category extends Controller
 
         $this->view('admin/home', [
             'page' => 'displayCategory',
-            'edit_slug_parent'=>$item->getSlugParent(),
-            'slug_parent'=> $item-> getSlugParent(),
+            'edit_slug_parent'=>$item->getInforCategory(),
+            'slug_parent'=> $item-> getInforCategory(),
             'item' => $item->getInforCategory()
         ]);
     }

@@ -35,8 +35,10 @@ class ProductModel extends DB
             $stmt = $this->connection->prepare($query);
             $visible = 0;
             $stmt->bind_param("sssi", $title, $description, $image, $visible);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -49,8 +51,10 @@ class ProductModel extends DB
             $query = "UPDATE product SET title=?, description=?, image=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("sss", $title, $description, $image);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

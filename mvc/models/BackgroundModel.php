@@ -20,8 +20,10 @@ class BackgroundModel extends DB
             $query = "INSERT INTO background (image) VALUES (?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $image);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -41,8 +43,10 @@ class BackgroundModel extends DB
             $query = "UPDATE icon SET image=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $image, $id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
