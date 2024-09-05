@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: space-between;
 }
-
-#addNavbarForm,#editNavbarForm,#addCategoryForm,#editCategoryForm {
+#addCategoryForm,
+#editCategoryForm {
   width: 5%;
   height: fit-content;
 }

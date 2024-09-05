@@ -23,7 +23,7 @@
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['type'] ?></option>
+                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -57,7 +57,7 @@
                             <?php if (mysqli_num_rows($data["edit_slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["edit_slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['type'] ?></option>
+                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -95,7 +95,7 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $counter++; ?></td>
-                                        <td><?php echo str_repeat('|---', $row['level']).$row['type'] ?></td>
+                                        <td><?php echo str_repeat('|---', $row['level']).$row['name'] ?></td>
                                         <td><?php echo $row['slug'] ?></td>
                                         <td>
                                             <form action="getCategoryById" method="POST">
@@ -148,7 +148,7 @@
                     if (response) {
                         $.each(response, function (key, value) {
                             $('#edit_category_id').val(value['id']);
-                            $('#edit_category_name').val(value['type'])
+                            $('#edit_category_name').val(value['name'])
                             $('#edit_category_slug').val(value['slug'])
                             $('#edit_category_parent').val(value['parent_id'])
 

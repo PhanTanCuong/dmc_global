@@ -93,7 +93,7 @@
             <form action="Slider" method="GET">
               <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
               <button type="submit" class="list-group-item list-group-item-action">
-                <?php echo $row['type']; ?>
+                <?php echo $row['name']; ?>
               </button>
             </form>
             <?php

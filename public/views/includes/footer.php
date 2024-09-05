@@ -68,7 +68,7 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) {
                                 while ($rows = mysqli_fetch_array($data['productCategory'])) {
                             ?>
                                     <ul>
-                                        <li><a href="#"><?php echo $rows['type'] ?></a></li>
+                                        <li><a href="#"><?php echo $rows['name'] ?></a></li>
                                     </ul>
                             <?php
                                 }
