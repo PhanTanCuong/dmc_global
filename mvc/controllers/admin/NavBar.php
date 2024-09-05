@@ -16,11 +16,13 @@ class NavBar extends Controller
     function display()
     {
         $item = $this->model('NavBarModel');
+        $category= $this->model('CategoryModel');
 
         // Load view
         $this->view('admin/home', [
             'page' => 'customizeNavbar',
-            'item' => $item->getInforNavBar()
+            'item' => $item->getInforNavBar(),
+            'category'=>$category->getInforCategory()
         ]);
     }
 

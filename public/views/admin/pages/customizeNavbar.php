@@ -1,7 +1,4 @@
 <script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
-
-
-
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
         <!-- First Card (Add Navbar Item) -->
@@ -55,6 +52,42 @@
                         </select>
                     </div>
                     <button type="submit" name="addNavbarItemBtn" class="btn btn-primary">Save</button>
+                </form>
+                <!-- Form for child items -->
+                <form id="childForm" action="addChildItems" class="mt-3" method="POST">
+                    <!-- Checkbox for Child Item -->
+                    <div class="form-group">
+                        <input type="checkbox" id="childItemCheckbox" name="childItemCheckbox">
+                        <label for="childItemCheckbox">Child Items</label>
+                    </div>
+
+                    <!-- Drag-and-drop container for Child Items -->
+                    <div id="childItemContainer" style="display:none;">
+                        <div class="row">
+                            <!-- Available Child Items -->
+                            <div class="col-md-6">
+                                <label>Available Child Items</label>
+                                <ul id="availableItems" class="list-group"
+                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                                    <?php while($rows=mysqli_fetch_assoc($data["category"])): ?>
+                                        <li class="list-group-item draggable-item" draggable="true"
+                                            data-id="<?php echo $rows['id']; ?>">
+                                            <?php echo $rows['name']; ?>
+                                        </li>
+                                    <?php endwhile; ?>
+                                </ul>
+                            </div>
+                            <!-- Drop Area for Child Items -->
+                            <div class="col-md-6">
+                                <label>Selected Child Items</label>
+                                <ul id="selectedItems" class="list-group"
+                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                                    <!-- Items dragged and dropped here will be added as Child Items -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" name="addChildItemBtn" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
@@ -119,10 +152,9 @@
                         </thead>
                         <tbody class="sortable">
                             <?php
-                            if (mysqli_num_rows($data["item"]) > 0) {
+                            if (mysqli_num_rows($data["item"]) > 0) :
                                 $counter = 1;
-                                while ($row = mysqli_fetch_array($data["item"])) {
-                                    ?>
+                                while ($row = mysqli_fetch_array($data["item"])) :?>
                                     <tr id="<?php echo $row['id'] ?>">
                                         <td><?php echo $counter++; ?></td>
                                         <td><?php echo $row['name'] ?></td>
@@ -143,8 +175,8 @@
                                         </td>
                                     </tr>
                                     <?php
-                                }
-                            }
+                                endwhile;
+                            endif;
                             ?>
                         </tbody>
                     </table>
@@ -153,91 +185,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('.edit_btn').click(function (e) {
-            e.preventDefault();
-
-            var navbar_id = $(this).data('id'); // Use data attribute to get the id
-
-            $.ajax({
-                type: "POST",
-                url: 'NavBar/getNavBarById/' + navbar_id,
-                data: {
-                    'checking_edit_btn': true,
-                    'navbar_id': navbar_id
-                },
-                success: function (response) {
-                    // Assuming response is JSON and contains the data
-                    if (response) {
-                        $.each(response, function (key, value) {
-                            // Populate edit form fields with the response data
-                            $('#edit_navbar_id').val(value['id']);
-                            $('#edit_navbar_name').val(value['name']);
-                            $('#edit_navbar_status').val(value['status']);
-                            $('#edit_navbar_link').val(value['link']);
-                        });
-
-                        // Hide the add form and show the edit form
-                        $('#addNavbarForm').hide();
-                        $('#editNavbarForm').show();
-
-                    } else {
-                        alert('Error fetching data.');
-                    }
-                },
-                error: function () {
-                    alert('An error occurred.');
-                }
-            });
-        });
-
-        $('#cancelEdit').click(function () {
-            // Hide the edit form and show the add form
-            $('#editNavbarForm').hide();
-            $('#addNavbarForm').show();
-        });
-    });
-</script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
 
 
-<script style="text/javascript" src="/dmc_global/public/js/admin/sortItem.js?<?php echo microtime(); ?>"></script>
-<script>
-    $(function () {
-        $("#navbar_link").selectmenu();
-    });
-    $(function () {
-        $("#navbar_status").selectmenu();
-    });
-
-
-</script>
-
-<!-- <script>
-    const dynamicPages = <?php echo json_encode($dynamic_pages); ?>;
-
-    $(function () {
-        $("#navbar_link").selectmenu().on("selectmenuchange", function () {
-            const selectedValue = $(this).val();
-
-            // Check if the selected value corresponds to a dynamic page
-            if (dynamicPages[selectedValue]) {
-                // Show the dynamic field container
-                $("#dynamic_field_container").show();
-
-                // Populate the dynamic selectmenu with the corresponding dynamic options
-                // let dynamicOptions = '';
-                // for (let key in dynamicPages[selectedValue]) {
-                //     dynamicOptions += `<option value="${key}">${dynamicPages[selectedValue][key]}</option>`;
-                // }
-
-                // $("#dynamic_field").html(dynamicOptions);
-                // $("#dynamic_field").selectmenu("refresh"); // Refresh the selectmenu to apply changes
-            } else {
-                // Hide the dynamic field container if a static page is selected
-                $("#dynamic_field_container").hide();
-            }
-        });
-    });
-</script> -->

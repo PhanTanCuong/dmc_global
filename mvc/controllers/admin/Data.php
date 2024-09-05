@@ -40,7 +40,7 @@ class Data extends Controller
         $data = $item->getItem($block_id, $product_category_id);
         $this->view("admin/home", [
             "item" => $data,
-            "product_categories" => $product_category->getInforCategory(),
+            "product_categories" => $product_category->getInforProductCategory(),
             "block" => $item->getBlock(),
             "radio_button" => $block_id,
             "page" => "customizeData"

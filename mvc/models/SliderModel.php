@@ -19,8 +19,10 @@ class SliderModel extends DB
             $query="INSERT INTO banner (title,description,image,product_category_id) VALUES (?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("sssi", $title, $description, $image, $product_category_id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         }catch(mysqli_sql_exception $e){
             echo "Error: ". $e->getMessage();
         }
@@ -32,8 +34,10 @@ class SliderModel extends DB
             $query = "UPDATE banner SET title=?,description=?,image=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("sssi", $title, $description, $image, $id);
-            $stmt->execute();
-            return $stmt;
+             if ($stmt->execute()) {
+                return true;
+            }
+            return false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
