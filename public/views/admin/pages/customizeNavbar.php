@@ -71,7 +71,7 @@
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                                     <?php while($rows=mysqli_fetch_assoc($data["category"])): ?>
                                         <li class="list-group-item draggable-item" draggable="true"
-                                            data-id="<?php echo $rows['id']; ?>">
+                                            data-id="<?php echo $rows['slug']; ?>">
                                             <?php echo $rows['name']; ?>
                                         </li>
                                     <?php endwhile; ?>
