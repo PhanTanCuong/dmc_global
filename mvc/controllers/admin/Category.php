@@ -11,7 +11,6 @@ class Category extends Controller
     function display()
     {
         $item = $this->model('CategoryModel');
-
         $this->view('admin/home', [
             'page' => 'displayCategory',
             'edit_slug_parent'=>$item->getInforCategory(),
@@ -24,17 +23,15 @@ class Category extends Controller
     {
         try {
             if (isset($_POST['addCategoryBtn'])) {
-                
+                $name = $_POST['category_name'];
                 $slug = strip_tags($_POST['category_slug']);
                 $parent_id=(int)$_POST['category_parent'];
-
+                
                 $item = $this->model('CategoryModel');
-                $category_level = $item->traceParent($parent_id);
-                $prefix =str_repeat('|---',$category_level);
-                $name = $prefix.strip_tags($_POST['category_name']);
 
-
-                $success = $item->addCategoryInfor($name,$slug,$parent_id);
+                $level= $item->traceParent($parent_id);
+                
+                $success = $item->addCategoryInfor($name,$slug,$parent_id,$level);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:Category');
@@ -68,7 +65,6 @@ class Category extends Controller
     function customizeCategory()
     {
         try {
-
             if (isset($_POST["category_updatebtn"])) {
                 $id = $_POST['edit_category_id'];
                 $name = strip_tags($_POST['edit_category_name']);
@@ -76,7 +72,10 @@ class Category extends Controller
                 $parent_id=(int)$_POST['edit_category_parent'];
 
                 $item = $this->model('CategoryModel');
-                $success = $item->customizeInforCategory($id, $name,$slug,$parent_id);
+
+                $level= $item->traceParent($parent_id);
+                
+                $success = $item->customizeInforCategory($id, $name,$slug,$parent_id,$level);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');

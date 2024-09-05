@@ -24,7 +24,7 @@ class Slider extends Controller
         }
 
         $this->view('admin/home', [
-            'product_categories' => $product_category->getInforCategory(),
+            'product_categories' => $product_category->getInforProductCategory(),
             'item' => $item->getInforBanner($product_category_id),
             'page' => 'customizeBanner'
         ]);

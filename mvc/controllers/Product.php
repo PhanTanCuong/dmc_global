@@ -18,6 +18,8 @@ class Product extends Controller
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("CustomizeModel");
+        $category = $this->model("CategoryModel");
+
         //View
         $this->view("home", [
             "menu_items" => $item->getNavBarItem(),
@@ -34,7 +36,7 @@ class Product extends Controller
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
             "icons" => $item->getFooterIconInfor(),
-            "productCategory" => $item->getCategory(),
+            "productCategory" => $category->getInforProductCategory(),
             "navbar_footer" => $item->getMenuFooter(),
             "bg_stat" => $item->getBackgroundbyId(7),
             "bg_footer" => $item->getBackgroundbyId(8),
