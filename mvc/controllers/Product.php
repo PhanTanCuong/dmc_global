@@ -24,8 +24,8 @@ class Product extends Controller
         $this->view("home", [
             "menu_items" => $item->getNavBarItem(),
             "checkDropdownMenu" => $item->getIdDropdownMenu(),
-            "getChildNavbarbyId" => function ($id) use ($item) {
-                return $item->getCategory();
+            "getChildNavbarbyId" => function ($id) use ($category) {
+                return $category->getInforProductCategory();
             },
             "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProduct(),

@@ -23,22 +23,23 @@ class CategoryModel extends DB
         }
     }
 
-    public function getInforProductCategory(){
-        try{
-            $query="SELECT * FROM product_category WHERE level=1 AND parent_id=23";
+    public function getInforProductCategory()
+    {
+        try {
+            $query = "SELECT * FROM product_category WHERE level=1 AND parent_id=23";
             return mysqli_query($this->connection, $query);
-        }catch(mysqli_sql_exception $e) {
-            echo "Error: ". $e->getMessage();
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
-    public function addCategoryInfor($name, $slug, $parent_id,$level)
+    public function addCategoryInfor($name, $slug, $parent_id, $level)
     {
         try {
             $query = "INSERT INTO product_category (type,slug,parent_id,level) VALUES (?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssii", $name, $slug, $parent_id,$level);
-             if ($stmt->execute()) {
+            $stmt->bind_param("ssii", $name, $slug, $parent_id, $level);
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
@@ -56,12 +57,12 @@ class CategoryModel extends DB
             echo $e->getMessage();
         }
     }
-    public function customizeInforCategory($id, $name, $slug, $parent_id,$level)
+    public function customizeInforCategory($id, $name, $slug, $parent_id, $level)
     {
         try {
             $query = "UPDATE product_category SET type=?,slug=?,parent_id=?,level=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssiii",$name, $slug, $parent_id,$level, $id);
+            $stmt->bind_param("ssiii", $name, $slug, $parent_id, $level, $id);
             if ($stmt->execute()) {
                 return true;
             }
@@ -100,6 +101,22 @@ class CategoryModel extends DB
             // parent_id <> 0, continue trace the parent category
             return $this->traceParent($category['parent_id'], $level + 1);
         }
+    }
+
+    public function hasChildren($category_id)
+    {
+        try {
+            $query = "SELECT COUNT(*) AS child_count FROM product_category WHERE parent_id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $category_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            return $row['child_count'] > 0; // Trả về true nếu có con
+        }catch(mysqli_sql_exception $error) {
+            echo "Error: ". $error->getMessage();
+        }
+
     }
 }
 

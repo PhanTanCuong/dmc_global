@@ -13,8 +13,8 @@ class Category extends Controller
         $item = $this->model('CategoryModel');
         $this->view('admin/home', [
             'page' => 'displayCategory',
-            'edit_slug_parent'=>$item->getInforCategory(),
-            'slug_parent'=> $item-> getInforCategory(),
+            'edit_slug_parent' => $item->getInforCategory(),
+            'slug_parent' => $item->getInforCategory(),
             'item' => $item->getInforCategory()
         ]);
     }
@@ -25,13 +25,13 @@ class Category extends Controller
             if (isset($_POST['addCategoryBtn'])) {
                 $name = $_POST['category_name'];
                 $slug = strip_tags($_POST['category_slug']);
-                $parent_id=(int)$_POST['category_parent'];
-                
+                $parent_id = (int) $_POST['category_parent'];
+
                 $item = $this->model('CategoryModel');
 
-                $level= $item->traceParent($parent_id);
-                
-                $success = $item->addCategoryInfor($name,$slug,$parent_id,$level);
+                $level = $item->traceParent($parent_id);
+
+                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:Category');
@@ -66,16 +66,20 @@ class Category extends Controller
     {
         try {
             if (isset($_POST["category_updatebtn"])) {
-                $id = $_POST['edit_category_id'];
+                $id = (int)$_POST['edit_category_id'];
                 $name = strip_tags($_POST['edit_category_name']);
                 $slug = strip_tags($_POST['edit_category_slug']);
-                $parent_id=(int)$_POST['edit_category_parent'];
-
+                $parent_id = (int) $_POST['edit_category_parent'];
+                if($id===$parent_id){
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location:Category');
+                    die();
+                }
                 $item = $this->model('CategoryModel');
 
-                $level= $item->traceParent($parent_id);
-                
-                $success = $item->customizeInforCategory($id, $name,$slug,$parent_id,$level);
+                $level = $item->traceParent($parent_id);
+
+                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');
@@ -96,6 +100,11 @@ class Category extends Controller
             if (isset($_POST['delete_category_btn'])) {
                 $id = $_POST['delete_category_id'];
                 $item = $this->model('CategoryModel');
+                if ($item->hasChildren($id)) {
+                    $_SESSION['status'] = 'The category can NOT be deleted because it has child categories.';
+                    header('Location:Category');
+                    die();
+                }
                 $success = $item->deleteCategory($id);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is deleted';
@@ -111,7 +120,7 @@ class Category extends Controller
         }
     }
 
-    
+
 
 }
 ?>
