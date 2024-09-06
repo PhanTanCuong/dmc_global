@@ -1,151 +1,13 @@
-<!-- Head Tab -->
-<div class="container-fluid">
-
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Customize Tab</h5>
-    </div>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="padding: 2em 0;">
-        <?php
-        foreach ($data["head"] as $row) {
-        ?>
-
-            <form action="customizeTab" method="POST" enctype="multipart/form-data">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" name="head_title" class="form-control" placeholder="Enter Title" value="<?php echo $row['title']; ?>"></>
-                    </div>
-                    <div class="form-group">
-                        <label>Current Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Image</label>
-                        <input type="file" name="head_image" id="image" class="form-control">
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" name="head_updatebtn" class="btn btn-primary" style="margin-left:20px">Update</button>
-                </div>
-            </form>
-        <?php
-        }
-        ?>
-    </div>
-</div>
-<!-- Head Logo -->
-<div class="container-fluid">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Customize Logo
-        </h5>
-    </div>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="padding: 2em 0;">
-        <form action="customizeLogo" method="POST" enctype="multipart/form-data">
-            <div class="card-body">
-                <?php
-                foreach ($data["header_icon"] as $row) {
-                ?>
-                    <div class="form-group">
-                        <label>Header</label><br>
-                        <label>Current Background Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Background Image</label>
-                        <input type="file" name="header_icon" class="form-control">
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
-            <div>
-                <button type="submit" name="head_logo_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
-            </div>
-        </form>
-
-
-    </div>
-</div>
-
-<!-- Footer logo -->
-<div class="container-fluid">
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="padding: 2em 0;">
-        <form action="customizeFooterLogo" method="POST" enctype="multipart/form-data">
-            <div class="card-body">
-                <?php
-                foreach ($data["footer_icon"] as $row) {
-                ?>
-                    <div class="form-group">
-                        <label>Footer</label><br>
-                        <label>Current Background Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Background Image</label>
-                        <input type="file" name="footer_icon" class="form-control">
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
-            <div>
-                <button type="submit" name="footer_logo_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
-            </div>
-        </form>
-
-
-    </div>
-</div>
+<?php
+include("fragments/headerInformation.php");
+include("fragments/Logo.php");
+include("fragments/footerBackground.php");
+?>
 
 <!-- Footer background -->
-<div class="container-fluid">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
-            Customize Footer Background
-        </h5>
-    </div>
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4" style="padding: 2em 0;">
-        <form action="customizeFooterBackground" method="POST" enctype="multipart/form-data">
-            <div class="card-body">
-                <?php
-                foreach ($data["bg_footer"] as $row) {
-                ?>
-                    <div class="form-group">
-                        <label>Header</label><br>
-                        <label>Current Background Image</label><br>
-                        <img src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%" height="auto" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Background Image</label>
-                        <input type="file" name="footer_bg_image" class="form-control">
-                    </div>
-                <?php
-                }
-                ?>
-            </div>
-            <div>
-                <button type="submit" name="footer_bg_updatebtn" class="btn btn-primary" style="margin-left: 20px;">Update</button>
-            </div>
-        </form>
-
-
-    </div>
-</div>
-
-<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -159,11 +21,13 @@
                     <div class="form-group">
                         <input type="hidden" name="edit_id" id="edit_id">
                         <label> Title </label>
-                        <input type="text" name="edit_title" id="edit_title" class="form-control" placeholder="Enter Title">
+                        <input type="text" name="edit_title" id="edit_title" class="form-control"
+                            placeholder="Enter Title">
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" name="edit_description" id="edit_description" class="form-control" placeholder="Enter Description">
+                        <input type="text" name="edit_description" id="edit_description" class="form-control"
+                            placeholder="Enter Description">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -175,16 +39,15 @@
         </div>
     </div>
 </div>
-
-
 <div class="container-fluid">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"
+            style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
+            Footer Information
+        </h5>
+    </div>
 
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List of data</h6>
-        </div>
-
         <div class="card-body">
             <div class="table-responsive">
                 <?php
@@ -201,21 +64,24 @@
                     <tbody>
                         <?php
                         if (mysqli_num_rows($data["item"]) > 0) {
-                            $counter = 1; // Initialize the counter for the sequential ID
+                            $counter = 1;
                             while ($row = mysqli_fetch_array($data["item"])) {
-                        ?>
+                                ?>
                                 <tr>
                                     <td><?php echo $counter++; ?></td>
                                     <td><?php echo $row['title'] ?></td>
                                     <td><?php echo $row['description'] ?></td>
                                     <td>
                                         <form action="getDataById" method="POST">
-                                            <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
-                                            <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></i></button>
+                                            <input type="hidden" name="edit_id" class="edit_id"
+                                                value="<?php echo $row['id']; ?>">
+                                            <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
+                                                data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i>
+                                                </i></i></button>
                                         </form>
                                     </td>
                                 </tr>
-                        <?php
+                                <?php
                             }
                         }
                         ?>
@@ -225,33 +91,55 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $('.edit_btn').click(function(e) {
-                e.preventDefault();
+</div>
 
-                var account_id = $(this).closest('tr').find('.edit_id').val();
+<div class="container-fluid">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"
+            style="color:#4a6fdc;text-transform: uppercase;font-weight: 600;">
+            Quick Links
+        </h5>
+    </div>
 
-                // console.log(account_id);
 
-                $.ajax({
-                    type: "POST",
-                    url: 'Customize/getDataById/' + account_id,
-                    data: {
-                        'checking_edit_btn': true,
-                        'data_id': account_id,
-                    },
-                    success: function(response) {
-                        // console.log(response);
-                        $.each(response, function(key, value) {
-                            $('#edit_id').val(value['id']);
-                            $('#edit_title').val(value['title']);
-                            $('#edit_description').val(value['description']);
-                        });
-                        $('#editData').modal('show');
-                    }
-                });
-            });
+    <div class="card shadow mb-4" style="padding: 2em 0;">
+        <form action="customizeFooterCategory" method="POST">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Available Child Items -->
+                    <div class="col-md-6">
+                        <label>Available Child Items</label>
+                        <ul id="availableItems" class="list-group"
+                            style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                            <?php while ($rows = mysqli_fetch_assoc($data["category"])): ?>
+                                <li class="list-group-item draggable-item" draggable="true"
+                                    data-id="<?php echo $rows['id']; ?>">
+                                    <?php echo $rows['name']; ?>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    </div>
+                    <!-- Drop Area for Child Items -->
+                    <div class="col-md-6">
+                        <label>Selected Child Items</label>
+                        <ul id="selectedItems" class="list-group"
+                            style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                            <!-- Items dragged and dropped here will be added as Child Items -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" name="footer_bg_updatebtn" class="btn btn-primary"
+                    style="margin-left: 20px;">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-        });
-    </script>
+
+
+
+<?php include("fragments/footerIcon.php") ?>
+<script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>

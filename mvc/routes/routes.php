@@ -61,15 +61,8 @@ Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
 Route::add('Admin/editFooterData','Customize@editFooterData');
 
-//Background
-Route::add('Admin/Background','Background@display');
-Route::add('Admin/addBackground','Background@addBackground');
-Route::add('Admin/Background/getBackgroundById/(\d+)', 'Background@getBackgroundById');
-Route::add('Admin/customizeBackground','Background@customizeBackground');
-Route::add('Admin/deleteBackground','Background@deleteBackground');
-
 //Icons
-Route::add('Admin/Icons','Icons@display');
+Route::add('Admin/Customize','Icons@display');
 Route::add('Admin/addIcons','Icons@addIcons');
 Route::add('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
 Route::add('Admin/customizeIcons','Icons@customizeIcons');
