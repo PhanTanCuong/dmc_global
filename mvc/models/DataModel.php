@@ -96,4 +96,6 @@ class DataModel extends DB
             echo "Error: ". $e->getMessage();
         }
     }
+
+    
 }
