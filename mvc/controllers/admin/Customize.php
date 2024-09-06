@@ -17,14 +17,16 @@ class Customize extends Controller
     {
         $item = $this->model('CustomizeModel');
         $icons =$this->model('IconsModel');
+        $category = $this->model('CategoryModel');
         $this->view('admin/home', [
-            'page' => 'customizeContent',
-            'head' => $item->getHeadInfor(),
+            "page" => 'customizeContent',
+            "head" => $item->getHeadInfor(),
             "header_icon" => $item->getIconbyId(2),
             "footer_icon" => $item->getIconbyId(14),
             "bg_footer" => $item->getBackgroundbyId(8),
             "item" => $item->getDataFooter(),
-            'footer_icons' => $icons->getInforIcons(7),
+            "footer_icons" => $icons->getInforIcons(7),
+            "category"=>$category->getInforProductCategory()
         ]);
     }
 

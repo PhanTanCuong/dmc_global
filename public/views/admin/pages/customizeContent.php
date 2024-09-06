@@ -1,7 +1,7 @@
 <?php
-    include("fragments/headerInformation.php");
-    include("fragments/Logo.php");
-    include("fragments/footerBackground.php");
+include("fragments/headerInformation.php");
+include("fragments/Logo.php");
+include("fragments/footerBackground.php");
 ?>
 
 <!-- Footer background -->
@@ -105,16 +105,35 @@
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <form action="customizeFooterCategory" method="POST">
             <div class="card-body">
-                    <div class="form-group">
+                <div class="row">
+                    <!-- Available Child Items -->
+                    <div class="col-md-6">
+                        <label>Available Child Items</label>
+                        <ul id="availableItems" class="list-group"
+                            style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                            <?php while ($rows = mysqli_fetch_assoc($data["category"])): ?>
+                                <li class="list-group-item draggable-item" draggable="true"
+                                    data-id="<?php echo $rows['id']; ?>">
+                                    <?php echo $rows['name']; ?>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
                     </div>
+                    <!-- Drop Area for Child Items -->
+                    <div class="col-md-6">
+                        <label>Selected Child Items</label>
+                        <ul id="selectedItems" class="list-group"
+                            style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                            <!-- Items dragged and dropped here will be added as Child Items -->
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div>
                 <button type="submit" name="footer_bg_updatebtn" class="btn btn-primary"
                     style="margin-left: 20px;">Update</button>
             </div>
         </form>
-
-
     </div>
 </div>
 
@@ -123,3 +142,4 @@
 
 <?php include("fragments/footerIcon.php") ?>
 <script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
