@@ -7,7 +7,7 @@
             Tab</h5>
     </div>
 
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <?php
         foreach ($data["head"] as $row) {
@@ -49,7 +49,7 @@
         </h5>
     </div>
 
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <form action="customizeLogo" method="POST" enctype="multipart/form-data">
             <div class="card-body">
@@ -88,7 +88,7 @@
             Footer Logo
         </h5>
     </div>
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <form action="customizeFooterLogo" method="POST" enctype="multipart/form-data">
             <div class="card-body">
@@ -128,7 +128,7 @@
         </h5>
     </div>
 
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4" style="padding: 2em 0;">
         <form action="customizeFooterBackground" method="POST" enctype="multipart/form-data">
             <div class="card-body">
@@ -202,7 +202,7 @@
             Footer Information
         </h5>
     </div>
-    <!-- DataTales Example -->
+    
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -220,7 +220,7 @@
                     <tbody>
                         <?php
                         if (mysqli_num_rows($data["item"]) > 0) {
-                            $counter = 1; // Initialize the counter for the sequential ID
+                            $counter = 1; 
                             while ($row = mysqli_fetch_array($data["item"])) {
                                 ?>
                                 <tr>
