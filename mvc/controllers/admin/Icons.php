@@ -13,14 +13,6 @@ class Icons extends Controller
     {
         Middleware::checkAdmin();
     }
-    function display()
-    {
-        $item = $this->model('IconsModel');
-        $this->view('admin/home', [
-            'item' => $item->getInforIcons(7),
-            'page' => 'customizeIcons'
-        ]);
-    }
 
     function addIcons()
     {
@@ -30,7 +22,7 @@ class Icons extends Controller
                 $image = $_FILES["icons_image"]['name'];
                 if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Incorrect image type.';
-                    header('Location:Icons');
+                    header('Location:Customize');
                     die();
                 }
                 $item = $this->model('IconsModel');
@@ -38,22 +30,22 @@ class Icons extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
                     $_SESSION['success'] = 'Icons image added successfully';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 } else {
                     $_SESSION['status'] = 'Icons image NOT added successfully';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Icons');
+            header('Location:Customize');
         }
     }
 
 
     function getIconsById()
     {
-        if (isset($_POST['checking_edit_btn'])) {
+        if (isset($_POST['checking_edit_footer_icon_btn'])) {
             $id = $_POST['icons_id'];
             $result_array = [];
             $item = $this->model('IconsModel');
@@ -76,7 +68,7 @@ class Icons extends Controller
             if (isset($_POST["icons_updatebtn"])) {
 
                 $item = $this->model('IconsModel');
-                $id = $_POST['edit_id'];
+                $id = $_POST['edit_footer_id'];
                 $result = $item->getIconsById($id);
                 $data=mysqli_fetch_assoc($result);// fetch mysqli_result into array data
 
@@ -86,7 +78,7 @@ class Icons extends Controller
                 if (!empty($_FILES["icons_image"]['name'])) {
                     if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
                         $_SESSION['status'] = 'Incorrect image type ';
-                        header('Location:Icons');
+                        header('Location:Customize');
                         die();
                     }
                     $image = $_FILES["icons_image"]['name'];
@@ -98,15 +90,15 @@ class Icons extends Controller
                 if ($success) {
                     move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Icons');
+            header('Location:Customize');
         }
     }
 
@@ -119,15 +111,15 @@ class Icons extends Controller
                 $success = $item->deleteIcons($id);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:Icons');
+                    header('Location:Customize');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Icons');
+            header('Location:Customize');
         }
     }
 }

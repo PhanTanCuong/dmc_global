@@ -62,7 +62,7 @@ Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
 Route::add('Admin/editFooterData','Customize@editFooterData');
 
 //Icons
-Route::add('Admin/Icons','Icons@display');
+Route::add('Admin/Customize','Icons@display');
 Route::add('Admin/addIcons','Icons@addIcons');
 Route::add('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
 Route::add('Admin/customizeIcons','Icons@customizeIcons');
