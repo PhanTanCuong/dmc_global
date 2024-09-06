@@ -13,7 +13,7 @@ class DataModel extends DB
             echo "Error: " . $e->getMessage();
         }
     }
-
+        
     public function addData($title, $description, $image, $block_id, $page_id)
     {
         try {
@@ -82,4 +82,18 @@ class DataModel extends DB
         }
     }
 
+    public function storedSelectedItems($selectedItems){
+        try{
+            $query="UPDATE data SET data=? WHERE id=12";
+            
+            $stmt =$this->connection->prepare($query);
+            $stmt->bind_param("s",$selectedItems);
+            if(!$stmt->execute()){
+                return false;
+            }
+            return true;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
 }

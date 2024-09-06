@@ -3,7 +3,11 @@ include("fragments/headerInformation.php");
 include("fragments/Logo.php");
 include("fragments/footerBackground.php");
 ?>
-
+<style>
+    .drag-n-drop-box{
+        height: 75vh;
+    }
+</style>
 <!-- Footer background -->
 
 <div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -103,13 +107,13 @@ include("fragments/footerBackground.php");
 
 
     <div class="card shadow mb-4" style="padding: 2em 0;">
-        <form action="customizeFooterCategory" method="POST">
+        <form action="customizeQuickLink" method="POST">
             <div class="card-body">
                 <div class="row">
                     <!-- Available Child Items -->
                     <div class="col-md-6">
                         <label>Available Child Items</label>
-                        <ul id="availableItems" class="list-group"
+                        <ul id="availableItems"  class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <?php while ($rows = mysqli_fetch_assoc($data["category"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
@@ -122,7 +126,7 @@ include("fragments/footerBackground.php");
                     <!-- Drop Area for Child Items -->
                     <div class="col-md-6">
                         <label>Selected Child Items</label>
-                        <ul id="selectedItems" class="list-group"
+                        <ul id="selectedItems" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <!-- Items dragged and dropped here will be added as Child Items -->
                         </ul>
@@ -130,8 +134,7 @@ include("fragments/footerBackground.php");
                 </div>
             </div>
             <div>
-                <button type="submit" name="footer_bg_updatebtn" class="btn btn-primary"
-                    style="margin-left: 20px;">Update</button>
+                <button id="submitButton" type="submit" name="submitButton" class="btn btn-primary" style="margin-left: 20px;">Update</button>
             </div>
         </form>
     </div>

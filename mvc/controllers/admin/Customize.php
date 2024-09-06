@@ -16,8 +16,9 @@ class Customize extends Controller
     function display()
     {
         $item = $this->model('CustomizeModel');
-        $icons =$this->model('IconsModel');
+        $icons = $this->model('IconsModel');
         $category = $this->model('CategoryModel');
+
         $this->view('admin/home', [
             "page" => 'customizeContent',
             "head" => $item->getHeadInfor(),
@@ -26,7 +27,7 @@ class Customize extends Controller
             "bg_footer" => $item->getBackgroundbyId(8),
             "item" => $item->getDataFooter(),
             "footer_icons" => $icons->getInforIcons(7),
-            "category"=>$category->getInforProductCategory()
+            "category" => $category->getInforProductCategory()
         ]);
     }
 
@@ -85,7 +86,7 @@ class Customize extends Controller
                         die();
                     }
                     $head_logo = $_FILES["header_icon"]["name"];
-                
+
                 } else {
                     $head_logo = $currentImage;
                 }
@@ -212,6 +213,30 @@ class Customize extends Controller
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
                     header('Location:Customize');
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:Customize');
+        }
+    }
+
+    function customizeQuickLink()
+    {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['selectedItems'])) {
+                    $selectedItems = json_encode($_POST['selectedItems'], true);
+
+                    $data = $this->model('DataModel');
+                    $success = $data->storedSelectedItems($selectedItems);
+                    if ($success) {
+                        $_SESSION['success'] = 'Your data is updated';
+                        header('Location:Customize');
+                    } else {
+                        $_SESSION['status'] = 'Your data is NOT updated';
+                        header('Location:Customize');
+                    }
                 }
             }
         } catch (Exception $e) {
