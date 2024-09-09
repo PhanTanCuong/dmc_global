@@ -36,7 +36,7 @@ class CategoryModel extends DB
     public function addCategoryInfor($name, $slug, $parent_id, $level)
     {
         try {
-            $query = "INSERT INTO category (type,slug,parent_id,level) VALUES (?,?,?,?)";
+            $query = "INSERT INTO category (name,slug,parent_id,level) VALUES (?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssii", $name, $slug, $parent_id, $level);
             if ($stmt->execute()) {
@@ -60,7 +60,7 @@ class CategoryModel extends DB
     public function customizeInforCategory($id, $name, $slug, $parent_id, $level)
     {
         try {
-            $query = "UPDATE category SET type=?,slug=?,parent_id=?,level=? WHERE id = ?";
+            $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssiii", $name, $slug, $parent_id, $level, $id);
             if ($stmt->execute()) {
