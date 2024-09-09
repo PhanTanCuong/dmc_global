@@ -1,6 +1,8 @@
 <?php
 use Core\Route;
 Route::add('/','Home@display');
+Route::add('/Product/fetchProductCategory', 'Product@fetchProductCategory');
+
 
 Route::add('Signin','Signin@display');
 Route::add('Signout','Signin@logout');
@@ -11,6 +13,8 @@ Route::add('Signin/login','Signin@login');
 
 //User routes
 Route::add('Product/(\d+)','Product@display');
+
+Route::add('Test','Test@display');  
 
 // Admin routes
 Route::add('Admin/dashboard','Home@display');
@@ -56,6 +60,7 @@ Route::add('Admin/customizeTab','Customize@customizeTab');
 Route::add('Admin/customizeLogo','Customize@customizeLogo');
 Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
 Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
+Route::add('Admin/customizeQuickLink','Customize@customizeQuickLink');
 
 Route::add('Admin/addData','Data@addData');
 Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
@@ -96,5 +101,7 @@ Route::add('Admin/addCategory','Category@addCategory');
 Route::add('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::add('Admin/customizeCategory','Category@customizeCategory');
 Route::add('Admin/deleteCategory','Category@deleteCategory');
+
+
 
 ?>

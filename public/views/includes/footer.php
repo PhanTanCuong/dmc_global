@@ -1,22 +1,22 @@
 <?php
-if (mysqli_num_rows($data["bg_footer"]) > 0) :
-    while ($rows = mysqli_fetch_array($data["bg_footer"])) :
+if (mysqli_num_rows($data["bg_footer"]) > 0):
+    while ($rows = mysqli_fetch_array($data["bg_footer"])):
         $footer_bg = $rows['image'];
         $image_footer_path = "/dmc_global/public/images/" . $footer_bg;
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_footer_path)) :
-?>
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_footer_path)):
+            ?>
             <footer style="background:url(<?php echo $image_footer_path ?>)no-repeat center/cover;">
                 <div class="container-footer">
                     <div class="footer-content">
                         <div class="footer-logo">
                             <?php
-                            if (mysqli_num_rows($data["footer_icon"]) > 0) :
-                                while ($rows = mysqli_fetch_array($data["footer_icon"])) :
+                            if (mysqli_num_rows($data["footer_icon"]) > 0):
+                                while ($rows = mysqli_fetch_array($data["footer_icon"])):
                                     $footer_icon = $rows['image'];
                                     $path = "/dmc_global/public/images/" . $footer_icon;
-                                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)) :?>
+                                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)): ?>
                                         <img src="<?php echo $path ?>" class="img-fluid">
-                            <?php
+                                        <?php
                                     endif;
                                 endwhile;
                             endif;
@@ -30,7 +30,7 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                             while ($row = mysqli_fetch_array($data['footer_data'])) {
                                 $titles[] = $row['title'];
                                 $descriptions[] = $row['description'];
-                            }?>
+                            } ?>
                             <h3 class="footer-title">
                                 <?php echo $titles[0] ?>
                                 <p class="underline-footer"></p>
@@ -43,11 +43,11 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                             </h3>
                             <p><?php echo $descriptions[1] ?></p>
                             <?php
-                            if (mysqli_num_rows($data['icons']) > 0) :
-                                while ($rows = mysqli_fetch_array($data['icons'])) :
-                            ?>
+                            if (mysqli_num_rows($data['icons']) > 0):
+                                while ($rows = mysqli_fetch_array($data['icons'])):
+                                    ?>
                                     <span><img src="/dmc_global/public/images/<?php echo $rows['image'] ?>"></span>
-                            <?php
+                                    <?php
                                 endwhile;
                             endif;
                             ?>
@@ -56,21 +56,16 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                         </div>
                         <div class="footer-links">
                             <h3 class="footer-title">
-                                <?php echo $titles[2] ?>
+                                <?php echo $titles[2]; ?>
                                 <p class="underline-footer"></p>
                             </h3>
-                            <?php
-                            if (mysqli_num_rows($data['productCategory']) > 0) :
-                                while ($rows = mysqli_fetch_array($data['productCategory'])) :
-                            ?>
-                                    <ul>
-                                        <li><a href="#"><?php echo $rows['name'] ?></a></li>
-                                    </ul>
-                            <?php
-                                endwhile;
-                            endif;
-                            ?>
+                            <ul id="product-category">
+                                <?php foreach ($data['product_categories'] as $category): ?>
+                                    <li><a href="#<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
                         </div>
+
                         <div class="footer-links">
                             <h3 class="footer-title">
                                 <?php echo $titles[3] ?>
@@ -78,11 +73,11 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                             </h3>
                             <ul>
                                 <?php
-                                if (mysqli_num_rows($data['navbar_footer']) > 0) :
-                                    while ($rows = mysqli_fetch_array($data['navbar_footer'])) :
-                                ?>
+                                if (mysqli_num_rows($data['navbar_footer']) > 0):
+                                    while ($rows = mysqli_fetch_array($data['navbar_footer'])):
+                                        ?>
                                         <li><a href="#"> <?php echo $rows['name'] ?></a></li>
-                                <?php
+                                        <?php
                                     endwhile;
                                 endif;
                                 ?>
@@ -99,11 +94,11 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                             <div id="phone">
                                 <ul>
                                     <?php
-                                    if (mysqli_num_rows($data['phone_icon']) > 0) :
-                                        while ($rows = mysqli_fetch_array($data['phone_icon'])) :
-                                    ?>
+                                    if (mysqli_num_rows($data['phone_icon']) > 0):
+                                        while ($rows = mysqli_fetch_array($data['phone_icon'])):
+                                            ?>
                                             <li><img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" class="img-fluid"></li>
-                                    <?php
+                                            <?php
                                         endwhile;
                                     endif;
                                     ?>
@@ -118,10 +113,31 @@ if (mysqli_num_rows($data["bg_footer"]) > 0) :
                 </div>
                 </section>
             </footer>
-<?php
+            <?php
         endif;
     endwhile;
 endif;
 
 ?>
 </body>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            url:"http://localhost/dmc_global/public/Product/1",
+            type:"GET",
+            dataType:"json",
+            success:function(response){
+                response.forEach(function(item){
+                    if(item.json_data!==null){
+                        var jsonData =JSON.parse(item.json_data);
+
+                        jsonData.forEach(function(product){
+                            $('#product-category').append('<li><a href="'+product.id+'">'+product.name+'</a></li>');
+                        })
+                    }
+                })
+            }
+        });
+    });
+</script> -->

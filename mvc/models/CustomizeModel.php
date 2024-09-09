@@ -4,106 +4,7 @@ use Core\DB;
 
 class CustomizeModel extends DB
 {
-    public function getAbout2Infor()
-    {
-        try {
-
-            $this->connection->query("SET @row_number := 0");
-            $query = "SELECT
-                                data.block_id,
-                                MAX(CASE WHEN row_num = 1 THEN image END) AS parent_image,
-                                MAX(CASE WHEN row_num = 2 THEN image END) AS child_image,
-                                data.title,
-                                data.description
-                                
-                            FROM (
-                                SELECT 
-                                    image,
-                                    block_id,
-                                    (@row_number := @row_number + 1) AS row_num
-                                FROM 
-                                    background
-                                WHERE 
-                                    block_id = 3
-                                ORDER BY 
-                                    id
-                            ) AS numbered_images
-                            JOIN data ON numbered_images.block_id = data.block_id
-                            WHERE data.block_id = 3
-                            GROUP BY data.title, data.description";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function getAbout3Infor()
-    {
-        try {
-            $query = "SELECT DISTINCT 
-                            background.image, 
-                            data.title, 
-                            data.description 
-                        FROM 
-                            background 
-                        JOIN 
-                            data 
-                            ON background.block_id = data.block_id 
-                        WHERE 
-                            background.block_id = 4;
-";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function getProduct1Infor()
-    {
-        try {
-            $query = "SELECT 
-                            background.image, 
-                            data.title, 
-                            data.description 
-                        FROM 
-                            background 
-                        JOIN 
-                            data 
-                            ON background.block_id = data.block_id 
-                        WHERE 
-                            background.block_id = 5;
-";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function getStatIconInfor()
-    {
-        try {
-            $query = "SELECT  
-                            icon.image,
-                            MAX(data.title) AS title,
-                            MAX(data.description) AS description
-                        FROM 
-                            block
-                        JOIN 
-                            icon ON block.block_id = icon.block_id
-                        JOIN 
-                            data ON block.block_id = data.block_id
-                        WHERE 
-                            block.block_id = 6
-                        GROUP BY 
-                            icon.image;
-
-";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
+    
     //Tab Head
 
     public function getHeadInfor()
@@ -294,5 +195,33 @@ class CustomizeModel extends DB
         }catch(mysqli_sql_exception $e){
             echo $e->getMessage();
         }
+    }
+
+    public function fetchJsonCategory(){
+        try{
+            $query="SELECT json_data FROM data WHERE id=12";
+            $result =$this->connection->query($query);
+
+            if($row=$result->fetch_assoc()){
+                return json_decode($row['json_data'],true); 
+            }else{
+                return null;
+            }
+
+        }catch(mysqli_sql_exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function test(){
+        $query ="SELECT * FROM data ";
+        $json= array();
+        $stmt =$this->connection->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row=$result->fetch_assoc()){
+            array_push($json,$row);
+        }
+        return json_encode($json);
     }
 }
