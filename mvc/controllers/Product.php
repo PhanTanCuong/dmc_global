@@ -36,7 +36,7 @@ class Product extends Controller
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
             "icons" => $item->getFooterIconInfor(),
-            "productCategory" => $category->getInforProductCategory(),
+            // "productCategory" => $category->getInforProductCategory(),
             "navbar_footer" => $item->getMenuFooter(),
             "bg_stat" => $item->getBackgroundbyId(7),
             "bg_footer" => $item->getBackgroundbyId(8),
@@ -46,5 +46,18 @@ class Product extends Controller
             "footer_data" => $item->getDataFooter(),
             "page" => "displayProduct"
         ]);
+    }
+
+    public function fetchProductCategory()
+    {
+        // Gọi model để lấy thông tin product category
+        $category = $this->model("CustomizeModel");
+
+        // Lấy dữ liệu từ model (có thể trả về mảng kết quả)
+        $productCategory = $category->test();
+
+        // Trả về JSON để client sử dụng
+        header('Content-Type: application/json');
+        echo json_encode($productCategory);
     }
 }

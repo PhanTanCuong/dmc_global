@@ -32,8 +32,8 @@ $('.draggable-item').on('dragstart', function(event) {
       $('#selectedItems .draggable-item').each(function(){
         //đưa thông tin từng draggable items vào mảng
         selectedItems.push({
-          id: $(this).data('id'),
-          name: $(this).text()
+          id: $(this).data('id').trim().replace(/\//g,''),
+          name: $(this).text().trim().replace(/\s+/g,'').replace(/\//g,'')
         });
       });
 

@@ -1,6 +1,8 @@
 <?php
 use Core\Route;
 Route::add('/','Home@display');
+Route::add('/Product/fetchProductCategory', 'Product@fetchProductCategory');
+
 
 Route::add('Signin','Signin@display');
 Route::add('Signout','Signin@logout');

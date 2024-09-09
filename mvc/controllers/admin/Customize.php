@@ -225,14 +225,8 @@ class Customize extends Controller
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
-                    $selectedItems=array();
-                    $selectedItems[] = json_encode($_POST['selectedItems'], true);
-                    foreach ($selectedItems as &$item) {
-                        $item['name'] = trim((string)$item['name']); 
-                        $item['id']=trim($item['id']);// Remove extra spaces
-                    }
-
-                    unset($item);
+                    $selectedItems = json_decode($_POST['selectedItems'],true);
+                        
                     $data = $this->model('DataModel');
                     $success = $data->storedSelectedItems($selectedItems);
                     if ($success) {

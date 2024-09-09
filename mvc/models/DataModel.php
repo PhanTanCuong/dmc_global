@@ -84,7 +84,9 @@ class DataModel extends DB
 
     public function storedSelectedItems($selectedItems){
         try{
-            $query="UPDATE data SET data=? WHERE id=12";
+            $selectedItems=json_encode($selectedItems);
+           
+            $query="UPDATE data SET json_data=CAST(? AS JSON) WHERE id=12";
             
             $stmt =$this->connection->prepare($query);
             $stmt->bind_param("s",$selectedItems);
