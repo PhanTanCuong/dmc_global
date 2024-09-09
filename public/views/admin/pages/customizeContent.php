@@ -5,7 +5,7 @@ include("fragments/footerBackground.php");
 ?>
 <style>
     .drag-n-drop-box{
-        height: 75vh;
+        height: 35vh;
     }
 </style>
 <!-- Footer background -->

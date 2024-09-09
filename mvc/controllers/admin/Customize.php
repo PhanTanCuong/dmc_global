@@ -224,10 +224,15 @@ class Customize extends Controller
     function customizeQuickLink()
     {
         try {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['selectedItems'])) {
-                    $selectedItems = json_encode($_POST['selectedItems'], true);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
+                    $selectedItems=array();
+                    $selectedItems[] = json_encode($_POST['selectedItems'], true);
+                    foreach ($selectedItems as &$item) {
+                        $item['name'] = trim((string)$item['name']); 
+                        $item['id']=trim($item['id']);// Remove extra spaces
+                    }
 
+                    unset($item);
                     $data = $this->model('DataModel');
                     $success = $data->storedSelectedItems($selectedItems);
                     if ($success) {
@@ -237,7 +242,6 @@ class Customize extends Controller
                         $_SESSION['status'] = 'Your data is NOT updated';
                         header('Location:Customize');
                     }
-                }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();

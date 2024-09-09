@@ -12,6 +12,8 @@ Route::add('Signin/login','Signin@login');
 //User routes
 Route::add('Product/(\d+)','Product@display');
 
+Route::add('Test','Test@display');  
+
 // Admin routes
 Route::add('Admin/dashboard','Home@display');
 Route::add('Admin/Account','Account@display');
@@ -97,5 +99,7 @@ Route::add('Admin/addCategory','Category@addCategory');
 Route::add('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::add('Admin/customizeCategory','Category@customizeCategory');
 Route::add('Admin/deleteCategory','Category@deleteCategory');
+
+
 
 ?>

@@ -212,4 +212,17 @@ class CustomizeModel extends DB
             throw new Exception($e->getMessage());
         }
     }
+
+    public function test(){
+        $query ="SELECT * FROM data";
+        $json= array();
+        $stmt =$this->connection->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        echo '<pre>';
+        while ($row=$result->fetch_assoc()){
+            array_push($json,$row);
+        }
+        echo json_encode($json);
+    }
 }
