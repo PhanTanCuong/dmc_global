@@ -199,30 +199,29 @@ class CustomizeModel extends DB
 
     public function fetchJsonCategory(){
         try{
-            $query="SELECT data FROM data WHERE id=12";
+            $query="SELECT json_data FROM data WHERE id=12";
             $result =$this->connection->query($query);
 
-            if($result->num_rows>0){
-                $row=$result->fetch_assoc();
-                return $row['data']; 
+            if($row=$result->fetch_assoc()){
+                return json_decode($row['json_data'],true); 
+            }else{
+                return null;
             }
 
-            return null;
         }catch(mysqli_sql_exception $e){
             throw new Exception($e->getMessage());
         }
     }
 
     public function test(){
-        $query ="SELECT * FROM data";
+        $query ="SELECT * FROM data ";
         $json= array();
         $stmt =$this->connection->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
-        echo '<pre>';
         while ($row=$result->fetch_assoc()){
             array_push($json,$row);
         }
-        echo json_encode($json);
+        return json_encode($json);
     }
 }

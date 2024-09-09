@@ -6,6 +6,7 @@ use Core\Controller;
 
 class Product extends Controller
 {
+
     function display()
     {
         $url = $_SERVER['REQUEST_URI']; // Lấy toàn bộ URL sau domain
@@ -13,12 +14,16 @@ class Product extends Controller
 
         // Giả sử URL có dạng: /dmc_global/public/Product/1
         $product_category_id = end($url_components); // Lấy phần cuối cùng của URL
+
         //Model
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("CustomizeModel");
         $category = $this->model("CategoryModel");
+
+        // Fetch product categories từ CategoryModel
+        $productCategories = $item->fetchJsonCategory(); // Lấy dữ liệu category trực tiếp
 
         //View
         $this->view("home", [
@@ -36,7 +41,6 @@ class Product extends Controller
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
             "icons" => $item->getFooterIconInfor(),
-            // "productCategory" => $category->getInforProductCategory(),
             "navbar_footer" => $item->getMenuFooter(),
             "bg_stat" => $item->getBackgroundbyId(7),
             "bg_footer" => $item->getBackgroundbyId(8),
@@ -44,20 +48,12 @@ class Product extends Controller
             "footer_icon" => $item->getIconbyId(14),
             "phone_icon" => $item->getIconbyId(16),
             "footer_data" => $item->getDataFooter(),
+            // Truyền dữ liệu product categories vào view
+            "product_categories" => $productCategories,
             "page" => "displayProduct"
         ]);
     }
-
-    public function fetchProductCategory()
-    {
-        // Gọi model để lấy thông tin product category
-        $category = $this->model("CustomizeModel");
-
-        // Lấy dữ liệu từ model (có thể trả về mảng kết quả)
-        $productCategory = $category->test();
-
-        // Trả về JSON để client sử dụng
-        header('Content-Type: application/json');
-        echo json_encode($productCategory);
-    }
 }
+
+
+

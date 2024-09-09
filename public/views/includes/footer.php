@@ -54,13 +54,15 @@ if (mysqli_num_rows($data["bg_footer"]) > 0):
                             <p><?php echo $descriptions[6] ?></p>
 
                         </div>
-                        <div class="footer-links product-category">
+                        <div class="footer-links">
                             <h3 class="footer-title">
                                 <?php echo $titles[2]; ?>
                                 <p class="underline-footer"></p>
                             </h3>
-                            <ul>
-                                <!-- Dữ liệu từ AJAX sẽ được thêm vào đây -->
+                            <ul id="product-category">
+                                <?php foreach ($data['product_categories'] as $category): ?>
+                                    <li><a href="#<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
 
@@ -119,28 +121,23 @@ endif;
 ?>
 </body>
 
-<script type="text/javascript">
- document.addEventListener('DOMContentLoaded', () => {
-    fetch('/Product/fetchProductCategory')
-        .then(response => response.json())
-        .then(data => {
-            // Kiểm tra nếu có dữ liệu
-            if (Array.isArray(data)) {
-                const ul = document.querySelector('.product-category ul');
-                
-                data.forEach(item => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = `#${item.id}`;
-                    a.textContent = item.name.trim(); // Loại bỏ khoảng trắng
-                    li.appendChild(a);
-                    ul.appendChild(li);
-                });
-            } else {
-                console.error('Dữ liệu không đúng định dạng:', data);
-            }
-        })
-        .catch(error => console.error('Lỗi:', error));
-});
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            url:"http://localhost/dmc_global/public/Product/1",
+            type:"GET",
+            dataType:"json",
+            success:function(response){
+                response.forEach(function(item){
+                    if(item.json_data!==null){
+                        var jsonData =JSON.parse(item.json_data);
 
-</script>
+                        jsonData.forEach(function(product){
+                            $('#product-category').append('<li><a href="'+product.id+'">'+product.name+'</a></li>');
+                        })
+                    }
+                })
+            }
+        });
+    });
+</script> -->
