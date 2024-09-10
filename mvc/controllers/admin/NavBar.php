@@ -35,7 +35,11 @@ class NavBar extends Controller
                 $slug=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
 <<<<<<< HEAD
+<<<<<<< HEAD
                 $success = $item->addNavBarInfor($name,$status,$link);
+=======
+                $success = $item->addNavBarInfor($name,$slug,$status);
+>>>>>>> SettingFooter
 =======
                 $success = $item->addNavBarInfor($name,$slug,$status);
 >>>>>>> SettingFooter
