@@ -118,6 +118,27 @@ class CategoryModel extends DB
         }
 
     }
+
+    public function getParentCategories(){
+        try{
+            $query ="SELECT * FROM category WHERE parent_id=0";
+            return mysqli_query($this->connection, $query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function getChildCategoriesByParentId($parentCategoryId) {
+        $query = "SELECT * FROM category WHERE parent_id = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param('i', $parentCategoryId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $childCategories = [];
+        while ($row = $result->fetch_assoc()) {
+            $childCategories[] = $row;
+        }
+        return $childCategories;
+    }
 }
 
 ?>

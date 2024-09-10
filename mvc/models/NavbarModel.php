@@ -86,7 +86,7 @@ class NavBarModel extends DB
     public function getInforChildNavBar()
     {
         try {
-            $query = "SELECT child_navbar.id,child_navbar.name AS child,navbar.name AS parent FROM child_navbar JOIN navbar ON child_navbar.navbar_id=navbar.id";
+            $query = "SELECT child_navbar.id,child_navbar.child_items AS child,navbar.name AS parent FROM child_navbar JOIN navbar ON child_navbar.navbar_id=navbar.id";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -96,7 +96,7 @@ class NavBarModel extends DB
     public function addChildNavBar($nav_parent_id, $name)
     {
         try {
-            $query = "INSERT INTO child_navbar (navbar_id,name) VALUES (?,?)";
+            $query = "INSERT INTO child_navbar (navbar_id,child_items) VALUES (?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("is", $nav_parent_id, $name);
              if ($stmt->execute()) {
@@ -120,7 +120,7 @@ class NavBarModel extends DB
     public function customizeInforChildNavBar($id, $name)
     {
         try {
-            $query = "UPDATE child_navbar SET name=? WHERE id = ?";
+            $query = "UPDATE child_navbar SET child_items=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $name, $id);
              if ($stmt->execute()) {

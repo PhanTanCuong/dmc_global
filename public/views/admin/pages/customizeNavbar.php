@@ -38,7 +38,7 @@
                             <optgroup label="Dynamic Pages">
                                 <?php foreach ($dynamic_pages as $page): ?>
                                     <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name'];?>
+                                        <?php echo $page['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
@@ -53,42 +53,7 @@
                     </div>
                     <button type="submit" name="addNavbarItemBtn" class="btn btn-primary">Save</button>
                 </form>
-                <!-- Form for child items -->
-                <form id="childForm" action="addChildItems" class="mt-3" method="POST">
-                    <!-- Checkbox for Child Item -->
-                    <div class="form-group">
-                        <input type="checkbox" id="childItemCheckbox" name="childItemCheckbox">
-                        <label for="childItemCheckbox">Child Items</label>
-                    </div>
 
-                    <!-- Drag-and-drop container for Child Items -->
-                    <div id="childItemContainer" style="display:none;">
-                        <div class="row">
-                            <!-- Available Child Items -->
-                            <div class="col-md-6">
-                                <label>Available Child Items</label>
-                                <ul id="availableItems" class="list-group"
-                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                                    <?php while($rows=mysqli_fetch_assoc($data["category"])): ?>
-                                        <li class="list-group-item draggable-item" draggable="true"
-                                            data-id="<?php echo $rows['slug']; ?>">
-                                            <?php echo $rows['name']; ?>
-                                        </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                            </div>
-                            <!-- Drop Area for Child Items -->
-                            <div class="col-md-6">
-                                <label>Selected Child Items</label>
-                                <ul id="selectedItems" class="list-group"
-                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                                    <!-- Items dragged and dropped here will be added as Child Items -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" name="addChildItemBtn" class="btn btn-primary">Save</button>
-                </form>
             </div>
         </div>
         <!-- Edit Navbar Item Form (Initially hidden) -->
@@ -132,6 +97,53 @@
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
                     <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
                 </form>
+                <!-- Form for child items -->
+                <form id="childForm" action="editChildItems" class="mt-3" method="POST">
+
+
+                    <!-- Checkbox for Child Item -->
+                    <div class="form-group">
+                        <input type="checkbox" id="childItemCheckbox" name="childItemCheckbox">
+                        <label for="childItemCheckbox">Child Items</label>
+                    </div>
+
+                    <!-- Drag-and-drop container for Child Items -->
+                    <div id="childItemContainer" style="display:none;">
+                        <!-- Select for Parent Category -->
+                        <div class="form-group">
+                            <label for="parentCategorySelect">Select Parent Category</label>
+                            <select id="parentCategorySelect" name="parentCategory" class="form-control">
+                                <option value="">-- Select Parent Category --</option>
+                                <?php foreach ($data['parent_categories'] as $parentCategory): ?>
+                                    <option value="<?php echo $parentCategory['id']; ?>">
+                                        <?php echo $parentCategory['name']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <!-- Available Child Items -->
+                            <div class="col-md-6">
+                                <label>Available Child Items</label>
+                                <ul id="availableItems" class="list-group"
+                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                                    <!-- Available items will be loaded here via AJAX -->
+                                </ul>
+                            </div>
+                            <!-- Drop Area for Child Items -->
+                            <div class="col-md-6">
+                                <label>Selected Child Items</label>
+                                <ul id="selectedItems" class="list-group"
+                                    style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
+                                    <!-- Items dragged and dropped here will be added as Child Items -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" name="editChildItemBtn" class="btn btn-primary">Save</button>
+                </form>
+
             </div>
         </div>
         <!-- List of Navbar Items -->
@@ -152,9 +164,9 @@
                         </thead>
                         <tbody class="sortable">
                             <?php
-                            if (mysqli_num_rows($data["item"]) > 0) :
+                            if (mysqli_num_rows($data["item"]) > 0):
                                 $counter = 1;
-                                while ($row = mysqli_fetch_array($data["item"])) :?>
+                                while ($row = mysqli_fetch_array($data["item"])): ?>
                                     <tr id="<?php echo $row['id'] ?>">
                                         <td><?php echo $counter++; ?></td>
                                         <td><?php echo $row['name'] ?></td>
@@ -187,4 +199,8 @@
 </div>
 <script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
-
+<script>
+    $(document).ready(function () {
+        initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
+    });
+</script>

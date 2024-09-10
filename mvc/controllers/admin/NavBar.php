@@ -22,6 +22,7 @@ class NavBar extends Controller
         $this->view('admin/home', [
             'page' => 'customizeNavbar',
             'item' => $item->getInforNavBar(),
+            'parent_categories'=>$category->getParentCategories(),
             'category'=>$category->getInforCategory()
         ]);
     }
@@ -125,6 +126,18 @@ class NavBar extends Controller
             'item' => $item->getInforChildNavBar(),
             'navbar_items' => $item->getInforNavBar()
         ]);
+    }
+
+    public function fetchChildCategories()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $parentCategoryId = $_POST['parentCategoryId'];
+            $categoryModel = $this->model('CategoryModel');
+            $childCategories = $categoryModel->getChildCategoriesByParentId($parentCategoryId);
+            
+            // Trả về kết quả dạng JSON
+            echo json_encode($childCategories);
+        }
     }
 
     function addChildNavInfor()

@@ -1,6 +1,4 @@
 
-
-    
 function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
   // Sự kiện khi bắt đầu kéo
   $('.' + draggableItem).on('dragstart', function(event) {
@@ -27,39 +25,6 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
       $('#' + selectedItemsId).append(draggedItem);
   });
 }
-
-
-    // $('#submitButton').on('click', function(event){
-    //   event.preventDefault();
-
-    //   //Mảng dữ liệu được chọn 
-    //   var selectedItems=[];
-
-    //   $('#selectedItems .draggable-item').each(function(){
-    //     //đưa thông tin từng draggable items vào mảng
-    //     selectedItems.push({
-    //       id: $(this).data('id').trim().replace(/\//g,''),
-    //       name: $(this).text().trim().replace(/\s+/g,'').replace(/\//g,'')
-    //     });
-    //   });
-
-    //   //Sử dụng phương pháp ajax đưa dữ liệu cho controlller để lưu trữ vào database
-
-    //   $.ajax({
-    //     url:'customizeQuickLink',
-    //     type:'post',
-    //     data:{
-    //       //Chuyển mảng thành dữ liệu json
-    //       selectedItems:JSON.stringify(selectedItems)
-    //     },
-    //     success:function(response) {
-    //       console.log(response);
-    //     },
-    //     error: function(xhr, status, error) {
-    //       console.log(error);
-    //     }
-    //   })
-    // })
 
   function setupDragAndSubmit(submitButtonId, selectedItemsId, quickLinkInputId, url) {
     $('#' + submitButtonId).on('click', function(event){
