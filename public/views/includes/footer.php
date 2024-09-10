@@ -72,15 +72,9 @@ if (mysqli_num_rows($data["bg_footer"]) > 0):
                                 <p class="underline-footer"></p>
                             </h3>
                             <ul>
-                                <?php
-                                if (mysqli_num_rows($data['navbar_footer']) > 0):
-                                    while ($rows = mysqli_fetch_array($data['navbar_footer'])):
-                                        ?>
-                                        <li><a href="#"> <?php echo $rows['name'] ?></a></li>
-                                        <?php
-                                    endwhile;
-                                endif;
-                                ?>
+                                <?php foreach ($data['quick_links'] as $quickLink): ?>
+                                    <li><a href="#<?php echo $quickLink['id']; ?>"><?php echo $quickLink['name']; ?></a></li>
+                                <?php endforeach; ?>
                             </ul>
 
                         </div>
@@ -120,24 +114,3 @@ endif;
 
 ?>
 </body>
-
-<!-- <script type="text/javascript">
-    $(document).ready(function(){
-        $.ajax({
-            url:"http://localhost/dmc_global/public/Product/1",
-            type:"GET",
-            dataType:"json",
-            success:function(response){
-                response.forEach(function(item){
-                    if(item.json_data!==null){
-                        var jsonData =JSON.parse(item.json_data);
-
-                        jsonData.forEach(function(product){
-                            $('#product-category').append('<li><a href="'+product.id+'">'+product.name+'</a></li>');
-                        })
-                    }
-                })
-            }
-        });
-    });
-</script> -->
