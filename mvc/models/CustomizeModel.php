@@ -197,11 +197,13 @@ class CustomizeModel extends DB
         }
     }
 
-    public function fetchJsonCategory(){
+    public function fetchJsonCategory($id){
         try{
-            $query="SELECT json_data FROM data WHERE id=12";
-            $result =$this->connection->query($query);
-
+            $query="SELECT json_data FROM data WHERE id=?";
+            $stmt =$this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             if($row=$result->fetch_assoc()){
                 return json_decode($row['json_data'],true); 
             }else{

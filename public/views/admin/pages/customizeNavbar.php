@@ -38,7 +38,7 @@
                             <optgroup label="Dynamic Pages">
                                 <?php foreach ($dynamic_pages as $page): ?>
                                     <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name']; ?>
+                                        <?php echo $page['name'];?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
@@ -162,7 +162,7 @@
                                             <button type="button" class="btn btn-warning edit_btn"
                                                 data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>"
                                                 data-status="<?php echo $row['status']; ?>"
-                                                data-link="<?php echo $row['link']; ?>">
+                                                data-link="<?php echo $row['slug']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                         </td>

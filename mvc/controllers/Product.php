@@ -22,8 +22,6 @@ class Product extends Controller
         $item = $this->model("CustomizeModel");
         $category = $this->model("CategoryModel");
 
-        // Fetch product categories từ CategoryModel
-        $productCategories = $item->fetchJsonCategory(); // Lấy dữ liệu category trực tiếp
 
         //View
         $this->view("home", [
@@ -49,7 +47,8 @@ class Product extends Controller
             "phone_icon" => $item->getIconbyId(16),
             "footer_data" => $item->getDataFooter(),
             // Truyền dữ liệu product categories vào view
-            "product_categories" => $productCategories,
+            "product_categories" => $item->fetchJsonCategory(12),
+            "quick_links"=>$item->fetchJsonCategory(13),
             "page" => "displayProduct"
         ]);
     }

@@ -18,6 +18,7 @@ class Customize extends Controller
         $item = $this->model('CustomizeModel');
         $icons = $this->model('IconsModel');
         $category = $this->model('CategoryModel');
+        $navbar_item=$this->model('NavbarModel');
 
         $this->view('admin/home', [
             "page" => 'customizeContent',
@@ -27,7 +28,8 @@ class Customize extends Controller
             "bg_footer" => $item->getBackgroundbyId(8),
             "item" => $item->getDataFooter(),
             "footer_icons" => $icons->getInforIcons(7),
-            "category" => $category->getInforProductCategory()
+            "category" => $category->getInforProductCategory(),
+            "navbar_item"=>$navbar_item->getInforNavBar(),
         ]);
     }
 
@@ -226,9 +228,10 @@ class Customize extends Controller
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
                     $selectedItems = json_decode($_POST['selectedItems'],true);
+                    $id=(int)$_POST['quick_link_id'];
                         
                     $data = $this->model('DataModel');
-                    $success = $data->storedSelectedItems($selectedItems);
+                    $success = $data->storedSelectedItems($selectedItems,$id);
                     if ($success) {
                         $_SESSION['success'] = 'Your data is updated';
                         header('Location:Customize');
