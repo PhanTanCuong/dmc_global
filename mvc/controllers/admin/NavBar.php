@@ -32,9 +32,9 @@ class NavBar extends Controller
             if (isset($_POST['addNavbarItemBtn'])) {
                 $name = strip_tags($_POST['navbar_name']);
                 $status=$_POST['navbar_status'];
-                $link=$_POST['navbar_link'];
+                $slug=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->addNavBarInfor($name,$link,$status);
+                $success = $item->addNavBarInfor($name,$slug,$status);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:NavBar');
@@ -73,9 +73,9 @@ class NavBar extends Controller
                 $id = $_POST['edit_navbar_id'];
                 $name = $_POST['edit_navbar_name'];
                 $status=$_POST['edit_navbar_status'];
-                $link=$_POST['edit_navbar_link'];
+                $slug=$_POST['edit_navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->customizeInforNavBar($id, $name,$status,$link);
+                $success = $item->customizeInforNavBar($id, $name,$status,$slug);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:NavBar');

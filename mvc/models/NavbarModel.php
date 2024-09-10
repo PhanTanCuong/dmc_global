@@ -14,7 +14,7 @@ class NavBarModel extends DB
         }
     }
 
-    public function addNavBarInfor($name, $status,$link)
+    public function addNavBarInfor($name, $status,$slug)
     {
         try {
             // Get the current maximum display_order value
@@ -24,8 +24,8 @@ class NavBarModel extends DB
             $new_display_order = $row['new_display_order'];
 
             // Insert the new navbar item with the calculated display_order
-            $stmt = $this->connection->prepare("INSERT INTO navbar (name, status,link, display_order) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $name, $status,$link, $new_display_order);
+            $stmt = $this->connection->prepare("INSERT INTO navbar (name, status,slug, display_order) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sssi", $name, $status,$slug, $new_display_order);
              if ($stmt->execute()) {
                 return true;
             }
@@ -44,12 +44,12 @@ class NavBarModel extends DB
             echo $e->getMessage();
         }
     }
-    public function customizeInforNavBar($id, $name, $status,$link)
+    public function customizeInforNavBar($id, $name, $status,$slug)
     {
         try {
-            $query = "UPDATE navbar SET name=?, status=?, link=? WHERE id = ?";
+            $query = "UPDATE navbar SET name=?, status=?, slug=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssi", $name, $status,$link, $id);
+            $stmt->bind_param("sssi", $name, $status,$slug, $id);
              if ($stmt->execute()) {
                 return true;
             }
