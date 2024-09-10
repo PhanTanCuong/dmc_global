@@ -1,28 +1,34 @@
-// Sự kiện khi bắt đầu kéo
-$('.draggable-item').on('dragstart', function(event) {
-    event.originalEvent.dataTransfer.setData('text', event.target.dataset.id);
-  });
-  
-  $('#availableItems,#selectedItems').on('dragover', function(event) {
-    event.preventDefault();
-  });
-  
-  // Sự kiện sau khi thả
-  // selectedItems
-    $('#selectedItems').on('drop', function(event) {
-      event.preventDefault();
-      var data = event.originalEvent.dataTransfer.getData('text');
-      var draggedItem = $('[data-id="' + data + '"]');
-      $('#selectedItems').append(draggedItem);
-    });   
-    // availableItems
-    $('#availableItems').on('drop', function(event) {
-      event.preventDefault();
-      var data = event.originalEvent.dataTransfer.getData('text');
-      var draggedItem = $('[data-id="' + data + '"]');
-      $('#availableItems').append(draggedItem);
-    });  
+
+
     
+function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
+  // Sự kiện khi bắt đầu kéo
+  $('.' + draggableItem).on('dragstart', function(event) {
+      event.originalEvent.dataTransfer.setData('text', event.target.dataset.id);
+  });
+
+  // Sự kiện khi thả vào vùng availableItems
+  $('#' + availableItemsId).on('dragover', function(event) {
+      event.preventDefault();
+  }).on('drop', function(event) {
+      event.preventDefault();
+      var data = event.originalEvent.dataTransfer.getData('text');
+      var draggedItem = $('[data-id="' + data + '"]');
+      $('#' + availableItemsId).append(draggedItem);
+  });
+
+  // Sự kiện khi thả vào vùng selectedItems
+  $('#' + selectedItemsId).on('dragover', function(event) {
+      event.preventDefault();
+  }).on('drop', function(event) {
+      event.preventDefault();
+      var data = event.originalEvent.dataTransfer.getData('text');
+      var draggedItem = $('[data-id="' + data + '"]');
+      $('#' + selectedItemsId).append(draggedItem);
+  });
+}
+
+
     $('#submitButton').on('click', function(event){
       event.preventDefault();
 
