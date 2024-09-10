@@ -82,14 +82,14 @@ class DataModel extends DB
         }
     }
 
-    public function storedSelectedItems($selectedItems){
+    public function storedSelectedItems($selectedItems,$id){
         try{
             $selectedItems=json_encode($selectedItems);
            
-            $query="UPDATE data SET json_data=CAST(? AS JSON) WHERE id=12";
+            $query="UPDATE data SET json_data=CAST(? AS JSON) WHERE id=?";
             
             $stmt =$this->connection->prepare($query);
-            $stmt->bind_param("s",$selectedItems);
+            $stmt->bind_param("si",$selectedItems,$id);
             if(!$stmt->execute()){
                 return false;
             }

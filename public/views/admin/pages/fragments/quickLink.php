@@ -35,8 +35,8 @@
                 </div>
             </div>
             <div>
-                <input type="hidden" name="quick_link_id" value="12">
-                <button id="submitButton" type="submit" name="submitButton" class="btn btn-primary"
+                <input type="hidden" id="product_category_id" value="12">
+                <button id="submit_product_category_Button" type="submit" name="submitButton" class="btn btn-primary"
                     style="margin-left: 20px;">Update</button>
             </div>
         </form>
@@ -62,7 +62,7 @@
                         <ul id="available_quick_link_Item" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <?php while ($rows = mysqli_fetch_assoc($data["navbar_item"])): ?>
-                                <li class="list-group-item draggable-quick-link-item" draggable="true"
+                                <li class="list-group-item draggable-item" draggable="true"
                                     data-id="<?php echo $rows['slug']; ?>">
                                     <?php echo $rows['name']; ?>
                                 </li>
@@ -80,8 +80,8 @@
                 </div>
             </div>
             <div>
-                <input type="hidden" name="quick_link_id" value="13">
-                <button id="submitButton" type="submit" name="submitButton" class="btn btn-primary"
+                <input type="hidden" id="quick_link_id" value="13">
+                <button id="submit_quick_link_Button" type="submit" name="submitButton" class="btn btn-primary"
                     style="margin-left: 20px;">Update</button>
             </div>
         </form>
@@ -91,10 +91,13 @@
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
 <script type="text/javascript">
      $(document).ready(function () {
-        // Gọi hàm enableDrag_Drop cho các phần tử tương ứng
+        //Product
         initDragAndDrop('draggable-item','availableItems', 'selectedItems');
+        setupDragAndSubmit('submit_product_category_Button', 'selectedItems', 'product_category_id', 'customizeQuickLink');
 
-        // Gọi hàm enableDrag_Drop cho Quick Links
+        //Quick Links 
         initDragAndDrop('draggable-quick-link-item','available_quick_link_Item', 'selected_quick_link_item');
+        setupDragAndSubmit('submit_quick_link_Button', 'selected_quick_link_item', 'quick_link_id', 'customizeQuickLink');
+
     });
 </script>

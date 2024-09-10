@@ -228,9 +228,10 @@ class Customize extends Controller
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
                     $selectedItems = json_decode($_POST['selectedItems'],true);
+                    $id=(int)$_POST['quick_link_id'];
                         
                     $data = $this->model('DataModel');
-                    $success = $data->storedSelectedItems($selectedItems);
+                    $success = $data->storedSelectedItems($selectedItems,$id);
                     if ($success) {
                         $_SESSION['success'] = 'Your data is updated';
                         header('Location:Customize');
