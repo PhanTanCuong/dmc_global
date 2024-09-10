@@ -34,15 +34,9 @@ class NavBar extends Controller
                 $status=$_POST['navbar_status'];
                 $slug=$_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
-<<<<<<< HEAD
-<<<<<<< HEAD
-                $success = $item->addNavBarInfor($name,$status,$link);
-=======
+
                 $success = $item->addNavBarInfor($name,$slug,$status);
->>>>>>> SettingFooter
-=======
-                $success = $item->addNavBarInfor($name,$slug,$status);
->>>>>>> SettingFooter
+
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:NavBar');
