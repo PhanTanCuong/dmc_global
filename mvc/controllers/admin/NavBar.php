@@ -161,7 +161,7 @@ class NavBar extends Controller
             $allSuccess = true;
             
             for ($i = 1; $i <= count($array); $i++) {
-                $success = $this->model('NavbarModel')->sortNavbarItem((int)$i, (int)$array[$i-1]);
+                $success = $this->model('NavbarModel')->sortNavbarItem((int)$array[$i-1],(int)$i);
                 
                 if (!$success) {
                     $allSuccess = false;
