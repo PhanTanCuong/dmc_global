@@ -83,5 +83,20 @@ class NavBarModel extends DB
         }
     }
     //Child NavBar
-    
+    public function storedSelectedChildItems($selectedItems,$id){
+        try{
+            $selectedItems=json_encode($selectedItems);
+           
+            $query="UPDATE navbar SET child_items=CAST(? AS JSON) WHERE id=?";
+            
+            $stmt =$this->connection->prepare($query);
+            $stmt->bind_param("si",$selectedItems,$id);
+            if(!$stmt->execute()){
+                return false;
+            }
+            return true;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
 }
