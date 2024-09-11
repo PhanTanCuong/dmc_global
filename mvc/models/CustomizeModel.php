@@ -84,27 +84,27 @@ class CustomizeModel extends DB
         }
     }
 
-    public function getIdDropdownMenu()
-    {
-        try {
-            // Giả sử kết nối cơ sở dữ liệu đã được khởi tạo
-            $sql = "SELECT DISTINCT navbar_id FROM child_navbar ;"; // Câu truy vấn để lấy khóa ngoại
+    // public function getIdDropdownMenu()
+    // {
+    //     try {
+    //         // Giả sử kết nối cơ sở dữ liệu đã được khởi tạo
+    //         $sql = "SELECT DISTINCT navbar_id FROM child_navbar ;"; // Câu truy vấn để lấy khóa ngoại
 
-            $result = $this->connection->query($sql); // Thực hiện câu truy vấn
+    //         $result = $this->connection->query($sql); // Thực hiện câu truy vấn
 
-            $ids = [];
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $ids[] = $row['navbar_id']; // Thêm từng khóa ngoại vào mảng
-                }
-            }
+    //         $ids = [];
+    //         if ($result->num_rows > 0) {
+    //             while ($row = $result->fetch_assoc()) {
+    //                 $ids[] = $row['navbar_id']; // Thêm từng khóa ngoại vào mảng
+    //             }
+    //         }
 
-            return implode(',', $ids); // Trả về chuỗi chứa các giá trị khóa ngoại, ngăn cách bởi dấu phẩy
+    //         return implode(',', $ids); // Trả về chuỗi chứa các giá trị khóa ngoại, ngăn cách bởi dấu phẩy
 
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
 
     public function getChildNavbarbyId($id)
     {

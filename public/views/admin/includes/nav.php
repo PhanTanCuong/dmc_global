@@ -69,7 +69,6 @@
                     Menu
                     <div id="collapse-others" class="collapse">
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">Items</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/ChildNavBar');">Child Items</a>
                     </div>
                 </div>
                 <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('public/Admin/Customize');">
