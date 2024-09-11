@@ -24,8 +24,8 @@ class NavBarModel extends DB
             $new_display_order = $row['new_display_order'];
 
             // Insert the new navbar item with the calculated display_order
-            $stmt = $this->connection->prepare("INSERT INTO navbar (name, status,slug, display_order) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $name, $status,$slug, $new_display_order);
+            $stmt = $this->connection->prepare("INSERT INTO navbar (name, slug,status, display_order) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sssi", $name, $slug,$status, $new_display_order);
              if ($stmt->execute()) {
                 return true;
             }
