@@ -13,17 +13,17 @@ class Pages
         ],
         'home' =>
             [
-                'link' => '/home',
+                'link' => 'home',
                 'name' => 'Home'
             ],
         'Cooperation' =>
             [
-                'link' => '/cooperation',
+                'link' => 'cooperation',
                 'name' => 'Cooperation'
             ],
         'Contact' =>
             [
-                'link' => '/contact',
+                'link' => 'contact',
                 'name' => 'Contact'
             ],
     ];
