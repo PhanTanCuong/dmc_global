@@ -51,7 +51,7 @@ $('.edit_btn').click(function (e) {
           $('#edit_navbar_id').val(value['id']);
           $('#edit_navbar_name').val(value['name']);
           $('#edit_navbar_status').val(value['status']);
-          $('#edit_navbar_link').val(value['link']);
+          $('#edit_navbar_link').val(value['slug']);
           $('#edit_child_item_id').val(value['id']);
         });
 

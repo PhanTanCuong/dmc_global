@@ -14,7 +14,7 @@ class NavBarModel extends DB
         }
     }
 
-    public function addNavBarInfor($name, $status,$slug)
+    public function addNavBarInfor($name, $slug,$status)
     {
         try {
             // Get the current maximum display_order value
@@ -24,8 +24,8 @@ class NavBarModel extends DB
             $new_display_order = $row['new_display_order'];
 
             // Insert the new navbar item with the calculated display_order
-            $stmt = $this->connection->prepare("INSERT INTO navbar (name, status,slug, display_order) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $name, $status,$slug, $new_display_order);
+            $stmt = $this->connection->prepare("INSERT INTO navbar (name, slug,status, display_order) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("sssi", $name, $slug,$status, $new_display_order);
              if ($stmt->execute()) {
                 return true;
             }
@@ -83,5 +83,20 @@ class NavBarModel extends DB
         }
     }
     //Child NavBar
-    
+    public function storedSelectedChildItems($selectedItems,$id){
+        try{
+            $selectedItems=json_encode($selectedItems);
+           
+            $query="UPDATE navbar SET child_items=CAST(? AS JSON) WHERE id=?";
+            
+            $stmt =$this->connection->prepare($query);
+            $stmt->bind_param("si",$selectedItems,$id);
+            if(!$stmt->execute()){
+                return false;
+            }
+            return true;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
+        }
+    }
 }

@@ -20,16 +20,16 @@ class Product extends Controller
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("CustomizeModel");
-        $category = $this->model("CategoryModel");
+        // $category = $this->model("CategoryModel");
 
 
         //View
         $this->view("home", [
             "menu_items" => $item->getNavBarItem(),
-            "checkDropdownMenu" => $item->getIdDropdownMenu(),
-            "getChildNavbarbyId" => function ($id) use ($category) {
-                return $category->getInforProductCategory();
-            },
+            // "checkDropdownMenu" => $item->getIdDropdownMenu(),
+            // "getChildNavbarbyId" => function ($id) use ($category) {
+            //     return $category->getInforProductCategory();
+            // },
             "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
