@@ -1,4 +1,4 @@
-<script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
+<link rel="stylesheet" href="/dmc_global/public/css/admin/sortItemTable.css?v=<?php echo microtime()?>">
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
         <!-- First Card (Add Navbar Item) -->
@@ -157,8 +157,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Item</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
+                                <th>Task</th>
                             </tr>
                         </thead>
                         <tbody class="sortable">
@@ -167,17 +166,18 @@
                                 $counter = 1;
                                 while ($row = mysqli_fetch_array($data["item"])): ?>
                                     <tr id="<?php echo $row['id'] ?>">
-                                        <td><?php echo $counter++; ?></td>
-                                        <td><?php echo $row['name'] ?></td>
                                         <td>
+                                            <i class="fas fa-grip-vertical"></i>
+                                            <?php echo $counter++; ?>
+                                        </td>
+                                        <td><?php echo $row['name'] ?></td>
+                                        <td style="display:flex; gap:10px;">
                                             <button type="button" class="btn btn-warning edit_btn"
                                                 data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>"
                                                 data-status="<?php echo $row['status']; ?>"
                                                 data-link="<?php echo $row['slug']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                        </td>
-                                        <td>
                                             <form action="deleteNavBar" method="POST">
                                                 <input type="hidden" name="delete_navbar_id" value="<?php echo $row['id']; ?>">
                                                 <button type="submit" name="delete_navbar_btn" class="btn btn-danger">
@@ -200,6 +200,8 @@
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
 <script>
     $(document).ready(function () {
+        //sortable
+        sortable('.sortable','sortNavbarItem');
         // initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
     });

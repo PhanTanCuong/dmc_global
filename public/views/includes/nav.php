@@ -29,7 +29,7 @@
             while ($row = mysqli_fetch_assoc($data["menu_items"])):
               $id_dropdown = $row['id'];
               ?>
-              <li><a href="#<?php echo $row['slug'] ?>"><?php echo $row['name'] ?>
+              <li><a href="#<?php echo $row['slug'] ?>"><?php echo $row['name'] ?></a>
               </li>
 
             <?php endwhile;

@@ -97,7 +97,7 @@
               <th>DELETE </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="sortable>
             <?php
             if (mysqli_num_rows($data["footer_icons"]) > 0) :
               $counter = 1;
