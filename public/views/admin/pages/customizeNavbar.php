@@ -139,8 +139,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" name="editChildItemBtn" class="btn btn-primary">Save</button>
+                    <input type="hidden" id="edit_child_item_id" value="">
+                    <button type="submit" name="editChildItemBtn" id="editChildItemBtn" class="btn btn-primary">Save</button>
                 </form>
 
             </div>
@@ -197,9 +197,10 @@
     </div>
 </div>
 <script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
-<!-- <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
 <script>
     $(document).ready(function () {
-        initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
+        // initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
+        setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
     });
-</script> -->
+</script>
