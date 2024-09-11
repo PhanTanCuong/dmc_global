@@ -115,18 +115,7 @@ class NavBar extends Controller
     }
 
 
-    //Child Navbar
-    function displayChildNavBar()
-    {
-        $item = $this->model('NavBarModel');
-        
-
-        $this->view('admin/home', [
-            'page' => 'customizeChildNavbar',
-            'item' => $item->getInforChildNavBar(),
-            'navbar_items' => $item->getInforNavBar()
-        ]);
-    }
+    //Child Navbar Item
 
     public function fetchChildCategories()
     {
@@ -140,64 +129,26 @@ class NavBar extends Controller
         }
     }
 
-    function addChildNavInfor()
+    function editChildItems()
     {
         try {
-            if (isset($_POST['addChildNavInforBtn'])) {
-                $name = strip_tags($_POST['child_nav_name']);
-                $parent=strip_tags($_POST['parent_nav']);
-
-                $item = $this->model('NavBarModel');
-                $success = $item->addChildNavBar($parent,$name);
-                if ($success) {
-                    $_SESSION['success'] = 'Your data is added';
-                    header('Location:ChildNavBar');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT added';
-                    header('Location:ChildNavBar');
-                }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
+                    $selectedItems = json_decode($_POST['selectedItems'],true);
+                    $id=(int)$_POST['quick_link_id'];
+                        
+                    $data = $this->model('NavbarModel');
+                    $success = $data->storedSelectedChildItems($selectedItems,$id);
+                    if ($success) {
+                        $_SESSION['success'] = 'Your data is updated';
+                        header('Location:Customize');
+                    } else {
+                        $_SESSION['status'] = 'Your data is NOT updated';
+                        header('Location:Customize');
+                    }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:ChildNavBar');
-        }
-    }
-
-    function getChildNavBarById()
-    {
-        if (isset($_POST['checking_edit_btn'])) {
-            $item_id = $_POST['child_nav_id'];
-            $result_array = [];
-            $item = $this->model('NavBarModel');
-            $result = $item->getChildNavBarById($item_id);
-            if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $row) {
-                    array_push($result_array, $row);
-                    header('Content-Type: application/json');
-                    echo json_encode($result_array);
-                }
-            }
-        }
-    }
-
-    function deleteChildNavBar()
-    {
-        try {
-            if (isset($_POST['delete_child_nav_btn'])) {
-                $id = $_POST['delete_child_nav_id'];
-                $item = $this->model('NavbarModel');
-                $success = $item->deleteChildNavBar($id);
-                if ($success) {
-                    $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:ChildNavBar');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:ChildNavBar');
-                }
-            }
-        } catch (Exception $e) {
-            $_SESSION['status'] = $e->getMessage();
-            header('Location:ChildNavBar');
+            header('Location:Customize');
         }
     }
 
