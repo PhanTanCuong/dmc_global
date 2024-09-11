@@ -32,27 +32,27 @@ class Pages
     public static $dynamic_pages = [
         'about_page' =>
             [
-                'link' => '/about/{about_id}',
+                'link' => 'about_us',
                 'name' => 'Abouts'
             ],
         'product_page' =>
             [
-                'link' => '/product/{product_id}',
+                'link' => 'product_category',
                 'name' => 'Products'
             ],
         'service_page' =>
             [
-                'link' => '/service/{service_id}',
+                'link' => 'business_services',
                 'name' => 'Services'
             ],
         'media_page' =>
             [
-                'link' => '/media/{media_id}',
+                'link' => 'media',
                 'name' => 'Media'
             ],
         'news_page' =>
             [
-                'link' => '/news/{news_id}',
+                'link' => 'news',
                 'name' => 'News'
             ],
     ];
