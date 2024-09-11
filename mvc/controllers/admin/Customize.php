@@ -30,6 +30,8 @@ class Customize extends Controller
             "footer_icons" => $icons->getInforIcons(7),
             "category" => $category->getInforProductCategory(),
             "navbar_item"=>$navbar_item->getInforNavBar(),
+            "selected_product_category_items"=>$item->fetchSelectedItem(12),
+            "selected_quick_link_items"=>$item->fetchSelectedItem(13),
         ]);
     }
 

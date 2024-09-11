@@ -127,7 +127,6 @@
                                 <label>Available Child Items</label>
                                 <ul id="availableItems" class="list-group"
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                                    <!-- Available items will be loaded here via AJAX -->
                                 </ul>
                             </div>
                             <!-- Drop Area for Child Items -->
@@ -198,9 +197,9 @@
     </div>
 </div>
 <script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
-<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
+<!-- <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
 <script>
     $(document).ready(function () {
         initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
     });
-</script>
+</script> -->

@@ -29,7 +29,12 @@
                         <label>Selected Child Items</label>
                         <ul id="selectedItems" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <!-- Items dragged and dropped here will be added as Child Items -->
+                            <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_product_category_items"])): ?>
+                                <li class="list-group-item draggable-item" draggable="true"
+                                    data-id="<?php echo $rows['slug']; ?>">
+                                    <?php echo $rows['name']; ?>
+                                </li>
+                            <?php endwhile; ?>                         -->
                         </ul>
                     </div>
                 </div>
@@ -74,7 +79,12 @@
                         <label>Selected Child Items</label>
                         <ul id="selected_quick_link_item" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <!-- Items dragged and dropped here will be added as Child Items -->
+                            <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_quick_link_items"])): ?>
+                                <li class="list-group-item draggable-item" draggable="true"
+                                    data-id="<?php echo $rows['slug']; ?>">
+                                    <?php echo $rows['name']; ?>
+                                </li>
+                            <?php endwhile; ?> -->
                         </ul>
                     </div>
                 </div>

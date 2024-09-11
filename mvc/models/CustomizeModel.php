@@ -226,4 +226,23 @@ class CustomizeModel extends DB
         }
         return json_encode($json);
     }
+
+    public function fetchSelectedItem($id){
+        try{
+            $query="SELECT 
+                        selected_items.id AS slug,
+                        selected_items.name
+                    FROM data,
+                        JSON_TABLE(
+                            json_data,
+                            '$[*]' COLUMNS (
+                                id VARCHAR(255) PATH '$.id',
+                                name VARCHAR(255) PATH '$.name'
+                            )
+                        ) AS selected_items
+                    WHERE data.id = $id";
+           return mysqli_query($this->connection,$query);
+        }catch(mysqli_sql_exception $e){
+            throw new Exception($e->getMessage());        }
+    }
 }

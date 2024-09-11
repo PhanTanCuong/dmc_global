@@ -118,14 +118,36 @@ document.getElementById('parentCategorySelect').addEventListener('change', funct
     };
     xhr.send('parentCategoryId=' + parentCategoryId);
   }
+  attachDragEvents();
 });
 
-// Show/Hide child item container based on checkbox
-document.getElementById('childItemCheckbox').addEventListener('change', function () {
-  var childItemContainer = document.getElementById('childItemContainer');
-  if (this.checked) {
-    childItemContainer.style.display = 'block';
-  } else {
-    childItemContainer.style.display = 'none';
+// Attach drag events to draggable items
+function attachDragEvents() {
+  var draggableItems = document.querySelectorAll('.draggable-item');
+  draggableItems.forEach(function(item) {
+      item.addEventListener('dragstart', function(e) {
+          e.dataTransfer.setData('text', e.target.getAttribute('data-id'));
+      });
+  });
+}
+
+
+dropZone.addEventListener('dragover', function(e) {
+  e.preventDefault();  // Necessary to allow dropping
+});
+
+
+dropZone.addEventListener('drop', function(e) {
+  e.preventDefault();
+  var data = e.dataTransfer.getData('text');
+  var draggedItem = document.querySelector('[data-id="' + data + '"]');
+
+  // Clone and add to the selected list
+  if (draggedItem) {
+      var newItem = draggedItem.cloneNode(true);
+      dropZone.appendChild(newItem);
   }
 });
+
+// Initially attach drag events
+attachDragEvents();
