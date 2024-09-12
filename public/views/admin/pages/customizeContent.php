@@ -63,6 +63,7 @@ include("fragments/footerBackground.php");
                             <th> Title</th>
                             <th> Description </th>
                             <th> EDIT </th>
+                            <th> DELETE </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,6 +85,13 @@ include("fragments/footerBackground.php");
                                                 </i></i></button>
                                         </form>
                                     </td>
+                                    <td>
+                                        <form action="deleteNavBar" method="POST">
+                                            <input type="hidden" name="delete_navbar_id" value="<?php echo $row['id']; ?>">
+                                            <button type="submit" name="delete_navbar_btn" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php
                             }
@@ -102,8 +110,8 @@ include("fragments/footerBackground.php");
 
 
 
-<?php 
-    include("fragments/quickLink.php");
-    include("fragments/footerIcon.php"); 
+<?php
+include("fragments/quickLink.php");
+include("fragments/footerIcon.php");
 ?>
 <script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?php echo microtime(); ?>"></script>
