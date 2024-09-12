@@ -1,5 +1,9 @@
-<script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
+<style>
+    #myTable>tbody>tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
+</style>
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
         <div id="addCategoryForm" class="card shadow mb-4 flex-fill mr-3">
@@ -34,7 +38,7 @@
                 </form>
             </div>
         </div>
-        <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3" style="display:none;">
+        <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3 " style="display:none;">
             <div class="edit-navbar card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Edit Category Information</h6>
             </div>
@@ -69,7 +73,7 @@
                 </form>
             </div>
         </div>
-        <div class="card shadow mb-4 flex-fill ml-3">
+        <div class="card shadow mb-4 ml-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List of Category</h6>
             </div>
