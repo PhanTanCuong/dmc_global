@@ -98,7 +98,7 @@
       <div class="table-responsive">
         <?php
         ?>
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>Check</th>
@@ -106,8 +106,7 @@
               <th>Title</th>
               <th>Description</th>
               <th>Image</th>
-              <th>EDIT</th>
-              <th>DELETE </th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -130,8 +129,6 @@
                       <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
                       <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editnewsprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
-                  </td>
-                  <td>
                     <form action="deleteNews" method="POST">
                       <input type="hidden" name="delete_news_id" value="<?php echo $row['id']; ?>">
                       <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>

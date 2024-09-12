@@ -14,14 +14,18 @@
 <!-- Page level custom scripts -->
 <script src="/dmc_global/public/js/admin/demo/chart-area-demo.js"></script>
 <script src="/dmc_global/public/js/admin/demo/chart-pie-demo.js"></script>
-
+<!-- jquery-ui -->
 <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
-
-
+<!-- datatables-bootstrap5 -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
   function redirectTo(path) {
     // <!-- The link that will trigger the JavaScript function to redirect -->
     window.location.href = '/dmc_global/' + path;
   }
+  $(document).ready(function(){
+    $('#myTable').DataTable();
+  });
 </script>
 

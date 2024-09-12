@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
   <!-- ajax -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+  <!-- datatables-boostrap5 -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
   <!-- css -->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?php echo microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?php echo microtime() ?>">

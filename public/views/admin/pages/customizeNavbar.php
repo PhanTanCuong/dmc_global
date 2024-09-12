@@ -198,7 +198,7 @@
 </div>
 <script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
-<script style="text/javascript" src="/dmc_global/public/js/admin/sortable.js?<?php echo microtime(); ?>"></script>
+
 
 <script>
     $(document).ready(function () {

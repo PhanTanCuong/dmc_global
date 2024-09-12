@@ -77,14 +77,13 @@
                 <div class="table-responsive">
                     <?php
                     ?>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>EDIT</th>
-                                <th>DELETE </th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,7 +96,7 @@
                                         <td><?php echo $counter++; ?></td>
                                         <td><?php echo str_repeat('|---', $row['level']).$row['name'] ?></td>
                                         <td><?php echo $row['slug'] ?></td>
-                                        <td>
+                                        <td style="display:flex; gap:10px;">
                                             <form action="getCategoryById" method="POST">
                                                 <input type="hidden" name="edit_id" class="edit_id"
                                                     value="<?php echo $row['id']; ?>">
@@ -105,8 +104,6 @@
                                                     data-toggle="modal" data-target="#editCategory"> <i class="fas fa-edit"></i>
                                                     </i></i></button>
                                             </form>
-                                        </td>
-                                        <td>
                                             <form action="deleteCategory" method="POST">
                                                 <input type="hidden" name="delete_category_id"
                                                     value="<?php echo $row['id']; ?>">
