@@ -93,35 +93,33 @@
             <tr>
               <th>ID</th>
               <th>Image</th>
-              <th>EDIT</th>
-              <th>DELETE </th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="sortable">
             <?php
-            if (mysqli_num_rows($data["footer_icons"]) > 0) :
+            if (mysqli_num_rows($data["footer_icons"]) > 0):
               $counter = 1;
-              while ($row = mysqli_fetch_array($data["footer_icons"])) :
+              while ($row = mysqli_fetch_array($data["footer_icons"])):
                 ?>
                 <tr>
-                  <td><?php echo $counter++; ?></td>
+                  <td><?= $counter++; ?></td>
                   <td>
-                    <?php echo '<img class="footer-icon" src="/dmc_global/public/images/' . $row['image'] . '"  alt="Icons Img">' ?>
+                    <?= '<img class="footer-icon" src="/dmc_global/public/images/' . $row['image'] . '"  alt="Icons Img">' ?>
                   </td>
                   <td>
-                    <form action="getIconsById" method="POST">
-                      <input type="hidden" name="edit_footer_id" class="edit_footer_id" value="<?php echo $row['id']; ?>">
-                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
-                        data-target="#editiconsprofile"> <i class="fas fa-edit"></i> </i></i></button>
-                    </form>
-                  </td>
-                  <td>
-                    <form action="deleteIcons" method="POST">
-                      <input type="hidden" name="delete_icons_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="delete_icons_btn" class="btn btn-danger"> <i
-                          class="fas fa-trash"></i></button>
-                    </form>
-                  </td>
+                    <div class="action_column">
+                      <form action="getIconsById" method="POST">
+                        <input type="hidden" name="edit_footer_id" class="edit_footer_id" value="<?= $row['id']; ?>">
+                        <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
+                          data-target="#editiconsprofile"> <i class="fas fa-edit"></i> </i></i></button>
+                      </form>
+                      <form action="deleteIcons" method="POST">
+                        <input type="hidden" name="delete_icons_id" value="<?= $row['id']; ?>">
+                        <button type="submit" name="delete_icons_btn" class="btn btn-danger"> <i
+                            class="fas fa-trash"></i></button>
+                      </form>
+                    </div>
                 </tr>
                 <?php
               endwhile;

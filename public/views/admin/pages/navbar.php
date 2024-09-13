@@ -26,8 +26,8 @@
                         foreach ($data["item"] as $row) {
                         ?>
                             <div class="input-field">
-                                <input type="hidden" value="<?php echo $row['id']?>" class="id-ic-navbar">
-                                <input type="text" value="<?php echo $row['name']; ?>" class="form-control">
+                                <input type="hidden" value="<?= $row['id']?>" class="id-ic-navbar">
+                                <input type="text" value="<?= $row['name']; ?>" class="form-control">
                                 <a href="javascript:void(0);" class="remove-ic-btn" title="Delete input" style="color:#c81c1c;"> <i class="fas fa-minus-circle"></i></a>
                                 <a href="javascript:void(0);" class="edit-ic-btn" title="Add input" style="color:#e4b555;"> <i class="fas fa-edit"></i></a>
                             </div>

@@ -24,6 +24,18 @@ class Media extends Controller
         ]);
     }
 
+
+    function displayAddNews(){
+        $this->view("admin/home",[
+            "page"=>"addPost"
+        ]);
+    }
+
+    function displayUpdateNews(){
+        $this->view("admin/home",[
+            "page"=>"editPost"
+        ]);
+    }
     //display detail infor user account
     function getNewsById()
     {

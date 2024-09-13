@@ -16,9 +16,9 @@
                     ?>
                     <div class="form-group">
                         <label>Current Background Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%"
+                        <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" width="100%"
                             height="auto" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
+                        <span>Current file: <?= $row['image']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>
@@ -55,9 +55,9 @@
                     ?>
                     <div class="form-group">
                         <label>Current Background Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%"
+                        <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" width="100%"
                             height="auto" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
+                        <span>Current file: <?= $row['image']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>

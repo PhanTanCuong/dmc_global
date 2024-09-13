@@ -1,5 +1,9 @@
-<script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
+<style>
+    #myTable>tbody>tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
+</style>
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
         <div id="addCategoryForm" class="card shadow mb-4 flex-fill mr-3">
@@ -23,7 +27,7 @@
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
+                                    <option value="<?= $options['id'] ?>"><?= str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -34,7 +38,7 @@
                 </form>
             </div>
         </div>
-        <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3" style="display:none;">
+        <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3 " style="display:none;">
             <div class="edit-navbar card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Edit Category Information</h6>
             </div>
@@ -57,7 +61,7 @@
                             <?php if (mysqli_num_rows($data["edit_slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["edit_slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
+                                    <option value="<?= $options['id'] ?>"><?= str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -69,7 +73,7 @@
                 </form>
             </div>
         </div>
-        <div class="card shadow mb-4 flex-fill ml-3">
+        <div class="card shadow mb-4 ml-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List of Category</h6>
             </div>
@@ -77,14 +81,13 @@
                 <div class="table-responsive">
                     <?php
                     ?>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Slug</th>
-                                <th>EDIT</th>
-                                <th>DELETE </th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,25 +97,25 @@
                                 while ($row = mysqli_fetch_array($data["item"])) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $counter++; ?></td>
-                                        <td><?php echo str_repeat('|---', $row['level']).$row['name'] ?></td>
-                                        <td><?php echo $row['slug'] ?></td>
+                                        <td><?= $counter++; ?></td>
+                                        <td><?= str_repeat('|---', $row['level']).$row['name'] ?></td>
+                                        <td><?= $row['slug'] ?></td>
                                         <td>
+                                            <div class="action_column">
                                             <form action="getCategoryById" method="POST">
                                                 <input type="hidden" name="edit_id" class="edit_id"
-                                                    value="<?php echo $row['id']; ?>">
+                                                    value="<?= $row['id']; ?>">
                                                 <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
                                                     data-toggle="modal" data-target="#editCategory"> <i class="fas fa-edit"></i>
                                                     </i></i></button>
                                             </form>
-                                        </td>
-                                        <td>
                                             <form action="deleteCategory" method="POST">
                                                 <input type="hidden" name="delete_category_id"
-                                                    value="<?php echo $row['id']; ?>">
+                                                    value="<?= $row['id']; ?>">
                                                 <button type="submit" name="delete_category_btn" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i></button>
                                             </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php

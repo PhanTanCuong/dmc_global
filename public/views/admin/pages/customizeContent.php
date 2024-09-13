@@ -62,7 +62,7 @@ include("fragments/footerBackground.php");
                             <th> No. </th>
                             <th> Title</th>
                             <th> Description </th>
-                            <th> EDIT </th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,18 +72,27 @@ include("fragments/footerBackground.php");
                             while ($row = mysqli_fetch_array($data["item"])) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $counter++; ?></td>
-                                    <td><?php echo $row['title'] ?></td>
-                                    <td><?php echo $row['description'] ?></td>
+                                    <td><?= $counter++; ?></td>
+                                    <td><?= $row['title'] ?></td>
+                                    <td><?= $row['description'] ?></td>
                                     <td>
+                                        <div class="action_column">
                                         <form action="getDataById" method="POST">
                                             <input type="hidden" name="edit_id" class="edit_id"
-                                                value="<?php echo $row['id']; ?>">
+                                                value="<?= $row['id']; ?>">
                                             <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
                                                 data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i>
                                                 </i></i></button>
                                         </form>
+                                        <form action="deleteNavBar" method="POST">
+                                            <input type="hidden" name="delete_navbar_id" value="<?= $row['id']; ?>">
+                                            <button type="submit" name="delete_navbar_btn" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i></button>
+                                        </form>
+                                        </div>
+                                        
                                     </td>
+
                                 </tr>
                                 <?php
                             }
@@ -102,8 +111,8 @@ include("fragments/footerBackground.php");
 
 
 
-<?php 
-    include("fragments/quickLink.php");
-    include("fragments/footerIcon.php"); 
+<?php
+include("fragments/quickLink.php");
+include("fragments/footerIcon.php");
 ?>
-<script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?= microtime(); ?>"></script>

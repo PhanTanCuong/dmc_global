@@ -20,6 +20,8 @@ Route::add('Test','Test@display');
 Route::add('Admin/dashboard','Home@display');
 Route::add('Admin/Account','Account@display');
 Route::add('Admin/Product','Product@display');
+Route::add('Admin/News','Media@display');
+
 
 
 //Admin Account routes
@@ -41,9 +43,10 @@ Route::add('Admin/editProduct','Product@editProduct');
 // Route::add('Admin/toggleCheckboxDelete', 'Productr@toggleCheckboxDelete');
 
 //Admin Media routes
+Route::add('Admin/News/Add','Media@displayAddNews');
+Route::add('Admin/News/Update','Media@displayUpdateNews');
 Route::add('Admin/addNews','Media@addNews');
 Route::add('Admin/deleteNews','Media@deleteNews');
-Route::add('Admin/News','Media@display');
 Route::add('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
 Route::add('Admin/editNews','Media@editNews');
 

@@ -3,7 +3,7 @@ namespace Mvc\Controllers;
 
 use Core\Controller;
 
-class test extends Controller{
+class Test extends Controller{
     function display(){
         $jsonData = $this->model("CustomizeModel");
 

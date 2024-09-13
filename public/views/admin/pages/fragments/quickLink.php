@@ -18,8 +18,8 @@
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <?php while ($rows = mysqli_fetch_assoc($data["category"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?php echo $rows['slug']; ?>">
-                                    <?php echo $rows['name']; ?>
+                                    data-id="<?= $rows['slug']; ?>">
+                                    <?= $rows['name']; ?>
                                 </li>
                             <?php endwhile; ?>
                         </ul>
@@ -31,8 +31,8 @@
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_product_category_items"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?php echo $rows['slug']; ?>">
-                                    <?php echo $rows['name']; ?>
+                                    data-id="<?= $rows['slug']; ?>">
+                                    <?= $rows['name']; ?>
                                 </li>
                             <?php endwhile; ?>                         -->
                         </ul>
@@ -68,8 +68,8 @@
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <?php while ($rows = mysqli_fetch_assoc($data["navbar_item"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?php echo $rows['slug']; ?>">
-                                    <?php echo $rows['name']; ?>
+                                    data-id="<?= $rows['slug']; ?>">
+                                    <?= $rows['name']; ?>
                                 </li>
                             <?php endwhile; ?>
                         </ul>
@@ -81,8 +81,8 @@
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_quick_link_items"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?php echo $rows['slug']; ?>">
-                                    <?php echo $rows['name']; ?>
+                                    data-id="<?= $rows['slug']; ?>">
+                                    <?= $rows['name']; ?>
                                 </li>
                             <?php endwhile; ?> -->
                         </ul>
@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?= microtime(); ?>"></script>
 <script type="text/javascript">
      $(document).ready(function () {
         //Product

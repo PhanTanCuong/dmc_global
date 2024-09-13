@@ -1,9 +1,11 @@
 // Sort Item
-$(function () {
-  $('.sortable').sortable({
-    stop: function () {
+
+
+function sortable(sortableClass,url){
+  $(sortableClass).sortable({
+    stop:function(){
       var ids = '';
-      $('.sortable tr').each(function () //loop function in javascript
+      $(sortableClass +' tr').each(function () //loop function in javascript
       {
         id = $(this).attr('id');
         if (ids == '') {
@@ -14,7 +16,7 @@ $(function () {
         // alert(ids)
       })
       $.ajax({
-        url: 'sortNavbarItem',
+        url: url,
         data: { ids: ids },
         type: 'POST',
         success: function (data) {
@@ -27,7 +29,7 @@ $(function () {
       });
     }
   });
-});
+}
 
 
 //Edit button

@@ -1,4 +1,4 @@
-<script style="text/css" src="/dmc_global/public/css/admin/navbar.css?<?php echo microtime(); ?>"></script>
+<link rel="stylesheet" href="/dmc_global/public/css/admin/sortItemTable.css?v=<?= microtime()?>">
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between">
         <!-- First Card (Add Navbar Item) -->
@@ -30,15 +30,15 @@
                         <select class="form-control" id="navbar_link" name="navbar_link" required>
                             <optgroup label="Static Pages">
                                 <?php foreach ($static_pages as $page): ?>
-                                    <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name']; ?>
+                                    <option value="<?= $page['link']; ?>">
+                                        <?= $page['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
                             <optgroup label="Dynamic Pages">
                                 <?php foreach ($dynamic_pages as $page): ?>
-                                    <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name']; ?>
+                                    <option value="<?= $page['link']; ?>">
+                                        <?= $page['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
@@ -80,15 +80,15 @@
                         <select class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
                             <optgroup label="Static Pages">
                                 <?php foreach ($static_pages as $page): ?>
-                                    <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name']; ?>
+                                    <option value="<?= $page['link']; ?>">
+                                        <?= $page['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
                             <optgroup label="Dynamic Pages">
                                 <?php foreach ($dynamic_pages as $page): ?>
-                                    <option value="<?php echo $page['link']; ?>">
-                                        <?php echo $page['name']; ?>
+                                    <option value="<?= $page['link']; ?>">
+                                        <?= $page['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
@@ -115,8 +115,8 @@
                             <select id="parentCategorySelect" name="parentCategory" class="form-control">
                                 <option value="">-- Select Parent Category --</option>
                                 <?php foreach ($data['parent_categories'] as $parentCategory): ?>
-                                    <option value="<?php echo $parentCategory['id']; ?>">
-                                        <?php echo $parentCategory['name']; ?>
+                                    <option value="<?= $parentCategory['id']; ?>">
+                                        <?= $parentCategory['name']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -157,8 +157,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Item</th>
-                                <th>EDIT</th>
-                                <th>DELETE</th>
+                                <th>Task</th>
                             </tr>
                         </thead>
                         <tbody class="sortable">
@@ -166,20 +165,21 @@
                             if (mysqli_num_rows($data["item"]) > 0):
                                 $counter = 1;
                                 while ($row = mysqli_fetch_array($data["item"])): ?>
-                                    <tr id="<?php echo $row['id'] ?>">
-                                        <td><?php echo $counter++; ?></td>
-                                        <td><?php echo $row['name'] ?></td>
+                                    <tr id="<?= $row['id'] ?>">
                                         <td>
+                                            <i class="fas fa-grip-vertical"></i>
+                                            <?= $counter++; ?>
+                                        </td>
+                                        <td><?= $row['name'] ?></td>
+                                        <td style="display:flex; gap:10px;">
                                             <button type="button" class="btn btn-warning edit_btn"
-                                                data-id="<?php echo $row['id']; ?>" data-name="<?php echo $row['name']; ?>"
-                                                data-status="<?php echo $row['status']; ?>"
-                                                data-link="<?php echo $row['slug']; ?>">
+                                                data-id="<?= $row['id']; ?>" data-name="<?= $row['name']; ?>"
+                                                data-status="<?= $row['status']; ?>"
+                                                data-link="<?= $row['slug']; ?>">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                        </td>
-                                        <td>
                                             <form action="deleteNavBar" method="POST">
-                                                <input type="hidden" name="delete_navbar_id" value="<?php echo $row['id']; ?>">
+                                                <input type="hidden" name="delete_navbar_id" value="<?= $row['id']; ?>">
                                                 <button type="submit" name="delete_navbar_btn" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i></button>
                                             </form>
@@ -196,10 +196,14 @@
         </div>
     </div>
 </div>
-<script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?php echo microtime(); ?>"></script>
-<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?php echo microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?= microtime(); ?>"></script>
+<script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?= microtime(); ?>"></script>
+
+
 <script>
     $(document).ready(function () {
+        //sortable
+        sortable('.sortable','sortFooterIcons');
         // initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
     });

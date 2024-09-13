@@ -102,7 +102,7 @@
         <div class="table-responsive">
           <?php
           ?>
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Check</th>
@@ -122,22 +122,22 @@
               ?>
                   <tr>
                     <td>
-                      <input type="checkbox" onclick="toggleCheckbox(this,'Admin/toggleCheckboxDelete/')" value="<?php echo $row['id'] ?>
-                    <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
+                      <input type="checkbox" onclick="toggleCheckbox(this,'Admin/toggleCheckboxDelete/')" value="<?= $row['id'] ?>
+                    <?= $row['visible'] === 1 ? "checked" : "" ?>">
                     </td>
-                    <td><?php echo $counter++; ?></td>
-                    <td><?php echo $row['title']; ?></td>
-                    <td><?php echo $row['description']; ?></td>
-                    <td><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
+                    <td><?= $counter++; ?></td>
+                    <td><?= $row['title']; ?></td>
+                    <td><?= $row['description']; ?></td>
+                    <td><?= '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
                     <td>
                       <form action="getProductById" method="POST">
-                        <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
                         <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editproductprofile"> <i class="fas fa-edit"></i> </i></i></button>
                       </form>
                     </td>
                     <td>
                       <form action="deleteProduct" method="POST">
-                        <input type="hidden" name="delete_product_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="delete_product_id" value="<?= $row['id']; ?>">
                         <button type="submit" name="delete_product_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                       </form>
                     </td>
