@@ -16,12 +16,16 @@
                         <label>Available Child Items</label>
                         <ul id="availableItems" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <?php while ($rows = mysqli_fetch_assoc($data["category"])): ?>
-                                <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?= $rows['slug']; ?>">
+
+                            <?php
+
+                            // Sử dụng foreach thay cho mysqli_fetch_assoc(vì hàm này để xuất đối tượng)
+                            foreach ($data["category"] as $rows):
+                                ?>
+                                <li class="list-group-item draggable-item" draggable="true" data-id="<?= $rows['slug']; ?>">
                                     <?= $rows['name']; ?>
                                 </li>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <!-- Drop Area for Child Items -->
@@ -29,12 +33,12 @@
                         <label>Selected Child Items</label>
                         <ul id="selectedItems" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_product_category_items"])): ?>
+                            <?php while ($rows = mysqli_fetch_assoc($data["selected_product_category_items"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
                                     data-id="<?= $rows['slug']; ?>">
                                     <?= $rows['name']; ?>
                                 </li>
-                            <?php endwhile; ?>                         -->
+                            <?php endwhile; ?>                        
                         </ul>
                     </div>
                 </div>
@@ -67,8 +71,7 @@
                         <ul id="available_quick_link_Item" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                             <?php while ($rows = mysqli_fetch_assoc($data["navbar_item"])): ?>
-                                <li class="list-group-item draggable-item" draggable="true"
-                                    data-id="<?= $rows['slug']; ?>">
+                                <li class="list-group-item draggable-item" draggable="true" data-id="<?= $rows['slug']; ?>">
                                     <?= $rows['name']; ?>
                                 </li>
                             <?php endwhile; ?>
@@ -100,13 +103,13 @@
 
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?= microtime(); ?>"></script>
 <script type="text/javascript">
-     $(document).ready(function () {
+    $(document).ready(function () {
         //Product
-        initDragAndDrop('draggable-item','availableItems', 'selectedItems');
+        initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('submit_product_category_Button', 'selectedItems', 'product_category_id', 'customizeQuickLink');
 
         //Quick Links 
-        initDragAndDrop('draggable-quick-link-item','available_quick_link_Item', 'selected_quick_link_item');
+        initDragAndDrop('draggable-quick-link-item', 'available_quick_link_Item', 'selected_quick_link_item');
         setupDragAndSubmit('submit_quick_link_Button', 'selected_quick_link_item', 'quick_link_id', 'customizeQuickLink');
 
     });
