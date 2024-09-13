@@ -1,17 +1,11 @@
-<style>
-    #exampleModalLabel {
-        color: #4a6fdc;
-        text-transform: uppercase;
-        font-weight: 600;
-    }
-</style>
+
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tab</h5>
+        <h5 class="modal-title" id="exampleModalLabel">post information</h5>
     </div>
 </div>
 
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 mx-4">
     <form action="addNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
@@ -31,10 +25,10 @@
                 <label>Image </label>
                 <input type="file" name="news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" required>
             </div>
-            <h5 class="modal-title">SEO Settings</h5>
+            <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">
                 <label>Meta Description</label>
-                <textarea name="news_meta_description" id="news_meta_description" class="formcontrol"
+                <textarea name="news_meta_description" id="news_meta_description" class="form-control"
                     rows="3"></textarea>
             </div>
             <div class="form-group">
@@ -45,7 +39,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a href="../News" class="btn btn-danger">Back</a>
             <button type="submit" name="addNewsBtn" class="btn btn-primary">Save</button>
         </div>
 </div>

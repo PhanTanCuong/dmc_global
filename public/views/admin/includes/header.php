@@ -34,6 +34,14 @@
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?= microtime() ?>">
 
   <style>
+
+    #exampleModalLabel {
+        color: #4a6fdc;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    //
     .customize-button {
       margin-bottom: 2rem;
     }
@@ -55,7 +63,7 @@
       background-color: black;
     }
 
-    #dataTable tbody tr td img {
+    #dataTable tbody tr td img,#myTable tbody tr td img{
       width: 120px;
       height: 120px;
     }
