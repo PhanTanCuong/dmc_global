@@ -29,7 +29,7 @@ class Customize extends Controller
             "item" => $item->getDataFooter(),
             "footer_icons" => $icons->getInforIcons(7),
             "category" => $item->getAvailableItems(23,12),
-            "navbar_item"=>$navbar_item->getInforNavBar(),
+            "navbar_item"=>$item->getAvailableQuickLink(13),
             "selected_product_category_items"=>$item->fetchSelectedItem(12),
             "selected_quick_link_items"=>$item->fetchSelectedItem(13),
         ]);

@@ -70,11 +70,12 @@
                         <label>Available Child Items</label>
                         <ul id="available_quick_link_Item" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <?php while ($rows = mysqli_fetch_assoc($data["navbar_item"])): ?>
-                                <li class="list-group-item draggable-item" draggable="true" data-id="<?= $rows['slug']; ?>">
-                                    <?= $rows['name']; ?>
+                            <?php 
+                            foreach($data["navbar_item"] as $row):?>
+                                <li class="list-group-item draggable-item" draggable="true" data-id="<?= $row['slug']; ?>">
+                                    <?= $row['name']; ?>
                                 </li>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <!-- Drop Area for Child Items -->
@@ -82,12 +83,12 @@
                         <label>Selected Child Items</label>
                         <ul id="selected_quick_link_item" class="list-group drag-n-drop-box"
                             style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                            <!-- <?php while ($rows = mysqli_fetch_assoc($data["selected_quick_link_items"])): ?>
+                            <?php while ($rows = mysqli_fetch_assoc($data["selected_quick_link_items"])): ?>
                                 <li class="list-group-item draggable-item" draggable="true"
                                     data-id="<?= $rows['slug']; ?>">
                                     <?= $rows['name']; ?>
                                 </li>
-                            <?php endwhile; ?> -->
+                            <?php endwhile; ?>
                         </ul>
                     </div>
                 </div>

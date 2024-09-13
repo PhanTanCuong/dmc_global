@@ -291,5 +291,34 @@ class CustomizeModel extends DB
         }
     }
     
+    public function getAvailableQuickLink($data_id){
+        try{
+            $query="SELECT * FROM navbar";
+            $quick_link=$this->connection->query($query);
+
+            $selecteditems=$this->fetchSelectedItem($data_id);
+            
+            $selectedArray=[];
+
+            while($selectedRow=mysqli_fetch_assoc($selecteditems)){
+                $selectedArray[]=$selectedRow['slug'];
+            }
+
+            $availableItems=[];
+
+            while($quickLinkRow=mysqli_fetch_assoc($quick_link)){
+                if(!in_array($quickLinkRow['slug'],$selectedArray)){
+                    $availableItems[]=[
+                        'name'=>$quickLinkRow['name'],
+                        'slug'=>$quickLinkRow['slug']
+                    ];
+                }
+            }
+
+            return $availableItems;
+        }catch(mysqli_sql_exception $e) {
+            echo "Error:".$e->getMessage();
+        }
+    }
 
 }
