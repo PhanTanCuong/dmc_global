@@ -165,4 +165,3 @@ document.getElementById('selectedItems').addEventListener('drop', function (even
 });
 
 
-// // Initially attach drag events
