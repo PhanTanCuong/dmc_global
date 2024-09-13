@@ -28,7 +28,7 @@ class Customize extends Controller
             "bg_footer" => $item->getBackgroundbyId(8),
             "item" => $item->getDataFooter(),
             "footer_icons" => $icons->getInforIcons(7),
-            "category" => $category->getInforProductCategory(),
+            "category" => $item->getAvailableItems(23,12),
             "navbar_item"=>$navbar_item->getInforNavBar(),
             "selected_product_category_items"=>$item->fetchSelectedItem(12),
             "selected_quick_link_items"=>$item->fetchSelectedItem(13),
