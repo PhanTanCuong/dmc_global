@@ -204,7 +204,8 @@
     $(document).ready(function () {
         //sortable
         sortable('.sortable','sortFooterIcons');
-        // initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
+        attachDragEvents();
+        initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
     });
 </script>

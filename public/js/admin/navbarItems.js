@@ -1,11 +1,11 @@
 // Sort Item
 
 
-function sortable(sortableClass,url){
+function sortable(sortableClass, url) {
   $(sortableClass).sortable({
-    stop:function(){
+    stop: function () {
       var ids = '';
-      $(sortableClass +' tr').each(function () //loop function in javascript
+      $(sortableClass + ' tr').each(function () //loop function in javascript
       {
         id = $(this).attr('id');
         if (ids == '') {
@@ -95,7 +95,10 @@ $('#childItemCheckbox').change(function () {
   }
 });
 
-//Fetch Child Items
+// Attach drag events to draggable items
+
+
+// Fetch Child Items
 document.getElementById('parentCategorySelect').addEventListener('change', function () {
   var parentCategoryId = this.value;
   if (parentCategoryId) {
@@ -117,40 +120,49 @@ document.getElementById('parentCategorySelect').addEventListener('change', funct
           li.textContent = item.name;
           availableItems.appendChild(li);
         });
+        attachDragEvents();  // Ensure drag events are attached after DOM update
       }
     };
     xhr.send('parentCategoryId=' + parentCategoryId);
   }
-  attachDragEvents();
 });
 
-// Attach drag events to draggable items
 function attachDragEvents() {
   var draggableItems = document.querySelectorAll('.draggable-item');
-  draggableItems.forEach(function(item) {
-      item.addEventListener('dragstart', function(e) {
-          e.dataTransfer.setData('text', e.target.getAttribute('data-id'));
-      });
+  draggableItems.forEach(function (item) {
+    item.addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('text', e.target.getAttribute('data-id'));
+      e.target.classList.add('dragging');
+    });
+    item.addEventListener('dragend', function (e) {
+      e.target.classList.remove('dragging');
+    });
   });
 }
 
-
-dropZone.addEventListener('dragover', function(e) {
-  e.preventDefault();  // Necessary to allow dropping
+// Sự kiện khi thả vào vùng availableItems
+document.getElementById('availableItems').addEventListener('dragover', function (event) {
+  event.preventDefault(); // Cho phép thả
 });
 
-
-dropZone.addEventListener('drop', function(e) {
-  e.preventDefault();
-  var data = e.dataTransfer.getData('text');
+document.getElementById('availableItems').addEventListener('drop', function (event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData('text');
   var draggedItem = document.querySelector('[data-id="' + data + '"]');
-
-  // Clone and add to the selected list
-  if (draggedItem) {
-      var newItem = draggedItem.cloneNode(true);
-      dropZone.appendChild(newItem);
-  }
+  event.target.appendChild(draggedItem);
 });
 
-// Initially attach drag events
-attachDragEvents();
+// Sự kiện khi thả vào vùng selectedItems
+document.getElementById('selectedItems').addEventListener('dragover', function (event) {
+  event.preventDefault(); // Cho phép thả
+});
+
+document.getElementById('selectedItems').addEventListener('drop', function (event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData('text');
+  var draggedItem = document.querySelector('[data-id="' + data + '"]');
+  event.target.appendChild(draggedItem);
+});
+
+
+// // Initially attach drag events
