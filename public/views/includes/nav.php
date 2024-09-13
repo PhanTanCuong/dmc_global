@@ -11,7 +11,7 @@
           if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) :
             ?>
             <div class="logo_ic">
-              <img src="<?php echo $image_path ?>" class="img-fluid" alt="DMC Global">
+              <img src="<?= $image_path ?>" class="img-fluid" alt="DMC Global">
             </div>
             <?php
           endif;
@@ -29,7 +29,7 @@
             while ($row = mysqli_fetch_assoc($data["menu_items"])):
               $id_dropdown = $row['id'];
               ?>
-              <li><a href="#<?php echo $row['slug'] ?>"><?php echo $row['name'] ?></a>
+              <li><a href="#<?= $row['slug'] ?>"><?= $row['name'] ?></a>
               </li>
 
             <?php endwhile;

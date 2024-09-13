@@ -10,20 +10,20 @@
     if (mysqli_num_rows($data["head"]) > 0) {
         while ($row = mysqli_fetch_assoc($data["head"])) {
     ?>
-            <title><?php echo $row['title'] ?></title>
+            <title><?= $row['title'] ?></title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <!-- Favicon -->
-            <link rel="icon" href="/dmc_global/public/images/<?php echo $row['image'] ?>" type="image/x-icon">
+            <link rel="icon" href="/dmc_global/public/images/<?= $row['image'] ?>" type="image/x-icon">
     <?php
         }
     }
     ?>
     <!-- .css file -->
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css?v=<?php echo microtime() ?>">
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css?v=<?php echo microtime() ?>">
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/product.css?v=<?php echo microtime() ?>">
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/media.css?v=<?php echo microtime() ?>">
-    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css?v=<?php echo microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/product.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/media.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css?v=<?= microtime() ?>">
 
     <!-- lib -->
     <!-- WoW -->

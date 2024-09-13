@@ -122,20 +122,20 @@
               while ($row = mysqli_fetch_array($data["user"])) {
             ?>
                 <tr>
-                  <td><?php echo $counter++; ?></td>
-                  <td><?php echo $row['username']; ?></td>
-                  <td><?php echo $row['email']; ?></td>
-                  <td><?php echo substr($row['password'], 0, 10); ?></td>
-                  <td><?php echo $row['role']; ?></td>
+                  <td><?= $counter++; ?></td>
+                  <td><?= $row['username']; ?></td>
+                  <td><?= $row['email']; ?></td>
+                  <td><?= substr($row['password'], 0, 10); ?></td>
+                  <td><?= $row['role']; ?></td>
                   <td>
                     <form action="getAccountById" method="POST">
-                      <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                      <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
                       <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editadminprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
                   </td>
                   <td>
                     <form action="deleteAccount" method="POST">
-                      <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                      <input type="hidden" name="delete_id" value="<?= $row['id']; ?>">
                       <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                     </form>
                   </td>

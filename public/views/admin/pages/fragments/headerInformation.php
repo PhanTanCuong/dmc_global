@@ -18,12 +18,12 @@
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" name="head_title" class="form-control" placeholder="Enter Title"
-                            value="<?php echo $row['title']; ?>"></>
+                            value="<?= $row['title']; ?>"></>
                     </div>
                     <div class="form-group">
                         <label>Current Image</label><br>
-                        <img class="icon_logo" src="/dmc_global/public/images/<?php echo $row['image']; ?>" alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
+                        <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" alt="Image"><br>
+                        <span>Current file: <?= $row['image']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Upload Image</label>

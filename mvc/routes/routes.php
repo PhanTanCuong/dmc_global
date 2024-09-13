@@ -41,6 +41,7 @@ Route::add('Admin/editProduct','Product@editProduct');
 // Route::add('Admin/toggleCheckboxDelete', 'Productr@toggleCheckboxDelete');
 
 //Admin Media routes
+Route::add('Admin/News/Add','Media@display');
 Route::add('Admin/addNews','Media@addNews');
 Route::add('Admin/deleteNews','Media@deleteNews');
 Route::add('Admin/News','Media@display');

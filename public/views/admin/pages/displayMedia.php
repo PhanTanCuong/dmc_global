@@ -1,4 +1,5 @@
-<div class="modal fade" id="addnewsinfor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addnewsinfor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -33,7 +34,8 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="editnewsprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editnewsprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -49,15 +51,18 @@
           <input type="hidden" name="edit_news_id" id="edit_id">
           <div class="form-group">
             <label> Title </label>
-            <input type="text" name="news_title" id="edit_title" class="form-control" placeholder="Enter Title" required>
+            <input type="text" name="news_title" id="edit_title" class="form-control" placeholder="Enter Title"
+              required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" name="news_description" id="edit_description" class="form-control" placeholder="Enter Description" required>
+            <input type="text" name="news_description" id="edit_description" class="form-control"
+              placeholder="Enter Description" required>
           </div>
           <div class="form-group">
             <label>Current Image</label><br>
-            <img id="news_current_image" src="/dmc_global/public/images/" width="50%" height="auto" alt="Product Img"><br>
+            <img id="news_current_image" src="/dmc_global/public/images/" width="50%" height="auto"
+              alt="Product Img"><br>
             <span id="current_file">Current file: </span>
           </div>
           <div class="form-group">
@@ -83,11 +88,13 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of blogs
         <div class="controll-btn">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewsinfor">
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewsinfor">
             <i class="fas fa-plus"></i>
-          </button>
+          </button> -->
+          <a href="" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           <form action="multipleDeleteNews" method="POST">
-            <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i
+                class="fas fa-trash"></i></button>
           </form>
         </div>
       </h6>
@@ -112,30 +119,34 @@
           <tbody>
             <?php
             if (mysqli_num_rows($data["news"]) > 0) {
-              $counter = 1; 
+              $counter = 1;
               while ($row = mysqli_fetch_array($data["news"])) {
-            ?>
+                ?>
                 <tr>
                   <td>
-                    <input type="checkbox" onclick="toggleCheckbox(this,'../Media/toggleCheckboxDelete')" value="<?php echo $row['id'] ?>
-                    <?php echo $row['visible'] === 1 ? "checked" : "" ?>">
+                    <input type="checkbox" onclick="toggleCheckbox(this,'Admin/toggleCheckboxDelete/')" value="<?= $row['id'] ?>
+                    <?= $row['visible'] === 1 ? "checked" : "" ?>">
                   </td>
-                  <td><?php echo $counter++; ?></td>
-                  <td><?php echo $row['title']; ?></td>
-                  <td><?php echo $row['description']; ?></td>
-                  <td><?php echo '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?></td>
+                  <td><?= $counter++; ?></td>
+                  <td><?= $row['title']; ?></td>
+                  <td><?= $row['description']; ?></td>
+                  <td>
+                    <?= '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?>
+                  </td>
                   <td>
                     <form action="getNewsById" method="POST">
-                      <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
-                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editnewsprofile"> <i class="fas fa-edit"></i> </i></i></button>
+                      <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
+                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
+                        data-target="#editnewsprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
                     <form action="deleteNews" method="POST">
-                      <input type="hidden" name="delete_news_id" value="<?php echo $row['id']; ?>">
-                      <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
+                      <input type="hidden" name="delete_news_id" value="<?= $row['id']; ?>">
+                      <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i
+                          class="fas fa-trash"></i></button>
                     </form>
                   </td>
                 </tr>
-            <?php
+                <?php
               }
             }
             ?>
@@ -148,8 +159,8 @@
 
   <script src="../public/js/admin/checkbox.js"></script>
   <script>
-    $(document).ready(function() {
-      $('.edit_btn').click(function(e) {
+    $(document).ready(function () {
+      $('.edit_btn').click(function (e) {
         e.preventDefault();
 
         var news_id = $(this).closest('tr').find('.edit_id').val();
@@ -163,9 +174,9 @@
             'checking_edit_btn': true,
             'news_id': news_id,
           },
-          success: function(response) {
+          success: function (response) {
             console.log(response);
-            $.each(response, function(key, value) {
+            $.each(response, function (key, value) {
               $('#edit_id').val(value['id']);
               $('#edit_title').val(value['title']);
               $('#edit_description').val(value['description']);

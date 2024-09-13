@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?php echo microtime()?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?= microtime()?>">
   <link href="/dmc_global/public/css/admin/sb-admin-2.min.css" rel="stylesheet">
   <!-- jquery_ui -->
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
@@ -29,9 +29,9 @@
   <!-- datatables-boostrap5 -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
   <!-- css -->
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?php echo microtime() ?>">
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?php echo microtime() ?>">
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?php echo microtime() ?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?= microtime() ?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?= microtime() ?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?= microtime() ?>">
 
   <style>
     .customize-button {

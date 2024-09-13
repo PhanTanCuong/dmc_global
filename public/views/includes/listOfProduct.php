@@ -10,9 +10,9 @@
               while ($rows = mysqli_fetch_array($data["product"])) {
             ?>
                 <div class="comp wow fadeIn">
-                  <img src="/dmc_global/public/images/<?php echo $rows['image'] ?>" alt="Image">
-                  <h2><?php echo $rows['title'] ?></h2>
-                  <p><?php echo $rows['description'] ?></p>
+                  <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="Image">
+                  <h2><?= $rows['title'] ?></h2>
+                  <p><?= $rows['description'] ?></p>
                   <div class="arrow"></div>
                 </div>
             <?php

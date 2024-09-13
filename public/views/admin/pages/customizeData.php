@@ -97,9 +97,9 @@
           while ($row = mysqli_fetch_array($data["product_categories"])) {
         ?>
               <form action="Data" method="GET">
-                <input type="hidden" name="product_category_id" value="<?php echo $row['id']; ?>">
+                <input type="hidden" name="product_category_id" value="<?= $row['id']; ?>">
                 <button type="submit" class="list-group-item list-group-item-action">
-                    <?php echo $row['name']; ?>
+                    <?= $row['name']; ?>
                 </button>
             </form>
         <?php
@@ -122,16 +122,16 @@
             <form action="Data" method="GET">
             <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3"
-                  <?php echo ($data['radio_button'] == '3') ? 'checked' : ''; ?>
+                  <?= ($data['radio_button'] == '3') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About2
                 <input type="radio" name="radio_option" value="4"
-                  <?php echo ($data['radio_button'] == '4') ? 'checked' : ''; ?>
+                  <?= ($data['radio_button'] == '4') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> About3
                 <input type="radio" name="radio_option" value="5"
-                  <?php echo ($data['radio_button'] == '5') ? 'checked' : ''; ?>
+                  <?= ($data['radio_button'] == '5') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Product1
                 <input type="radio" name="radio_option" value="6"
-                  <?php echo ($data['radio_button'] == '6') ? 'checked' : ''; ?>
+                  <?= ($data['radio_button'] == '6') ? 'checked' : ''; ?>
                   onclick="this.form.submit();"> Stat
               </div>
             </form>
@@ -158,9 +158,9 @@
                   while ($row = mysqli_fetch_array($data["item"])) {
                 ?>
                     <tr>
-                      <td><?php echo $counter++; ?></td>
-                      <td><?php echo $row['title'] ?></td>
-                      <td><?php echo substr($row['description'],0,200).'...' ?></td>
+                      <td><?= $counter++; ?></td>
+                      <td><?= $row['title'] ?></td>
+                      <td><?= substr($row['description'],0,200).'...' ?></td>
                       <td><?php 
                       $selected_option = isset($_GET['radio_option']) ? $_GET['radio_option'] : 3;
                       if($selected_option==6) {
@@ -170,13 +170,13 @@
                       ?></td>
                       <td>
                         <form action="getDataById" method="POST">
-                          <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id'];?>">
+                          <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id'];?>">
                           <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
                         </form>
                       </td>
                       <td>
                         <form action="deleteData" method="POST">
-                          <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                          <input type="hidden" name="delete_id" value="<?= $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                         </form>
                       </td>

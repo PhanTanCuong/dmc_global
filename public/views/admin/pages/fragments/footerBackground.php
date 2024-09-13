@@ -16,9 +16,9 @@
                     <div class="form-group">
                         <label>Header</label><br>
                         <label>Current Background Image</label><br>
-                        <img src="/dmc_global/public/images/<?php echo $row['image']; ?>" width="100%" height="auto"
+                        <img src="/dmc_global/public/images/<?= $row['image']; ?>" width="100%" height="auto"
                             alt="Image"><br>
-                        <span>Current file: <?php echo $row['image']; ?></span>
+                        <span>Current file: <?= $row['image']; ?></span>
                     </div>
                     <div class="form-group">
                         <label>Upload Background Image</label>

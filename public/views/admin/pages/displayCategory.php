@@ -27,7 +27,7 @@
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
+                                    <option value="<?= $options['id'] ?>"><?= str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -61,7 +61,7 @@
                             <?php if (mysqli_num_rows($data["edit_slug_parent"]) > 0) {
                                 while ($options = mysqli_fetch_array($data["edit_slug_parent"])) {
                                     ?>
-                                    <option value="<?php echo $options['id'] ?>"><?php echo str_repeat('|---', $options['level']).$options['name'] ?></option>
+                                    <option value="<?= $options['id'] ?>"><?= str_repeat('|---', $options['level']).$options['name'] ?></option>
                                     <?php
                                 }
                             }
@@ -97,20 +97,20 @@
                                 while ($row = mysqli_fetch_array($data["item"])) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $counter++; ?></td>
-                                        <td><?php echo str_repeat('|---', $row['level']).$row['name'] ?></td>
-                                        <td><?php echo $row['slug'] ?></td>
+                                        <td><?= $counter++; ?></td>
+                                        <td><?= str_repeat('|---', $row['level']).$row['name'] ?></td>
+                                        <td><?= $row['slug'] ?></td>
                                         <td style="display:flex; gap:10px;">
                                             <form action="getCategoryById" method="POST">
                                                 <input type="hidden" name="edit_id" class="edit_id"
-                                                    value="<?php echo $row['id']; ?>">
+                                                    value="<?= $row['id']; ?>">
                                                 <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
                                                     data-toggle="modal" data-target="#editCategory"> <i class="fas fa-edit"></i>
                                                     </i></i></button>
                                             </form>
                                             <form action="deleteCategory" method="POST">
                                                 <input type="hidden" name="delete_category_id"
-                                                    value="<?php echo $row['id']; ?>">
+                                                    value="<?= $row['id']; ?>">
                                                 <button type="submit" name="delete_category_btn" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i></button>
                                             </form>

@@ -123,18 +123,18 @@
                                 while ($row = mysqli_fetch_array($data["item"])) {
                             ?>
                                   <tr>
-                                      <td><?php echo $counter++; ?></td>
-                                      <td><?php echo $row['parent']?></td>
-                                      <td><?php echo $row['child']?></td>
+                                      <td><?= $counter++; ?></td>
+                                      <td><?= $row['parent']?></td>
+                                      <td><?= $row['child']?></td>
                                       <td>
                                           <form action="getChildNavBarById" method="POST">
-                                              <input type="hidden" name="edit_id" class="edit_id" value="<?php echo $row['id']; ?>">
+                                              <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
                                               <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal" data-target="#editChildNav"> <i class="fas fa-edit"></i> </i></i></button>
                                           </form>
                                       </td>
                                       <td>
                                           <form action="deleteChildNavBar" method="POST">
-                                              <input type="hidden" name="delete_child_nav_id" value="<?php echo $row['id']; ?>">
+                                              <input type="hidden" name="delete_child_nav_id" value="<?= $row['id']; ?>">
                                               <button type="submit" name="delete_child_nav_btn" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                                           </form>
                                       </td>
