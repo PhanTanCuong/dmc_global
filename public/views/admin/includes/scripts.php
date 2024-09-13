@@ -19,12 +19,18 @@
 <!-- datatables-bootstrap5 -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Summernote Editor -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script>
   function redirectTo(path) {
     // <!-- The link that will trigger the JavaScript function to redirect -->
     window.location.href = '/dmc_global/' + path;
   }
   $(document).ready(function(){
+    $('.summernote').summernote({
+      height:250
+    });
     $('#myTable').DataTable();
   });
 </script>

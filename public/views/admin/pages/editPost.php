@@ -22,6 +22,10 @@
                     required>
             </div>
             <div class="form-group">
+                <label>Long Description</label>
+                <textarea name="edit_news_long_description" class="form-control summernote" rows="3"></textarea>
+            </div>
+            <div class="form-group">
                 <label>Image </label>
                 <input type="file" name="edit_news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" required>
             </div>

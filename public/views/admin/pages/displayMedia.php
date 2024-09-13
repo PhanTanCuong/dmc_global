@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="editnewsprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -83,9 +82,9 @@
           </thead>
           <tbody>
             <?php
-            if (mysqli_num_rows($data["news"]) > 0) :
+            if (mysqli_num_rows($data["news"]) > 0):
               $counter = 1;
-              while ($row = mysqli_fetch_array($data["news"])) :
+              while ($row = mysqli_fetch_array($data["news"])):
                 ?>
                 <tr>
                   <!-- <td>
@@ -99,15 +98,18 @@
                     <?= '<img src="/dmc_global/public/images/' . $row['image'] . '"alt="Product Img">' ?>
                   </td>
                   <td>
-                    <form action="getNewsById" method="POST">
-                      <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
-                      <a href="News/Update" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                    </form>
-                    <form action="deleteNews" method="POST">
-                      <input type="hidden" name="delete_news_id" value="<?= $row['id']; ?>">
-                      <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i
-                          class="fas fa-trash"></i></button>
-                    </form>
+                    <div class="action_column">
+                      <form action="getNewsById" method="POST">
+                        <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
+                        <a href="News/Update" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      </form>
+                      <form action="deleteNews" method="POST">
+                        <input type="hidden" name="delete_news_id" value="<?= $row['id']; ?>">
+                        <button type="submit" name="delete_news_btn" class="btn btn-danger"> <i
+                            class="fas fa-trash"></i></button>
+                      </form>
+                    </div>
+
                   </td>
                 </tr>
                 <?php

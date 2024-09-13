@@ -28,6 +28,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
   <!-- datatables-boostrap5 -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+  <!-- Summernote Editor -->
+   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
   <!-- css -->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?= microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?= microtime() ?>">
@@ -35,10 +38,15 @@
 
   <style>
 
+    .action_column{
+      display:flex;
+      gap:10px;
+    }
+
     #exampleModalLabel {
         color: #4a6fdc;
         text-transform: uppercase;
-        font-weight: 600;
+        font-weight: 600; 
     }
 
     //

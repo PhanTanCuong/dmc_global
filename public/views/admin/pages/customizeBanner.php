@@ -126,8 +126,7 @@
                   <th> Title</th>
                   <th> Description </th>
                   <th> Background</th>
-                  <th> EDIT </th>
-                  <th> DELETE </th>
+                  <th> Action </th>
                 </tr>
               </thead>
               <tbody>
@@ -142,19 +141,21 @@
                       <td><?= $row['description'] ?></td>
                       <td><?= '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">'; ?></td>
                       <td>
+                        <div class="action_column">
                         <form action="getBannerById" method="POST">
                           <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
                           <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
                             data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
                         </form>
-                      </td>
-                      <td>
                         <form action="deleteBanner" method="POST">
                           <input type="hidden" name="delete_id" value="<?= $row['id']; ?>">
                           <button type="submit" name="delete_btn" class="btn btn-danger"> <i
                               class="fas fa-trash"></i></button>
                         </form>
+                        </div>
+                        
                       </td>
+                      
                     </tr>
                     <?php
                   }

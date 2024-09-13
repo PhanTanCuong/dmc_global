@@ -100,7 +100,8 @@
                                         <td><?= $counter++; ?></td>
                                         <td><?= str_repeat('|---', $row['level']).$row['name'] ?></td>
                                         <td><?= $row['slug'] ?></td>
-                                        <td style="display:flex; gap:10px;">
+                                        <td>
+                                            <div class="action_column">
                                             <form action="getCategoryById" method="POST">
                                                 <input type="hidden" name="edit_id" class="edit_id"
                                                     value="<?= $row['id']; ?>">
@@ -114,6 +115,7 @@
                                                 <button type="submit" name="delete_category_btn" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i></button>
                                             </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php

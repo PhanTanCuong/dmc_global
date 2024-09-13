@@ -62,8 +62,7 @@ include("fragments/footerBackground.php");
                             <th> No. </th>
                             <th> Title</th>
                             <th> Description </th>
-                            <th> EDIT </th>
-                            <th> DELETE </th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +76,7 @@ include("fragments/footerBackground.php");
                                     <td><?= $row['title'] ?></td>
                                     <td><?= $row['description'] ?></td>
                                     <td>
+                                        <div class="action_column">
                                         <form action="getDataById" method="POST">
                                             <input type="hidden" name="edit_id" class="edit_id"
                                                 value="<?= $row['id']; ?>">
@@ -84,14 +84,15 @@ include("fragments/footerBackground.php");
                                                 data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i>
                                                 </i></i></button>
                                         </form>
-                                    </td>
-                                    <td>
                                         <form action="deleteNavBar" method="POST">
                                             <input type="hidden" name="delete_navbar_id" value="<?= $row['id']; ?>">
                                             <button type="submit" name="delete_navbar_btn" class="btn btn-danger">
                                                 <i class="fas fa-trash"></i></button>
                                         </form>
+                                        </div>
+                                        
                                     </td>
+
                                 </tr>
                                 <?php
                             }
