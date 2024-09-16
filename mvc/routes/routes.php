@@ -91,7 +91,7 @@ Route::add('Admin/customizeNavBar','NavBar@customizeNavBar');
 Route::add('Admin/deleteNavBar','NavBar@deleteNavBar');
 Route::add('Admin/sortNavbarItem','NavBar@sortNavbarItem');
 Route::add('Admin/fetchChildCategories','NavBar@fetchChildCategories');
-
+Route::add('Admin/editChildItems','Navbar@editChildItems');
 
 //Category
 Route::add('Admin/Category','Category@display');

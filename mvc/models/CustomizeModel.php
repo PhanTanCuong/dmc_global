@@ -4,7 +4,7 @@ use Core\DB;
 
 class CustomizeModel extends DB
 {
-    
+
     //Tab Head
 
     public function getHeadInfor()
@@ -188,48 +188,52 @@ class CustomizeModel extends DB
         }
     }
 
-    public function getLayoutbyId($block_id,$page_id){
-        try{
-            $query="SELECT * FROM item WHERE block_id='$block_id' AND product_category_id='$page_id'";
+    public function getLayoutbyId($block_id, $page_id)
+    {
+        try {
+            $query = "SELECT * FROM item WHERE block_id='$block_id' AND product_category_id='$page_id'";
             return mysqli_query($this->connection, $query);
-        }catch(mysqli_sql_exception $e){
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function fetchJsonCategory($id){
-        try{
-            $query="SELECT json_data FROM data WHERE id=?";
-            $stmt =$this->connection->prepare($query);
+    public function fetchJsonCategory($id)
+    {
+        try {
+            $query = "SELECT json_data FROM data WHERE id=?";
+            $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($row=$result->fetch_assoc()){
-                return json_decode($row['json_data'],true); 
-            }else{
+            if ($row = $result->fetch_assoc()) {
+                return json_decode($row['json_data'], true);
+            } else {
                 return null;
             }
 
-        }catch(mysqli_sql_exception $e){
+        } catch (mysqli_sql_exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function test(){
-        $query ="SELECT * FROM data ";
-        $json= array();
-        $stmt =$this->connection->prepare($query);
+    public function test()
+    {
+        $query = "SELECT * FROM data ";
+        $json = array();
+        $stmt = $this->connection->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
-        while ($row=$result->fetch_assoc()){
-            array_push($json,$row);
+        while ($row = $result->fetch_assoc()) {
+            array_push($json, $row);
         }
         return json_encode($json);
     }
 
-    public function fetchSelectedItem($id){
-        try{
-            $query="SELECT 
+    public function fetchSelectedItem($id)
+    {
+        try {
+            $stmt=$this->connection->prepare("SELECT 
                         selected_items.id AS slug,
                         selected_items.name
                     FROM data,
@@ -240,9 +244,85 @@ class CustomizeModel extends DB
                                 name VARCHAR(255) PATH '$.name'
                             )
                         ) AS selected_items
-                    WHERE data.id = $id";
-           return mysqli_query($this->connection,$query);
-        }catch(mysqli_sql_exception $e){
-            throw new Exception($e->getMessage());        }
+                    WHERE data.id =?");
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            return $stmt->get_result();
+
+            // return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
+
+    public function getAvailableItems($category_id, $data_id) {
+        try {
+            // Lấy dữ liệu từ bảng category
+            $query = "SELECT * FROM category WHERE level = 1 AND parent_id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $category_id);  
+            $stmt->execute();
+            $category = $stmt->get_result();  
+    
+            // Lấy selected items từ JSON
+            $selecteditems = $this->fetchSelectedItem($data_id);
+            // Khởi tạo mảng selectedItems
+            $selectedArray = [];
+    
+            // Đưa các 'slug' từ selected_items vào mảng $selectedArray
+            while ($selectedRow = mysqli_fetch_assoc($selecteditems)) {
+                $selectedArray[] = $selectedRow['slug'];
+            }
+    
+            // Khởi tạo mảng availableItems
+            $availableItems = [];
+    
+            // Kiểm tra các phần tử từ category có trùng với selected_items không
+            while ($categoryRow = mysqli_fetch_assoc($category)) {
+                if (!in_array($categoryRow['slug'], $selectedArray)) {
+                    // Đưa vào mảng availableItems nếu không trùng
+                    $availableItems[] = [
+                        'name' => $categoryRow['name'],
+                        'slug' => $categoryRow['slug']
+                    ];
+                }
+            }
+    
+            return $availableItems;
+    
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
+    public function getAvailableQuickLink($data_id){
+        try{
+            $query="SELECT * FROM navbar";
+            $quick_link=$this->connection->query($query);
+
+            $selecteditems=$this->fetchSelectedItem($data_id);
+            
+            $selectedArray=[];
+
+            while($selectedRow=mysqli_fetch_assoc($selecteditems)){
+                $selectedArray[]=$selectedRow['slug'];
+            }
+
+            $availableItems=[];
+
+            while($quickLinkRow=mysqli_fetch_assoc($quick_link)){
+                if(!in_array($quickLinkRow['slug'],$selectedArray)){
+                    $availableItems[]=[
+                        'name'=>$quickLinkRow['name'],
+                        'slug'=>$quickLinkRow['slug']
+                    ];
+                }
+            }
+
+            return $availableItems;
+        }catch(mysqli_sql_exception $e) {
+            echo "Error:".$e->getMessage();
+        }
+    }
+
 }

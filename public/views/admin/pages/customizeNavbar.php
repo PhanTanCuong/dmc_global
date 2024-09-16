@@ -132,9 +132,8 @@
                             <!-- Drop Area for Child Items -->
                             <div class="col-md-6">
                                 <label>Selected Child Items</label>
-                                <ul id="selectedItems" class="list-group"
+                                <ul id="selectedItems" class="list-group drag-n-drop-box"
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                                    <!-- Items dragged and dropped here will be added as Child Items -->
                                 </ul>
                             </div>
                         </div>
@@ -204,7 +203,8 @@
     $(document).ready(function () {
         //sortable
         sortable('.sortable','sortFooterIcons');
-        // initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
+        attachDragEvents();
+        initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
     });
 </script>
