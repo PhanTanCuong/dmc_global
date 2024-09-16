@@ -77,8 +77,24 @@ class CustomizeModel extends DB
     {
 
         try {
-            $query = "SELECT * FROM navbar";
-            return mysqli_query($this->connection, $query);
+            $query="SELECT * FROM navbar";
+            $result=$this->connection->query($query);
+
+            //Menu items array
+            $menu_items= [];
+
+            while($row=$result->fetch_assoc()){
+                // Check if the root navbar item has children  
+                if(!empty($row['child_items'])){
+                    $row['child_items']=json_decode($row['child_items'],true);
+                }else{
+                    $row['child_items']=[];
+                }
+
+                $menu_items[]=$row;
+            }
+
+            return $menu_items; //return  menu items's associative array
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -106,15 +122,15 @@ class CustomizeModel extends DB
     //     }
     // }
 
-    public function getChildNavbarbyId($id)
-    {
-        try {
-            $query = "SELECT * FROM child_navbar WHERE navbar_id='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
+    // public function getChildNavbarbyId($id)
+    // {
+    //     try {
+    //         $query = "SELECT * FROM child_navbar WHERE navbar_id='$id'";
+    //         return mysqli_query($this->connection, $query);
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
 
 
     public function getBackgroundbyId($id)
