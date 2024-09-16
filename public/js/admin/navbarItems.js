@@ -48,15 +48,21 @@ $('.edit_btn').click(function (e) {
     success: function (response) {
       // Assuming response is JSON and contains the data
       if (response) {
-        $.each(response, function (key, value) {
-          // Populate edit form fields with the response data
-          $('#edit_navbar_id').val(value['id']);
-          $('#edit_navbar_name').val(value['name']);
-          $('#edit_navbar_status').val(value['status']);
-          $('#edit_navbar_link').val(value['slug']);
-          $('#edit_child_item_id').val(value['id']);
-        });
 
+        // Populate edit form fields with the response data
+        $('#edit_navbar_id').val(response.navbar['id']);
+        $('#edit_navbar_name').val(response.navbar['name']);
+        $('#edit_navbar_status').val(response.navbar['status']);
+        $('#edit_navbar_link').val(response.navbar['slug']);
+        $('#edit_child_item_id').val(response.navbar['id']);
+
+        var selectedItems=$('#selectedItems');
+
+        selectedItems.empty();//Clear a current list
+
+        $.each(response.navbar.child_items,function(key,value){
+          selectedItems.append('<li class="list-group-item draggable-item" draggable="true" data-id="'+ value.id +'">'+ value.name +'</li>');
+        })
         // Hide the add form and show the edit form
         $('#addNavbarForm').hide();
         $('#editNavbarForm').show();
