@@ -16,16 +16,14 @@ class NavBar extends Controller
     function display()
     {
         $item = $this->model('NavBarModel');
-        $category= $this->model('CategoryModel');
+        $category = $this->model('CategoryModel');
 
         // Load view
         $this->view('admin/home', [
             'page' => 'customizeNavbar',
             'item' => $item->getInforNavBar(),
-            'parent_categories'=>$category->getParentCategories(),
-            'category'=>$category->getInforCategory(),
-            // 'available_items'=>$item->getAvailableItems(),
-            'selected_items'=>$item->fetchSelectedItems(1)
+            'parent_categories' => $category->getParentCategories(),
+            'category' => $category->getInforCategory(),
         ]);
     }
 
@@ -34,11 +32,11 @@ class NavBar extends Controller
         try {
             if (isset($_POST['addNavbarItemBtn'])) {
                 $name = strip_tags($_POST['navbar_name']);
-                $status=$_POST['navbar_status'];
-                $slug=$_POST['navbar_link'];
+                $status = $_POST['navbar_status'];
+                $slug = $_POST['navbar_link'];
                 $item = $this->model('NavBarModel');
 
-                $success = $item->addNavBarInfor($name,$slug,$status);
+                $success = $item->addNavBarInfor($name, $slug, $status);
 
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
@@ -56,18 +54,38 @@ class NavBar extends Controller
 
     function getNavBarById()
     {
-        if (isset($_POST['checking_edit_btn'])) {
-            $item_id = $_POST['navbar_id'];
-            $result_array = [];
-            $item = $this->model('NavBarModel');
-            $result = $item->getNavBarById($item_id);
-            if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $row) {
-                    array_push($result_array, $row);
+        try {
+            if (isset($_POST['checking_edit_btn'])) {
+                $item_id = $_POST['navbar_id'];
+                $result_array = [];
+                $item = $this->model('NavBarModel');
+                $result = $item->getNavBarById($item_id);
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Lấy dữ liệu JSON từ cột 'child_item'
+                        $child_items_json = $row['child_items'];
+        
+                        // Giải mã chuỗi JSON thành mảng PHP
+                        $child_items = json_decode($child_items_json, true);
+        
+                        // Kiểm tra nếu dữ liệu JSON được giải mã thành công
+                        if (is_array($child_items)) {
+                            $row['child_items'] = $child_items; // Thêm mảng này vào kết quả trả về
+                        } else {
+                            $row['child_items'] = []; // Nếu JSON không hợp lệ, đặt giá trị rỗng
+                        }
+        
+                        $result_array['navbar'] = $row;
+                    }
+        
+                    // Send JSON response back to AJAX
                     header('Content-Type: application/json');
                     echo json_encode($result_array);
                 }
             }
+        } catch (\Exception $exception) {
+            echo 'Error: '.$exception->getMessage();
         }
     }
     function customizeNavBar()
@@ -77,10 +95,10 @@ class NavBar extends Controller
             if (isset($_POST["editNavbarItemBtn"])) {
                 $id = $_POST['edit_navbar_id'];
                 $name = $_POST['edit_navbar_name'];
-                $status=$_POST['edit_navbar_status'];
-                $slug=$_POST['edit_navbar_link'];
+                $status = $_POST['edit_navbar_status'];
+                $slug = $_POST['edit_navbar_link'];
                 $item = $this->model('NavBarModel');
-                $success = $item->customizeInforNavBar($id, $name,$status,$slug);
+                $success = $item->customizeInforNavBar($id, $name, $status, $slug);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:NavBar');
@@ -93,7 +111,7 @@ class NavBar extends Controller
             $_SESSION['status'] = $e->getMessage();
             header('Location:NavBar');
         }
-}
+    }
 
     function deleteNavBar()
     {
@@ -125,7 +143,7 @@ class NavBar extends Controller
             $parentCategoryId = $_POST['parentCategoryId'];
             $categoryModel = $this->model('CategoryModel');
             $childCategories = $categoryModel->getChildCategoriesByParentId($parentCategoryId);
-            
+
             // Trả về kết quả dạng JSON
             echo json_encode($childCategories);
         }
@@ -135,18 +153,18 @@ class NavBar extends Controller
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
-                    $selectedItems = json_decode($_POST['selectedItems'],true);
-                    $id=(int)$_POST['quick_link_id'];
-                        
-                    $data = $this->model('NavbarModel');
-                    $success = $data->storedSelectedChildItems($selectedItems,$id);
-                    if ($success) {
-                        $_SESSION['success'] = 'Your data is updated';
-                        header('Location:Customize');
-                    } else {
-                        $_SESSION['status'] = 'Your data is NOT updated';
-                        header('Location:Customize');
-                    }
+                $selectedItems = json_decode($_POST['selectedItems'], true);
+                $id = (int) $_POST['quick_link_id'];
+
+                $data = $this->model('NavbarModel');
+                $success = $data->storedSelectedChildItems($selectedItems, $id);
+                if ($success) {
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location:Customize');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location:Customize');
+                }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
@@ -155,22 +173,23 @@ class NavBar extends Controller
     }
 
     // sorting navbar Item
-    function sortNavbarItem() {
+    function sortNavbarItem()
+    {
         if (isset($_POST['ids'])) {
             $ids = $_POST['ids'];
             $array = explode(',', $ids);
-            
+
             $allSuccess = true;
-            
+
             for ($i = 1; $i <= count($array); $i++) {
-                $success = $this->model('NavbarModel')->sortNavbarItem((int)$array[$i-1],(int)$i);
-                
+                $success = $this->model('NavbarModel')->sortNavbarItem((int) $array[$i - 1], (int) $i);
+
                 if (!$success) {
                     $allSuccess = false;
                     break;
                 }
             }
-            
+
             if ($allSuccess) {
                 echo json_encode(['status' => 'success']);
             } else {
@@ -180,5 +199,5 @@ class NavBar extends Controller
             echo json_encode(['status' => 'error', 'message' => 'No IDs received']);
         }
     }
-    
+
 }
