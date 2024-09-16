@@ -63,29 +63,33 @@ class NavBar extends Controller
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        // Lấy dữ liệu JSON từ cột 'child_item'
-                        $child_items_json = $row['child_items'];
-        
-                        // Giải mã chuỗi JSON thành mảng PHP
-                        $child_items = json_decode($child_items_json, true);
-        
-                        // Kiểm tra nếu dữ liệu JSON được giải mã thành công
-                        if (is_array($child_items)) {
-                            $row['child_items'] = $child_items; // Thêm mảng này vào kết quả trả về
-                        } else {
-                            $row['child_items'] = []; // Nếu JSON không hợp lệ, đặt giá trị rỗng
+                        //Kiểm tra nếu giá trị child_items column rỗng
+                        if (!empty($row['child_items'])) {
+                            // Lấy dữ liệu JSON từ cột 'child_item'
+                            $child_items_json = $row['child_items'];
+
+                            // Giải mã chuỗi JSON thành mảng PHP
+                            $child_items = json_decode($child_items_json, true);
+
+                            // Kiểm tra nếu dữ liệu JSON được giải mã thành công
+                            if (is_array($child_items)) {
+                                $row['child_items'] = $child_items; // Thêm mảng này vào kết quả trả về
+                            }
+                        }else{
+                            $row['child_items'] = []; 
                         }
-        
+
+
                         $result_array['navbar'] = $row;
                     }
-        
+
                     // Send JSON response back to AJAX
                     header('Content-Type: application/json');
                     echo json_encode($result_array);
                 }
             }
         } catch (\Exception $exception) {
-            echo 'Error: '.$exception->getMessage();
+            echo 'Error: ' . $exception->getMessage();
         }
     }
     function customizeNavBar()
@@ -141,9 +145,9 @@ class NavBar extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $parentCategoryId = $_POST['parentCategoryId'];
-            $dataId=$_POST['dataId'];
+            $dataId = $_POST['dataId'];
             $categoryModel = $this->model('NavbarModel');
-            $childCategories = $categoryModel->getAvailableItems($parentCategoryId,$dataId);
+            $childCategories = $categoryModel->getAvailableItems($parentCategoryId, $dataId);
 
             // Trả về kết quả dạng JSON
             echo json_encode($childCategories);
