@@ -26,10 +26,6 @@ class Product extends Controller
         //View
         $this->view("home", [
             "menu_items" => $item->getNavBarItem(),
-            // "checkDropdownMenu" => $item->getIdDropdownMenu(),
-            // "getChildNavbarbyId" => function ($id) use ($category) {
-            //     return $category->getInforProductCategory();
-            // },
             "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
@@ -46,7 +42,6 @@ class Product extends Controller
             "footer_icon" => $item->getIconbyId(14),
             "phone_icon" => $item->getIconbyId(16),
             "footer_data" => $item->getDataFooter(),
-            // Truyền dữ liệu product categories vào view
             "product_categories" => $item->fetchJsonCategory(12),
             "quick_links"=>$item->fetchJsonCategory(13),
             "page" => "displayProduct"

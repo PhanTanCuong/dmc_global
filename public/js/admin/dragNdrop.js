@@ -33,13 +33,14 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
         // Mảng dữ liệu được chọn 
         var selectedItems = [];
 
-        $('#' + selectedItemsId + ' .draggable-item').each(function(){
+        $('#' + selectedItemsId + ' .draggable-item').each(function() {
             // Đưa thông tin từng draggable items vào mảng
             selectedItems.push({
-                id: $(this).data('id').trim().replace(/\//g, ''),
-                name: $(this).text().trim().replace(/\s+/g, '').replace(/\//g, '')
+                id: $(this).data('id').trim().replace(/\//g, ''),  // Loại bỏ các dấu "/" nếu có
+                name: $(this).text().trim().replace(/^[^\w\/]+|[^\w\/]+$/g, '')  // Xóa ký tự đặc biệt đầu và cuối
             });
         });
+        
 
         // Lấy giá trị của quick_link_id từ input hidden
         var quickLinkId = $('#' + quickLinkInputId).val();
