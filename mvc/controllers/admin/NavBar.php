@@ -141,8 +141,9 @@ class NavBar extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $parentCategoryId = $_POST['parentCategoryId'];
-            $categoryModel = $this->model('CategoryModel');
-            $childCategories = $categoryModel->getChildCategoriesByParentId($parentCategoryId);
+            $dataId=$_POST['dataId'];
+            $categoryModel = $this->model('NavbarModel');
+            $childCategories = $categoryModel->getAvailableItems($parentCategoryId,$dataId);
 
             // Trả về kết quả dạng JSON
             echo json_encode($childCategories);
