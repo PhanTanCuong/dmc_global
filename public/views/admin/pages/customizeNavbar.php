@@ -132,9 +132,16 @@
                             <!-- Drop Area for Child Items -->
                             <div class="col-md-6">
                                 <label>Selected Child Items</label>
-                                <ul id="selectedItems" class="list-group"
+                                <ul id="selectedItems" class="list-group drag-n-drop-box"
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
-                                    <!-- Items dragged and dropped here will be added as Child Items -->
+                                    <?php
+                                     while ($rows =mysqli_fetch_assoc($data["selected_items"])):?>
+                                        <li class="list-group-item draggable-item"
+                                            draggable="true"
+                                            data-id="<?= $rows['slug']?>"><?= $rows['name']?></li>
+                                      <?php
+                                      endwhile;    
+                                    ?>
                                 </ul>
                             </div>
                         </div>

@@ -23,7 +23,9 @@ class NavBar extends Controller
             'page' => 'customizeNavbar',
             'item' => $item->getInforNavBar(),
             'parent_categories'=>$category->getParentCategories(),
-            'category'=>$category->getInforCategory()
+            'category'=>$category->getInforCategory(),
+            // 'available_items'=>$item->getAvailableItems(),
+            'selected_items'=>$item->fetchSelectedItems(1)
         ]);
     }
 

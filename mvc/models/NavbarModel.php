@@ -8,7 +8,7 @@ class NavBarModel extends DB
     {
         try {
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
-            return mysqli_query($this->connection, $query);
+             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -97,6 +97,63 @@ class NavBarModel extends DB
             return true;
         }catch(mysqli_sql_exception $e){
             echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function fetchSelectedItems($id){
+        try{
+            $stmt=$this->connection->prepare(
+                "SELECT 
+                            selected_items.id AS slug,
+                            selected_items.name
+                            FROM navbar,
+                                JSON_TABLE(
+                                    child_items,
+                                    '$[*]' COLUMNS(
+                                        id VARCHAR(255) PATH '$.id',
+                                        name VARCHAR(255) PATH '$.name'
+                                    )
+                                ) AS selected_items
+                            WHERE navbar.id =?");
+            $stmt->bind_param("i",$id)                        ;
+            $stmt->execute();
+            return $stmt->get_result();
+        }catch(mysqli_sql_exception $e){    
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getAvailableItems($category_id,$data_id){
+        try{
+            $query="SELECT * FROM category WHERE parent_id=?";
+            $stmt=$this->connection->prepare($query);
+            $stmt->bind_param("i",$category_id);
+            $stmt->execute();
+
+            $category=$stmt->get_result();
+
+            $selected_items=$this->fetchSelectedItems($data_id);
+
+            $selectedArray=[];
+
+            while($selectedRows=mysqli_fetch_assoc($selected_items)){
+                $selectedArray[]=$selectedArray['slug'];
+            }
+
+            $availableItems=[];
+
+            while($availableRows=mysqlI_fetch_assoc($category)){
+                if(!in_array($availableRows['slug'],$selectedArray)){
+                    $availableItems=[
+                        'name'=>$availableRows['name'],
+                        'slug'=>$availableRows['id']
+                    ];
+                }
+            }
+
+            return $availableItems;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ".$e->getMessage();
         }
     }
 }

@@ -233,7 +233,7 @@ class CustomizeModel extends DB
     public function fetchSelectedItem($id)
     {
         try {
-            $query = "SELECT 
+            $stmt=$this->connection->prepare("SELECT 
                         selected_items.id AS slug,
                         selected_items.name
                     FROM data,
@@ -244,8 +244,12 @@ class CustomizeModel extends DB
                                 name VARCHAR(255) PATH '$.name'
                             )
                         ) AS selected_items
-                    WHERE data.id = $id";
-            return mysqli_query($this->connection, $query);
+                    WHERE data.id =?");
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            return $stmt->get_result();
+
+            // return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             throw new Exception($e->getMessage());
         }
