@@ -158,6 +158,9 @@ nav ul li a:hover {
 
 /* 
 dropdown */
+/* i.fa.fa-caret-down::before {
+  content: none;
+} */
 
 nav ul li .dropdown {
   z-index: 1;

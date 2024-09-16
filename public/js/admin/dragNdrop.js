@@ -53,10 +53,10 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
                 quick_link_id: quickLinkId
             },
             success: function(response) {
-                console.log(response);
+                toastr.success('Success ! Your data is updated.');            
             },
             error: function(xhr, status, error) {
-                console.log(error);
+                toastr.error('Error! Your data is NOT updated');
             }
         });
     });

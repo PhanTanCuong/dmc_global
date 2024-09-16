@@ -100,7 +100,7 @@ class NavBarModel extends DB
         }
     }
 
-    public function fetchSelectedItems($id){
+    public function fetchNavbarSelectedItems($id){
         try{
             $stmt=$this->connection->prepare(
                 "SELECT 
@@ -132,21 +132,21 @@ class NavBarModel extends DB
 
             $category=$stmt->get_result();
 
-            $selected_items=$this->fetchSelectedItems($data_id);
+            $selected_items=$this->fetchNavbarSelectedItems($data_id);
 
             $selectedArray=[];
 
             while($selectedRows=mysqli_fetch_assoc($selected_items)){
-                $selectedArray[]=$selectedArray['slug'];
+                $selectedArray[]=$selectedRows['slug'];
             }
 
             $availableItems=[];
 
-            while($availableRows=mysqlI_fetch_assoc($category)){
+            while($availableRows=mysqli_fetch_assoc($category)){
                 if(!in_array($availableRows['slug'],$selectedArray)){
-                    $availableItems=[
+                    $availableItems[]=[
                         'name'=>$availableRows['name'],
-                        'slug'=>$availableRows['id']
+                        'slug'=>$availableRows['slug']
                     ];
                 }
             }

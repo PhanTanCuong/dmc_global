@@ -107,6 +107,7 @@ $('#childItemCheckbox').change(function () {
 // Fetch Child Items
 document.getElementById('parentCategorySelect').addEventListener('change', function () {
   var parentCategoryId = this.value;
+  var dataId= document.getElementById('edit_navbar_id').value;
   if (parentCategoryId) {
     // Fetch child categories via AJAX
     var xhr = new XMLHttpRequest();
@@ -129,7 +130,7 @@ document.getElementById('parentCategorySelect').addEventListener('change', funct
         attachDragEvents();  // Ensure drag events are attached after DOM update
       }
     };
-    xhr.send('parentCategoryId=' + parentCategoryId);
+    xhr.send('parentCategoryId=' + parentCategoryId + '&dataId=' + dataId);
   }
 });
 

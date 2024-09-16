@@ -14,13 +14,16 @@
   <link rel="icon" href="/dmc_global/public/images/abut2_child_img.png" type="image/x-icon">
 
   <!-- Custom fonts for this template-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    type="text/css">
   <!-- local lib -->
   <link href="/dmc_global/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?= microtime()?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/custom-banner.css?v=<?= microtime() ?>">
   <link href="/dmc_global/public/css/admin/sb-admin-2.min.css" rel="stylesheet">
   <!-- jquery_ui -->
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
@@ -29,24 +32,26 @@
   <!-- datatables-boostrap5 -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
   <!-- Summernote Editor -->
-   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+  <!-- toast -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  
   <!-- css -->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?= microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?= microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?= microtime() ?>">
 
   <style>
-
-    .action_column{
-      display:flex;
-      gap:10px;
+    .action_column {
+      display: flex;
+      gap: 10px;
     }
 
     #exampleModalLabel {
-        color: #4a6fdc;
-        text-transform: uppercase;
-        font-weight: 600; 
+      color: #4a6fdc;
+      text-transform: uppercase;
+      font-weight: 600;
     }
 
     //
@@ -71,16 +76,18 @@
       background-color: black;
     }
 
-    #dataTable tbody tr td img,#myTable tbody tr td img{
+    #dataTable tbody tr td img,
+    #myTable tbody tr td img {
       width: 120px;
       height: 120px;
     }
 
-    #current_image{
+    #current_image {
       width: 120px;
       height: 120px;
     }
-    .icon{
+
+    .icon {
       background-color: blue;
     }
   </style>
