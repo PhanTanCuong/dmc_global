@@ -46,6 +46,7 @@ class Route
             }
         }
 
+        // header('Location:dmc_global/public/views/404.php');
         echo '404 - Page not found';
     }
 }
