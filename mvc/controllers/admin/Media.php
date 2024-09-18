@@ -37,38 +37,23 @@ class Media extends Controller
         ]);
     }
 
-    function displayUpdateNews(){
+    function Update(){
         if(isset($_COOKIE['parent_id'])){
             $parent_id=(int)$_COOKIE['parent_id'];
             $categories=$this->model('CategoryModel')->getCategory($parent_id);
         }
         
+        if (isset($_POST['checking_edit_btn'])) {
+            $news_id = (int)$_POST['news_id'];
+            $news=$this->model('MediaModel')->getNewsbyId($news_id);
+        }
         
         $this->view("admin/home",[
+            "news"=> $news,
             "product_categories"=>$categories,
             "page"=>"editPost"
         ]);
     }
-    //display detail infor user account
-    function getNewsById()
-    {
-        if (isset($_POST['checking_edit_btn'])) {
-            $news_id = $_POST['news_id'];
-            $result_array = [];
-            $news = $this->model('MediaModel');
-            $result = $news->getNewsbyId($news_id);
-            if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $row) {
-                    array_push($result_array, $row);
-                    header('Content-Type: application/json');
-                    echo json_encode($result_array);
-
-                }
-
-            }
-        }
-    }
-
     //Add new product function
     function addNews()
     {

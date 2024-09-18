@@ -52,9 +52,11 @@
                   </td>
                   <td>
                     <div class="action_column">
-                      <form action="displayUpdateNews" method="POST">
-                        <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
-                        <a href="News/Update" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                      <form action="News/Update" method="POST">
+                        <input type="hidden" name="news_id" value="<?= $row['id']; ?>">
+                        <!-- <a href="News/Update" name="checking_edit_btn"  class="btn btn-warning"><i class="fas fa-edit"></i></a> -->
+                        <button type="submit" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"> <i
+                        class="fas fa-edit"></i></button>
                       </form>
                       <form action="deleteNews" method="POST">
                         <input type="hidden" name="delete_news_id" value="<?= $row['id']; ?>">
@@ -77,36 +79,3 @@
   </div>
 
   <script src="../public/js/admin/checkbox.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.edit_btn').click(function (e) {
-        e.preventDefault();
-
-        var news_id = $(this).closest('tr').find('.edit_id').val();
-
-        // console.log(news_id);
-
-        $.ajax({
-          type: "POST",
-          url: 'News/getNewsById/' + news_id,
-          data: {
-            'checking_edit_btn': true,
-            'news_id': news_id,
-          },
-          success: function (response) {
-            console.log(response);
-            $.each(response, function (key, value) {
-              $('#edit_id').val(value['id']);
-              $('#edit_title').val(value['title']);
-              $('#edit_description').val(value['description']);
-              $('#edit_link').val(value['link']);
-              $('#news_current_image').attr('src', '/dmc_global/public/images/' + value['image']);
-              $('#current_file').text('Current file:' + value['image']);
-            });
-            $('#editproductprofile').modal('show');
-          }
-        });
-      });
-
-    });
-  </script>

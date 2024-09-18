@@ -17,11 +17,14 @@ class MediaModel extends DB
 
     }
 
-    public function getNewsbyId($id)
+    public function getNewsbyId(int $id)
     {
         try {
-            $query = "SELECT * FROM news WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "SELECT * FROM news WHERE id=?";
+            $stmt= $this->connection->prepare($query);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -50,9 +53,9 @@ class MediaModel extends DB
     {
         try {
 
-            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword WHERE id=?";
+            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("isssssss", $id, $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword);
+            $stmt->bind_param("sssssssi", $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$id);
              if ($stmt->execute()) {
                 return true;
             }
