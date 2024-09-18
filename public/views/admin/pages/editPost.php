@@ -12,16 +12,15 @@
             <input type="hidden" name="edit_news_id" value="<?= $row['id'] ?>">
             <div class="form-group">
                 <label> Title </label>
-                <input type="text" name="edit_news_title" class="form-control" placeholder="Enter Title" value="<?= $row['title']?>" required>
+                <input type="text" name="edit_news_title" class="form-control" placeholder="Enter Title" value="<?= $row['title']?>" >
             </div>
             <div class="form-group">
                 <label>URL/Domain</label>
-                <input type="text" name="edit_news_slug" class="form-control" placeholder="Enter Url/Domain" value="<?= $row['slug']?>" required>
+                <input type="text" name="edit_news_slug" class="form-control" placeholder="Enter Url/Domain" value="<?= $row['slug']?>" >
             </div>
             <div class="form-group">
                 <label>Small Description</label>
-                <input type="text" name="edit_news_description" class="form-control" placeholder="Enter Small Description"
-                value="<?= $row['description']?>"   required>
+                <textarea type="text" name="edit_news_description" class="form-control" placeholder="Enter Small Description"><?= $row['description']?></textarea>
             </div>
             <div class="form-group">
                 <label>Long Description</label>
@@ -34,13 +33,13 @@
                     </div>
             <div class="form-group">
                 <label>Image </label>
-                <input type="file" name="news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" required>
+                <input type="file" name="news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" >
             </div>
             <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">
                 <label>Meta Keyword</label>
                 <input type="text" name="edit_news_meta_keyword" class="form-control" placeholder="Enter Description"
-                 value="<?= $row["meta_keyword"]?>"   required>
+                 value="<?= $row["meta_keyword"]?>"   >
             </div>
             <div class="form-group">
                 <label>Meta Description</label>
@@ -57,3 +56,4 @@
 </div>
 </form>
 </div>
+

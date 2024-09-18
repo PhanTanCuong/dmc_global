@@ -8,7 +8,7 @@
     <form action="addNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
-                <label for="category">Product Category</label>
+                <label for="category">Category</label>
                 <select class="form-control " name="category" id="news_category" required>
                     <?php foreach ($data["product_categories"] as $category): ?>
                         <option value="<?= $category['slug'] ?>"><?= $category['name'] ?></option>
@@ -18,15 +18,15 @@
             </div>
             <div class="form-group">
                 <label> Title </label>
-                <input type="text" name="news_title" class="form-control" placeholder="Enter Title" required>
+                <input type="text" name="news_title" id="news_title" class="form-control" placeholder="Enter Title" required>
             </div>
             <div class="form-group">
                 <label>URL/Domain</label>
-                <input type="text" name="news_slug" class="form-control" placeholder="Enter Url/Domain" required>
+                <input type="text" name="news_slug" id ="news_slug" class="form-control" placeholder="Enter Url/Domain" required>
             </div>
             <div class="form-group">
                 <label>Small Description</label>
-                <textarea name="news_description" class="form-control" placeholder="Enter Small Description" rows="3"
+                <textarea name="news_description" id="news_description" class="form-control" placeholder="Enter Small Description" rows="3"
                      required></textarea>
 
             </div>
@@ -42,7 +42,7 @@
             <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">
                 <label>Meta Keyword</label>
-                <input type="text" name="news_meta_keyword" class="form-control" placeholder="Enter Description"
+                <input type="text" name="news_meta_keyword" id="news_meta_keyword" class="form-control" placeholder="Enter Description"
                     required>
             </div>
             <div class="form-group">
@@ -60,3 +60,15 @@
 </div>
 </form>
 </div>
+
+<script type="text/javascript" src="/dmc_global/public/js/admin/slug.js?v=<?= microtime()?>"></script>
+
+<!-- Inline script to initialize the function -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        generateToSlug('news_title', 'news_slug');
+        generateToMeta('news_title', 'news_meta_keyword');
+        generateToMeta('news_description', 'news_meta_description');
+    });
+    
+</script>
