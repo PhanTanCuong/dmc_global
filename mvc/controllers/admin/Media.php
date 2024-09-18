@@ -26,13 +26,26 @@ class Media extends Controller
 
 
     function displayAddNews(){
+
+        if(isset($_COOKIE['parent_id'])){
+            $parent_id=(int)$_COOKIE['parent_id'];
+            $categories=$this->model('CategoryModel')->getCategory($parent_id);
+        }
         $this->view("admin/home",[
+            "product_categories"=>$categories,
             "page"=>"addPost"
         ]);
     }
 
     function displayUpdateNews(){
+        if(isset($_COOKIE['parent_id'])){
+            $parent_id=(int)$_COOKIE['parent_id'];
+            $categories=$this->model('CategoryModel')->getCategory($parent_id);
+        }
+        
+        
         $this->view("admin/home",[
+            "product_categories"=>$categories,
             "page"=>"editPost"
         ]);
     }
@@ -62,31 +75,35 @@ class Media extends Controller
         //Model
         try {
             if (isset($_POST['addNewsBtn'])) {
-                $title = strip_tags($_POST['news_title']);
-                $description = strip_tags($_POST['news_description']);
-                $link = strip_tags($_POST['news_link']);
+                $title = $_POST['news_title'];
+                $slug = $_POST['news_slug'];
+                $short_description =$_POST['news_description'];
+                $long_description=$_POST['news_long_description'];
+                $meta_keyword=$_POST['news_meta_keyword'];
+                $meta_description=$_POST['news_meta_description'];
+                $id = $_POST['edit_news_id'];
                 $image = $_FILES["news_image"]['name'];
                 if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Incorrect image type';
-                    header('Location:News');
+                    header('Location:../News');
                     die();
                 }
                 $news = $this->model("MediaModel");
-                $result = $news->addNews($title, $description, $link, $image);
+                $result = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
                 if ($result) {
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = "News is added successfully";
-                    header('Location:News');
+                    header('Location:../News');
                 } else {
                     $_SESSION['status'] = "News is NOT added";
-                    header('Location:News');
+                    header('Location:Add');
                 }
                 // }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
-            header('Location:News');
+            header('Location:Add');
         }
     }
 
@@ -97,10 +114,12 @@ class Media extends Controller
         try {
 
             if (isset($_POST["news_updatebtn"])) {
-                $title = strip_tags($_POST['news_title']);
-                $description = strip_tags($_POST['news_description']);
-                $link = strip_tags($_POST['news_link']);
-
+                $title = $_POST['edit_news_title'];
+                $slug = $_POST['edit_news_slug'];
+                $short_description =$_POST['edit_news_description'];
+                $long_description=$_POST['edit_news_long_description'];
+                $meta_keyword=$_POST['edit_news_meta_keyword'];
+                $meta_description=$_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
                 $news = $this->model('MediaModel');
 
@@ -111,26 +130,26 @@ class Media extends Controller
                 if (!empty($_FILES["news_image"]['name'])) {
                     if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
                         $_SESSION['status'] = 'Incorrect image type';
-                        header('Location:News');
+                        header('Location:../News');
                         die();
                     }
                     $image = $_FILES["news_image"]['name'];
                 } else {
                     $image = $stored_image['image'];
                 }
-                $success = $news->editNews($id, $title, $description, $link, $image);
+                $success = $news->editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
                 if ($success) {
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location:News');
+                    header('Location:../News');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:News');
+                    header('Location:Update');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:News');
+            header('Location:Update');
         }
     }
 

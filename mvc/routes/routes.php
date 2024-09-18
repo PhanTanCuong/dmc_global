@@ -45,10 +45,10 @@ Route::add('Admin/editProduct','Product@editProduct');
 //Admin Media routes
 Route::add('Admin/News/Add','Media@displayAddNews');
 Route::add('Admin/News/Update','Media@displayUpdateNews');
-Route::add('Admin/addNews','Media@addNews');
+Route::add('Admin/News/addNews','Media@addNews');
 Route::add('Admin/deleteNews','Media@deleteNews');
 Route::add('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
-Route::add('Admin/editNews','Media@editNews');
+Route::add('Admin/News/editNews','Media@editNews');
 
 //Customize
 //Slider

@@ -52,9 +52,9 @@
                   </td>
                   <td>
                     <div class="action_column">
-                      <form action="getNewsById" method="POST">
+                      <form action="displayUpdateNews" method="POST">
                         <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
-                        <a href="News/Update" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="News/Update" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                       </form>
                       <form action="deleteNews" method="POST">
                         <input type="hidden" name="delete_news_id" value="<?= $row['id']; ?>">

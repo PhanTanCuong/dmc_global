@@ -6,44 +6,53 @@
 </div>
 
 <div class="card shadow mb-4 mx-4">
-    <form action="addNews" method="POST" enctype="multipart/form-data">
+    <form action="editNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
+            <?php foreach($data["news"] as $row): ?>
+            <input type="hidden" name="edit_news_id" value="<?= $row['id'] ?>">
             <div class="form-group">
                 <label> Title </label>
-                <input type="text" name="edit_news_title" class="form-control" placeholder="Enter Title" required>
+                <input type="text" name="edit_news_title" class="form-control" placeholder="Enter Title" value="<?= $row['title']?>" required>
             </div>
             <div class="form-group">
                 <label>URL/Domain</label>
-                <input type="text" name="edit_news_slug" class="form-control" placeholder="Enter Url/Domain" required>
+                <input type="text" name="edit_news_slug" class="form-control" placeholder="Enter Url/Domain" value="<?= $row['slug']?>" required>
             </div>
             <div class="form-group">
                 <label>Small Description</label>
                 <input type="text" name="edit_news_description" class="form-control" placeholder="Enter Small Description"
-                    required>
+                value="<?= $row['description']?>"   required>
             </div>
             <div class="form-group">
                 <label>Long Description</label>
-                <textarea name="edit_news_long_description" class="form-control summernote" rows="3"></textarea>
+                <textarea name="edit_news_long_description" class="form-control summernote" rows="3"><?= $row['long_description']?></textarea>
             </div>
             <div class="form-group">
+                        <label>Current Image</label><br>
+                        <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" alt="Image"><br>
+                        <span>Current file: <?= $row['image']; ?></span>
+                    </div>
+            <div class="form-group">
                 <label>Image </label>
-                <input type="file" name="edit_news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" required>
+                <input type="file" name="news_image" id="news_image" class="form-control" placeholder="Enter Meta Description" required>
             </div>
             <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">
-                <label>Meta Description</label>
-                <textarea name="edit_news_meta_description" id="news_meta_description" class="form-control"
-                    rows="3"></textarea>
-            </div>
-            <div class="form-group">
                 <label>Meta Keyword</label>
                 <input type="text" name="edit_news_meta_keyword" class="form-control" placeholder="Enter Description"
-                    required>
+                 value="<?= $row["meta_keyword"]?>"   required>
             </div>
+            <div class="form-group">
+                <label>Meta Description</label>
+                <textarea name="edit_news_meta_description" id="news_meta_description" class="form-control"
+                    rows="3"><?= $row['meta_description']?></textarea>
+            </div>
+            <?php endforeach;?>
+           
         </div>
         <div class="modal-footer">
             <a href="../News" class="btn btn-danger">Back</a>
-            <button type="submit" name="NewsBtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="news_updatebtn" class="btn btn-primary">Save</button>
         </div>
 </div>
 </form>

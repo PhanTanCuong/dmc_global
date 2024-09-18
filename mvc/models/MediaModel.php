@@ -28,15 +28,15 @@ class MediaModel extends DB
     }
 
     //add new news function
-    public function addNews($title, $description, $image)
+    public function addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description)
     {
         try {
 
-            $query = "INSERT INTO news (title,description,image,visible) VALUES (?,?,?,?)";
+            $query = "INSERT INTO news (title,description,long_description,slug,image,meta_description,meta_keyword) VALUES (?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $visible = 0;
-            $stmt->bind_param("sssi", $title, $description, $image, $visible);
-             if ($stmt->execute()) {
+            // $visible = 0;
+            // $stmt->bind_param("sssssss", $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword);
+             if ($stmt->execute([$title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword])) {
                 return true;
             }
             return false;
@@ -46,13 +46,13 @@ class MediaModel extends DB
     }
 
     //edit news function
-    public function editNews($id, $title, $description, $image)
+    public function editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description)
     {
         try {
 
-            $query = "UPDATE product SET title=?, description=?, image=? WHERE id=?";
+            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword WHERE id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sss", $title, $description, $image);
+            $stmt->bind_param("isssssss", $id, $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword);
              if ($stmt->execute()) {
                 return true;
             }

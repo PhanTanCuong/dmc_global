@@ -8,6 +8,15 @@
     <form action="addNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
+                <label for="category">Product Category</label>
+                <select class="form-control " name="category" id="news_category" required>
+                    <?php foreach ($data["product_categories"] as $category): ?>
+                        <option value="<?= $category['slug'] ?>"><?= $category['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+
+            </div>
+            <div class="form-group">
                 <label> Title </label>
                 <input type="text" name="news_title" class="form-control" placeholder="Enter Title" required>
             </div>
@@ -17,8 +26,9 @@
             </div>
             <div class="form-group">
                 <label>Small Description</label>
-                <input type="text" name="news_description" class="form-control" placeholder="Enter Small Description"
-                    required>
+                <textarea name="news_description" class="form-control" placeholder="Enter Small Description" rows="3"
+                     required></textarea>
+
             </div>
             <div class="form-group">
                 <label>Long Description</label>
@@ -31,15 +41,16 @@
             </div>
             <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">
-                <label>Meta Description</label>
-                <textarea name="news_meta_description" id="news_meta_description" class="form-control"
-                    rows="3"></textarea>
-            </div>
-            <div class="form-group">
                 <label>Meta Keyword</label>
                 <input type="text" name="news_meta_keyword" class="form-control" placeholder="Enter Description"
                     required>
             </div>
+            <div class="form-group">
+                <label>Meta Description</label>
+                <textarea name="news_meta_description" id="news_meta_description" class="form-control"
+                    rows="3"></textarea>
+            </div>
+            
 
         </div>
         <div class="modal-footer">
