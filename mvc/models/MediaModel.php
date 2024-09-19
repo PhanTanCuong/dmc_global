@@ -31,13 +31,13 @@ class MediaModel extends DB
     }
 
     //add new news function
-    public function addNews($title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description,$category_id,$type_id)
+    public function addNews($title, $short_description, $long_description, $slug, $image,$meta_description,$meta_keyword,$category_id,$type_id)
     {
         try {
 
             $query = "INSERT INTO news (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssssii",$title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description,$category_id,$type_id);
+            $stmt->bind_param("sssssssii",$title, $short_description, $long_description, $slug, $image, $meta_description,$meta_keyword,$category_id,$type_id);
             if ($stmt->execute()) {
                 return $this->connection->insert_id;
             }
@@ -48,13 +48,13 @@ class MediaModel extends DB
     }
 
     //edit news function
-    public function editNews($id, $title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description)
+    public function editNews($id, $title, $short_description, $long_description, $image, $meta_description, $meta_keyword,$category_id)
     {
         try {
 
-            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword=?,category_id=? WHERE id=?";
+            $query = "UPDATE news SET title=?, description=?,long_description=?,image=?,meta_description=?,meta_keyword=?,category_id=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssssii", $title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword,$category_id, $id);
+            $stmt->bind_param("ssssssii", $title, $short_description, $long_description, $image, $meta_description, $meta_keyword,$category_id, $id);
             if ($stmt->execute()) {
                 return true;
             } else {

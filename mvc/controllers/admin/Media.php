@@ -88,7 +88,7 @@ class Media extends Controller
                 //Model
                 $news = $this->model("MediaModel");
 
-                $preference_id = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description,$category_id,$type_id);
+                $preference_id = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$category_id,$type_id);
                 if (is_numeric($preference_id) && $preference_id>0) {
 
                    
@@ -103,12 +103,12 @@ class Media extends Controller
                     header('Location:../News');
                 } else {
                     $_SESSION['status'] = "News is NOT added";
-                    header('Location:Add');
+                    header('Location:../News');
                 }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
-            header('Location:Add');
+            header('Location:../News');
         }
     }
 
@@ -118,6 +118,7 @@ class Media extends Controller
     {
         try {
             if (isset($_POST["news_updatebtn"])) {
+                $category_id=(int)$_POST['category'];
                 $title = $_POST['edit_news_title'];
                 $slug = $_POST['edit_news_slug'];
                 $short_description =$_POST['edit_news_description'];
@@ -142,10 +143,10 @@ class Media extends Controller
                 } else {
                     $image = $stored_image['image'];
                 }
-                $success = $news->editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
+                $success = $news->editNews($id, $title, $short_description,$long_description,$image,$meta_keyword,$meta_description,$category_id);
                 if ($success) {
 
-                    // $this->model('MenuModel')->updateMenu($slug,$category_id,$id);
+                    $this->model('MenuModel')->updateMenu($category_id,$id);
                     
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     
@@ -153,12 +154,12 @@ class Media extends Controller
                     header('Location:../News');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Update');
+                    header('Location:../News');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Update');
+            header('Location:../News');
         }
     }
 

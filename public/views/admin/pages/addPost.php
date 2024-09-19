@@ -14,7 +14,6 @@
                         <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
-
             </div>
             <div class="form-group">
                 <label> Title </label>

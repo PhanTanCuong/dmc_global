@@ -32,11 +32,11 @@
         }
     }
 
-    public function updateMenu($slug,$category_id,$preference_id){
+    public function updateMenu($category_id,$preference_id){
         try{
-            $query="UPDATE menu SET slug=?,category=? WHERE preference_id=?";
+            $query="UPDATE menu SET category_id=? WHERE preference_id=?";
             $stmt=$this->connection->prepare($query);
-            $stmt->bind_param("sii",$slug,$category_id,$preference_id); 
+            $stmt->bind_param("ii",$category_id,$preference_id); 
             if($stmt->execute()){
                 return true;
             }else{
