@@ -107,6 +107,7 @@ class Media extends Controller
                 $meta_description=$_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
                 $news = $this->model('MediaModel');
+                $menu =$this->model('MenuModel');
 
                 $data = $news->getCurrentNewsImages($id);
                 $stored_image = mysqli_fetch_array($data);
@@ -125,6 +126,7 @@ class Media extends Controller
                 $success = $news->editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
                 if ($success) {
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
+                    
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:../News');
                 } else {
