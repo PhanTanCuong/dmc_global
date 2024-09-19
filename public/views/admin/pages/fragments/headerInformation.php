@@ -9,10 +9,7 @@
 
 
     <div class="card shadow mb-4" style="padding: 2em 0;">
-        <?php
-        foreach ($data["head"] as $row) {
-            ?>
-
+        <?php foreach ($data["head"] as $row) :?>
             <form action="customizeTab" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group">
@@ -35,8 +32,6 @@
                         style="margin-left:20px">Update</button>
                 </div>
             </form>
-            <?php
-        }
-        ?>
+            <?php endforeach;?>
     </div>
 </div>

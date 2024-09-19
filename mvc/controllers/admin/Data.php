@@ -16,7 +16,10 @@ class Data extends Controller
     {
         // Model
         $item = $this->model("DataModel");
-        $product_category = $this->model("CategoryModel");
+        if(isset($_COOKIE["parent_id"])){
+            $parent_id=(int)$_COOKIE["parent_id"];
+            $product_category = $this->model("CategoryModel")->getCategory($parent_id);
+        }
         if (isset($_GET['radio_option'])) {
             // Set new block_id and expire the old one
             setcookie("block_id", "", time() - 3600); // Expire old block_id cookie
@@ -40,7 +43,7 @@ class Data extends Controller
         $data = $item->getItem($block_id, $product_category_id);
         $this->view("admin/home", [
             "item" => $data,
-            "product_categories" => $product_category->getInforProductCategory(),
+            "product_categories" => $product_category,
             "block" => $item->getBlock(),
             "radio_button" => $block_id,
             "page" => "customizeData"

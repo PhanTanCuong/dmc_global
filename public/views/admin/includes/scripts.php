@@ -29,11 +29,23 @@
     // <!-- The link that will trigger the JavaScript function to redirect -->
     window.location.href = '/dmc_global/' + path;
   }
-  $(document).ready(function(){
+
+  function setParentID(parentId, path) {
+    //delete old cookie 
+    document.cookie="parent_id=" + parentId + ";path=/;expires=" + new Date(new Date().getTime() - 24*60*60*1000).toUTCString();
+
+    //set cookie
+    document.cookie = "parent_id=" + parentId + ";path=/;expires=" + new Date(new Date().getTime() + 24*60*60*1000).toUTCString();
+
+    //REdirect to URL
+    window.location.href = '/dmc_global/' + path;
+
+  }
+
+  $(document).ready(function () {
     $('.summernote').summernote({
-      height:250
+      height: 250
     });
     $('#myTable').DataTable();
   });
 </script>
-

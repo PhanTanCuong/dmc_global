@@ -34,7 +34,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Item:</h6>
                 <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Product');">Products</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/News');">Media</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">Media</a>
             </div>
         </div>
     </li>
@@ -58,8 +58,8 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Data');">Data</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/Slider');">Banner</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID('23','public/Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setparentID('23','public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">

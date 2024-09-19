@@ -14,6 +14,10 @@ class Slider extends Controller
     function display()
     {
         $item = $this->model('SliderModel');
+        if(isset($_COOKIE["parent_id"])){
+            $parent_id=(int)$_COOKIE["parent_id"];
+            $product_category=$this->model('CategoryModel')->getCategory($parent_id);
+        }
         $product_category = $this->model('CategoryModel');
         if (isset($_GET['product_category_id'])) {
             setcookie("product_category_id", "", time() - 3600);
@@ -24,7 +28,7 @@ class Slider extends Controller
         }
 
         $this->view('admin/home', [
-            'product_categories' => $product_category->getInforProductCategory(),
+            'product_categories' => $product_category,
             'item' => $item->getInforBanner($product_category_id),
             'page' => 'customizeBanner'
         ]);

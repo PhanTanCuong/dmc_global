@@ -23,11 +23,14 @@ class CategoryModel extends DB
         }
     }
 
-    public function getInforProductCategory()
+    public function getCategory($parent_id)
     {
         try {
-            $query = "SELECT * FROM category WHERE level=1 AND parent_id=23";
-            return mysqli_query($this->connection, $query);
+            $query = "SELECT * FROM category WHERE parent_id=?";
+            $stmt=$this->connection->prepare($query);
+            $stmt->bind_param("i",$parent_id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
