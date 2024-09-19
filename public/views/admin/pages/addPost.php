@@ -11,7 +11,7 @@
                 <label for="category">Category</label>
                 <select class="form-control " name="category" id="news_category" required>
                     <?php foreach ($data["product_categories"] as $category): ?>
-                        <option value="<?= $category['slug'] ?>"><?= $category['name'] ?></option>
+                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
 

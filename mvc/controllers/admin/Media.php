@@ -60,31 +60,51 @@ class Media extends Controller
         //Model
         try {
             if (isset($_POST['addNewsBtn'])) {
+                //Input fields
+                $category_id=$_POST['category'];
                 $title = $_POST['news_title'];
                 $slug = $_POST['news_slug'];
                 $short_description =$_POST['news_description'];
                 $long_description=$_POST['news_long_description'];
                 $meta_keyword=$_POST['news_meta_keyword'];
                 $meta_description=$_POST['news_meta_description'];
-                $id = $_POST['edit_news_id'];
                 $image = $_FILES["news_image"]['name'];
+
+                //Check if image is an image file
                 if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../News');
                     die();
                 }
+
+                if(isset($_COOKIE['parent_id'])){
+                    $type_id=(int)$_COOKIE['parent_id'];
+                }else{
+                    $_SESSION['status'] = "ID isexpired";
+                    header('Location:Add');
+                    die();
+                }
+
+                //Model
                 $news = $this->model("MediaModel");
-                $result = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
-                if ($result) {
+
+                $preference_id = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description,$category_id,$type_id);
+                if (is_numeric($preference_id) && $preference_id>0) {
+
+                   
+
+                    //add to slug center
+                    $this->model('MenuModel')->addMenu($slug,$preference_id,$category_id);
+                    
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
+                    
                     $_SESSION['success'] = "News is added successfully";
                     header('Location:../News');
                 } else {
                     $_SESSION['status'] = "News is NOT added";
                     header('Location:Add');
                 }
-                // }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
@@ -97,7 +117,6 @@ class Media extends Controller
     function editNews()
     {
         try {
-
             if (isset($_POST["news_updatebtn"])) {
                 $title = $_POST['edit_news_title'];
                 $slug = $_POST['edit_news_slug'];
@@ -106,8 +125,8 @@ class Media extends Controller
                 $meta_keyword=$_POST['edit_news_meta_keyword'];
                 $meta_description=$_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
+
                 $news = $this->model('MediaModel');
-                $menu =$this->model('MenuModel');
 
                 $data = $news->getCurrentNewsImages($id);
                 $stored_image = mysqli_fetch_array($data);
@@ -125,6 +144,9 @@ class Media extends Controller
                 }
                 $success = $news->editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description);
                 if ($success) {
+
+                    // $this->model('MenuModel')->updateMenu($slug,$category_id,$id);
+                    
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     
                     $_SESSION['success'] = 'Your data is updated';
@@ -146,9 +168,12 @@ class Media extends Controller
         try {
             if (isset($_POST["delete_news_btn"])) {
                 $id = $_POST['delete_news_id'];
+                
                 $news = $this->model('MediaModel');
+                
                 $result = $news->deleteNews($id);
                 if ($result) {
+                    $this->model('MenuModel')->deleteMenu($id);
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location:News');
                 } else {

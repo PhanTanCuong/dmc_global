@@ -21,8 +21,8 @@ class MediaModel extends DB
     {
         try {
             $query = "SELECT * FROM news WHERE id=?";
-            $stmt= $this->connection->prepare($query);
-            $stmt->bind_param("i",$id);
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
@@ -31,16 +31,15 @@ class MediaModel extends DB
     }
 
     //add new news function
-    public function addNews($title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description)
+    public function addNews($title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description,$category_id,$type_id)
     {
         try {
 
-            $query = "INSERT INTO news (title,description,long_description,slug,image,meta_description,meta_keyword) VALUES (?,?,?,?,?,?,?)";
+            $query = "INSERT INTO news (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            // $visible = 0;
-            // $stmt->bind_param("sssssss", $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword);
-             if ($stmt->execute([$title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword])) {
-                return true;
+            $stmt->bind_param("sssssssii",$title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description,$category_id,$type_id);
+            if ($stmt->execute()) {
+                return $this->connection->insert_id;
             }
             return false;
         } catch (mysqli_sql_exception $e) {
@@ -49,17 +48,19 @@ class MediaModel extends DB
     }
 
     //edit news function
-    public function editNews($id, $title, $short_description,$long_description,$slug,$image,$meta_keyword,$meta_description)
+    public function editNews($id, $title, $short_description, $long_description, $slug, $image, $meta_keyword, $meta_description)
     {
         try {
 
-            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword=? WHERE id=?";
+            $query = "UPDATE news SET title=?, description=?,long_description=?,slug=?,image=?,meta_description=?,meta_keyword=?,category_id=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssssi", $title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$id);
-             if ($stmt->execute()) {
+            $stmt->bind_param("sssssssii", $title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword,$category_id, $id);
+            if ($stmt->execute()) {
                 return true;
+            } else {
+                return false;
             }
-            return false;
+
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
