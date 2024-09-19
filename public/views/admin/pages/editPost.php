@@ -13,8 +13,8 @@
                     <label for="category">Category</label>
                     <select id="edit_news_category" name="category" class="form-control">
                         <?php foreach($data["product_categories"] as $category):?>
-                        <option value="<?= $category['id']?>">
-                            <?=($category['id']==$row['id'])?'selected':''?>
+                        <option value="<?= $category['id']?>"
+                            <?=($category['id']==$row['category_id'])?'selected':''?>>
                             <?=$category['name']?>
                         </option>
                         <?php endforeach;?>
