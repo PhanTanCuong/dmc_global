@@ -18,7 +18,7 @@ class Customize extends Controller
         $item = $this->model('CustomizeModel');
         $icons = $this->model('IconsModel');
         $category = $this->model('CategoryModel');
-        $navbar_item=$this->model('NavbarModel');
+        $navbar_item = $this->model('NavbarModel');
 
         $this->view('admin/home', [
             "page" => 'customizeContent',
@@ -28,10 +28,10 @@ class Customize extends Controller
             "bg_footer" => $item->getBackgroundbyId(8),
             "item" => $item->getDataFooter(),
             "footer_icons" => $icons->getInforIcons(7),
-            "category" => $item->getAvailableItems(23,12),
-            "navbar_item"=>$item->getAvailableQuickLink(13),
-            "selected_product_category_items"=>$item->fetchSelectedItem(12),
-            "selected_quick_link_items"=>$item->fetchSelectedItem(13),
+            "category" => $item->getAvailableItems(23, 12),
+            "navbar_item" => $item->getAvailableQuickLink(13),
+            "selected_product_category_items" => $item->fetchSelectedItem(12),
+            "selected_quick_link_items" => $item->fetchSelectedItem(13),
         ]);
     }
 
@@ -47,7 +47,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["head_image"]["name"])) {
-                    if (Image::isImageFile($_FILES["head_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["head_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -59,7 +59,10 @@ class Customize extends Controller
 
                 $success = $item->customizeHeaderInfor($name, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["head_image"]["tmp_name"], "./public/images/" . $_FILES["head_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["head_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["head_image"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -84,7 +87,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["header_icon"]["name"])) {
-                    if (Image::isImageFile($_FILES["header_icon"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["header_icon"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -121,7 +124,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_icon"]["name"])) {
-                    if (Image::isImageFile($_FILES["footer_icon"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["footer_icon"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -132,7 +135,10 @@ class Customize extends Controller
                 }
                 $result = $item->customizeIconbyId(14, $footer_logo);
                 if ($result) {
-                    move_uploaded_file($_FILES["footer_icon"]["tmp_name"], "./public/images/" . $_FILES["footer_icon"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["footer_icon"]["tmp_name"],
+                        "./public/images/" . $_FILES["footer_icon"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -157,7 +163,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_bg_image"]["name"])) {
-                    if (Image::isImageFile($_FILES["footer_bg_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["footer_bg_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -168,7 +174,10 @@ class Customize extends Controller
                 }
                 $result = $item->customizeBackgroundbyId(8, $footer_bg);
                 if ($result) {
-                    move_uploaded_file($_FILES["footer_bg_image"]["tmp_name"], "./public/images/" . $_FILES["footer_bg_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["footer_bg_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["footer_bg_image"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {
@@ -229,18 +238,18 @@ class Customize extends Controller
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['selectedItems'])) {
-                    $selectedItems = json_decode($_POST['selectedItems'],true);
-                    $id=(int)$_POST['quick_link_id'];
-                        
-                    $data = $this->model('DataModel');
-                    $success = $data->storedSelectedItems($selectedItems,$id);
-                    if ($success) {
-                        $_SESSION['success'] = 'Your data is updated';
-                        header('Location:Customize');
-                    } else {
-                        $_SESSION['status'] = 'Your data is NOT updated';
-                        header('Location:Customize');
-                    }
+                $selectedItems = json_decode($_POST['selectedItems'], true);
+                $id = (int) $_POST['quick_link_id'];
+
+                $data = $this->model('DataModel');
+                $success = $data->storedSelectedItems($selectedItems, $id);
+                if ($success) {
+                    $_SESSION['success'] = 'Your data is updated';
+                    header('Location:Customize');
+                } else {
+                    $_SESSION['status'] = 'Your data is NOT updated';
+                    header('Location:Customize');
+                }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();

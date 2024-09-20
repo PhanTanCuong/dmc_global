@@ -20,7 +20,7 @@ class Icons extends Controller
         try {
             if (isset($_POST["addIconsBtn"])) {
                 $image = $_FILES["icons_image"]['name'];
-                if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["icons_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type.';
                     header('Location:Customize');
                     die();
@@ -28,7 +28,10 @@ class Icons extends Controller
                 $item = $this->model('IconsModel');
                 $success = $item->addIconsImages($image);
                 if ($success) {
-                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["icons_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["icons_image"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Icons image added successfully';
                     header('Location:Customize');
                 } else {
@@ -70,13 +73,13 @@ class Icons extends Controller
                 $item = $this->model('IconsModel');
                 $id = $_POST['edit_footer_id'];
                 $result = $item->getIconsById($id);
-                $data=mysqli_fetch_assoc($result);// fetch mysqli_result into array data
+                $data = mysqli_fetch_assoc($result);// fetch mysqli_result into array data
 
                 $currentImages = $data['image'];
 
                 //Check image is null
                 if (!empty($_FILES["icons_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["icons_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["icons_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -88,7 +91,10 @@ class Icons extends Controller
 
                 $success = $item->customizeInforIcons($id, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["icons_image"]["tmp_name"], "./public/images/" . $_FILES["icons_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["icons_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["icons_image"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Customize');
                 } else {

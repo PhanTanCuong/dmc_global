@@ -16,8 +16,8 @@ class Data extends Controller
     {
         // Model
         $item = $this->model("DataModel");
-        if(isset($_COOKIE["parent_id"])){
-            $parent_id=(int)$_COOKIE["parent_id"];
+        if (isset($_COOKIE["parent_id"])) {
+            $parent_id = (int) $_COOKIE["parent_id"];
             $product_category = $this->model("CategoryModel")->getCategory($parent_id);
         }
         if (isset($_GET['radio_option'])) {
@@ -29,8 +29,8 @@ class Data extends Controller
             $block_id = isset($_COOKIE['block_id']) ? $_COOKIE['block_id'] : 3;
         }
         if (isset($_GET['product_category_id'])) {
-            setcookie("product_category_id", "", time() - 3600); 
-            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600); 
+            setcookie("product_category_id", "", time() - 3600);
+            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600);
             $product_category_id = $_GET['product_category_id'];
             $block_id = 3;
             setcookie("block_id", "", time() - 3600);
@@ -58,7 +58,7 @@ class Data extends Controller
                 $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
-                if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["data_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Data');
                     die();
@@ -66,7 +66,10 @@ class Data extends Controller
                 $result = $data->addData($title, $description, $image, $_COOKIE['block_id'], $_COOKIE['product_category_id']);
                 if ($result) {
                     //Upload image data vào folder upload
-                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["data_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["data_image"]["name"]
+                    ) . '';
                     $_GET['radio_option'] = $_COOKIE['block_id'];
                     $_SESSION['success'] = "Data is added successfully";
                     header('Location:Data');
@@ -113,12 +116,12 @@ class Data extends Controller
                 $result = $item->getItemById($id);
                 $data = mysqli_fetch_assoc($result);
 
-              
+
                 $currentImage = $data['image'];
 
                 if (!empty($_FILES["data_image"]['name'])) {
                     $image = $_FILES["data_image"]['name'];
-                    if (Image::isImageFile($_FILES["data_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["data_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Data');
                         die();
@@ -129,7 +132,10 @@ class Data extends Controller
 
                 $success = $item->editItem($id, $title, $description, $image);
                 if ($success) {
-                    move_uploaded_file($_FILES["data_image"]["tmp_name"], "./public/images/" . $_FILES["data_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["data_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["data_image"]["name"]
+                    ) . '';
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Data');
                 } else {

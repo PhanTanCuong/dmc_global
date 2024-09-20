@@ -3,12 +3,12 @@ use Core\DB;
 
 class MenuModel extends DB
 {
-    public function addMenu($slug, $preference_id)
+    public function addMenu($slug,$type, $preference_id)
     {
         try {
-            $query = "INSERT INTO menu (slug,preference_id) VALUES(?,?)";
+            $query = "INSERT INTO menu (slug,type,preference_id) VALUES(?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("si", $slug, $preference_id);
+            $stmt->bind_param("ssi", $slug,$type, $preference_id);
             return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo "Error" . $e->getMessage();

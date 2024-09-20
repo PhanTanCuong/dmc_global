@@ -25,33 +25,35 @@ class Media extends Controller
     }
 
 
-    function displayAddNews(){
+    function displayAddNews()
+    {
 
-        if(isset($_COOKIE['parent_id'])){
-            $parent_id=(int)$_COOKIE['parent_id'];
-            $categories=$this->model('CategoryModel')->getCategory($parent_id);
+        if (isset($_COOKIE['parent_id'])) {
+            $parent_id = (int) $_COOKIE['parent_id'];
+            $categories = $this->model('CategoryModel')->getCategory($parent_id);
         }
-        $this->view("admin/home",[
-            "product_categories"=>$categories,
-            "page"=>"addPost"
+        $this->view("admin/home", [
+            "product_categories" => $categories,
+            "page" => "addPost"
         ]);
     }
 
-    function Update(){
-        if(isset($_COOKIE['parent_id'])){
-            $parent_id=(int)$_COOKIE['parent_id'];
-            $categories=$this->model('CategoryModel')->getCategory($parent_id);
+    function Update()
+    {
+        if (isset($_COOKIE['parent_id'])) {
+            $parent_id = (int) $_COOKIE['parent_id'];
+            $categories = $this->model('CategoryModel')->getCategory($parent_id);
         }
-        
+
         if (isset($_POST['checking_edit_btn'])) {
-            $news_id = (int)$_POST['news_id'];
-            $news=$this->model('MediaModel')->getNewsbyId($news_id);
+            $news_id = (int) $_POST['news_id'];
+            $news = $this->model('MediaModel')->getNewsbyId($news_id);
         }
-        
-        $this->view("admin/home",[
-            "news"=> $news,
-            "product_categories"=>$categories,
-            "page"=>"editPost"
+
+        $this->view("admin/home", [
+            "news" => $news,
+            "product_categories" => $categories,
+            "page" => "editPost"
         ]);
     }
     //Add new product function
@@ -61,25 +63,25 @@ class Media extends Controller
         try {
             if (isset($_POST['addNewsBtn'])) {
                 //Input fields
-                $category_id=$_POST['category'];
+                $category_id = $_POST['category'];
                 $title = $_POST['news_title'];
                 $slug = $_POST['news_slug'];
-                $short_description =$_POST['news_description'];
-                $long_description=$_POST['news_long_description'];
-                $meta_keyword=$_POST['news_meta_keyword'];
-                $meta_description=$_POST['news_meta_description'];
+                $short_description = $_POST['news_description'];
+                $long_description = $_POST['news_long_description'];
+                $meta_keyword = $_POST['news_meta_keyword'];
+                $meta_description = $_POST['news_meta_description'];
                 $image = $_FILES["news_image"]['name'];
 
                 //Check if image is an image file
-                if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["news_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../News');
                     die();
                 }
 
-                if(isset($_COOKIE['parent_id'])){
-                    $type_id=(int)$_COOKIE['parent_id'];
-                }else{
+                if (isset($_COOKIE['parent_id'])) {
+                    $type_id = (int) $_COOKIE['parent_id'];
+                } else {
                     $_SESSION['status'] = "ID isexpired";
                     header('Location:Add');
                     die();
@@ -88,15 +90,28 @@ class Media extends Controller
                 //Model
                 $news = $this->model("MediaModel");
 
-                $preference_id = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$category_id,$type_id);
-                if (is_numeric($preference_id) && $preference_id>0) {
+                $preference_id = $news->addNews(
+                    $title,
+                    $short_description,
+                    $long_description,
+                    $slug,
+                    $image,
+                    $meta_description,
+                    $meta_keyword,
+                    $category_id,
+                    $type_id
+                );
+                if (is_numeric($preference_id) && $preference_id > 0) {
 
                     //add to slug center
-                    $this->model('MenuModel')->addMenu($slug,$preference_id);
-                    
+                    $this->model('MenuModel')->addMenu($slug, $preference_id);
+
                     //Upload image data vào folder upload
-                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
-                    
+                    move_uploaded_file(
+                        $_FILES["news_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["news_image"]["name"]
+                    ) . '';
+
                     $_SESSION['success'] = "News is added successfully";
                     header('Location:../News');
                 } else {
@@ -116,13 +131,13 @@ class Media extends Controller
     {
         try {
             if (isset($_POST["news_updatebtn"])) {
-                $category_id=(int)$_POST['category'];
+                $category_id = (int) $_POST['category'];
                 $title = $_POST['edit_news_title'];
                 $slug = $_POST['edit_news_slug'];
-                $short_description =$_POST['edit_news_description'];
-                $long_description=$_POST['edit_news_long_description'];
-                $meta_keyword=$_POST['edit_news_meta_keyword'];
-                $meta_description=$_POST['edit_news_meta_description'];
+                $short_description = $_POST['edit_news_description'];
+                $long_description = $_POST['edit_news_long_description'];
+                $meta_keyword = $_POST['edit_news_meta_keyword'];
+                $meta_description = $_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
 
                 $news = $this->model('MediaModel');
@@ -132,7 +147,7 @@ class Media extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["news_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["news_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["news_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type';
                         header('Location:../News');
                         die();
@@ -141,13 +156,25 @@ class Media extends Controller
                 } else {
                     $image = $stored_image['image'];
                 }
-                $success = $news->editNews($id, $title, $short_description,$long_description,$image,$meta_keyword,$meta_description,$category_id);
+                $success = $news->editNews(
+                    $id,
+                    $title,
+                    $short_description,
+                    $long_description,
+                    $image,
+                    $meta_keyword,
+                    $meta_description,
+                    $category_id
+                );
                 if ($success) {
 
                     // $this->model('MenuModel')->updateMenu($category_id,$id);
-                    
-                    move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
-                    
+
+                    move_uploaded_file(
+                        $_FILES["news_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["news_image"]["name"]
+                    ) . '';
+
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:../News');
                 } else {
@@ -167,9 +194,9 @@ class Media extends Controller
         try {
             if (isset($_POST["delete_news_btn"])) {
                 $id = $_POST['delete_news_id'];
-                
+
                 $news = $this->model('MediaModel');
-                
+
                 $result = $news->deleteNews($id);
                 if ($result) {
                     $this->model('MenuModel')->deleteMenu($id);

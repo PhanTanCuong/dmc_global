@@ -28,13 +28,36 @@ class ProductModel extends DB
 
 
     //add new product function
-    public function addProduct($title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword, $category_id, $type_id)
-    {
+    public function addProduct(
+        $title,
+        $short_description,
+        $long_description,
+        $slug,
+        $image,
+        $meta_description,
+        $meta_keyword,
+        $category_id,
+        $type_id
+    ) {
         try {
 
-            $query = "INSERT INTO product (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) VALUES (?,?,?,?,?,?,?,?,?)";
+            $query = "INSERT INTO product 
+                                        (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) 
+                                    VALUES 
+                                        (?,?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssssii", $title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword, $category_id, $type_id);
+            $stmt->bind_param(
+                "sssssssii",
+                $title,
+                $short_description,
+                $long_description,
+                $slug,
+                $image,
+                $meta_description,
+                $meta_keyword,
+                $category_id,
+                $type_id
+            );
             return ($stmt->execute()) ? $this->connection->insert_id : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -42,13 +65,42 @@ class ProductModel extends DB
     }
 
     //edit product function
-    public function editProduct($id, $title, $short_description, $long_description, $image, $meta_description, $meta_keyword, $category_id)
-    {
+    public function editProduct(
+        $id,
+        $title,
+        $short_description,
+        $long_description,
+        $image,
+        $meta_description,
+        $meta_keyword,
+        $category_id
+    ) {
         try {
 
-            $query = "UPDATE product SET title=?, description=?,long_description=?,image=?,meta_description=?,meta_keyword=?,category_id=? WHERE id=?";
+            $query = "UPDATE product 
+                                SET 
+                                    title = ?, 
+                                    description = ?, 
+                                    long_description = ?, 
+                                    image = ?, 
+                                    meta_description = ?, 
+                                    meta_keyword = ?, 
+                                    category_id = ? 
+                                WHERE 
+                                    id = ?;
+                                ";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssssssii", $title, $short_description, $long_description, $image, $meta_description, $meta_keyword, $category_id, $id);
+            $stmt->bind_param(
+                "ssssssii",
+                $title,
+                $short_description,
+                $long_description,
+                $image,
+                $meta_description,
+                $meta_keyword,
+                $category_id,
+                $id
+            );
             return ($stmt->execute()) ? true : false;
 
         } catch (mysqli_sql_exception $e) {
