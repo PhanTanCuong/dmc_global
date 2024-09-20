@@ -27,100 +27,141 @@ class Product extends Controller
         ]);
     }
 
-    //display detail infor user account
-    function getProductById()
-    {
-        if(isset($_POST['checking_edit_btn'])) {
-            $product_id=$_POST['product_id'];
-            $result_array=[];
-            $product= $this->model('ProductModel');
-            $result = $product->getProductById($product_id);
-            if(mysqli_num_rows($result) > 0) {
-                foreach ($result as $row) {
-                    array_push($result_array, $row);
-                    header('Content-Type: application/json');
-                    echo json_encode($result_array);
+    function displayAddProduct(){
 
-                }
-
-            }
+        if(isset($_COOKIE['parent_id'])){
+            $parent_id=(int)$_COOKIE['parent_id'];
+            $categories=$this->model('CategoryModel')->getCategory($parent_id);
         }
+        $this->view("admin/home",[
+            "product_categories"=>$categories,
+            "page"=>"addProduct"
+        ]);
     }
 
-
+    function Update(){
+        if(isset($_COOKIE['parent_id'])){
+            $parent_id=(int)$_COOKIE['parent_id'];
+            $categories=$this->model('CategoryModel')->getCategory($parent_id);
+        }
+        
+        if (isset($_POST['checking_edit_btn'])) {
+            $product_id = (int)$_POST['product_id'];
+            $product=$this->model('ProductModel')->getProductbyId($product_id);
+        }
+        
+        $this->view("admin/home",[
+            "product"=> $product,
+            "product_categories"=>$categories,
+            "page"=>"editProduct"
+        ]);
+    }
     //Add new product function
     function addProduct()
     {
         //Model
         try {
             if (isset($_POST['addProductBtn'])) {
-                $title = strip_tags($_POST['product_title']);
-                $description = strip_tags($_POST['product_description']);
-                $link = strip_tags($_POST['product_link']);
+                //Input fields
+                $category_id=$_POST['category'];
+                $title = $_POST['product_title'];
+                $slug = $_POST['product_slug'];
+                $short_description =$_POST['product_description'];
+                $long_description=$_POST['product_long_description'];
+                $meta_keyword=$_POST['product_meta_keyword'];
+                $meta_description=$_POST['product_meta_description'];
                 $image = $_FILES["product_image"]['name'];
+
+                //Check if image is an image file
                 if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
                     $_SESSION['status'] = 'Incorrect image type';
-                    header('Location:Product');
+                    header('Location:../Product');
                     die();
                 }
-                $product = $this->model('ProductModel');
-                $result = $product->addProduct($title, $description, $image);
-                if ($result) {
+
+                if(isset($_COOKIE['parent_id'])){
+                    $type_id=(int)$_COOKIE['parent_id'];
+                }else{
+                    $_SESSION['status'] = "ID isexpired";
+                    header('Location:Add');
+                    die();
+                }
+
+                //Model
+                $product = $this->model("ProductModel");
+
+                $preference_id = $product->addProduct($title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$category_id,$type_id);
+                if (is_numeric($preference_id) && $preference_id>0) {
+
+                   
+
+                    //add to slug center
+                    $this->model('MenuModel')->addMenu($slug,$preference_id,$category_id);
+                    
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./public/images/" . $_FILES["product_image"]["name"]) . '';
+                    
                     $_SESSION['success'] = "Product is added successfully";
-                    header('Location:Product');
+                    header('Location:../Product');
                 } else {
                     $_SESSION['status'] = "Product is NOT added";
-                    header('Location:Product');
+                    header('Location:../Product');
                 }
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
-            header('Location:Product');
+            header('Location:../Product');
         }
     }
-
 
     //Edit product function
 
     function editProduct()
     {
         try {
-
             if (isset($_POST["product_updatebtn"])) {
-                $title = strip_tags($_POST['product_title']);
-                $description = strip_tags($_POST['product_description']);
-                $link = strip_tags($_POST['product_link']);
+                $category_id=(int)$_POST['category'];
+                $title = $_POST['edit_product_title'];
+                $slug = $_POST['edit_product_slug'];
+                $short_description =$_POST['edit_product_description'];
+                $long_description=$_POST['edit_product_long_description'];
+                $meta_keyword=$_POST['edit_product_meta_keyword'];
+                $meta_description=$_POST['edit_product_meta_description'];
+                $id = $_POST['edit_product_id'];
 
-                $id = $_POST['edit_id'];
                 $product = $this->model('ProductModel');
-              
+
                 $data = $product->getCurrentProductImages($id);
-                $stored_image = mysqli_fetch_assoc($data);
+                $stored_image = mysqli_fetch_array($data);
+
+                //Check image is null
                 if (!empty($_FILES["product_image"]['name'])) {
                     if (Image::isImageFile($_FILES["product_image"]) === is_bool('')) {
                         $_SESSION['status'] = 'Incorrect image type';
-                        header('Location:Product');
+                        header('Location:../Product');
                         die();
                     }
                     $image = $_FILES["product_image"]['name'];
                 } else {
                     $image = $stored_image['image'];
                 }
-                $success = $product->editProduct($id, $title, $description, $link, $image);
+                $success = $product->editProduct($id, $title, $short_description,$long_description,$image,$meta_keyword,$meta_description,$category_id);
                 if ($success) {
+
+                    $this->model('MenuModel')->updateMenu($category_id,$id);
+                    
                     move_uploaded_file($_FILES["product_image"]["tmp_name"], "./public/images/" . $_FILES["product_image"]["name"]) . '';
+                    
                     $_SESSION['success'] = 'Your data is updated';
-                    header('Location: Product');
+                    header('Location:../Product');
                 } else {
                     $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location: Product');
+                    header('Location:../Product');
                 }
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header('Location:Product');
+            header('Location:../Product');
         }
     }
 
@@ -130,9 +171,12 @@ class Product extends Controller
         try {
             if (isset($_POST["delete_product_btn"])) {
                 $id = $_POST['delete_product_id'];
+                
                 $product = $this->model('ProductModel');
+                
                 $result = $product->deleteProduct($id);
                 if ($result) {
+                    $this->model('MenuModel')->deleteMenu($id);
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location:Product');
                 } else {
@@ -145,6 +189,8 @@ class Product extends Controller
             header('Location:Product');
         }
     }
+
+
 
 
     //delete multiple products functions

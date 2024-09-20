@@ -1,91 +1,3 @@
-<!-- Add new product form -->
-<div class="modal fade" id="addproductprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product Information </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-      <form action="addProduct" method="POST" enctype="multipart/form-data">
-
-        <div class="modal-body">
-
-          <div class="form-group">
-            <label> Title </label>
-            <input type="text" name="product_title" class="form-control" placeholder="Enter Product Title" required>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input type="text" name="product_description" class="form-control" placeholder="Enter Product Description"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Image </label>
-            <input type="file" name="product_image" id="product_image" class="form-control" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="addProductBtn" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-
-    </div>
-  </div>
-</div>
-
-<!-- Edit new product form -->
-<div class="modal fade" id="editproductprofile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product Information </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- enctype="multipart/form-data": Thuộc tính phải có để uplaod hoặc fetch dữ liệu dạng file(Ảnh) -->
-      <form action="editProduct" method="POST" enctype="multipart/form-data">
-
-        <div class="modal-body">
-          <input type="hidden" name="edit_id" id="edit_id">
-          <div class="form-group">
-            <label> Title </label>
-            <input type="text" name="product_title" id="edit_title" class="form-control" placeholder="Enter Title"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input type="text" name="product_description" id="edit_description" class="form-control"
-              placeholder="Enter Description" required>
-          </div>
-          <div class="form-group">
-            <label>Current Image</label><br>
-            <img id="product_current_image" src="/dmc_global/public/images/" width="50%" height="auto"
-              alt="Product Img"><br>
-            <span id="current_file">Current file: </span>
-          </div>
-          <div class="form-group">
-            <label>Upload Image </label>
-            <input type="file" name="product_image" id="edit_img" class="form-control">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" name="product_updatebtn" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-
-    </div>
-  </div>
-</div>
-
-
 <div class="container-fluid">
 
   <!-- DataTales Example -->
@@ -93,9 +5,7 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
         <div class="controll-btn">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproductprofile">
-            <i class="fas fa-plus"></i>
-          </button>
+          <a href="Product/Add" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           <form action="multipleDeleteProduct" method="POST">
             <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i
                 class="fas fa-trash"></i></button>
@@ -116,75 +26,41 @@
               <th>Title</th>
               <th>Description</th>
               <th>Image</th>
-              <th>EDIT</th>
-              <th>DELETE </th>
+              <th>Action</th>
             </tr>
           </thead>
-            <?php if (mysqli_num_rows($data["product"]) > 0): ?>
-              <?php $counter = 1; ?>
-              <?php while ($row = mysqli_fetch_array($data["product"])): ?>
-                <tr>
-                  <td><?= $counter++; ?></td>
-                  <td><?= $row['title']; ?></td>
-                  <td><?= $row['description']; ?></td>
-                  <td>
-                    <?= '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?>
-                  </td>
-                  <td>
-                    <form action="getProductById" method="POST">
-                      <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
-                      <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
+          <?php if (mysqli_num_rows($data["product"]) > 0): ?>
+            <?php $counter = 1; ?>
+            <?php while ($row = mysqli_fetch_array($data["product"])): ?>
+              <tr>
+                <td><?= $counter++; ?></td>
+                <td><?= $row['title']; ?></td>
+                <td><?= $row['description']; ?></td>
+                <td>
+                  <?= '<img src="/dmc_global/public/images/' . $row['image'] . '" width="200px" height="200px" alt="Product Img">' ?>
+                </td>
+                <td>
+                  <div class="action_column">
+                    <form action="Product/Update" method="POST">
+                      <input type="hidden" name="product_id" class="product_id" value="<?= $row['id']; ?>">
+                      <button type="submit" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
                         data-target="#editproductprofile"> <i class="fas fa-edit"></i> </i></i></button>
                     </form>
-                  </td>
-                  <td>
                     <form action="deleteProduct" method="POST">
                       <input type="hidden" name="delete_product_id" value="<?= $row['id']; ?>">
                       <button type="submit" name="delete_product_btn" class="btn btn-danger"> <i
                           class="fas fa-trash"></i></button>
                     </form>
-                  </td>
-                </tr>
-              <?php endwhile; ?>
-            <?php endif; ?>
-            </tbody>
+                  </div>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          <?php endif; ?>
+          </tbody>
         </table>
 
       </div>
     </div>
   </div>
 
-  <script src="/public/js/admin/checkbox.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.edit_btn').click(function (e) {
-        e.preventDefault();
-
-        var product_id = $(this).closest('tr').find('.edit_id').val();
-
-        // console.log(product_id);
-
-        $.ajax({
-          type: "POST",
-          url: 'Product/getProductById/' + product_id,
-          data: {
-            'checking_edit_btn': true,
-            'product_id': product_id,
-          },
-          success: function (response) {
-            console.log(response);
-            $.each(response, function (key, value) {
-              $('#edit_id').val(value['id']);
-              $('#edit_title').val(value['title']);
-              $('#edit_description').val(value['description']);
-              $('#edit_link').val(value['link']);
-              $('#product_current_image').attr('src', '/dmc_global/public/images/' + value['image']);
-              $('#current_file').text('Current file:' + value['image']);
-            });
-            $('#editproductprofile').modal('show');
-          }
-        });
-      });
-
-    });
-  </script>
+  <!-- <script src="/public/js/admin/checkbox.js"></script> -->

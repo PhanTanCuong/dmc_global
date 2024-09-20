@@ -32,6 +32,8 @@ Route::add('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
 Route::add('Admin/editAccount','Account@editAccount');
 
 //Admin Product routes
+Route::add('Admin/Product/Add','Product@displayAddProduct');
+Route::add('Admin/Product/Update','Product@Update');
 Route::add('Admin/addProduct','Product@addProduct');
 Route::add('Admin/deleteProduct','Product@deleteProduct');
 Route::add('Admin/Product','Product@display');

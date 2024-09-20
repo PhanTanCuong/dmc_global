@@ -5,9 +5,6 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of blogs
         <div class="controll-btn">
-          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewsinfor">
-            <i class="fas fa-plus"></i>
-          </button> -->
           <a href="News/Add" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           <form action="multipleDeleteNews" method="POST">
             <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i
@@ -34,11 +31,9 @@
             </tr>
           </thead>
           <tbody>
-            <?php
-            if (mysqli_num_rows($data["news"]) > 0):
-              $counter = 1;
-              while ($row = mysqli_fetch_array($data["news"])):
-                ?>
+            <?php if (mysqli_num_rows($data["news"]) > 0): ?>
+              <?php $counter = 1;?>
+              <?php while ($row = mysqli_fetch_array($data["news"])):?>
                 <tr>
                   <!-- <td>
                     <input type="checkbox" onclick="toggleCheckbox(this,'../Admin/toggleCheckboxDelete/')" value="<?= $row['id'] ?>
@@ -54,7 +49,6 @@
                     <div class="action_column">
                       <form action="News/Update" method="POST">
                         <input type="hidden" name="news_id" value="<?= $row['id']; ?>">
-                        <!-- <a href="News/Update" name="checking_edit_btn"  class="btn btn-warning"><i class="fas fa-edit"></i></a> -->
                         <button type="submit" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"> <i
                         class="fas fa-edit"></i></button>
                       </form>
@@ -64,13 +58,10 @@
                             class="fas fa-trash"></i></button>
                       </form>
                     </div>
-
                   </td>
                 </tr>
-                <?php
-              endwhile;
-            endif;
-            ?>
+                <?php endwhile;?>
+            <?php endif; ?>
           </tbody>
         </table>
 
@@ -78,4 +69,4 @@
     </div>
   </div>
 
-  <script src="../public/js/admin/checkbox.js"></script>
+  <!-- <script src="../public/js/admin/checkbox.js"></script> -->

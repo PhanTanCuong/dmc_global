@@ -65,7 +65,7 @@
 
         </div>
         <div class="modal-footer">
-            <a href="../News" class="btn btn-danger">Back</a>
+            <a href="../Product" class="btn btn-danger">Back</a>
             <button type="submit" name="product_updatebtn" class="btn btn-primary">Save</button>
         </div>
 </div>
