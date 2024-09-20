@@ -43,8 +43,8 @@
                   <div class="action_column">
                     <form action="Product/Update" method="POST">
                       <input type="hidden" name="product_id" class="product_id" value="<?= $row['id']; ?>">
-                      <button type="submit" name="edit_btn" class="btn btn-warning edit_btn" data-toggle="modal"
-                        data-target="#editproductprofile"> <i class="fas fa-edit"></i> </i></i></button>
+                      <button type="submit" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"> <i
+                      class="fas fa-edit"></i></button>
                     </form>
                     <form action="deleteProduct" method="POST">
                       <input type="hidden" name="delete_product_id" value="<?= $row['id']; ?>">

@@ -7,7 +7,7 @@
 <div class="card shadow mb-4 mx-4">
     <form action="editProduct" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
-            <?php foreach ($data["news"] as $row): ?>
+            <?php foreach ($data["product"] as $row): ?>
                 <input type="hidden" name="edit_product_id" value="<?= $row['id'] ?>">
                 <div class="form-group">
                     <label for="category">Category</label>
