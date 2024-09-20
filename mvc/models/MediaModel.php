@@ -5,11 +5,11 @@ use Core\DB;
 class MediaModel extends DB
 {
 
-    //get List of news function
+    //get List of post function
     public function getNews()
     {
         try {
-            $query = "SELECT * FROM news";
+            $query = "SELECT * FROM post";
             return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
@@ -20,7 +20,7 @@ class MediaModel extends DB
     public function getNewsbyId(int $id)
     {
         try {
-            $query = "SELECT * FROM news WHERE id=?";
+            $query = "SELECT * FROM post WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -30,7 +30,7 @@ class MediaModel extends DB
         }
     }
 
-    //add new news function
+    //add new post function
     public function addNews(
         $title,
         $short_description,
@@ -44,10 +44,10 @@ class MediaModel extends DB
     ) {
         try {
 
-            $query = "INSERT INTO news 
+            $query = "INSERT INTO post 
                                         (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) 
                                     VALUES 
-                                        ?,?,?,?,?,?,?,?,?)";
+                                        (?,?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param(
                 "sssssssii",
@@ -67,7 +67,7 @@ class MediaModel extends DB
         }
     }
 
-    //edit news function
+    //edit post function
     public function editNews(
         $id,
         $title,
@@ -79,7 +79,7 @@ class MediaModel extends DB
         $category_id
     ) {
         try {
-            $query = "UPDATE news 
+            $query = "UPDATE post 
                                 SET 
                                     title = ?, 
                                     description = ?, 
@@ -113,7 +113,7 @@ class MediaModel extends DB
     public function getCurrentNewsImages($id)
     {
         try {
-            $query = "SELECT image FROM news WHERE id=?";
+            $query = "SELECT image FROM post WHERE id=?";
             $stmt = $this->connection->prepare($query);
 
             if ($stmt === false) {
@@ -127,11 +127,11 @@ class MediaModel extends DB
         }
     }
 
-    //delete news function
+    //delete post function
     public function deleteNews($id)
     {
         try {
-            $query_run = "DELETE FROM news WHERE id='$id'";
+            $query_run = "DELETE FROM post WHERE id='$id'";
             return mysqli_query($this->connection, $query_run);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

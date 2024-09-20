@@ -101,10 +101,11 @@ class Media extends Controller
                     $category_id,
                     $type_id
                 );
+                
                 if (is_numeric($preference_id) && $preference_id > 0) {
 
                     //add to slug center
-                    $this->model('MenuModel')->addMenu($slug, $preference_id);
+                    $this->model('MenuModel')->addMenu($slug,'post', $preference_id);
 
                     //Upload image data vào folder upload
                     move_uploaded_file(
@@ -133,7 +134,7 @@ class Media extends Controller
             if (isset($_POST["news_updatebtn"])) {
                 $category_id = (int) $_POST['category'];
                 $title = $_POST['edit_news_title'];
-                $slug = $_POST['edit_news_slug'];
+                // $slug = $_POST['edit_news_slug'];
                 $short_description = $_POST['edit_news_description'];
                 $long_description = $_POST['edit_news_long_description'];
                 $meta_keyword = $_POST['edit_news_meta_keyword'];
