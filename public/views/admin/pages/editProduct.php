@@ -5,7 +5,7 @@
 </div>
 
 <div class="card shadow mb-4 mx-4">
-    <form action="editNews" method="POST" enctype="multipart/form-data">
+    <form action="editProduct" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <?php foreach ($data["news"] as $row): ?>
                 <input type="hidden" name="edit_product_id" value="<?= $row['id'] ?>">

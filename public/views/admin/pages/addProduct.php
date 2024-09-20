@@ -5,7 +5,7 @@
 </div>
 
 <div class="card shadow mb-4 mx-4">
-    <form action="addNews" method="POST" enctype="multipart/form-data">
+    <form action="addProduct" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
                 <label for="category">Category</label>
@@ -54,7 +54,7 @@
         </div>
         <div class="modal-footer">
             <a href="../Product" class="btn btn-danger">Back</a>
-            <button type="submit" name="addNewsBtn" class="btn btn-primary">Save</button>
+            <button type="submit" name="addProductBtn" class="btn btn-primary">Save</button>
         </div>
 </div>
 </form>

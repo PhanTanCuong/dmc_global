@@ -91,10 +91,8 @@ class Media extends Controller
                 $preference_id = $news->addNews($title, $short_description,$long_description,$slug,$image,$meta_description,$meta_keyword,$category_id,$type_id);
                 if (is_numeric($preference_id) && $preference_id>0) {
 
-                   
-
                     //add to slug center
-                    $this->model('MenuModel')->addMenu($slug,$preference_id,$category_id);
+                    $this->model('MenuModel')->addMenu($slug,$preference_id);
                     
                     //Upload image data vào folder upload
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
@@ -146,7 +144,7 @@ class Media extends Controller
                 $success = $news->editNews($id, $title, $short_description,$long_description,$image,$meta_keyword,$meta_description,$category_id);
                 if ($success) {
 
-                    $this->model('MenuModel')->updateMenu($category_id,$id);
+                    // $this->model('MenuModel')->updateMenu($category_id,$id);
                     
                     move_uploaded_file($_FILES["news_image"]["tmp_name"], "./public/images/" . $_FILES["news_image"]["name"]) . '';
                     

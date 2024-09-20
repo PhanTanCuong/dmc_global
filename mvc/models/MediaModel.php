@@ -10,7 +10,7 @@ class MediaModel extends DB
     {
         try {
             $query = "SELECT * FROM news";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -31,35 +31,32 @@ class MediaModel extends DB
     }
 
     //add new news function
-    public function addNews($title, $short_description, $long_description, $slug, $image,$meta_description,$meta_keyword,$category_id,$type_id)
+    public function addNews($title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword, $category_id, $type_id)
     {
         try {
 
             $query = "INSERT INTO news (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("sssssssii",$title, $short_description, $long_description, $slug, $image, $meta_description,$meta_keyword,$category_id,$type_id);
-            if ($stmt->execute()) {
-                return $this->connection->insert_id;
-            }
-            return false;
+            $stmt->bind_param("sssssssii", $title, $short_description, $long_description, $slug, $image, $meta_description, $meta_keyword, $category_id, $type_id);
+            // if ($stmt->execute()) {
+            //     return $this->connection->insert_id;
+            // }
+            // return false;
+            return ($stmt->execute()) ? $this->connection->insert_id : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
     //edit news function
-    public function editNews($id, $title, $short_description, $long_description, $image, $meta_description, $meta_keyword,$category_id)
+    public function editNews($id, $title, $short_description, $long_description, $image, $meta_description, $meta_keyword, $category_id)
     {
         try {
 
             $query = "UPDATE news SET title=?, description=?,long_description=?,image=?,meta_description=?,meta_keyword=?,category_id=? WHERE id=?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssssssii", $title, $short_description, $long_description, $image, $meta_description, $meta_keyword,$category_id, $id);
-            if ($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+            $stmt->bind_param("ssssssii", $title, $short_description, $long_description, $image, $meta_description, $meta_keyword, $category_id, $id);
+            return ($stmt->execute()) ? true : false;
 
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -69,8 +66,15 @@ class MediaModel extends DB
     public function getCurrentNewsImages($id)
     {
         try {
-            $query = "SELECT image FROM news WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            $query = "SELECT image FROM news WHERE id=?";
+            $stmt=$this->connection->prepare($query);
+
+            if ($stmt === false) {
+                throw new Exception('Statement preparation failed: ' . $this->connection->error);
+            }
+            
+            $stmt->bind_param("i",$id);
+            return ($stmt->execute()) ? $stmt->get_result():false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
