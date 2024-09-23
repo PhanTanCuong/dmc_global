@@ -143,7 +143,7 @@ class CategoryModel extends DB
         return $childCategories;
     }
 
-    public function getIDCategoryBySlug($slug){
+    public function getCategoryIdBySlug($slug){
         try{
             $query="SELECT * FROM category WHERE slug=?";
             $stmt=$this->connection->prepare($query);

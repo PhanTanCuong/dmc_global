@@ -1,10 +1,10 @@
-<!-- <section class="latest-news">
+<section class="latest-news">
     <div class="container">
         <h2 class="title wow slideInLeft">our latest news
             <p class="pseudo"></p>
         </h2>
 
-        <div class="comp wow fadeIn">
+        <div class="news-grid wow fadeIn">
             <?php
             if (mysqli_num_rows($data['news']) > 0) {
                 while ($rows = mysqli_fetch_array($data['news'])) {
@@ -18,4 +18,4 @@
                 }
             }
             ?>
-</section> -->
+</section>

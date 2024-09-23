@@ -8,7 +8,6 @@ include('includes/nav.php');
 
 require_once "pages/" . $data["page"] . ".php";
 
-
 include('includes/scripts.php');
 
 //Fetch data footer

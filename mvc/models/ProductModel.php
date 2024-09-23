@@ -18,6 +18,16 @@ class ProductModel extends DB
         }
     }
 
+    public function getProductByProductCategory($category_id) {
+        try{
+            $query="SELECT * FROM product WHERE category_id = ?";
+            $stmt=$this->connection->prepare($query);
+            $stmt->bind_param("i", $category_id);
+            return ($stmt->execute())?$stmt->get_result() : false;
+        }catch(mysqli_sql_exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
     //get product information by id
 
     public function getProductbyId($id)

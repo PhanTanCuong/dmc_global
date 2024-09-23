@@ -22,22 +22,20 @@ class Product extends Controller
         $item = $this->model("SettingModel");
         $category = $this->model("CategoryModel");
 
-        $product_category_id = $category->getIDCategoryBySlug($slug);
+        $product_category_id = $category->getCategoryIdBySlug($slug);
+        $news_category_id = $category->getCategoryIdBySlug($slug."-news");
 
 
         //View
         $this->view("home", [
-            // "menu_items" => $item->getNavBarItem(),
             "banner" => $banner->getInforBanner($product_category_id),
-            "product" => $product->getProduct(),
-            "news" => $news->getNews(),
-            // "head" => $item->getHeadInfor(),
+            "product" => $product->getProductByProductCategory($product_category_id),
+            "news" => $news->getNewsByProductCategory($news_category_id),
             "about2Infor" => $item->getLayoutbyId(3, $product_category_id),
             "about3Infor" => $item->getLayoutbyId(4, $product_category_id),
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
             "bg_stat" => $item->getBackgroundbyId(7),
-            // "header_icon" => $item->getIconbyId(2),
             "page" => "displayProduct"
         ]);
     }
