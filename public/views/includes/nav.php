@@ -5,8 +5,8 @@
     <!-- Thanh chuyển hướng -->
     <div class="logo">
       <?php
-      if (mysqli_num_rows($data["header_icon"]) > 0):
-        while ($rows = mysqli_fetch_array($data["header_icon"])):
+      if (mysqli_num_rows($header["header_icon"]) > 0):
+        while ($rows = mysqli_fetch_array($header["header_icon"])):
           $header_icon = $rows['image'];
           $image_path = "/dmc_global/public/images/" . $header_icon;
           if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)):
@@ -26,8 +26,8 @@
 
         <ul>
 
-          <?php if (!empty($data["menu_items"])): ?>
-            <?php foreach ($data["menu_items"] as $row): ?>
+          <?php if (!empty($header["menu_items"])): ?>
+            <?php foreach ($header["menu_items"] as $row): ?>
               <li><a href="#<?= htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
             </a>
                 <?php if (!empty($row['child_items'])): ?>

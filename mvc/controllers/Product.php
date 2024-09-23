@@ -21,24 +21,23 @@ class Product extends Controller
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
         $category = $this->model("CategoryModel");
-        // $footer=$this->model("FooterModel");
 
         $product_category_id = $category->getIDCategoryBySlug($slug);
 
 
         //View
         $this->view("home", [
-            "menu_items" => $item->getNavBarItem(),
+            // "menu_items" => $item->getNavBarItem(),
             "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProduct(),
             "news" => $news->getNews(),
-            "head" => $item->getHeadInfor(),
+            // "head" => $item->getHeadInfor(),
             "about2Infor" => $item->getLayoutbyId(3, $product_category_id),
             "about3Infor" => $item->getLayoutbyId(4, $product_category_id),
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
             "bg_stat" => $item->getBackgroundbyId(7),
-            "header_icon" => $item->getIconbyId(2),
+            // "header_icon" => $item->getIconbyId(2),
             "page" => "displayProduct"
         ]);
     }
