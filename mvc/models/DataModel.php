@@ -86,7 +86,7 @@ class DataModel extends DB
         try{
             $selectedItems=json_encode($selectedItems);
            
-            $query="UPDATE data SET json_data=CAST(? AS JSON) WHERE id=?";
+            $query="UPDATE footer SET json_data=CAST(? AS JSON) WHERE id=?";
             
             $stmt =$this->connection->prepare($query);
             $stmt->bind_param("si",$selectedItems,$id);

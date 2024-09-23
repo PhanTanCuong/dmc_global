@@ -15,7 +15,7 @@ class Customize extends Controller
 
     function display()
     {
-        $item = $this->model('CustomizeModel');
+        $item = $this->model('SettingModel');
         $icons = $this->model('IconsModel');
         $category = $this->model('CategoryModel');
         $navbar_item = $this->model('NavbarModel');
@@ -41,7 +41,7 @@ class Customize extends Controller
 
             if (isset($_POST["head_updatebtn"])) {
                 $name = $_POST["head_title"];
-                $item = $this->model('CustomizeModel');
+                $item = $this->model('SettingModel');
                 $data = $item->getHeadInfor();
                 foreach ($data as $row) {
                     $currentImage = $row['image'];
@@ -81,7 +81,7 @@ class Customize extends Controller
         try {
 
             if (isset($_POST["head_logo_updatebtn"])) {
-                $item = $this->model('CustomizeModel');
+                $item = $this->model('SettingModel');
                 $data = $item->getIconbyId(2);
                 foreach ($data as $row) {
                     $currentImage = $row['image'];
@@ -118,7 +118,7 @@ class Customize extends Controller
         try {
 
             if (isset($_POST["footer_logo_updatebtn"])) {
-                $item = $this->model('CustomizeModel');
+                $item = $this->model('SettingModel');
                 $data = $item->getIconbyId(2);
                 foreach ($data as $row) {
                     $currentImage = $row['image'];
@@ -157,7 +157,7 @@ class Customize extends Controller
         try {
 
             if (isset($_POST["footer_bg_updatebtn"])) {
-                $item = $this->model('CustomizeModel');
+                $item = $this->model('SettingModel');
                 $data = $item->getBackgroundById(8);
                 foreach ($data as $row) {
                     $currentImage = $row['image'];
@@ -197,7 +197,7 @@ class Customize extends Controller
         if (isset($_POST['checking_edit_btn'])) {
             $item_id = $_POST['data_id'];
             $result_array = [];
-            $item = $this->model('CustomizeModel');
+            $item = $this->model('SettingModel');
             $result = $item->getDataById($item_id);
             if (mysqli_num_rows($result) > 0) {
                 foreach ($result as $row) {
@@ -217,7 +217,7 @@ class Customize extends Controller
                 $title = strip_tags($_POST['edit_title']);
                 $description = strip_tags($_POST['edit_description']);
                 $id = $_POST['edit_id'];
-                $item = $this->model('CustomizeModel');
+                $item = $this->model('SettingModel');
 
                 $success = $item->editData($id, $title, $description);
                 if ($success) {

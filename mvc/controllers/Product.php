@@ -19,10 +19,11 @@ class Product extends Controller
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
-        $item = $this->model("CustomizeModel");
+        $item = $this->model("SettingModel");
         $category = $this->model("CategoryModel");
+        // $footer=$this->model("FooterModel");
 
-        $product_category_id=$category->getIDCategoryBySlug($slug);
+        $product_category_id = $category->getIDCategoryBySlug($slug);
 
 
         //View
@@ -36,16 +37,8 @@ class Product extends Controller
             "about3Infor" => $item->getLayoutbyId(4, $product_category_id),
             "product1" => $item->getLayoutbyId(5, $product_category_id),
             "stats" => $item->getLayoutbyId(6, $product_category_id),
-            "icons" => $item->getFooterIconInfor(),
-            "navbar_footer" => $item->getMenuFooter(),
             "bg_stat" => $item->getBackgroundbyId(7),
-            "bg_footer" => $item->getBackgroundbyId(8),
             "header_icon" => $item->getIconbyId(2),
-            "footer_icon" => $item->getIconbyId(14),
-            "phone_icon" => $item->getIconbyId(16),
-            "footer_data" => $item->getDataFooter(),
-            "product_categories" => $item->fetchJsonCategory(12),
-            "quick_links"=>$item->fetchJsonCategory(13),
             "page" => "displayProduct"
         ]);
     }
