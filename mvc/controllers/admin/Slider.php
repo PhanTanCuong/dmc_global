@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-use Mvc\Libraries\Image;
+use Mvc\Utils\Image;
 class Slider extends Controller
 {
     public function __construct()
@@ -14,9 +14,9 @@ class Slider extends Controller
     function display()
     {
         $item = $this->model('SliderModel');
-        if(isset($_COOKIE["parent_id"])){
-            $parent_id=(int)$_COOKIE["parent_id"];
-            $product_category=$this->model('CategoryModel')->getCategory($parent_id);
+        if (isset($_COOKIE["parent_id"])) {
+            $parent_id = (int) $_COOKIE["parent_id"];
+            $product_category = $this->model('CategoryModel')->getCategory($parent_id);
         }
         $product_category = $this->model('CategoryModel');
         if (isset($_GET['product_category_id'])) {
@@ -45,7 +45,7 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $image = $_FILES["banner_image"]['name'];
 
-                if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                if (Image::isImageFile($_FILES["banner_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Slider');
                     die();
@@ -54,7 +54,10 @@ class Slider extends Controller
 
                 $success = $item->addInforbanner($title, $description, $image, $product_category_id);
                 if ($success) {
-                    move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]) . '';
+                    move_uploaded_file(
+                        $_FILES["banner_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["banner_image"]["name"]
+                    ) . '';
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
                     Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is added successfully';
@@ -100,9 +103,9 @@ class Slider extends Controller
                 $item = $this->model('SliderModel');
                 $result = $item->getBannerInforById($id);
                 $data = mysqli_fetch_assoc($result);
-                    $currentImage = $data['image'];
+                $currentImage = $data['image'];
                 if (!empty($_FILES["banner_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["banner_image"]) === is_bool('')) {
+                    if (Image::isImageFile($_FILES["banner_image"]) === false) {
                         $_SESSION['status'] = 'Please upload a correct image type ';
                         header('Location:Slider');
                         die();
@@ -114,8 +117,12 @@ class Slider extends Controller
 
 
                 $success = $item->customizeInforBanner($id, $title, $description, $image);
+                
                 if ($success) {
-                    move_uploaded_file($_FILES["banner_image"]["tmp_name"], "./public/images/" . $_FILES["banner_image"]["name"]);
+                    move_uploaded_file(
+                        $_FILES["banner_image"]["tmp_name"],
+                        "./public/images/" . $_FILES["banner_image"]["name"]
+                    );
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
                     Image::resize_image($filepath, 1920, 860);
                     $_SESSION['success'] = 'Your data is updated';

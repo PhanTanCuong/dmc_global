@@ -12,7 +12,7 @@ Route::add('Signin/login','Signin@login');
 
 
 //User routes
-Route::add('Product/(\d+)','Product@display');
+Route::add('Product/([a-zA-Z0-9_-]+)', 'Product@display');
 
 Route::add('Test','Test@display');  
 
@@ -32,11 +32,13 @@ Route::add('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
 Route::add('Admin/editAccount','Account@editAccount');
 
 //Admin Product routes
-Route::add('Admin/addProduct','Product@addProduct');
+Route::add('Admin/Product/Add','Product@displayAddProduct');
+Route::add('Admin/Product/Update','Product@Update');
+Route::add('Admin/Product/addProduct','Product@addProduct');
 Route::add('Admin/deleteProduct','Product@deleteProduct');
 Route::add('Admin/Product','Product@display');
 Route::add('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
-Route::add('Admin/editProduct','Product@editProduct');
+Route::add('Admin/Product/editProduct','Product@editProduct');
 // Route::add('Admin/multipleDeleteProduct','Product@multipleDeleteProduct');
 // Route::add('Admin/toggleCheckboxDelete','Product@toggleCheckboxDelete');
 

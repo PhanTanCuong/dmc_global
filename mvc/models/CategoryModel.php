@@ -142,6 +142,24 @@ class CategoryModel extends DB
         }
         return $childCategories;
     }
+
+    public function getIDCategoryBySlug($slug){
+        try{
+            $query="SELECT * FROM category WHERE slug=?";
+            $stmt=$this->connection->prepare($query);
+            $stmt->bind_param("s",$slug);
+            $stmt->execute();
+            $result=$stmt->get_result();
+
+            foreach($result as $row){
+                $category_id=$row['id'];
+            }
+
+            return $category_id;
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ".$e->getMessage();
+        }
+    }
 }
 
 ?>

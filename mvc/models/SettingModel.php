@@ -2,7 +2,7 @@
 
 use Core\DB;
 
-class CustomizeModel extends DB
+class SettingModel extends DB
 {
 
     //Tab Head
@@ -12,12 +12,12 @@ class CustomizeModel extends DB
         try {
             $query = "SELECT DISTINCT 
                             icon.image, 
-                            data.title 
+                            footer.title 
                         FROM 
                             icon 
                         JOIN 
-                            data 
-                            ON icon.block_id = data.block_id 
+                            footer 
+                            ON icon.block_id = footer.block_id 
                         WHERE 
                             icon.block_id = 1;
 ";
@@ -31,11 +31,12 @@ class CustomizeModel extends DB
     {
         try {
             $query = "UPDATE icon 
-                        JOIN data ON icon.block_id = data.block_id  
-                        SET data.title = '$name', icon.image = '$image' 
+                        JOIN footer ON icon.block_id = footer.block_id  
+                        SET footer.title = ?, icon.image = ? 
                         WHERE icon.block_id = 1
-";
-            return mysqli_query($this->connection, $query);
+            ";
+            $stmt=$this->connection->prepare($query);
+            return ($stmt->execute([$name,$image]))?$stmt->get_result():false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -100,39 +101,6 @@ class CustomizeModel extends DB
         }
     }
 
-    // public function getIdDropdownMenu()
-    // {
-    //     try {
-    //         // Giả sử kết nối cơ sở dữ liệu đã được khởi tạo
-    //         $sql = "SELECT DISTINCT navbar_id FROM child_navbar ;"; // Câu truy vấn để lấy khóa ngoại
-
-    //         $result = $this->connection->query($sql); // Thực hiện câu truy vấn
-
-    //         $ids = [];
-    //         if ($result->num_rows > 0) {
-    //             while ($row = $result->fetch_assoc()) {
-    //                 $ids[] = $row['navbar_id']; // Thêm từng khóa ngoại vào mảng
-    //             }
-    //         }
-
-    //         return implode(',', $ids); // Trả về chuỗi chứa các giá trị khóa ngoại, ngăn cách bởi dấu phẩy
-
-    //     } catch (mysqli_sql_exception $e) {
-    //         echo $e->getMessage();
-    //     }
-    // }
-
-    // public function getChildNavbarbyId($id)
-    // {
-    //     try {
-    //         $query = "SELECT * FROM child_navbar WHERE navbar_id='$id'";
-    //         return mysqli_query($this->connection, $query);
-    //     } catch (mysqli_sql_exception $e) {
-    //         echo $e->getMessage();
-    //     }
-    // }
-
-
     public function getBackgroundbyId($id)
     {
         try {
@@ -177,7 +145,7 @@ class CustomizeModel extends DB
     public function getDatabyId($id)
     {
         try {
-            $query = "SELECT * FROM data WHERE id='$id'";
+            $query = "SELECT * FROM footer WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -187,7 +155,7 @@ class CustomizeModel extends DB
     public function getDataFooter()
     {
         try {
-            $query = "SELECT * FROM data WHERE block_id=7";
+            $query = "SELECT * FROM footer WHERE block_id=7";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -197,7 +165,7 @@ class CustomizeModel extends DB
     public function editData($id, $title, $description)
     {
         try {
-            $query = "UPDATE data SET title='$title', description='$description' WHERE id='$id'";
+            $query = "UPDATE footer SET title='$title', description='$description' WHERE id='$id'";
             return mysqli_query($this->connection, $query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -217,7 +185,7 @@ class CustomizeModel extends DB
     public function fetchJsonCategory($id)
     {
         try {
-            $query = "SELECT json_data FROM data WHERE id=?";
+            $query = "SELECT json_data FROM footer WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -233,26 +201,13 @@ class CustomizeModel extends DB
         }
     }
 
-    public function test()
-    {
-        $query = "SELECT * FROM data ";
-        $json = array();
-        $stmt = $this->connection->prepare($query);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
-            array_push($json, $row);
-        }
-        return json_encode($json);
-    }
-
     public function fetchSelectedItem($id)
     {
         try {
             $stmt=$this->connection->prepare("SELECT 
                         selected_items.id AS slug,
                         selected_items.name
-                    FROM data,
+                    FROM footer,
                         JSON_TABLE(
                             json_data,
                             '$[*]' COLUMNS (
@@ -260,7 +215,7 @@ class CustomizeModel extends DB
                                 name VARCHAR(255) PATH '$.name'
                             )
                         ) AS selected_items
-                    WHERE data.id =?");
+                    WHERE footer.id =?");
             $stmt->bind_param("i",$id);
             $stmt->execute();
             return $stmt->get_result();
