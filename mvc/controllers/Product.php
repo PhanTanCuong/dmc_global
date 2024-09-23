@@ -13,14 +13,16 @@ class Product extends Controller
         $url_components = explode('/', $url); // Tách URL thành các phần dựa trên dấu '/'
 
         // Giả sử URL có dạng: /dmc_global/public/Product/1
-        $product_category_id = end($url_components); // Lấy phần cuối cùng của URL
+        $slug = end($url_components); // Lấy phần cuối cùng của URL
 
         //Model
         $product = $this->model("ProductModel");
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("CustomizeModel");
-        // $category = $this->model("CategoryModel");
+        $category = $this->model("CategoryModel");
+
+        $product_category_id=$category->getIDCategoryBySlug($slug);
 
 
         //View

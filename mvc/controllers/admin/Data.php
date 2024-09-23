@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Middleware;
-use Mvc\Libraries\Image;
+use Mvc\Utils\Image;
 class Data extends Controller
 {
     public function __construct()

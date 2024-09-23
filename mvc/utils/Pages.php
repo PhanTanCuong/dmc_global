@@ -1,6 +1,6 @@
 <?php
 
-namespace Mvc\Libraries;
+namespace Mvc\Utils;
 class Pages
 {
 

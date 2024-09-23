@@ -23,7 +23,7 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         ),
         'M' => 
         array (
-            'Mvc\\Libraries\\' => 14,
+            'Mvc\\Utils\\' => 10,
             'Mvc\\Controllers\\Admin\\' => 22,
             'Mvc\\Controllers\\' => 16,
         ),
@@ -46,9 +46,9 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
-        'Mvc\\Libraries\\' => 
+        'Mvc\\Utils\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/mvc/libs',
+            0 => __DIR__ . '/../..' . '/mvc/utils',
         ),
         'Mvc\\Controllers\\Admin\\' => 
         array (

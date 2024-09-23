@@ -20,7 +20,7 @@
                         </select>
                     </div>
                     <?php
-                    use Mvc\Libraries\Pages;
+                    use Mvc\Utils\Pages;
                     $static_pages = Pages::$static_pages;
                     $dynamic_pages = Pages::$dynamic_pages;
 
