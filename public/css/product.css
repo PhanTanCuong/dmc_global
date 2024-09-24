@@ -64,6 +64,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2em;
+  overflow:hidden;
 }
 
 .btn2-container {
@@ -128,9 +129,10 @@
   border-radius: 8px;
 }
 
-.comp h2,
+.comp a,
 .news-item h2 {
-  font-weight: bold;
+  color: #292b2c;
+  font-weight: 700;
   padding: 10px 10px 0;
   font-size: 1.5em;
   margin-bottom: 10px;
@@ -259,6 +261,10 @@ product3 */
     width: 3.5rem;
     height: 0.2rem;
     bottom: -1.5rem;
+  }
+
+  .comp{
+    text-align: center;
   }
 
   .comp h2 {

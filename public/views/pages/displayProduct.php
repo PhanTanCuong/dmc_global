@@ -34,7 +34,7 @@
                     while ($rows = mysqli_fetch_array($data["about2Infor"])) {
                         ?>
                         <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
-                            <div class="img-container">
+                            <div class="image img-container">
                                 <img src="/dmc_global/public/images/<?= $rows['image'] ?>" class="lazy" alt="image">
                                 <div class="chld-img-container">
                                     <img src="/dmc_global/public/images/5-canh.gif" class="lazy img-fluid" alt="image">
@@ -53,39 +53,44 @@
             </div>
         </section>
         <section class="about3">
-            <?php
-            $isOdd = false;
-            if (mysqli_num_rows($data["about3Infor"]) > 0) {
-                while ($rows = mysqli_fetch_array($data["about3Infor"])) {
-                    if ($isOdd) {
-                        $class = "odd";
-                        $pos = "right";
-                        $animation = "fadeInRight";
-                    } else {
-                        $class = "even";
-                        $pos = "left";
-                        $animation = "fadeInLeft";
-                    }
-                    $isOdd = !$isOdd;
-                    ?>
-                    <div class="grid2-container <?= $class ?>">
-                        <div>
-                            <img class="wow <?= $animation; ?>" data-wow-delay="400ms" style="height:27rem;"
-                                src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="about3_image">
-                        </div>
-                        <div class="txt2-container wow <?= $animation; ?>" data-wow-delay="400ms"
-                            style="background: transparent; color: aliceblue;">
-                            <div class="image"><img src="/dmc_global/public/images/backgrud_banner.png" alt="img"></div>
-                            <div class="text">
-                                <h2><?= $rows['title'] ?></h2>
-                                <p><?= $rows['description'] ?></p>
+                <div class="container"></div>
+            <div class="banner">
+                <?php $isOdd = true; ?>
+                <?php if (mysqli_num_rows($data["about3Infor"]) > 0): ?>
+                    <?php while ($rows = mysqli_fetch_array($data["about3Infor"])): ?>
+                        <?php if ($isOdd) {
+                            $class = "odd";
+                            $pos = "right";
+                            $animation = "fadeInRight";
+                        } else {
+                            $class = "even";
+                            $pos = "left";
+                            $animation = "fadeInLeft";
+                        }
+                        $isOdd = !$isOdd; ?>
+                        <div class="grid2-container <?= $class ?>"
+                            style="background:url(/dmc_global/public/images/<?= $rows['image'] ?>)">
+                            <div class="image-container wow <?= $animation; ?>" data-wow-delay="400ms">
+                                <div class="image">
+                                    <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="img">
+                                </div>
+                            </div>
+                            <div class="txt2-container wow <?= $animation; ?>" data-wow-delay="400ms"
+                                style="background: transparent; color: aliceblue;">
+                                <div class="image">
+                                    <img src="/dmc_global/public/images/backgrud_banner.png" alt="img">
+                                </div>
+                                <div class="text">
+                                    <h2><?= $rows['title'] ?></h2>
+                                    <p><?= $rows['description'] ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
+
+                    <?php endwhile; ?>
+                <?php endif; ?>
+            </div>
+
         </section>
         <section id="product">
             <?php
@@ -105,7 +110,7 @@
             }
             ?>
 
-            <?php include('partials/Product_items.php')  ?>
+            <?php include('partials/Product_items.php') ?>
 
             </div>
         </section>
