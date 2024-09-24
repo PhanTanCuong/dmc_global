@@ -5,22 +5,23 @@
     </h1>
 
     <div class="grid">
-      <?php
-      if (mysqli_num_rows($data["product"]) > 0) {
-        while ($rows = mysqli_fetch_array($data["product"])) {
-          ?>
+      <?php if (mysqli_num_rows($data["product"]) > 0): ?>
+        <?php while ($rows = mysqli_fetch_array($data["product"])): ?>
           <div class="comp wow fadeIn">
             <a href="<?= $rows['slug'] ?>">
               <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="Image">
             </a>
-            <a href="<?= $row['slug'] ?>"><?= $rows['title'] ?></a>
-            <p><?= $rows['description'] ?></p>
-            <div class="arrow"></div>
+
+            <div class="item-infor">
+              <h3 class="item-title">
+                <a href="<?= $row['slug'] ?>"><?= $rows['title'] ?></a>
+              </h3>
+              <p class="description"><?= $rows['description'] ?></p>
+              <p class="arrow"><i class="fas fa-arrow-right"></i></p>
+            </div>
           </div>
-          <?php
-        }
-      }
-      ?>
+        <?php endwhile; ?>
+      <?php endif; ?>
     </div>
     <div class="btn2-container">
       <button class="btn2"><b>View more</b></button>

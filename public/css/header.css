@@ -76,7 +76,9 @@ ul {
     margin: 0;
     padding: 0
 }
-
+ul {
+  list-style-type: none;
+}
 label {
     color: #6c757d
 }
@@ -216,12 +218,6 @@ nav ul li a:hover {
   padding: 10px 15px;
   cursor: pointer;
 }
-
-/* 
-dropdown */
-/* i.fa.fa-caret-down::before {
-  content: none;
-} */
 
 nav ul li .dropdown {
   z-index: 1;

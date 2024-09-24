@@ -28,7 +28,7 @@
 
           <?php if (!empty($header["menu_items"])): ?>
             <?php foreach ($header["menu_items"] as $row): ?>
-              <li><a href="#<?= htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
+              <li><a href="http://localhost/dmc_global/public/Public<?= htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
             </a>
                 <?php if (!empty($row['child_items'])): ?>
                   <i class="fa fa-caret-down"></i>
