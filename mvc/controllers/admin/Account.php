@@ -4,13 +4,13 @@ namespace Mvc\Controllers\Admin;
 
 use Core\Controller;
 use Core\Exception;
-use Core\Middleware;
+use Core\Auth;
 class Account extends Controller
 {
 
     public function __construct()
     {
-        Middleware::checkAdmin();
+        Auth::checkAdmin();
     }
     function display()
     {

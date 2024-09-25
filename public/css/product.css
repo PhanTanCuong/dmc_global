@@ -24,9 +24,9 @@
   text-align: center;
   margin-top: 10rem;
 }
-.our-products{
-  padding: 0 20rem
-} 
+.our-products {
+  padding: 0 20rem;
+}
 .product1 h1 {
   text-transform: uppercase;
   color: white;
@@ -64,6 +64,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2em;
+  overflow: hidden;
 }
 
 .btn2-container {
@@ -117,6 +118,7 @@
   text-align: justify;
   border-radius: 4px;
   position: relative;
+  background-color: #fff;
 }
 
 .comp img {
@@ -127,14 +129,30 @@
   border-radius: 8px;
 }
 
-.comp h2,
-.news-item h2 {
-  font-weight: bold;
+.item-title {
+  color: #292b2c;
+  font-weight: 700;
   padding: 10px 10px 0;
   font-size: 1.5em;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
+.item-title a{
+  color:#292b2c;
+  text-decoration: none;
+}
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .comp p {
   font-size: 1rem;
   color: #666;
@@ -143,20 +161,21 @@
 }
 
 .comp .arrow {
-  content: url(../images/arrow.png);
   visibility: hidden;
-  position: absolute;
-  bottom: 5px;
-  left: 10px;
 }
 
-.comp:hover h2 {
+.comp:hover a {
   color: #c92027;
 }
-
-.comp:hover .arrow {
+.comp:hover .arrow i {
   visibility: visible;
+  font-size: 1rem;
+  color: #c92027;
+  font-size: 24px;
+  transform: scaleX(1.5);
 }
+
+
 
 .comp:hover {
   box-shadow: 1px -1px 17px #88888830;
@@ -203,7 +222,7 @@ product3 */
 /* responsive */
 
 @media only screen and (max-width: 1024px) {
-  .our-products{
+  .our-products {
     padding: 0px;
   }
   /* product1 */
@@ -218,7 +237,7 @@ product3 */
 }
 
 @media only screen and (min-width: 721px) and (max-width: 1024px) {
-  .product1{
+  .product1 {
     padding: 5rem;
   }
   /* product2 */
@@ -240,7 +259,7 @@ product3 */
 }
 
 @media only screen and (max-width: 720px) {
-  .grid{
+  .grid {
     margin-top: 2rem;
   }
   /* product2 */
@@ -258,6 +277,10 @@ product3 */
     width: 3.5rem;
     height: 0.2rem;
     bottom: -1.5rem;
+  }
+
+  .comp {
+    text-align: center;
   }
 
   .comp h2 {

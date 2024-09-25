@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <?php
-    if (mysqli_num_rows($data["head"]) > 0) {
-        while ($row = mysqli_fetch_assoc($data["head"])) {
+    if (mysqli_num_rows($header["head"]) > 0) {
+        while ($row = mysqli_fetch_assoc($header["head"])) {
     ?>
             <title><?= $row['title'] ?></title>
             <meta name="viewport" content="width=device-width, initial-scale=1">

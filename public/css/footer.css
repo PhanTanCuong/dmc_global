@@ -1,11 +1,11 @@
 footer {
-  background-color:#f5f5f5 !important;
+  background-color: #f5f5f5 !important;
   width: 100%;
   padding: 200px 80px 0px 80px;
 }
 
 footer h3,
-footer p {  
+footer p {
   color: #fff;
 }
 
@@ -59,7 +59,6 @@ footer p {
 
 .underline-footer::before {
   content: "";
-
 }
 
 .footer-info h3 {
@@ -84,7 +83,6 @@ footer p {
 .footer-links ul {
   list-style: none;
   padding: 0;
-
 }
 
 .footer-links li {
@@ -112,10 +110,17 @@ footer p {
   margin-bottom: 10px;
 }
 
+#phone h3 {
+  font-size: 1.25em;
+}
+
+#phone li:last-child{
+  margin-top:10px
+}
+
 .footer-phone ul {
   list-style: none;
   padding: 0;
-
 }
 
 .footer-phone li {
@@ -140,13 +145,12 @@ footer p {
   /* line-height: 13px; */
   display: flex;
   gap: 20px;
-
 }
 
 #phone ul li:nth-last-child(2) {
-
-  background: #ffc776;
+  background: #ffa11a;
   padding: 10px;
+  border-radius: 10%;
 }
 
 .phone-title {
@@ -154,11 +158,11 @@ footer p {
   /* width: 180px; */
 }
 
-@media only screen and (max-width:1024px) {
+@media only screen and (max-width: 1024px) {
   footer {
     background: #c92027 !important;
     background-size: cover;
-    padding: 10px
+    padding: 10px;
   }
 
   .footer-logo {
@@ -174,15 +178,11 @@ footer p {
   }
 
   .footer-info {
-
     grid-column: span 2;
-
   }
 
   .footer-phone {
-
     grid-column: span 2;
-
   }
 
   .footer-info img {
@@ -193,5 +193,4 @@ footer p {
     top: -210px;
     left: 205px;
   }
-
 }

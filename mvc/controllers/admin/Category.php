@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 
 use Core\Controller;
 use Core\Exception;
-use Core\Middleware;
+use Core\Auth;
 class Category extends Controller
 {
     //Product Category

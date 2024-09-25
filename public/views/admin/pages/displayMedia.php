@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
 
   <!-- DataTales Example -->
@@ -37,7 +38,7 @@
                 <tr>
                   <!-- <td>
                     <input type="checkbox" onclick="toggleCheckbox(this,'../Admin/toggleCheckboxDelete/')" value="<?= $row['id'] ?>
-                    <?= $row['visible'] === 1 ? "checked" : "" ?>"> -->
+                      = 1 ? "checked" : "" ?>"> -->
                   </td>
                   <td><?= $counter++; ?></td>
                   <td><?= $row['title']; ?></td>

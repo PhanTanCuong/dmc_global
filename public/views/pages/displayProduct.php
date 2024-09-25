@@ -9,7 +9,7 @@
                     while ($rows = mysqli_fetch_array($data["banner"])) {
 
                         $banner_pic = $rows['image'];
-                        $image_path = "/dmc_global/public/images/" . $banner_pic;
+                        $image_path = $_ENV["PICTURE_URL"] . '/' . $banner_pic;
                         if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
                             ?>
                             <div class="item" style="position:relative;">
@@ -34,10 +34,10 @@
                     while ($rows = mysqli_fetch_array($data["about2Infor"])) {
                         ?>
                         <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
-                            <div class="img-container">
-                                <img src="/dmc_global/public/images/<?= $rows['image'] ?>" class="lazy" alt="image">
+                            <div class="image img-container">
+                                <img src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="image">
                                 <div class="chld-img-container">
-                                    <img src="/dmc_global/public/images/5-canh.gif" class="lazy img-fluid" alt="image">
+                                    <img src="<?= $imageUrl . '/5-canh.gif' ?>" class="lazy img-fluid" alt="image">
                                 </div>
                             </div>
                             <div class="txt-container wow pulse" data-wow-delay="400ms">
@@ -53,45 +53,46 @@
             </div>
         </section>
         <section class="about3">
-            <?php
-            $isOdd = false;
-            if (mysqli_num_rows($data["about3Infor"]) > 0) {
-                while ($rows = mysqli_fetch_array($data["about3Infor"])) {
-                    if ($isOdd) {
-                        $class = "odd";
-                        $pos = "right";
-                        $animation = "fadeInRight";
-                    } else {
-                        $class = "even";
-                        $pos = "left";
-                        $animation = "fadeInLeft";
-                    }
-                    $isOdd = !$isOdd;
-                    ?>
-                    <div class="grid2-container <?= $class ?>">
-                        <div>
-                            <img class="wow <?= $animation; ?>" data-wow-delay="400ms" style="height:27rem;"
-                                src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="about3_image">
-                        </div>
-                        <div class="txt2-container wow <?= $animation; ?>" data-wow-delay="400ms"
-                            style="background: transparent; color: aliceblue;">
-                            <div class="image"><img src="/dmc_global/public/images/backgrud_banner.png" alt="img"></div>
-                            <div class="text">
-                                <h2><?= $rows['title'] ?></h2>
-                                <p><?= $rows['description'] ?></p>
+            <div class="container"></div>
+            <div class="banner">
+                <?php $isOdd = true; ?>
+                <?php if (mysqli_num_rows($data["about3Infor"]) > 0): ?>
+                    <?php while ($rows = mysqli_fetch_array($data["about3Infor"])): ?>
+                        <?php if ($isOdd) {
+                            $class = "odd";
+                            $pos = "right";
+                            $animation = "fadeInRight";
+                        } else {
+                            $class = "even";
+                            $pos = "left";
+                            $animation = "fadeInLeft";
+                        }
+                        $isOdd = !$isOdd; ?>
+                        <div class="grid2-container <?= $class ?> wow <?= $animation; ?>"
+                            style="background:url(<?= $imageUrl . '/' . $rows['image'] ?>)">
+                            <div class="image-container" data-wow-delay="400ms">
+                                <div class="image">
+                                    <img src="<?= $imageUrl . $rows['image'] ?>" alt="img">
+                                </div>
+                            </div>
+                            <div class="txt2-container" data-wow-delay="400ms"
+                                style="background: transparent; color: aliceblue;">
+                                <div class="image">
+                                    <img src="<?= $imageUrl . '/backgrud_banner.png' ?>" alt="img">
+                                </div>
+                                <div class="text wow pulse">
+                                    <h2><?= $rows['title'] ?></h2>
+                                    <p><?= $rows['description'] ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
-                }
-            }
-            ?>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+            </div>
         </section>
         <section id="product">
-            <?php
-            if (mysqli_num_rows($data["product1"]) > 0) {
-                while ($rows = mysqli_fetch_array($data["product1"])) {
-                    ?>
+            <?php if (mysqli_num_rows($data["product1"]) > 0): ?>
+                <?php while ($rows = mysqli_fetch_array($data["product1"])): ?>
                     <section class="product1" id="product1"
                         style="background-image:url(/dmc_global/public/images/<?= $rows['image'] ?>)">
                         <div class="our-products wow pulse">
@@ -100,41 +101,10 @@
                             <button>VIEW MORE</button>
                         </div>
                     </section>
-                    <?php
-                }
-            }
-            ?>
+                <?php endwhile; ?>
+            <?php endif; ?>
 
-            <section class='product2' id="product2">
-                <div class="container">
-                    <h1 class="title  wow slideInLeft">products
-                        <p class="pseudo"></p>
-                    </h1>
-
-                    <div class="grid">
-                        <?php
-                        if (mysqli_num_rows($data["product"]) > 0) {
-                            while ($rows = mysqli_fetch_array($data["product"])) {
-                                ?>
-                                <div class="comp wow fadeIn">
-                                    <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="Image">
-                                    <h2><?= $rows['title'] ?></h2>
-                                    <p><?= $rows['description'] ?></p>
-                                    <div class="arrow"></div>
-                                </div>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </div>
-                    <div class="btn2-container">
-                        <button class="btn2"><b>View more</b></button>
-                    </div>
-                </div>
-                </div>
-                </div>
-
-            </section>
+            <?php include('partials/Product_items.php') ?>
 
             </div>
         </section>
@@ -143,7 +113,7 @@
             if (mysqli_num_rows($data["bg_stat"]) > 0) {
                 while ($rows = mysqli_fetch_array($data["bg_stat"])) {
                     $stat_bg = $rows['image'];
-                    $image_path = "/dmc_global/public/images/" . $stat_bg;
+                    $image_path = $imageUrl . '/' . $stat_bg;
                     if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
                         ?>
                         <section class="stats" style="background:url(<?= $image_path ?>); ">
@@ -154,7 +124,7 @@
                                         ?>
                                         <div class="stat">
                                             <div class="stat-ic wow flipInY">
-                                                <img class="flash" src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="Icon">
+                                                <img class="flash" src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="Icon">
                                             </div>
                                             <div class="stat-text wow fadeInDown">
                                                 <h3><?= $rows['title'] ?></h3>
@@ -172,25 +142,5 @@
             }
             ?>
         </section>
-        <section class="latest-news">
-            <div class="container">
-                <h2 class="title wow slideInLeft">our latest news
-                    <p class="pseudo"></p>
-                </h2>
-
-                <div class="news-grid wow fadeIn">
-                    <?php
-                    if (mysqli_num_rows($data['news']) > 0) {
-                        while ($rows = mysqli_fetch_array($data['news'])) {
-                            ?>
-                            <div class="news-item ">
-                                <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="News">
-                                <h3><?= $rows['title'] ?></h3>
-                                <p><?= $rows['description'] ?></p>
-                            </div>
-                            <?php
-                        }
-                    }
-                    ?>
-        </section>
+        <?php include('partials/News_items.php') ?>
 </main>

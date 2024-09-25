@@ -3,13 +3,13 @@
 namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
-use Core\Middleware;
+use Core\Auth;
 use Mvc\Utils\Image;
 class Media extends Controller
 {
     public function __construct()
     {
-        Middleware::checkAdmin();
+        Auth::checkAdmin();
     }
     // News2
     function display()
@@ -112,7 +112,8 @@ class Media extends Controller
                         $_FILES["news_image"]["tmp_name"],
                         "./public/images/" . $_FILES["news_image"]["name"]
                     ) . '';
-
+                    $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
+                    Image::resize_image($filepath, 389, 389);
                     $_SESSION['success'] = "News is added successfully";
                     header('Location:../News');
                 } else {
@@ -175,7 +176,8 @@ class Media extends Controller
                         $_FILES["news_image"]["tmp_name"],
                         "./public/images/" . $_FILES["news_image"]["name"]
                     ) . '';
-
+                    $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
+                    Image::resize_image($filepath, 389, 389);
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:../News');
                 } else {

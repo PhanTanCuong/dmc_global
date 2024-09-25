@@ -112,10 +112,10 @@ class CategoryModel extends DB
             $query = "SELECT COUNT(*) AS child_count FROM category WHERE parent_id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
-            $stmt->execute();
+            $stmt->execute();   
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-            return $row['child_count'] > 0; // Trả về true nếu có con
+            return $row['child_count'] > 0; // Trả về true nếu có phần tử con
         }catch(mysqli_sql_exception $error) {
             echo "Error: ". $error->getMessage();
         }
@@ -143,7 +143,7 @@ class CategoryModel extends DB
         return $childCategories;
     }
 
-    public function getIDCategoryBySlug($slug){
+    public function getCategoryIdBySlug($slug){
         try{
             $query="SELECT * FROM category WHERE slug=?";
             $stmt=$this->connection->prepare($query);

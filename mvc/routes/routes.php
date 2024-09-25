@@ -12,7 +12,10 @@ Route::add('Signin/login','Signin@login');
 
 
 //User routes
-Route::add('Product/([a-zA-Z0-9_-]+)', 'Product@display');
+Route::add('category/([a-zA-Z0-9_-]+)', 'Product@display');
+Route::add('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
+Route::add('news/([a-zA-Z0-9_-]+)', 'Post@display');
+
 
 Route::add('Test','Test@display');  
 
