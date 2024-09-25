@@ -13,7 +13,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             if (mysqli_num_rows($footer["footer_icon"]) > 0):
                                 while ($rows = mysqli_fetch_array($footer["footer_icon"])):
                                     $footer_icon = $rows['image'];
-                                    $path = $imageUrl.'/'. $footer_icon;
+                                    $path = $imageUrl . '/' . $footer_icon;
                                     if (file_exists($_SERVER['DOCUMENT_ROOT'] . $path)): ?>
                                         <img src="<?= $path ?>" class="img-fluid">
                                         <?php
@@ -45,7 +45,9 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             <p><?= $descriptions[1] ?></p>
                             <?php if (mysqli_num_rows($footer['icons']) > 0): ?>
                                 <?php while ($rows = mysqli_fetch_array($footer['icons'])): ?>
-                                    <span><img src=<?= $imageUrl .'/'. $rows['image'] ?>></span>
+                                    <span> <a href="#" style=" text-decoration: none;">
+                                            <img src=<?= $imageUrl . '/' . $rows['image'] ?> alt="Image">
+                                        </a></span>
                                 <?php endwhile; ?>
                             <?php endif; ?>
                             <p><?= $descriptions[6] ?></p>
@@ -57,7 +59,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             </h3>
                             <ul id="product-category">
                                 <?php foreach ($links[2] as $category): ?>
-                                    <li><a href="#<?= $category['id']; ?>"><?= $category['name']; ?></a></li>
+                                    <li><a href="<?= $_ENV["PRODUCT_URL"] . '/' . $category['id']; ?>"><?= $category['name']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -68,7 +70,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             </h3>
                             <ul>
                                 <?php foreach ($links[3] as $quickLink): ?>
-                                    <li><a href="#<?= $quickLink['id']; ?>"><?= $quickLink['name']; ?></a></li>
+                                    <li><a href="<?= $_ENV["BASE_URL"] . $quickLink['id']; ?>"><?= $quickLink['name']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -82,7 +84,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                                 <ul>
                                     <?php if (mysqli_num_rows($footer['phone_icon']) > 0): ?>
                                         <?php while ($rows = mysqli_fetch_array($footer['phone_icon'])): ?>
-                                            <li><img src=<?= $imageUrl .'/'. $rows['image'] ?> class="img-fluid"></li>
+                                            <li><img src=<?= $imageUrl . '/' . $rows['image'] ?> class="img-fluid"></li>
                                         <?php endwhile; ?>
                                     <?php endif; ?>
                                     <li>

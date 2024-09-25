@@ -13,10 +13,19 @@ class Post extends Controller {
             $slug =end($url_component);
 
             $post= $this->model('MenuModel');
+            $category = $this->model('CategoryModel');
+
+            $post_data=$post->directPage($slug);
+            foreach($post_data as $row){
+                $news=$category->getCategoryById($row['type_id']);
+                $news_category=$category->getCategoryById($row['category_id']);
+            }
 
             $this->view('home',[
+                'post'=>$post_data,
+                'news'=>$news,
+                'category'=>$news_category,
                 'page'=>'post',
-                'post'=>$post->directPage($slug)
             ]);
 
 

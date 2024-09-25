@@ -39,6 +39,28 @@ class Product extends Controller
             "page" => "displayProduct"
         ]);
     }
+
+    function displayProductDetail(){
+        try{
+            $url =$_SERVER['REQUEST_URI'];
+            $url_component=explode("/",$url);
+
+            $slug =end($url_component);
+
+            $product= $this->model('MenuModel');
+
+            $product_data=$product->directPage($slug);
+
+            $this->view('home',[
+                'product'=>$product_data,
+                'page'=>'product',
+            ]);
+
+
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
+    }
 }
 
 
