@@ -3,14 +3,14 @@
 namespace Mvc\Controllers\Admin;
 
 use Core\Controller;
-use Core\Middleware;
+use Core\Auth;
 
 class Home extends Controller
 {
 
         public function __construct()
         {
-            Middleware::checkAdmin();
+            Auth::checkAdmin();
         }
     function display()
     {

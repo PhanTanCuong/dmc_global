@@ -21,6 +21,3 @@
             <?php endif; ?>
         </div>
 </section>
-<main>
-    
-</main>

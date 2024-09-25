@@ -3,14 +3,14 @@
 namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
-use Core\Middleware;
+use Core\Auth;
 use Mvc\Utils\Image;
 class Product extends Controller
 {
 
     public function __construct()
     {
-        Middleware::checkAdmin();
+        Auth::checkAdmin();
     }
 
 
