@@ -9,12 +9,12 @@
         <?php while ($rows = mysqli_fetch_array($data["product"])): ?>
           <div class="comp wow fadeIn">
             <a href="<?= $rows['slug'] ?>">
-              <img src="/dmc_global/public/images/<?= $rows['image'] ?>" alt="Image">
+              <img src=<?= $imageUrl .'/'. $rows['image'] ?> alt="Image">
             </a>
 
             <div class="item-infor">
               <h3 class="item-title">
-                <a href="<?= $row['slug'] ?>"><?= $rows['title'] ?></a>
+                <a href="<?= $rows['slug'] ?>"><?= $rows['title'] ?></a>
               </h3>
               <p class="description"><?= $rows['description'] ?></p>
               <p class="arrow"><i class="fas fa-arrow-right"></i></p>

@@ -1,4 +1,5 @@
 <?php
+$imageUrl=$_ENV["PICTURE_URL"];
 use Mvc\Controllers\Footer;
 $footerController = new Footer();
 

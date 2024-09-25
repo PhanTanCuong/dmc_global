@@ -1,24 +1,19 @@
-
 <div class="container-fluid">
   <!-- Header -->
   <header>
     <!-- Thanh chuyển hướng -->
     <div class="logo">
-      <?php
-      if (mysqli_num_rows($header["header_icon"]) > 0):
-        while ($rows = mysqli_fetch_array($header["header_icon"])):
-          $header_icon = $rows['image'];
-          $image_path = "/dmc_global/public/images/" . $header_icon;
-          if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)):
-            ?>
+      <?php if (mysqli_num_rows($header["header_icon"]) > 0): ?>
+        <?php while ($rows = mysqli_fetch_array($header["header_icon"])): ?>
+          <?php $header_icon = $rows['image'];
+          $image_path = $imageUrl . '/' . $header_icon;
+          if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)): ?>
             <div class="logo_ic">
               <img src="<?= $image_path ?>" class="img-fluid" alt="DMC Global">
             </div>
-            <?php
-          endif;
-        endwhile;
-      endif;
-      ?>
+          <?php endif; ?>
+        <?php endwhile; ?>
+      <?php endif; ?>
       <div class="toogle">
         <i class="fa-solid fa-bars"></i>
       </div>
@@ -28,13 +23,15 @@
 
           <?php if (!empty($header["menu_items"])): ?>
             <?php foreach ($header["menu_items"] as $row): ?>
-              <li><a href="http://localhost/dmc_global/public/Public<?= htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
-            </a>
+              <li><a
+                  href="<?= $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
+                </a>
                 <?php if (!empty($row['child_items'])): ?>
                   <i class="fa fa-caret-down"></i>
                   <ul class="dropdown">
-                    <?php foreach ($childItems=json_decode($row['child_items'],true) as $childItem): ?>
-                      <li><a href="<?= htmlspecialchars($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
+                    <?php foreach ($childItems = json_decode($row['child_items'], true) as $childItem): ?>
+                      <li><a
+                          href="<?= $_ENV["PRODUCT_URL"] . '/' . ($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
                       </li>
                     <?php endforeach; ?>
                   </ul>

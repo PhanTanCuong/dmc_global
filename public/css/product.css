@@ -142,6 +142,10 @@
   -webkit-box-orient: vertical;
 }
 
+.item-title a{
+  color:#292b2c;
+  text-decoration: none;
+}
 .description {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -160,7 +164,7 @@
   visibility: hidden;
 }
 
-.comp:hover h3 {
+.comp:hover a {
   color: #c92027;
 }
 .comp:hover .arrow i {

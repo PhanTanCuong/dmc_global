@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
 
   <title>DMC Global</title>
   <!-- Favicon -->
-  <link rel="icon" href="/dmc_global/public/images/abut2_child_img.png" type="image/x-icon">
+  <link rel="icon" href="<?=$imageUrl?>'/abut2_child_img.png" type="image/x-icon">
 
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
