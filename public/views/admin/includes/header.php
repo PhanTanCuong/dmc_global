@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?= microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/sidebar.css?v=<?= microtime() ?>">
   <link rel="stylesheet" href="/dmc_global/public/css/admin/navbar.css?v=<?= microtime() ?>">
+  <link rel="stylesheet" href="/dmc_global/public/css/admin/breadcrumb.css?v=<?= microtime() ?>">
 
   <style>
     .action_column {

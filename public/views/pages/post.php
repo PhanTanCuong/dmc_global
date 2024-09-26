@@ -1,10 +1,5 @@
+<link rel="stylesheet" href="">
 <style>
-
-    /* .breadcrumb */
-    .breadcrumb_section,
-    .breadcrumb_section>.container{
-        background-color: #c92027;
-    }
     /* post body */
     .container {
         background-color: #f5f5f5;
@@ -135,23 +130,9 @@
     }
 </style>
 <!-- BREADCRUMB  -->
-<div class="breadcrumb_section bg-main-color page-title-mini">
-       <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-5">
-                <?php foreach($data["news"] as $column):?>
-                <div class="page-title">
-                    <h2 class="text-white"><?= $column['name']?></h2>
-                </div>
-                <?php endforeach;?>
-                <?php unset($column);?>
-            </div>
-            <div class="col-md-7">
-                <ol class="breadcrumb justify-content-md-start"></ol>
-            </div>
-        </div>
-       </div>
-    </div>
+<?php include('partials/breadcrumb.php')?>
+
+<!-- END BREADCRUMB  -->
 <main>
     
 
