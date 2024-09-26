@@ -8,13 +8,13 @@
       <?php if (mysqli_num_rows($data["product"]) > 0): ?>
         <?php while ($rows = mysqli_fetch_array($data["product"])): ?>
           <div class="comp wow fadeIn">
-            <a href="<?= $rows['slug'] ?>">
-              <img src=<?= $imageUrl .'/'. $rows['image'] ?> alt="Image">
+            <a href="<?= $_ENV["PRODUCT_URL"] . '/' . $rows['slug'] ?>">
+              <img src=<?= $imageUrl . '/' . $rows['image'] ?> alt="Image">
             </a>
 
             <div class="item-infor">
               <h3 class="item-title">
-                <a href="<?= $rows['slug'] ?>"><?= $rows['title'] ?></a>
+                <a href="<?= $_ENV["PRODUCT_URL"] . '/' . $rows['slug'] ?>"><?= $rows['title'] ?></a>
               </h3>
               <p class="description"><?= $rows['description'] ?></p>
               <p class="arrow"><i class="fas fa-arrow-right"></i></p>
