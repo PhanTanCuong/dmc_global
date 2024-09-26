@@ -1,29 +1,79 @@
+<style>
+    
+    .box-item {
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+
+    .box-item :is(h5, a, p) {
+        letter-spacing: .3px;
+    }
+
+    .box__title h5 {
+        background-color: #b4171b;
+        color: #fff;
+        text-align: center;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .box__infor {
+        padding: 10px 20px;
+    }
+
+    .sticky-sidebar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+    }
+
+    .box-item ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .box-item li {
+        margin-bottom: 10px;
+    }
+
+    .box-item a {
+        color: unset;
+        text-decoration: none;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 10px;
+    }
+</style>
 <!-- Right Section: Sidebar -->
-<div class="col-md-4 sidebar">
-                <div class="sticky-sidebar">
-                    <section class="products">
-                        <h3>Products</h3>
+<?php $sideBar = $footerController->fetchFooterData(); ?>
+
+<div class="col-lg-3 col-12 sidebar">
+    <div class="sticky-sidebar">
+        <?php if (mysqli_num_rows($sideBar["bg_footer"]) > 0): ?>
+            <?= $breakLoop=false ?>
+            <?php foreach ($sideBar["footer_data"] as  $sidebar_data): ?>    
+                <?php if ($breakLoop==true) break; ?>
+                <section class="box-item">
+                    <div class="box__title">
+                        <h5><?= $sidebar_data['title']?></h5>
+                    </div>
+                    <div class="box__infor">
+                        <?php if($sidebar_data['title']==='PRODUCT'):   ?>
                         <ul>
-                            <li><a href="#">Base Oil</a></li>
-                            <li><a href="#">Steel</a></li>
-                            <li><a href="#">Chemical</a></li>
-                            <li><a href="#">Plastic</a></li>
-                            <li><a href="#">Agriculture</a></li>
+                            <?php foreach(json_decode($sidebar_data['json_data'],true) as $link ):?>
+                            <li><a href="<?=$_ENV["PRODUCT_URL"].'/'.$link['id']?>"><?=$link['name']?></a></li>
+                            <?php endforeach; ?>
+                            <?php unset($link)?>
+                            <?php $breakLoop=true; ?>
                         </ul>
-                    </section>
-                    <section class="address">
-                        <h3>Address</h3>
-                        <p>10 Anson Road, #11-20, International Plaza, Singapore</p>
-                    </section>
-                    <section class="support">
-                        <h3>Support</h3>
-                        <p><a href="mailto:roberttaylor@dmcglobal.sg">roberttaylor@dmcglobal.sg</a></p>
-                        <ul class="social-icons">
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google"></i></a></li>
-                        </ul>
-                    </section>
-                </div>
+                        <?php endif;?>
+                        <p><?= $sidebar_data['description']?></p>
+                    </div>
+                </section>
+                <?php endforeach; ?>
+                <?php endif; ?>
             </div>
+        </div>

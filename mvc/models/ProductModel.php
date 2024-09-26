@@ -18,6 +18,15 @@ class ProductModel extends DB
         }
     }
 
+    public function getRelatedProducts(){
+        try{
+            $query="SELECT * FROM product LIMIT 6";
+            return $this->connection->query($query);
+        }catch(mysqli_sql_exception $e) {
+            echo "Error: ". $e->getMessage();
+
+        }
+    }
     public function getProductByProductCategory($category_id) {
         try{
             $query="SELECT * FROM product WHERE category_id = ?";

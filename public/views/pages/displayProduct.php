@@ -103,7 +103,9 @@
                     </section>
                 <?php endwhile; ?>
             <?php endif; ?>
-
+            <h1 class="title  wow slideInLeft">products
+                <p class="pseudo"></p>
+            </h1>
             <?php include('partials/Product_items.php') ?>
 
             </div>

@@ -1,4 +1,7 @@
 <style>
+    .related-products :is(#product2,.btn2-container){
+        margin-bottom: unset;
+    }
     .product-body {
         padding-top: 10vh
     }
@@ -18,8 +21,8 @@
         width: 100%;
     }
 
-    .item img{
-        padding:10px
+    .item img {
+        padding: 10px
     }
 
     .product__infor {
@@ -33,7 +36,7 @@
 
     .product-content {
         margin-top: clamp(0px, 2vw, 20px);
-        padding :10px;
+        padding: 10px;
     }
 
     .product-email,
@@ -80,28 +83,7 @@
         padding-left: 20px;
     }
 
-    .sticky-sidebar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 10px;
-    }
 
-    .products ul,
-    .address,
-    .support ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .products ul li,
-    .support ul li {
-        margin-bottom: 10px;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 10px;
-    }
 
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -129,9 +111,9 @@
 <main>
     <div class="container">
         <div class="product-body row">
-            <?php foreach ($data["product"] as $product): ?>
+            <?php foreach ($data["product_data"] as $product): ?>
                 <!-- Left Section: Product Details -->
-                <div class="col-md-8 product-details">
+                <div class="col-lg-9 col-12 product-detailss">
                     <!-- Image and product info -->
                     <div class="product-header">
                         <div class="image product__thumbnail">
@@ -162,15 +144,17 @@
                         <p><?= $product['long_description'] ?></p>
                     </section>
                 <?php endforeach; ?>
-
-
             </div>
 
-
+            <?php include('partials/sideBar.php') ?>
 
         </div>
     </div>
     <!-- Related Products Section -->
     <section class="related-products">
+        <h1 class="title  wow slideInLeft"> related products
+            <p class="pseudo"></p>
+        </h1>
+        <?php include('partials/Product_items.php') ?>
     </section>
 </main>

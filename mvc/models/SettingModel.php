@@ -55,15 +55,15 @@ class SettingModel extends DB
         }
     }
 
-    public function getCategory()
-    {
-        try {
-            $query = "SELECT * FROM product_category";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
+    // public function getCategory()
+    // {
+    //     try {
+    //         $query = "SELECT * FROM product_category";
+    //         return mysqli_query($this->connection, $query);
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo $e->getMessage();
+    //     }
+    // }
 
     public function getNavBarItem()
     {

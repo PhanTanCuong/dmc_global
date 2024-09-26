@@ -50,9 +50,11 @@ class Product extends Controller
             $product= $this->model('MenuModel');
 
             $product_data=$product->directPage($slug);
+            
 
             $this->view('home',[
-                'product'=>$product_data,
+                'product_data'=>$product_data,
+                'product'=>$this->model('ProductModel')->getRelatedProducts(),
                 'page'=>'product',
             ]);
 

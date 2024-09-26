@@ -1,8 +1,7 @@
+
 <section class='product2' id="product2">
   <div class="container">
-    <h1 class="title  wow slideInLeft">products
-      <p class="pseudo"></p>
-    </h1>
+
 
     <div class="grid">
       <?php if (mysqli_num_rows($data["product"]) > 0): ?>
