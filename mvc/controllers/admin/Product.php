@@ -32,7 +32,7 @@ class Product extends Controller
 
         if (isset($_COOKIE['parent_id'])) {
             $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
+            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
         }
         $this->view("admin/home", [
             "product_categories" => $categories,
@@ -44,7 +44,7 @@ class Product extends Controller
     {
         if (isset($_COOKIE['parent_id'])) {
             $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
+            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
         }
 
         if (isset($_POST['checking_edit_btn'])) {

@@ -1,7 +1,7 @@
 <?php
-include("fragments/headerInformation.php");
-include("fragments/Logo.php");
-include("fragments/footerBackground.php");
+include("partials/headerInformation.php");
+include("partials/Logo.php");
+include("partials/footerBackground.php");
 ?>
 <!-- <style>
     .drag-n-drop-box{
@@ -112,7 +112,7 @@ include("fragments/footerBackground.php");
 
 
 <?php
-include("fragments/quickLink.php");
-include("fragments/footerIcon.php");
+include("partials/quickLink.php");
+include("partials/footerIcon.php");
 ?>
 <script style="text/javascript" src="/dmc_global/public/js/admin/footerSetting.js?<?= microtime(); ?>"></script>

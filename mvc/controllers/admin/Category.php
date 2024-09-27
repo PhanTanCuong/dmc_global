@@ -11,11 +11,13 @@ class Category extends Controller
     function display()
     {
         $item = $this->model('CategoryModel');
+
         $this->view('admin/home', [
             'page' => 'displayCategory',
-            'edit_slug_parent' => $item->getInforCategory(),
-            'slug_parent' => $item->getInforCategory(),
-            'item' => $item->getInforCategory()
+            'item' => $item->getInforCategory(),
+            'edit_slug_parent' => $item->getInforParentCategory(),
+            'slug_parent' => $item->getInforParentCategory(),
+
         ]);
     }
 
@@ -66,11 +68,11 @@ class Category extends Controller
     {
         try {
             if (isset($_POST["category_updatebtn"])) {
-                $id = (int)$_POST['edit_category_id'];
+                $id = (int) $_POST['edit_category_id'];
                 $name = strip_tags($_POST['edit_category_name']);
                 $slug = strip_tags($_POST['edit_category_slug']);
                 $parent_id = (int) $_POST['edit_category_parent'];
-                if($id===$parent_id){
+                if ($id === $parent_id) {
                     $_SESSION['status'] = 'Your data is NOT updated';
                     header('Location:Category');
                     die();
@@ -81,6 +83,9 @@ class Category extends Controller
 
                 $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level);
                 if ($success) {
+                    if($level<3){
+                        $this->model('MenuModel')->addMenu($slug,'category',$id);
+                    }
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');
                 } else {
