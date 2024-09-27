@@ -34,7 +34,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Item:</h6>
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Product');">Products</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">Media</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">News</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(32,'public/Admin/News');">Abouts</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(44,'public/Admin/News');">Services</a>
+
             </div>
         </div>
     </li>
@@ -45,7 +48,6 @@
             <span>Admin Profiles</span>
         </a>
     </li>
-    <!-- Nav Item - Utilities Collapse Menu -->
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
