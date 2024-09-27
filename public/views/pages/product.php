@@ -155,6 +155,6 @@
         <h1 class="title  wow slideInLeft"> related products
             <p class="pseudo"></p>
         </h1>
-        <?php include('partials/Product_items.php') ?>
+        <?php include('partials/product_items.php') ?>
     </section>
 </main>
