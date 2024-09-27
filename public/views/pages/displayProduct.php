@@ -103,8 +103,10 @@
                     </section>
                 <?php endwhile; ?>
             <?php endif; ?>
-
-            <?php include('partials/Product_items.php') ?>
+            <h1 class="title  wow slideInLeft">products
+                <p class="pseudo"></p>
+            </h1>
+            <?php include('partials/product_items.php') ?>
 
             </div>
         </section>
@@ -142,5 +144,5 @@
             }
             ?>
         </section>
-        <?php include('partials/News_items.php') ?>
+        <?php include('partials/post_items.php') ?>
 </main>

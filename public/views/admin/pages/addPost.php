@@ -1,15 +1,14 @@
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">post information</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><?=$data['name']?> information</h5>
     </div>
 </div>
-
 <div class="card shadow mb-4 mx-4">
     <form action="addNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
-            <div class="form-group">
+            <div class="form-group" style="display:<?=$data['display']?>">
                 <label for="category">Category</label>
-                <select class="form-control " name="category" id="news_category" required>
+                <select class="form-control " name="category"  id="news_category">
                     <?php foreach ($data["product_categories"] as $category): ?>
                         <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
@@ -33,10 +32,10 @@
                 <label>Long Description</label>
                 <textarea name="news_long_description" class="form-control summernote" rows="3"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:<?=$data['display']?>">
                 <label>Image </label>
                 <input type="file" name="news_image" id="news_image" class="form-control"
-                    placeholder="Enter Meta Description" required>
+                    placeholder="Enter Meta Description">
             </div>
             <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
             <div class="form-group">

@@ -1,15 +1,16 @@
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">post information</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><?=$data['name']?> information</h5>
     </div>
 </div>
 
 <div class="card shadow mb-4 mx-4">
     <form action="editNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
+            <?php $display= $data["display"]?>
             <?php foreach ($data["news"] as $row): ?>
                 <input type="hidden" name="edit_news_id" value="<?= $row['id'] ?>">
-                <div class="form-group">
+                <div class="form-group" style="display:<?=$display?>">
                     <label for="category">Category</label>
                     <select id="edit_news_category" name="category" class="form-control">
                         <?php foreach($data["product_categories"] as $category):?>
@@ -40,12 +41,12 @@
                     <textarea name="edit_news_long_description" class="form-control summernote"
                         rows="3"><?= $row['long_description'] ?></textarea>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:<?=$display?>">
                     <label>Current Image</label><br>
                     <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" alt="Image"><br>
                     <span>Current file: <?= $row['image']; ?></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display:<?=$display?>">
                     <label>Image </label>
                     <input type="file" name="news_image" id="news_image" class="form-control"
                         placeholder="Enter Meta Description">

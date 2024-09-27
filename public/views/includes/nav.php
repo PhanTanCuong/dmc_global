@@ -31,7 +31,7 @@
                   <ul class="dropdown">
                     <?php foreach ($childItems = json_decode($row['child_items'], true) as $childItem): ?>
                       <li><a
-                          href="<?= $_ENV["BASE_URL"] . '/category//' . ($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
+                          href="<?= $_ENV["BASE_URL"] . '/' . 'category/' . ($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
                       </li>
                     <?php endforeach; ?>
                   </ul>

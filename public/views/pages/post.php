@@ -1,4 +1,6 @@
+<link rel="stylesheet" href="">
 <style>
+    /* post body */
     .container {
         background-color: #f5f5f5;
     }
@@ -127,8 +129,12 @@
         }
     }
 </style>
+<!-- BREADCRUMB  -->
+<?php include('partials/breadcrumb.php')?>
+
+<!-- END BREADCRUMB  -->
 <main>
-    <!--  -->
+    
 
     <div class="container">
         <div class="section">
@@ -144,7 +150,7 @@
                             <li>
                                 <span>
                                     <i class="far fa-edit"></i>
-                                    <?php foreach ($data["news"] as $column): ?>
+                                    <?php foreach ($data["breadcrumb_data"] as $column): ?>
                                         <a
                                             href="<?= $_ENV["BASE_URL"] . '/' . $column['slug'] ?>"><?= $column['name'] . ',' ?></a>
                                     <?php endforeach; ?>

@@ -16,11 +16,24 @@ class MediaModel extends DB
         }
     }
 
+
+
     public function getNewsByProductCategory($category_id) {
         try{
             $query="SELECT * FROM post WHERE category_id = ?";
             $stmt=$this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
+            return ($stmt->execute())?$stmt->get_result() : false;
+        }catch(mysqli_sql_exception $e) {
+            echo "Error: ". $e->getMessage();
+        }
+    }
+
+    public function getNewsByType($type_id) {
+        try{
+            $query="SELECT * FROM post WHERE type_id = ?";
+            $stmt=$this->connection->prepare($query);
+            $stmt->bind_param("i", $type_id);
             return ($stmt->execute())?$stmt->get_result() : false;
         }catch(mysqli_sql_exception $e) {
             echo "Error: ". $e->getMessage();

@@ -23,7 +23,7 @@ class Post extends Controller {
 
             $this->view('home',[
                 'post'=>$post_data,
-                'news'=>$news,
+                'breadcrumb_data'=>$news,
                 'category'=>$news_category,
                 'page'=>'post',
             ]);

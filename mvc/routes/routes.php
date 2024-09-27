@@ -17,8 +17,6 @@ Route::add('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
 Route::add('news/([a-zA-Z0-9_-]+)', 'Post@display');
 
 
-Route::add('Test','Test@display');  
-
 // Admin routes
 Route::add('Admin/dashboard','Home@display');
 Route::add('Admin/Account','Account@display');
