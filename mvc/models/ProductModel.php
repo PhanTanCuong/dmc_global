@@ -29,7 +29,7 @@ class ProductModel extends DB
     }
     public function getProductByProductCategory($category_id) {
         try{
-            $query="SELECT * FROM product WHERE category_id = ?";
+            $query="SELECT * FROM product WHERE type_id = ?";
             $stmt=$this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
             return ($stmt->execute())?$stmt->get_result() : false;
@@ -92,7 +92,8 @@ class ProductModel extends DB
         $image,
         $meta_description,
         $meta_keyword,
-        $category_id
+        $category_id,
+        $type_id
     ) {
         try {
 
@@ -104,13 +105,14 @@ class ProductModel extends DB
                                     image = ?, 
                                     meta_description = ?, 
                                     meta_keyword = ?, 
-                                    category_id = ? 
+                                    category_id = ?,
+                                    type_id =? 
                                 WHERE 
                                     id = ?;
                                 ";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param(
-                "ssssssii",
+                "ssssssiii",
                 $title,
                 $short_description,
                 $long_description,
@@ -118,6 +120,7 @@ class ProductModel extends DB
                 $meta_description,
                 $meta_keyword,
                 $category_id,
+                $type_id,
                 $id
             );
             return ($stmt->execute()) ? true : false;
@@ -145,6 +148,21 @@ class ProductModel extends DB
             return mysqli_query($this->connection, $query_run);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function getTypeIdByCategory($category_id){
+        try{
+                $query="SELEECT *  FROM category WHERE id=?";
+                $stmt=$this->connection->prepare($query);
+                $stmt->bind_param("i", $category_id);
+                $stmt->execute();
+                $result=$stmt->get_result();
+                while ($row=$result->fetch_assoc()){
+                    return $row['parent_id'];
+                }    
+        }catch(mysqli_sql_exception $e){
+            echo "Error: ". $e->getMessage();
         }
     }
 

@@ -55,7 +55,7 @@ class Product extends Controller
             $this->view('home',[
                 'product_data'=>$product_data,
                 'product'=>$this->model('ProductModel')->getRelatedProducts(),
-                'page'=>'product',
+                'page'=>'detail_of_product',
             ]);
 
 

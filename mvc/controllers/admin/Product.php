@@ -81,16 +81,9 @@ class Product extends Controller
                     die();
                 }
 
-                if (isset($_COOKIE['parent_id'])) {
-                    $type_id = (int) $_COOKIE['parent_id'];
-                } else {
-                    $_SESSION['status'] = "ID isexpired";
-                    header('Location:Add');
-                    die();
-                }
-
-                //Model
                 $product = $this->model("ProductModel");
+
+                // $type_id=$product->getTypeIdByCategory($category_id);
 
                 $preference_id = $product->addProduct(
                     $title,
@@ -100,12 +93,10 @@ class Product extends Controller
                     $image,
                     $meta_description,
                     $meta_keyword,
-                    $category_id,
-                    $type_id
+                    $category_id
+                    // $type_id
                 );
                 if (is_numeric($preference_id) && $preference_id > 0) {
-
-
 
                     //add to slug center
                     $this->model('MenuModel')->addMenu($slug, 'product', $preference_id);
@@ -137,7 +128,6 @@ class Product extends Controller
             if (isset($_POST["product_updatebtn"])) {
                 $category_id = (int) $_POST['category'];
                 $title = $_POST['edit_product_title'];
-                $slug = $_POST['edit_product_slug'];
                 $short_description = $_POST['edit_product_description'];
                 $long_description = $_POST['edit_product_long_description'];
                 $meta_keyword = $_POST['edit_product_meta_keyword'];
@@ -160,6 +150,11 @@ class Product extends Controller
                 } else {
                     $image = $stored_image['image'];
                 }
+
+                // while($row=mysqli_fetch_assoc($this->model('CategoryModel')->getCategoryById($category_id))){
+                //     $type_id=$row['parent_id'];
+                // }
+                
                 $success = $product->editProduct(
                     $id,
                     $title,
@@ -168,7 +163,8 @@ class Product extends Controller
                     $image,
                     $meta_keyword,
                     $meta_description,
-                    $category_id
+                    $category_id,
+                    $type_id
                 );
                 if ($success) {
 
