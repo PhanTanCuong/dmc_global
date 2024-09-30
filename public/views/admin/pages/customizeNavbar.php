@@ -19,29 +19,13 @@
                             <option value="inactive">Inactive</option>
                         </select>
                     </div>
-                    <?php
-                    use Mvc\Utils\Pages;
-                    $static_pages = Pages::$static_pages;
-                    $dynamic_pages = Pages::$dynamic_pages;
-
-                    ?>
                     <div class="form-group">
                         <label for="navbar_link">Link</label>
                         <select class="form-control" id="navbar_link" name="navbar_link" required>
-                            <optgroup label="Static Pages">
-                                <?php foreach ($static_pages as $page): ?>
-                                    <option value="<?= $page['link']; ?>">
-                                        <?= $page['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                            <optgroup label="Dynamic Pages">
-                                <?php foreach ($dynamic_pages as $page): ?>
-                                    <option value="<?= $page['link']; ?>">
-                                        <?= $page['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </optgroup>
+                        <option value="">None</option>
+                        <?php foreach ($data['links'] as $page): ?>
+                            <option value="<?= $page['slug']; ?>"><?= $page['name']; ?></option>
+                        <?php endforeach; ?>
                         </select>
                     </div>
                     <!-- Container for the additional selectmenu -->
@@ -78,20 +62,10 @@
                     <div class="form-group">
                         <label for="edit_navbar_link">Link</label>
                         <select class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
-                            <optgroup label="Static Pages">
-                                <?php foreach ($static_pages as $page): ?>
-                                    <option value="<?= $page['link']; ?>">
-                                        <?= $page['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                            <optgroup label="Dynamic Pages">
-                                <?php foreach ($dynamic_pages as $page): ?>
-                                    <option value="<?= $page['link']; ?>">
-                                        <?= $page['name']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </optgroup>
+                        <option value="">None</option>
+                        <?php foreach ($data['links'] as $page): ?>
+                            <option value="<?= $page['slug']; ?>"><?= $page['name']; ?></option>
+                        <?php endforeach; ?>
                         </select>
                     </div>
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>

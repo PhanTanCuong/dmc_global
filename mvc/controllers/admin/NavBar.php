@@ -22,6 +22,7 @@ class NavBar extends Controller
         $this->view('admin/home', [
             'page' => 'customizeNavbar',
             'item' => $item->getInforNavBar(),
+            'links'=> $item->getLinkList(),
             'parent_categories' => $category->getParentCategories(),
             'category' => $category->getInforCategory(),
         ]);

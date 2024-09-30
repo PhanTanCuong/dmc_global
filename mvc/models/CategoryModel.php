@@ -9,7 +9,7 @@ class CategoryModel extends DB
     {
         try {
             $query = "SELECT * FROM category_tree";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -19,7 +19,7 @@ class CategoryModel extends DB
     {
         try {
             $query = "SELECT id,name,level FROM category_tree WHERE level <2";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -99,7 +99,7 @@ class CategoryModel extends DB
     {
         try {
             $query = "DELETE FROM category WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -145,7 +145,7 @@ class CategoryModel extends DB
     {
         try {
             $query = "SELECT * FROM category WHERE parent_id=0";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

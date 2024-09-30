@@ -10,7 +10,7 @@ class IconsModel extends DB
             $query = "SELECT * FROM icon
                         WHERE block_id = '$id'
                         AND image <> 'footer.png'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -36,7 +36,7 @@ class IconsModel extends DB
     {
         try {
             $query = "SELECT * FROM icon WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -59,7 +59,7 @@ class IconsModel extends DB
     {
         try {
             $query = "DELETE FROM icon WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

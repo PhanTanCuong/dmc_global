@@ -8,7 +8,7 @@ class DataModel extends DB
     {
         try {
             $query = "SELECT * FROM item WHERE block_id='$block_id' AND product_category_id	='$page_id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -55,7 +55,7 @@ class DataModel extends DB
     {
         try {
             $query = "DELETE FROM item WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
 
             echo "Error: " . $e->getMessage();
@@ -66,7 +66,7 @@ class DataModel extends DB
     {
         try {
             $query = "SELECT * FROM item WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -76,7 +76,7 @@ class DataModel extends DB
     {
         try {
             $query = "SELECT * FROM block WHERE block_id<7";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }

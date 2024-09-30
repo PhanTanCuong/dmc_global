@@ -8,7 +8,7 @@ class BackgroundModel extends DB
     {
         try {
             $query = "SELECT * FROM background";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -32,7 +32,7 @@ class BackgroundModel extends DB
     public function getBackgroundById($id){
         try {
             $query = "SELECT * FROM background WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -56,7 +56,7 @@ class BackgroundModel extends DB
     {
         try {
             $query = "SELECT image FROM background WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -65,7 +65,7 @@ class BackgroundModel extends DB
     public function deleteBackground($id){
         try{
             $query = "UPDATE background SET image='' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         }catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

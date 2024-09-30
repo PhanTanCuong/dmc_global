@@ -21,7 +21,7 @@ class SettingModel extends DB
                         WHERE 
                             icon.block_id = 1;
 ";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -49,7 +49,7 @@ class SettingModel extends DB
                         WHERE block_id = 7 
                         AND image LIKE '%ic%'";
 
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -59,7 +59,7 @@ class SettingModel extends DB
     // {
     //     try {
     //         $query = "SELECT * FROM product_category";
-    //         return mysqli_query($this->connection, $query);
+    //       return $this->connection->query($query);
     //     } catch (mysqli_sql_exception $e) {
     //         echo $e->getMessage();
     //     }
@@ -69,7 +69,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -105,7 +105,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM background WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -116,7 +116,7 @@ class SettingModel extends DB
     {
         try {
             $query = "UPDATE background SET image='$image' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -125,7 +125,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM icon WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -135,7 +135,7 @@ class SettingModel extends DB
     {
         try {
             $query = "UPDATE icon SET image='$image' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -146,7 +146,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM footer WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -156,7 +156,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM footer WHERE block_id=7";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -166,7 +166,7 @@ class SettingModel extends DB
     {
         try {
             $query = "UPDATE footer SET title='$title', description='$description' WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -176,7 +176,7 @@ class SettingModel extends DB
     {
         try {
             $query = "SELECT * FROM item WHERE block_id='$block_id' AND product_category_id='$page_id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

@@ -4,34 +4,59 @@ namespace Mvc\Controllers;
 use Core\Controller;
 use Core\Exception;
 
-class Post extends Controller {
-    function display(){
-        try{
-            $url =$_SERVER['REQUEST_URI'];
-            $url_component=explode("/",$url);
+class Post extends Controller
+{
+    function display()
+    {
+        try {
+            $slug = $this->getSlugFromURL();
 
-            $slug =end($url_component);
-
-            $post= $this->model('MenuModel');
+            $post = $this->model('MenuModel');
             $category = $this->model('CategoryModel');
 
-            $post_data=$post->directPage($slug);
-            foreach($post_data as $row){
-                $news=$category->getCategoryById($row['type_id']);
-                $news_category=$category->getCategoryById($row['category_id']);
+            $post_data = $post->directPage($slug);
+            foreach ($post_data as $row) {
+                $news = $category->getCategoryById($row['type_id']);
+                $news_category = $category->getCategoryById($row['category_id']);
             }
 
-            $this->view('home',[
-                'post'=>$post_data,
-                'breadcrumb_data'=>$news,
-                'category'=>$news_category,
-                'page'=>'post',
+            $this->view('home', [
+                'post' => $post_data,
+                'breadcrumb_data' => $news,
+                'category' => $news_category,
+                'page' => 'post',
             ]);
 
 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
+
+    protected function getSlugFromURL()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        $url_component = explode("/", $url);
+        return end($url_component);
+    }
+
+    function displayAbout()
+    {
+        try {
+            $slug = $this->getSlugFromURL();
+            $post = $this->model('MenuModel');
+
+            $post_data = $post->directPage($slug);
+
+            $this->view('home', [
+                'about' => $post_data,
+                'page' => 'about',
+            ]);
+
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+    }
+
 }
 ?>

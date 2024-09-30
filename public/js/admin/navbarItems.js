@@ -83,15 +83,6 @@ $('#cancelEdit').click(function () {
   $('#addNavbarForm').show();
 });
 
-
-//Selections
-$(function () {
-  $("#navbar_link").selectmenu();
-});
-$(function () {
-  $("#navbar_status").selectmenu();
-});
-
 //Child Items
 $('#childItemCheckbox').change(function () {
   if ($(this).is(':checked')) {
