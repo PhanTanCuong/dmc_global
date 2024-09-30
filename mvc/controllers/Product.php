@@ -3,17 +3,13 @@
 namespace Mvc\Controllers;
 
 use Core\Controller;
+use Mvc\Utils\SlugHelper;
 
 class Product extends Controller
 {
 
     function display()
     {
-        $url = $_SERVER['REQUEST_URI']; // Lấy toàn bộ URL sau domain
-        $url_components = explode('/', $url); // Tách URL thành các phần dựa trên dấu '/'
-
-        // Giả sử URL có dạng: /dmc_global/public/Product/1
-        $slug = end($url_components); // Lấy phần cuối cùng của URL
 
         //Model
         $product = $this->model("ProductModel");
@@ -22,8 +18,8 @@ class Product extends Controller
         $item = $this->model("SettingModel");
         $category = $this->model("CategoryModel");
 
-        $product_category_id = $category->getCategoryIdBySlug($slug);
-        $news_category_id = $category->getCategoryIdBySlug($slug."-news");
+        $product_category_id = $category->getCategoryIdBySlug(SlugHelper::getSlugFromURL());
+        $news_category_id = $category->getCategoryIdBySlug(SlugHelper::getSlugFromURL() . "-news");
 
 
         //View
@@ -40,27 +36,39 @@ class Product extends Controller
         ]);
     }
 
-    function displayProductDetail(){
-        try{
-            $url =$_SERVER['REQUEST_URI'];
-            $url_component=explode("/",$url);
+    function displayProductDetail()
+    {
+        try {
 
-            $slug =end($url_component);
-
-            $product= $this->model('MenuModel');
-
-            $product_data=$product->directPage($slug);
-            
-
-            $this->view('home',[
-                'product_data'=>$product_data,
-                'product'=>$this->model('ProductModel')->getRelatedProducts(),
-                'page'=>'detail_of_product',
+            $product = $this->model('MenuModel');
+            $product_data = $product->directPage(SlugHelper::getSlugFromURL());
+            $this->view('home', [
+                'product_data' => $product_data,
+                'product' => $this->model('ProductModel')->getRelatedProducts(),
+                'page' => 'detail_of_product',
             ]);
-
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    function displayListOfProductByCategory()
+    {
+        try{
+
+            $menu = $this->model('MenuModel');
+            $direct = $menu->directPage(SlugHelper::getSlugFromURL());
+            foreach ($direct as $row){
+
+            }
+
+            // $this->view('home',[
+            //     'product_category' => $product_category,
+            //     'page'=>'list_of_product_category'
+            // ]);
+
+        }catch(\Exception $exception){
+            echo $exception->getMessage();
         }
     }
 }

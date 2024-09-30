@@ -2,7 +2,7 @@
 
 namespace Mvc\Utils;
 
-class Image
+class ImageHelper
 {
     public static function resize_image($file, $newWidth, $newHeight)
     {

@@ -64,31 +64,25 @@ class CategoryModel extends DB
         }
     }
 
-    public function addCategoryInfor($name, $slug, $parent_id, $level)
+    public function addCategoryInfor($name, $slug, $parent_id, $level,$type)
     {
         try {
-            $query = "INSERT INTO category (name,slug,parent_id,level) VALUES (?,?,?,?)";
+            $query = "INSERT INTO category (name,slug,parent_id,level,type) VALUES (?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssii", $name, $slug, $parent_id, $level);
-            if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            $stmt->bind_param("ssiis", $name, $slug, $parent_id, $level,$type);
+            return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function customizeInforCategory($id, $name, $slug, $parent_id, $level)
+    public function customizeInforCategory($id, $name, $slug, $parent_id, $level,$type)
     {
         try {
-            $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=? WHERE id = ?";
+            $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=?,type=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssiii", $name, $slug, $parent_id, $level, $id);
-            if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            $stmt->bind_param("ssiisi", $name, $slug, $parent_id, $level,$type, $id);
+            return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

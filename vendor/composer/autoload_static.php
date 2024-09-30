@@ -34,6 +34,7 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         'M' => 
         array (
             'Mvc\\Utils\\' => 10,
+            'Mvc\\Services\\' => 13,
             'Mvc\\Controllers\\Admin\\' => 22,
             'Mvc\\Controllers\\' => 16,
         ),
@@ -83,6 +84,10 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         'Mvc\\Utils\\' => 
         array (
             0 => __DIR__ . '/../..' . '/mvc/utils',
+        ),
+        'Mvc\\Services\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/mvc/services',
         ),
         'Mvc\\Controllers\\Admin\\' => 
         array (

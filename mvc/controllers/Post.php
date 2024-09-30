@@ -3,18 +3,17 @@
 namespace Mvc\Controllers;
 use Core\Controller;
 use Core\Exception;
-
+use Mvc\Utils\SlugHelper;
 class Post extends Controller
 {
     function display()
     {
         try {
-            $slug = $this->getSlugFromURL();
 
             $post = $this->model('MenuModel');
             $category = $this->model('CategoryModel');
 
-            $post_data = $post->directPage($slug);
+            $post_data = $post->directPage(SlugHelper::getSlugFromURL());
             foreach ($post_data as $row) {
                 $news = $category->getCategoryById($row['type_id']);
                 $news_category = $category->getCategoryById($row['category_id']);
@@ -33,20 +32,13 @@ class Post extends Controller
         }
     }
 
-    protected function getSlugFromURL()
-    {
-        $url = $_SERVER['REQUEST_URI'];
-        $url_component = explode("/", $url);
-        return end($url_component);
-    }
 
     function displayAbout()
     {
         try {
-            $slug = $this->getSlugFromURL();
             $post = $this->model('MenuModel');
 
-            $post_data = $post->directPage($slug);
+            $post_data = $post->directPage(SlugHelper::getSlugFromURL());
 
             $this->view('home', [
                 'about' => $post_data,

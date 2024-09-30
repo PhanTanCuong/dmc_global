@@ -32,7 +32,7 @@ class MenuModel extends DB
     public function getMenuBySlug($slug)
     {
         try {
-            $query = "SELECT * FROM menu WHERE slug=?";
+            $query = "SELECT type,preference_id FROM menu WHERE slug=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
             return ($stmt->execute()) ? $stmt->get_result()->fetch_assoc() : null;
