@@ -83,7 +83,13 @@ class Product extends Controller
 
                 $product = $this->model("ProductModel");
 
-                // $type_id=$product->getTypeIdByCategory($category_id);
+                $category= $this->model('CategoryModel');
+                $result=$category->getCategoryById($category_id);
+
+
+                while($row=mysqli_fetch_assoc($result)){
+                    $type_id=$row['parent_id'];
+                }
 
                 $preference_id = $product->addProduct(
                     $title,
@@ -93,8 +99,8 @@ class Product extends Controller
                     $image,
                     $meta_description,
                     $meta_keyword,
-                    $category_id
-                    // $type_id
+                    $category_id,
+                    $type_id
                 );
                 if (is_numeric($preference_id) && $preference_id > 0) {
 
@@ -151,9 +157,13 @@ class Product extends Controller
                     $image = $stored_image['image'];
                 }
 
-                // while($row=mysqli_fetch_assoc($this->model('CategoryModel')->getCategoryById($category_id))){
-                //     $type_id=$row['parent_id'];
-                // }
+                $category= $this->model('CategoryModel');
+                $result=$category->getCategoryById($category_id);
+
+
+                while($row=mysqli_fetch_assoc($result)){
+                    $type_id=$row['parent_id'];
+                }
                 
                 $success = $product->editProduct(
                     $id,

@@ -18,8 +18,20 @@ class CategoryModel extends DB
     public function getInforParentCategory()
     {
         try {
-            $query = "SELECT * FROM category_tree WHERE level <2";
+            $query = "SELECT id,name,level FROM category_tree WHERE level <2";
             return mysqli_query($this->connection, $query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getCategoryById($id)
+    {
+        try {
+            $query = "SELECT * FROM category WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return ($stmt->execute()) ? $stmt->get_result() : null;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -67,15 +79,6 @@ class CategoryModel extends DB
         }
     }
 
-    public function getCategoryById($id)
-    {
-        try {
-            $query = "SELECT * FROM category WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
     public function customizeInforCategory($id, $name, $slug, $parent_id, $level)
     {
         try {

@@ -18,31 +18,39 @@ class ProductModel extends DB
         }
     }
 
-    public function getRelatedProducts(){
-        try{
-            $query="SELECT * FROM product LIMIT 6";
+    public function getRelatedProducts()
+    {
+        try {
+            $query = "SELECT * FROM product LIMIT 6";
             return $this->connection->query($query);
-        }catch(mysqli_sql_exception $e) {
-            echo "Error: ". $e->getMessage();
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
 
         }
     }
-    public function getProductByProductCategory($category_id) {
-        try{
-            $query="SELECT * FROM product WHERE type_id = ?";
-            $stmt=$this->connection->prepare($query);
+    public function getProductByProductCategory($category_id)
+    {
+        try {
+            $query = "SELECT * FROM product WHERE type_id = ? LIMIT 6";
+            $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
-            return ($stmt->execute())?$stmt->get_result() : false;
-        }catch(mysqli_sql_exception $e) {
-            echo "Error: ". $e->getMessage();
+            return ($stmt->execute()) ? $stmt->get_result() : false;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
     //get product information by id
 
     public function getProductbyId($id)
     {
-        $query_run = "SELECT * FROM product where id='$id'";
-        return mysqli_query($this->connection, $query_run);
+        try {
+            $query = "SELECT * FROM product where id='$id'";
+            $stmt= $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return ($stmt->execute()) ? $stmt->get_result() : false;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
 
@@ -151,18 +159,19 @@ class ProductModel extends DB
         }
     }
 
-    public function getTypeIdByCategory($category_id){
-        try{
-                $query="SELEECT *  FROM category WHERE id=?";
-                $stmt=$this->connection->prepare($query);
-                $stmt->bind_param("i", $category_id);
-                $stmt->execute();
-                $result=$stmt->get_result();
-                while ($row=$result->fetch_assoc()){
-                    return $row['parent_id'];
-                }    
-        }catch(mysqli_sql_exception $e){
-            echo "Error: ". $e->getMessage();
+    public function getTypeIdByCategory($category_id)
+    {
+        try {
+            $query = "SELEECT *  FROM category WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $category_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                return $row['parent_id'];
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
