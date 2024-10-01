@@ -4,6 +4,9 @@ namespace Mvc\Controllers;
 
 use Core\Controller;
 use Mvc\Utils\SlugHelper;
+use Mvc\Services\CategoryService;
+use MenuModel;
+use CategoryModel;
 
 class Product extends Controller
 {
@@ -42,6 +45,7 @@ class Product extends Controller
 
             $product = $this->model('MenuModel');
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
+
             $this->view('home', [
                 'product_data' => $product_data,
                 'product' => $this->model('ProductModel')->getRelatedProducts(),
@@ -56,16 +60,17 @@ class Product extends Controller
     {
         try{
 
-            $menu = $this->model('MenuModel');
-            $direct = $menu->directPage(SlugHelper::getSlugFromURL());
-            foreach ($direct as $row){
+            $menuModel = new MenuModel();
+            $categoryModel = new CategoryModel();
 
-            }
+            $categoryService = new CategoryService($menuModel, $categoryModel);
 
-            // $this->view('home',[
-            //     'product_category' => $product_category,
-            //     'page'=>'list_of_product_category'
-            // ]);
+            $product_category = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+
+            $this->view('home',[
+                'product_category' => $product_category,
+                'page'=>'list_of_product_category'
+            ]);
 
         }catch(\Exception $exception){
             echo $exception->getMessage();
