@@ -60,15 +60,18 @@ class Product extends Controller
     {
         try{
 
-            $menuModel = new MenuModel();
-            $categoryModel = new CategoryModel();
-
+            $menuModel = $this->model('MenuModel');
+            $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
             $product_category = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
-
+            $selectedCategory = $menuModel->directPage(SlugHelper::getSlugFromURL());
+            foreach ($selectedCategory as $row) {
+                $breadcrumb_data = $categoryModel->getCategoryById($row['id']);
+            }
             $this->view('home',[
                 'product_category' => $product_category,
+                'breadcrumb_data' => $breadcrumb_data,
                 'page'=>'list_of_product_category'
             ]);
 

@@ -82,10 +82,13 @@
   justify-content: center;
   background-color: #cc0000;
   border-radius: 4px;
-  /* font-weight: 100; */
   padding: 10px 30px;
-  /* border-color: white; */
   border: none;
+}
+
+.btn2:hover {
+  background-color: #990000; 
+  transform: scale(1.05); 
 }
 
 .title {

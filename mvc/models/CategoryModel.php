@@ -4,6 +4,9 @@ use Core\DB;
 
 class CategoryModel extends DB
 {
+    public function __construct(){
+        parent ::__construct();
+    }
     //Product Category
     public function getInforCategory()
     {
@@ -161,21 +164,25 @@ class CategoryModel extends DB
     public function getCategoryIdBySlug($slug)
     {
         try {
-            $query = "SELECT * FROM category WHERE slug=?";
+            $query = "SELECT id FROM category WHERE slug = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
             $stmt->execute();
             $result = $stmt->get_result();
-
-            foreach ($result as $row) {
-                $category_id = $row['id'];
+    
+            // Kiểm tra kết quả trả về và lấy hàng đầu tiên
+            if ($row = $result->fetch_assoc()) {
+                return $row['id'];
             }
-
-            return $category_id;
+    
+            // Trả về null nếu không tìm thấy
+            return null;
+    
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+    
 }
 
 ?>

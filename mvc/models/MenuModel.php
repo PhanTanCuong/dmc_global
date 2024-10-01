@@ -3,6 +3,11 @@ use Core\DB;
 
 class MenuModel extends DB
 {
+
+    
+    public function __construct(){
+        parent ::__construct(); //khởi tạo lớp cha
+    }
     public function addMenu($slug, $type, $preference_id)
     {
         try {
