@@ -48,7 +48,7 @@ Route::post('Admin/News/editNews', 'Media@editNews');
 
 // Admin quản lý slide
 Route::get('Admin/Slider', 'Slider@display');
-Route::post('Admin/addBanner', 'Slider@postBanner');
+Route::post('Admin/addBanner', 'Slider@addBanner');
 Route::post('Admin/Slider/getBannerById/(\d+)', 'Slider@getBannerById');
 Route::post('Admin/customizeBanner', 'Slider@customizeBanner');
 Route::post('Admin/deleteBanner', 'Slider@deleteBanner');

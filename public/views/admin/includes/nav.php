@@ -60,8 +60,8 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID('23','public/Admin/Data');">Data</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setparentID('23','public/Admin/Slider');">Banner</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">

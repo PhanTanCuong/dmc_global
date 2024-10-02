@@ -18,7 +18,6 @@ class Slider extends Controller
             $parent_id = (int) $_COOKIE["parent_id"];
             $product_category = $this->model('CategoryModel')->getCategory($parent_id);
         }
-        $product_category = $this->model('CategoryModel');
         if (isset($_GET['product_category_id'])) {
             setcookie("product_category_id", "", time() - 3600);
             setcookie("product_category_id", $_GET['product_category_id'], time() + 3600);

@@ -21,6 +21,7 @@ function sortable(sortableClass, url) {
         type: 'POST',
         success: function (data) {
           console.log('Navbar item sorted successfully');
+          console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error('AJAX Error: ' + textStatus + ': ' + errorThrown);
