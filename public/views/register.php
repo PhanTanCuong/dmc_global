@@ -1,6 +1,10 @@
 <?php
-// session_start();
-include ('admin/includes/header.php');
+$imageUrl = $_ENV["PICTURE_URL"];
+use Mvc\Controllers\Footer;
+$footerController = new Footer();
+
+$header = $footerController->fetchHeaderData();
+include('admin/includes/header.php');
 ?>
 <div class="container">
 
@@ -26,8 +30,9 @@ include ('admin/includes/header.php');
                                 </div>
                                 <form class="user" action="signup" method="POST">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="username" 
-                                        placeholder="Enter Username"></div>
+                                        <input type="text" class="form-control form-control-user" name="username"
+                                            placeholder="Enter Username">
+                                    </div>
 
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email"
@@ -57,5 +62,5 @@ include ('admin/includes/header.php');
 </div>
 
 <?php
-include ('admin/includes/scripts.php');
+include('admin/includes/scripts.php');
 ?>

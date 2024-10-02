@@ -22,23 +22,24 @@ class Register extends Controller
                 $email = strip_tags($_POST['email']);
                 $password = strip_tags($_POST['password']);
                 $confirmpassword = strip_tags($_POST['confirmpassword']);
-                $role = 'user';
+                
 
-                if ($password === $confirmpassword) {
-                    $account = $this->model('AccountModel');
-                    $success = $account->addAccount($username, $email, $password, $role);
-                    if ($success) {
-                        echo "Saved";
-                        header('Location: ../Signin/');
-                    } else {
-                        echo "Not save";
-                        $_SESSION['status'] = 'Fail create a new account';
-                        header('Location: ');
-                    }
-                } else {
+                if ($password !== $confirmpassword) {
                     $_SESSION['status'] = 'Password and Confirm Pass';
                     header('Location: ');
                 }
+
+                $account = $this->model('AccountModel');
+                $success = $account->addAccount($username, $email, $password, 'user');
+
+                if (!$success) {
+                    echo "Not save";
+                    $_SESSION['status'] = 'Fail create a new account';
+                    header('Location: ');
+                }
+
+                echo "Saved";
+                header('Location: ../Signin/');
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();

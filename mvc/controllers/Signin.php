@@ -15,29 +15,42 @@ class Signin extends Controller
     function login($email_login = null, $password_login = null)
     {
         try {
-            if (isset($_POST["login_btn"])) {
-                $email_login = strip_tags($_POST['email']);
-                $password_login = strip_tags($_POST['password']);
 
-                $account = $this->model("AccountModel");
-                $result = $account->login($email_login, $password_login);
-                if (!$result) {
-                    $_SESSION['status'] = 'Wrong email and password';
-                    header("Location: " . $_ENV['BASE_URL'] . "Signin/");
-                } else {
-                    $role = $result['role'];
-                    if ($role === 'admin') {
-                        $_SESSION['username'] = $email_login;
-                        $_SESSION['isLogin'] = true;
-                        header("Location: " . $_ENV['BASE_URL'] . "/Admin/dashboard/");
-                    } else if ($role === 'user') {
-                        header("Location: " . $_ENV['BASE_URL'] . "/product-categories/base-oil");
-                    }
-                }
+            if (!isset($_POST["login_btn"])) {
+                $_SESSION['status'] = 'Something went wrong!!!';
+                header("Location: " . $_ENV['BASE_URL'] . "/Sigin");
             }
+
+            $email_login = strip_tags($_POST['email']);
+            $password_login = strip_tags($_POST['password']);
+
+            $account = $this->model("AccountModel");
+            $result = $account->login($email_login, $password_login);
+
+            if (!$result) {
+                $_SESSION['status'] = 'Wrong email and password';
+                header("Location: " . $_ENV['BASE_URL'] . "/Signin");
+            }
+            $role = $result['role'];
+
+            switch ($role) {
+                case 'admin':
+                    $_SESSION['username'] = $email_login;
+                    $_SESSION['isLogin'] = true;
+                    header("Location: " . $_ENV['BASE_URL'] . "/Admin/dashboard");
+                    break;
+                case 'user':
+                    header("Location: " . $_ENV['BASE_URL'] . "/product-categories/base-oil");
+                    break;
+                default:
+                    $_SESSION['status'] = 'Something went wrong!!!';
+                    header("Location: " . $_ENV['BASE_URL'] . "/Sigin");
+                    break;
+            }
+
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
-            header("Location: " . $_ENV['BASE_URL'] . "Signin/");
+            header("Location: " . $_ENV['BASE_URL'] . "/Signin");
         }
     }
 
