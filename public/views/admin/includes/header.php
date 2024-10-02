@@ -12,8 +12,15 @@
 
   <title>DMC Global</title>
   <!-- Favicon -->
-  <link rel="icon" href="<?=$imageUrl?>'/abut2_child_img.png" type="image/x-icon">
-
+  <meta charset="utf-8">
+    <?php if (mysqli_num_rows($header["head"]) > 0): ?>
+        <?php while ($row = mysqli_fetch_assoc($header["head"])): ?>
+            <title><?= $row['title'] ?></title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- Favicon -->
+            <link rel="icon" href="/dmc_global/public/images/<?= $row['image'] ?>" type="image/x-icon">
+        <?php endwhile; ?>
+    <?php endif; ?>
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     type="text/css">

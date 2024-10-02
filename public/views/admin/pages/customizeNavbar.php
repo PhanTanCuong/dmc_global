@@ -176,7 +176,7 @@
 <script>
     $(document).ready(function () {
         //sortable
-        sortable('.sortable','sortFooterIcons');
+        sortable('.sortable', 'Admin/sortNavbarItem');
         attachDragEvents();
         initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')

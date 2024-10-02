@@ -1,4 +1,9 @@
 <?php
+$imageUrl=$_ENV["PICTURE_URL"];
+use Mvc\Controllers\Footer;
+$footerController = new Footer();
+
+$header = $footerController->fetchHeaderData();
 include ('includes/header.php');
 include ('includes/nav.php');
 include_once('includes/Notification.php');
