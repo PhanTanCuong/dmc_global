@@ -45,7 +45,7 @@
     <li class="nav-item">
         <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/Account');">
             <i class="fas fa-fw fa-user"></i>
-            <span>Admin Profiles</span>
+            <span>Account</span>
         </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -287,7 +287,7 @@
                         </a>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                                <!-- <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="..."> -->
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div>

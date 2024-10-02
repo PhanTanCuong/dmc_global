@@ -23,49 +23,54 @@ Route::get('Admin/dashboard', 'Home@display');
 
 // Admin quản lý tài khoản
 Route::get('Admin/Account', 'Account@display');
-Route::post('Admin/postAccount', 'Account@postAccount');
+Route::post('Admin/addAccount', 'Account@postAccount');
 Route::post('Admin/deleteAccount', 'Account@deleteAccount');
 Route::get('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
-Route::put('Admin/editAccount', 'Account@editAccount');
+Route::post('Admin/editAccount', 'Account@editAccount');
 
 // Admin quản lý sản phẩm
 Route::get('Admin/Product', 'Product@display');
 Route::post('Admin/Product/Add', 'Product@displayAddProduct');
 Route::post('Admin/Product/Update', 'Product@Update');
-Route::post('Admin/Product/postProduct', 'Product@postProduct');
+Route::post('Admin/Product/addProduct', 'Product@addProduct');
 Route::post('Admin/deleteProduct', 'Product@deleteProduct');
 Route::get('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
-Route::put('Admin/Product/editProduct', 'Product@editProduct');
+Route::post('Admin/Product/editProduct', 'Product@editProduct');
 
 // Admin quản lý bài viết (News/Media)
 Route::get('Admin/News', 'Media@display');
 Route::get('Admin/News/Add', 'Media@displayAddNews');
-Route::put('Admin/News/Update', 'Media@Update');
-Route::post('Admin/News/postNews', 'Media@postNews');
-Route::delete('Admin/deleteNews', 'Media@deleteNews');
+Route::post('Admin/News/Update', 'Media@Update');
+Route::post('Admin/News/addNews', 'Media@addNews');
+Route::post('Admin/deleteNews', 'Media@deleteNews');
 Route::get('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
-Route::put('Admin/News/editNews', 'Media@editNews');
+Route::post('Admin/News/editNews', 'Media@editNews');
 
 // Admin quản lý slide
 Route::get('Admin/Slider', 'Slider@display');
-Route::post('Admin/postBanner', 'Slider@postBanner');
+Route::post('Admin/addBanner', 'Slider@postBanner');
 Route::get('Admin/Slider/getBannerById/(\d+)', 'Slider@getBannerById');
-Route::put('Admin/customizeBanner', 'Slider@customizeBanner');
-Route::delete('Admin/deleteBanner', 'Slider@deleteBanner');
+Route::post('Admin/customizeBanner', 'Slider@customizeBanner');
+Route::post('Admin/deleteBanner', 'Slider@deleteBanner');
 
 // Admin quản lý navbar
 Route::get('Admin/NavBar', 'NavBar@display');
-Route::post('Admin/postNavBar', 'NavBar@postNavBar');
+Route::post('Admin/addCategory', 'NavBar@addCategory');
 Route::get('Admin/NavBar/getNavBarById/(\d+)', 'NavBar@getNavBarById');
-Route::put('Admin/customizeNavBar', 'NavBar@customizeNavBar');
-Route::delete('Admin/deleteNavBar', 'NavBar@deleteNavBar');
+Route::post('Admin/customizeNavBar', 'NavBar@customizeNavBar');
+Route::post('Admin/deleteNavBar', 'NavBar@deleteNavBar');
 Route::post('Admin/sortNavbarItem', 'NavBar@sortNavbarItem');
 
 // Admin quản lý danh mục
 Route::get('Admin/Category', 'Category@display');
-Route::post('Admin/postCategory', 'Category@postCategory');
+Route::post('Admin/addCategory', 'Category@addCategory');
 Route::get('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
-Route::put('Admin/customizeCategory', 'Category@customizeCategory');
-Route::delete('Admin/deleteCategory', 'Category@deleteCategory');
+Route::post('Admin/customizeCategory', 'Category@customizeCategory');
+Route::post('Admin/deleteCategory', 'Category@deleteCategory');
 
+
+Route::get('Admin/Customize', 'Customize@display');
+Route::post('Admin/customizeTab', 'Customize@customizeTab');
+Route::post('Admin/customizeLogo', 'Customize@customizeLogo');
+Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterLogo');
 ?>
