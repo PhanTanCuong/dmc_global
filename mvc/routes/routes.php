@@ -13,8 +13,8 @@ Route::get('about-us/([a-zA-Z0-9_-]+)', 'Post@displayAbout');
 
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');
-Route::post('Signin/login', 'Signin@login');
-Route::post('Signout', 'Signin@logout');
+Route::post('login', 'Signin@login');
+Route::post('logout', 'Signin@logout');
 Route::get('Register', 'Register@display');
 Route::post('Register/signup', 'Register@signup');
 
