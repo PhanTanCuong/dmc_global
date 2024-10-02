@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 class Product extends Controller
 {
 
@@ -75,7 +75,7 @@ class Product extends Controller
                 $image = $_FILES["product_image"]['name'];
 
                 //Check if image is an image file
-                if (Image::isImageFile($_FILES["product_image"]) === false) {
+                if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../Product');
                     die();
@@ -147,7 +147,7 @@ class Product extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["product_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["product_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type';
                         header('Location:../Product');
                         die();

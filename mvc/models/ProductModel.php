@@ -44,7 +44,7 @@ class ProductModel extends DB
     public function getProductbyId($id)
     {
         try {
-            $query = "SELECT * FROM product where id='$id'";
+            $query = "SELECT * FROM product where id=?";
             $stmt= $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             return ($stmt->execute()) ? $stmt->get_result() : false;

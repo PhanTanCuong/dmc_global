@@ -5,7 +5,8 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
         <div class="controll-btn">
-          <a href="Product/Add" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+          <form action="Product/Add" method="POST" ><button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button></form>
+          <!-- <a href="" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
           <form action="multipleDeleteProduct" method="POST">
             <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i
                 class="fas fa-trash"></i></button>

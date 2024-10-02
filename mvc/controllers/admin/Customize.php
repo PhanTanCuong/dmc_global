@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 class Customize extends Controller
 {
     function __construct()
@@ -47,7 +47,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["head_image"]["name"])) {
-                    if (Image::isImageFile($_FILES["head_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["head_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -87,7 +87,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["header_icon"]["name"])) {
-                    if (Image::isImageFile($_FILES["header_icon"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["header_icon"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -124,7 +124,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_icon"]["name"])) {
-                    if (Image::isImageFile($_FILES["footer_icon"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["footer_icon"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();
@@ -163,7 +163,7 @@ class Customize extends Controller
                     $currentImage = $row['image'];
                 }
                 if (!empty($_FILES["footer_bg_image"]["name"])) {
-                    if (Image::isImageFile($_FILES["footer_bg_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["footer_bg_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();

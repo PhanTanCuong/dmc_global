@@ -194,7 +194,6 @@ class NavBar extends Controller
 
             for ($i = 1; $i <= count($array); $i++) {
                 $success = $this->model('NavbarModel')->sortNavbarItem((int) $array[$i - 1], (int) $i);
-
                 if (!$success) {
                     $allSuccess = false;
                     break;

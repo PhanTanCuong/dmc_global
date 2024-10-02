@@ -82,10 +82,7 @@ class NavBarModel extends DB
             $query = "UPDATE navbar SET display_order=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ii", $display_order, $id);
-             if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            return ($stmt->execute())? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

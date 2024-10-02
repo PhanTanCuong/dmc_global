@@ -7,7 +7,11 @@ use Core\Exception;
 use Core\Auth;
 class Category extends Controller
 {
-    //Product Category
+    function __construct()
+    {
+        Auth::checkAdmin();
+    }
+
     function display()
     {
         $item = $this->model('CategoryModel');

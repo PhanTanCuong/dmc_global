@@ -5,18 +5,46 @@ class Route
 {
     private static $routes = [];
 
-    public static function add($uri, $controller)
+    public static function add($method, $uri, $controller)
     {
         // Biến URI thành dạng regex để có thể bắt các tham số động
         $uri = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '(?P<$1>[a-zA-Z0-9_-]+)', $uri);
         $uri = "#^" . $uri . "$#";
-        self::$routes[] = ['uri' => $uri, 'controller' => $controller];
+        self::$routes[] = [
+            'method' => strtoupper($method), // Xác định phương thức HTTP
+            'uri' => $uri, 
+            'controller' => $controller
+        ];
+    }
+
+    public static function get($uri, $controller)
+    {
+        self::add('GET', $uri, $controller); //method GET
+    }
+
+    public static function post($uri, $controller)
+    {
+        self::add('POST', $uri, $controller); //method POST
+    }
+
+    public static function put($uri, $controller)
+    {
+        self::add('PUT', $uri, $controller); //method PUT
+    }
+
+    public static function delete($uri, $controller)
+    {
+        self::add('DELETE', $uri, $controller); //method DELETE
     }
 
     public static function dispatch($uri)
     {
+        // Lấy phương thức HTTP hiện tại
+        $method = $_SERVER['REQUEST_METHOD'];
+
         foreach (self::$routes as $route) {
-            if (preg_match($route['uri'], $uri, $matches)) {
+            // So khớp cả phương thức và URI
+            if ($method === $route['method'] && preg_match($route['uri'], $uri, $matches)) {
                 // Lọc chỉ lấy các tham số từ URL
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
 
@@ -50,3 +78,5 @@ class Route
         echo '404 - Page not found';
     }
 }
+
+?>
