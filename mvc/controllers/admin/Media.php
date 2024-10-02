@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 class Media extends Controller
 {
     public function __construct()
@@ -103,7 +103,7 @@ class Media extends Controller
                 $image = $_FILES["news_image"]['name'];
 
                 //Check if image is an image file
-                if ($_COOKIE['parent_id']!=32 && Image::isImageFile($_FILES["news_image"]) === false) {
+                if ($_COOKIE['parent_id']!=32 && ImageHelper::isImageFile($_FILES["news_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../News');
                     die();
@@ -143,7 +143,7 @@ class Media extends Controller
                         "./public/images/" . $_FILES["news_image"]["name"]
                     ) . '';
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
-                    Image::resize_image($filepath, 389, 389);
+                    ImageHelper::resize_image($filepath, 389, 389);
                     $_SESSION['success'] = "News is added successfully";
                     header('Location:../News');
                 } else {
@@ -179,7 +179,7 @@ class Media extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["news_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["news_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type';
                         header('Location:../News');
                         die();
@@ -207,7 +207,7 @@ class Media extends Controller
                         "./public/images/" . $_FILES["news_image"]["name"]
                     ) . '';
                     $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
-                    Image::resize_image($filepath, 389, 389);
+                    ImageHelper::resize_image($filepath, 389, 389);
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:../News');
                 } else {

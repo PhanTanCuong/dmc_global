@@ -70,7 +70,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             </h3>
                             <ul>
                                 <?php foreach ($links[3] as $quickLink): ?>
-                                    <li><a href="<?= $_ENV["BASE_URL"] . $quickLink['id']; ?>"><?= $quickLink['name']; ?></a></li>
+                                    <li><a href="<?= $_ENV["BASE_URL"] .'/'. $quickLink['id']; ?>"><?= $quickLink['name']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

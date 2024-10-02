@@ -46,7 +46,7 @@
                       <button type="submit" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"> <i
                       class="fas fa-edit"></i></button>
                     </form>
-                    <form action="deleteProduct" method="POST">
+                    <form action="deleteProduct" method="DELETE">
                       <input type="hidden" name="delete_product_id" value="<?= $row['id']; ?>">
                       <button type="submit" name="delete_product_btn" class="btn btn-danger"> <i
                           class="fas fa-trash"></i></button>
