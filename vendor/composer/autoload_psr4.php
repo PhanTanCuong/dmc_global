@@ -14,6 +14,7 @@ return array(
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Mvc\\Utils\\' => array($baseDir . '/mvc/utils'),
+    'Mvc\\Services\\' => array($baseDir . '/mvc/services'),
     'Mvc\\Controllers\\Admin\\' => array($baseDir . '/mvc/controllers/admin'),
     'Mvc\\Controllers\\' => array($baseDir . '/mvc/controllers'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),

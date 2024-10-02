@@ -82,10 +82,13 @@
   justify-content: center;
   background-color: #cc0000;
   border-radius: 4px;
-  /* font-weight: 100; */
   padding: 10px 30px;
-  /* border-color: white; */
   border: none;
+}
+
+.btn2:hover {
+  background-color: #990000; 
+  transform: scale(1.05); 
 }
 
 .title {
@@ -102,10 +105,10 @@
 .pseudo {
   background: #c92027;
   content: "";
-  width: 1.2em;
+  width: 3.5rem;
   height: 3px;
   position: absolute;
-  bottom: -0.4em;
+  bottom: -2.5rem;
 }
 
 .pseudo::before {
@@ -274,9 +277,9 @@ product3 */
   }
 
   .pseudo {
-    width: 3.5rem;
-    height: 0.2rem;
-    bottom: -1.5rem;
+    width: 2.5rem;
+    height: 3px;
+    bottom: -2em;
   }
 
   .comp {

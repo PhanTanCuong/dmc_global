@@ -7,15 +7,21 @@ use Core\Exception;
 use Core\Auth;
 class Category extends Controller
 {
-    //Product Category
+    function __construct()
+    {
+        Auth::checkAdmin();
+    }
+
     function display()
     {
         $item = $this->model('CategoryModel');
+
         $this->view('admin/home', [
             'page' => 'displayCategory',
-            'edit_slug_parent' => $item->getInforCategory(),
-            'slug_parent' => $item->getInforCategory(),
-            'item' => $item->getInforCategory()
+            'item' => $item->getInforCategory(),
+            'edit_slug_parent' => $item->getInforParentCategory(),
+            'slug_parent' => $item->getInforParentCategory(),
+
         ]);
     }
 
@@ -24,14 +30,14 @@ class Category extends Controller
         try {
             if (isset($_POST['addCategoryBtn'])) {
                 $name = $_POST['category_name'];
-                $slug = strip_tags($_POST['category_slug']);
+                $slug = $_POST['category_slug'];
                 $parent_id = (int) $_POST['category_parent'];
-
+                $type = $_POST['category_type'];
                 $item = $this->model('CategoryModel');
 
                 $level = $item->traceParent($parent_id);
 
-                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level);
+                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level,$type);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:Category');
@@ -66,11 +72,12 @@ class Category extends Controller
     {
         try {
             if (isset($_POST["category_updatebtn"])) {
-                $id = (int)$_POST['edit_category_id'];
+                $id = (int) $_POST['edit_category_id'];
                 $name = strip_tags($_POST['edit_category_name']);
                 $slug = strip_tags($_POST['edit_category_slug']);
                 $parent_id = (int) $_POST['edit_category_parent'];
-                if($id===$parent_id){
+                $type = strip_tags($_POST['edit_category_type']);
+                if ($id === $parent_id) {
                     $_SESSION['status'] = 'Your data is NOT updated';
                     header('Location:Category');
                     die();
@@ -79,8 +86,11 @@ class Category extends Controller
 
                 $level = $item->traceParent($parent_id);
 
-                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level);
+                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level,$type);
                 if ($success) {
+                    if($level<3){
+                        $this->model('MenuModel')->addMenu($slug,'category',$id);
+                    }
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');
                 } else {

@@ -86,20 +86,16 @@
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
         </div>
-        <?php
-        if (mysqli_num_rows($data["product_categories"]) > 0) {
-          while ($row = mysqli_fetch_array($data["product_categories"])) {
-            ?>
+        <?php if (mysqli_num_rows($data["product_categories"]) > 0): ?>
+          <?php while ($row = mysqli_fetch_array($data["product_categories"])): ?>
             <form action="Slider" method="GET">
               <input type="hidden" name="product_category_id" value="<?= $row['id']; ?>">
               <button type="submit" class="list-group-item list-group-item-action">
                 <?= $row['name']; ?>
               </button>
             </form>
-            <?php
-          }
-        }
-        ?>
+          <?php endwhile; ?>
+        <?php endif; ?>
       </div>
     </div>
 
@@ -117,7 +113,7 @@
         </div>
 
         <div class="card-body">
-          <!-- <?php include_once('../includes/Notification.php');?> -->
+          <!-- <?php include_once('../includes/Notification.php'); ?> -->
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
               <thead>
@@ -142,20 +138,20 @@
                       <td><?= '<img src="/dmc_global/public/images/' . $row['image'] . '" alt="Img">'; ?></td>
                       <td>
                         <div class="action_column">
-                        <form action="getBannerById" method="POST">
-                          <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
-                          <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
-                            data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
-                        </form>
-                        <form action="deleteBanner" method="POST">
-                          <input type="hidden" name="delete_id" value="<?= $row['id']; ?>">
-                          <button type="submit" name="delete_btn" class="btn btn-danger"> <i
-                              class="fas fa-trash"></i></button>
-                        </form>
+                          <form action="getBannerById" method="POST">
+                            <input type="hidden" name="edit_id" class="edit_id" value="<?= $row['id']; ?>">
+                            <button href="#" type="button" name="edit_btn" class="btn btn-warning edit_btn"
+                              data-toggle="modal" data-target="#editData"> <i class="fas fa-edit"></i> </i></button>
+                          </form>
+                          <form action="deleteBanner" method="POST">
+                            <input type="hidden" name="delete_id" value="<?= $row['id']; ?>">
+                            <button type="submit" name="delete_btn" class="btn btn-danger"> <i
+                                class="fas fa-trash"></i></button>
+                          </form>
                         </div>
-                        
+
                       </td>
-                      
+
                     </tr>
                     <?php
                   }

@@ -4,7 +4,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 class Product extends Controller
 {
 
@@ -32,7 +32,7 @@ class Product extends Controller
 
         if (isset($_COOKIE['parent_id'])) {
             $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
+            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
         }
         $this->view("admin/home", [
             "product_categories" => $categories,
@@ -44,7 +44,7 @@ class Product extends Controller
     {
         if (isset($_COOKIE['parent_id'])) {
             $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
+            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
         }
 
         if (isset($_POST['checking_edit_btn'])) {
@@ -75,22 +75,21 @@ class Product extends Controller
                 $image = $_FILES["product_image"]['name'];
 
                 //Check if image is an image file
-                if (Image::isImageFile($_FILES["product_image"]) === false) {
+                if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../Product');
                     die();
                 }
 
-                if (isset($_COOKIE['parent_id'])) {
-                    $type_id = (int) $_COOKIE['parent_id'];
-                } else {
-                    $_SESSION['status'] = "ID isexpired";
-                    header('Location:Add');
-                    die();
-                }
-
-                //Model
                 $product = $this->model("ProductModel");
+
+                $category= $this->model('CategoryModel');
+                $result=$category->getCategoryById($category_id);
+
+
+                while($row=mysqli_fetch_assoc($result)){
+                    $type_id=$row['parent_id'];
+                }
 
                 $preference_id = $product->addProduct(
                     $title,
@@ -104,8 +103,6 @@ class Product extends Controller
                     $type_id
                 );
                 if (is_numeric($preference_id) && $preference_id > 0) {
-
-
 
                     //add to slug center
                     $this->model('MenuModel')->addMenu($slug, 'product', $preference_id);
@@ -137,7 +134,6 @@ class Product extends Controller
             if (isset($_POST["product_updatebtn"])) {
                 $category_id = (int) $_POST['category'];
                 $title = $_POST['edit_product_title'];
-                $slug = $_POST['edit_product_slug'];
                 $short_description = $_POST['edit_product_description'];
                 $long_description = $_POST['edit_product_long_description'];
                 $meta_keyword = $_POST['edit_product_meta_keyword'];
@@ -151,7 +147,7 @@ class Product extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["product_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["product_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type';
                         header('Location:../Product');
                         die();
@@ -160,6 +156,15 @@ class Product extends Controller
                 } else {
                     $image = $stored_image['image'];
                 }
+
+                $category= $this->model('CategoryModel');
+                $result=$category->getCategoryById($category_id);
+
+
+                while($row=mysqli_fetch_assoc($result)){
+                    $type_id=$row['parent_id'];
+                }
+                
                 $success = $product->editProduct(
                     $id,
                     $title,
@@ -168,7 +173,8 @@ class Product extends Controller
                     $image,
                     $meta_keyword,
                     $meta_description,
-                    $category_id
+                    $category_id,
+                    $type_id
                 );
                 if ($success) {
 

@@ -4,20 +4,37 @@ use Core\DB;
 
 class CategoryModel extends DB
 {
+    public function __construct(){
+        parent ::__construct();
+    }
     //Product Category
     public function getInforCategory()
     {
         try {
-            $query = "SELECT *
-                        FROM category
-                        ORDER BY 
-                            CASE 
-                                WHEN parent_id = 0 THEN id
-                                ELSE parent_id
-                            END,
-                            parent_id, 
-                            id";
-            return mysqli_query($this->connection, $query);
+            $query = "SELECT * FROM category_tree";
+            return $this->connection->query($query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getInforParentCategory()
+    {
+        try {
+            $query = "SELECT id,name,level FROM category_tree WHERE level <2";
+            return $this->connection->query($query);
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getCategoryById($id)
+    {
+        try {
+            $query = "SELECT * FROM category WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return ($stmt->execute()) ? $stmt->get_result() : null;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -27,8 +44,8 @@ class CategoryModel extends DB
     {
         try {
             $query = "SELECT * FROM category WHERE parent_id=?";
-            $stmt=$this->connection->prepare($query);
-            $stmt->bind_param("i",$parent_id);
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $parent_id);
             $stmt->execute();
             return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
@@ -36,40 +53,39 @@ class CategoryModel extends DB
         }
     }
 
-    public function addCategoryInfor($name, $slug, $parent_id, $level)
+    public function getProductCategory($parent_id)
     {
         try {
-            $query = "INSERT INTO category (name,slug,parent_id,level) VALUES (?,?,?,?)";
+            $query = "SELECT * FROM category_tree WHERE order_sequence LIKE ? AND level>0";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssii", $name, $slug, $parent_id, $level);
-            if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            $likePattern = "%$parent_id%";
+            $stmt->bind_param("s", $likePattern);
+            $stmt->execute();
+            return $stmt->get_result();
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function addCategoryInfor($name, $slug, $parent_id, $level,$type)
+    {
+        try {
+            $query = "INSERT INTO category (name,slug,parent_id,level,type) VALUES (?,?,?,?,?)";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ssiis", $name, $slug, $parent_id, $level,$type);
+            return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getCategoryById($id)
+    public function customizeInforCategory($id, $name, $slug, $parent_id, $level,$type)
     {
         try {
-            $query = "SELECT * FROM category WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-    public function customizeInforCategory($id, $name, $slug, $parent_id, $level)
-    {
-        try {
-            $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=? WHERE id = ?";
+            $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=?,type=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssiii", $name, $slug, $parent_id, $level, $id);
-            if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            $stmt->bind_param("ssiisi", $name, $slug, $parent_id, $level,$type, $id);
+            return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -80,7 +96,7 @@ class CategoryModel extends DB
     {
         try {
             $query = "DELETE FROM category WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -112,25 +128,27 @@ class CategoryModel extends DB
             $query = "SELECT COUNT(*) AS child_count FROM category WHERE parent_id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
-            $stmt->execute();   
+            $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
             return $row['child_count'] > 0; // Trả về true nếu có phần tử con
-        }catch(mysqli_sql_exception $error) {
-            echo "Error: ". $error->getMessage();
+        } catch (mysqli_sql_exception $error) {
+            echo "Error: " . $error->getMessage();
         }
 
     }
 
-    public function getParentCategories(){
-        try{
-            $query ="SELECT * FROM category WHERE parent_id=0";
-            return mysqli_query($this->connection, $query);
-        }catch(Exception $e){
+    public function getParentCategories()
+    {
+        try {
+            $query = "SELECT * FROM category WHERE parent_id=0";
+            return $this->connection->query($query);
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    public function getChildCategoriesByParentId($parentCategoryId) {
+    public function getChildCategoriesByParentId($parentCategoryId)
+    {
         $query = "SELECT * FROM category WHERE parent_id = ?";
         $stmt = $this->connection->prepare($query);
         $stmt->bind_param('i', $parentCategoryId);
@@ -143,23 +161,28 @@ class CategoryModel extends DB
         return $childCategories;
     }
 
-    public function getCategoryIdBySlug($slug){
-        try{
-            $query="SELECT * FROM category WHERE slug=?";
-            $stmt=$this->connection->prepare($query);
-            $stmt->bind_param("s",$slug);
+    public function getCategoryIdBySlug($slug)
+    {
+        try {
+            $query = "SELECT id FROM category WHERE slug = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $slug);
             $stmt->execute();
-            $result=$stmt->get_result();
-
-            foreach($result as $row){
-                $category_id=$row['id'];
+            $result = $stmt->get_result();
+    
+            // Kiểm tra kết quả trả về và lấy hàng đầu tiên
+            if ($row = $result->fetch_assoc()) {
+                return $row['id'];
             }
-
-            return $category_id;
-        }catch(mysqli_sql_exception $e){
-            echo "Error: ".$e->getMessage();
+    
+            // Trả về null nếu không tìm thấy
+            return null;
+    
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
+    
 }
 
 ?>

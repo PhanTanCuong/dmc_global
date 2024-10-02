@@ -15,7 +15,7 @@
                         <?php foreach($data["product_categories"] as $category):?>
                         <option value="<?= $category['id']?>"
                             <?=($category['id']==$row['category_id'])?'selected':''?>>
-                            <?=$category['name']?>
+                            <?=str_repeat('|---',$category['level']-1).$category['name']?>
                         </option>
                         <?php endforeach;?>
                     </select>

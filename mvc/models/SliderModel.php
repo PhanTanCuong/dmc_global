@@ -8,7 +8,7 @@ class SliderModel extends DB
     {
         try {
             $query = "SELECT * FROM banner WHERE product_category_id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -55,7 +55,7 @@ class SliderModel extends DB
     {
         try {
             $query = "SELECT image FROM banner WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

@@ -11,7 +11,7 @@
                 <label for="category">Category</label>
                 <select class="form-control " name="category" id="product_category" required>
                     <?php foreach ($data["product_categories"] as $category): ?>
-                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                        <option value="<?= $category['id'] ?>"><?= str_repeat('|---',$category['level']-1).$category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

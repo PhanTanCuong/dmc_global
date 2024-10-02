@@ -8,12 +8,20 @@ class NavBarModel extends DB
     {
         try {
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
-             return mysqli_query($this->connection, $query);
+           return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
+    public function getLinkList(){
+        try{
+            $query = "SELECT name,slug FROM category_tree WHERE level = 0";
+            return $this->connection->query($query);
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
     public function addNavBarInfor($name, $slug,$status)
     {
         try {
@@ -39,7 +47,7 @@ class NavBarModel extends DB
     {
         try {
             $query = "SELECT * FROM navbar WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -62,7 +70,7 @@ class NavBarModel extends DB
     {
         try {
             $query = "DELETE FROM navbar WHERE id = '$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -74,10 +82,7 @@ class NavBarModel extends DB
             $query = "UPDATE navbar SET display_order=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ii", $display_order, $id);
-             if ($stmt->execute()) {
-                return true;
-            }
-            return false;
+            return ($stmt->execute())? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

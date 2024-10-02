@@ -11,38 +11,46 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT * FROM product";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
 
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getRelatedProducts(){
-        try{
-            $query="SELECT * FROM product LIMIT 6";
+    public function getRelatedProducts()
+    {
+        try {
+            $query = "SELECT * FROM product LIMIT 6";
             return $this->connection->query($query);
-        }catch(mysqli_sql_exception $e) {
-            echo "Error: ". $e->getMessage();
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
 
         }
     }
-    public function getProductByProductCategory($category_id) {
-        try{
-            $query="SELECT * FROM product WHERE category_id = ?";
-            $stmt=$this->connection->prepare($query);
+    public function getProductByProductCategory($category_id)
+    {
+        try {
+            $query = "SELECT * FROM product WHERE type_id = ? LIMIT 6";
+            $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
-            return ($stmt->execute())?$stmt->get_result() : false;
-        }catch(mysqli_sql_exception $e) {
-            echo "Error: ". $e->getMessage();
+            return ($stmt->execute()) ? $stmt->get_result() : false;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
     //get product information by id
 
     public function getProductbyId($id)
     {
-        $query_run = "SELECT * FROM product where id='$id'";
-        return mysqli_query($this->connection, $query_run);
+        try {
+            $query = "SELECT * FROM product where id=?";
+            $stmt= $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return ($stmt->execute()) ? $stmt->get_result() : false;
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
 
@@ -92,7 +100,8 @@ class ProductModel extends DB
         $image,
         $meta_description,
         $meta_keyword,
-        $category_id
+        $category_id,
+        $type_id
     ) {
         try {
 
@@ -104,13 +113,14 @@ class ProductModel extends DB
                                     image = ?, 
                                     meta_description = ?, 
                                     meta_keyword = ?, 
-                                    category_id = ? 
+                                    category_id = ?,
+                                    type_id =? 
                                 WHERE 
                                     id = ?;
                                 ";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param(
-                "ssssssii",
+                "ssssssiii",
                 $title,
                 $short_description,
                 $long_description,
@@ -118,6 +128,7 @@ class ProductModel extends DB
                 $meta_description,
                 $meta_keyword,
                 $category_id,
+                $type_id,
                 $id
             );
             return ($stmt->execute()) ? true : false;
@@ -131,7 +142,7 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT image FROM product WHERE id='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -148,13 +159,29 @@ class ProductModel extends DB
         }
     }
 
+    public function getTypeIdByCategory($category_id)
+    {
+        try {
+            $query = "SELEECT *  FROM category WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $category_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                return $row['parent_id'];
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
     //multiple delete products functions
     //toggleCheckboxDelete()
     public function toggleCheckboxDelete($id, $visible)
     {
         try {
             $query = "UPDATE product SET visible='$visible' WHERE id ='$id'";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -165,7 +192,7 @@ class ProductModel extends DB
     {
         try {
             $query = "DELETE FROM product WHERE visible=1";
-            return mysqli_query($this->connection, $query);
+          return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

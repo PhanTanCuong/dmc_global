@@ -31,6 +31,13 @@
                             <?php endif; ?>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="category_type">Type</label>
+                        <select class="form-control" id="edit_navbar_status" name="edit_navbar_status" required>
+                            <option value="post">Post</option>
+                            <option value="product">Product</option>
+                        </select>
+                    </div>
                     <button type="submit" name="addCategoryBtn" class="btn btn-primary">Save</button>
                 </form>
             </div>
@@ -65,6 +72,13 @@
                             <?php endif; ?>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="edit_category_type">Type</label>
+                        <select class="form-control" id="edit_category_type" name="edit_category_type" required>
+                            <option value="post">Post</option>
+                            <option value="product">Product</option>
+                        </select>
+                    </div>
                     <button type="submit" name="category_updatebtn" class="btn btn-primary">Update</button>
                     <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
                 </form>
@@ -76,8 +90,6 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <?php
-                    ?>
                     <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -148,6 +160,7 @@
                             $('#edit_category_name').val(value['name'])
                             $('#edit_category_slug').val(value['slug'])
                             $('#edit_category_parent').val(value['parent_id'])
+                            $('#edit_category_type').val(value['type'])
 
                         });
                         $('#addCategoryForm').hide();

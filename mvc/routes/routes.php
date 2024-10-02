@@ -1,108 +1,83 @@
 <?php
 use Core\Route;
-Route::add('/','Home@display');
-Route::add('/Product/fetchProductCategory', 'Product@fetchProductCategory');
 
+// Trang chủ
+Route::get('/', 'Home@display');
 
-Route::add('Signin','Signin@display');
-Route::add('Signout','Signin@logout');
-Route::add('Register','Register@display');
-Route::add('Register/signup','Register@signup');
-Route::add('Signin/login','Signin@login');
+// Sản phẩm và danh mục
+Route::post('/Product/fetchProductCategory', 'Product@fetchProductCategory');
+Route::get('product-categories/([a-zA-Z0-9_-]+)', 'Product@display');
+Route::get('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
+Route::get('list-product-by-category/([a-zA-Z0-9_-]+)', 'Product@displayListOfProductByCategory');
+Route::get('about-us/([a-zA-Z0-9_-]+)', 'Post@displayAbout');
 
+// Đăng nhập/Đăng ký
+Route::get('Signin', 'Signin@display');
+Route::post('login', 'Signin@login');
+Route::post('logout', 'Signin@logout');
+Route::get('Register', 'Register@display');
+Route::post('Register/signup', 'Register@signup');
 
-//User routes
-Route::add('category/([a-zA-Z0-9_-]+)', 'Product@display');
-Route::add('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
-Route::add('news/([a-zA-Z0-9_-]+)', 'Post@display');
+// Admin dashboard
+Route::get('Admin/dashboard', 'Home@display');
 
+// Admin quản lý tài khoản
+Route::get('Admin/Account', 'Account@display');
+Route::post('Admin/addAccount', 'Account@postAccount');
+Route::post('Admin/deleteAccount', 'Account@deleteAccount');
+Route::post('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
+Route::post('Admin/editAccount', 'Account@editAccount');
 
-// Admin routes
-Route::add('Admin/dashboard','Home@display');
-Route::add('Admin/Account','Account@display');
-Route::add('Admin/Product','Product@display');
-Route::add('Admin/News','Media@display');
+// Admin quản lý sản phẩm
+Route::get('Admin/Product', 'Product@display');
+Route::post('Admin/Product/Add', 'Product@displayAddProduct');
+Route::post('Admin/Product/Update', 'Product@Update');
+Route::post('Admin/Product/addProduct', 'Product@addProduct');
+Route::post('Admin/deleteProduct', 'Product@deleteProduct');
+Route::post('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
+Route::post('Admin/Product/editProduct', 'Product@editProduct');
 
+// Admin quản lý bài viết (News/Media)
+Route::get('Admin/News', 'Media@display');
+Route::get('Admin/News/Add', 'Media@displayAddNews');
+Route::post('Admin/News/Update', 'Media@Update');
+Route::post('Admin/News/addNews', 'Media@addNews');
+Route::post('Admin/deleteNews', 'Media@deleteNews');
+Route::post('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
+Route::post('Admin/News/editNews', 'Media@editNews');
 
+// Admin quản lý slide
+Route::get('Admin/Slider', 'Slider@display');
+Route::post('Admin/addBanner', 'Slider@addBanner');
+Route::post('Admin/Slider/getBannerById/(\d+)', 'Slider@getBannerById');
+Route::post('Admin/customizeBanner', 'Slider@customizeBanner');
+Route::post('Admin/deleteBanner', 'Slider@deleteBanner');
 
-//Admin Account routes
-Route::add('Admin/addAccount','Account@addAccount');
-Route::add('Admin/deleteAccount','Account@deleteAccount');
-Route::add('Admin/Account','Account@display');
-Route::add('Admin/Account/getAccountById/(\d+)', 'Account@getAccountById');
-Route::add('Admin/editAccount','Account@editAccount');
+// Admin quản lý navbar
+Route::get('Admin/NavBar', 'NavBar@display');
+Route::post('Admin/addNavBar', 'NavBar@addNavBar');
+Route::post('Admin/NavBar/getNavBarById/(\d+)', 'NavBar@getNavBarById');
+Route::post('Admin/customizeNavBar', 'NavBar@customizeNavBar');
+Route::post('Admin/deleteNavBar', 'NavBar@deleteNavBar');
+Route::post('Admin/sortNavbarItem', 'NavBar@sortNavbarItem');
 
-//Admin Product routes
-Route::add('Admin/Product/Add','Product@displayAddProduct');
-Route::add('Admin/Product/Update','Product@Update');
-Route::add('Admin/Product/addProduct','Product@addProduct');
-Route::add('Admin/deleteProduct','Product@deleteProduct');
-Route::add('Admin/Product','Product@display');
-Route::add('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
-Route::add('Admin/Product/editProduct','Product@editProduct');
-// Route::add('Admin/multipleDeleteProduct','Product@multipleDeleteProduct');
-// Route::add('Admin/toggleCheckboxDelete','Product@toggleCheckboxDelete');
+// Admin quản lý danh mục
+Route::get('Admin/Category', 'Category@display');
+Route::post('Admin/addCategory', 'Category@addCategory');
+Route::post('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
+Route::post('Admin/customizeCategory', 'Category@customizeCategory');
+Route::post('Admin/deleteCategory', 'Category@deleteCategory');
 
-// Route::add('Admin/toggleCheckboxDelete', 'Productr@toggleCheckboxDelete');
-
-//Admin Media routes
-Route::add('Admin/News/Add','Media@displayAddNews');
-Route::add('Admin/News/Update','Media@Update');
-Route::add('Admin/News/addNews','Media@addNews');
-Route::add('Admin/deleteNews','Media@deleteNews');
-Route::add('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
-Route::add('Admin/News/editNews','Media@editNews');
-
-//Customize
-//Slider
-Route::add('Admin/Slider','Slider@display');
-Route::add('Admin/addBanner','Slider@addBanner');
-Route::add('Admin/Slider/getBannerById/(\d+)', 'Slider@getBannerById');
-Route::add('Admin/customizeBanner','Slider@customizeBanner');
-Route::add('Admin/deleteBanner','Slider@deleteBanner');
-
-Route::add('Admin/Customize','Customize@display');
-Route::add('Admin/customizeTab','Customize@customizeTab');
-Route::add('Admin/customizeLogo','Customize@customizeLogo');
-Route::add('Admin/customizeFooterLogo','Customize@customizeFooterLogo');
-Route::add('Admin/customizeFooterBackground','Customize@customizeFooterBackground');
-Route::add('Admin/customizeQuickLink','Customize@customizeQuickLink');
-
-Route::add('Admin/addData','Data@addData');
-Route::add('Admin/Customize/getDataById/(\d+)','Customize@getDataById');
-Route::add('Admin/editFooterData','Customize@editFooterData');
-
-//Icons
-Route::add('Admin/Customize','Icons@display');
-Route::add('Admin/addIcons','Icons@addIcons');
-Route::add('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
-Route::add('Admin/customizeIcons','Icons@customizeIcons');
-Route::add('Admin/deleteIcons','Icons@deleteIcons');
+//Setting
+Route::get('Admin/Customize', 'Customize@display');
+Route::post('Admin/customizeTab', 'Customize@customizeTab');
+Route::post('Admin/customizeLogo', 'Customize@customizeLogo');
+Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterLogo');
 
 //Data
-Route::add('Admin/Data', 'Data@display');
-Route::add('Admin/addData','Data@addData');
-Route::add('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
-Route::add('Admin/customizeData','Data@customizeData');
-Route::add('Admin/deleteData','Data@deleteData');
-
-// Navbar
-Route::add('Admin/NavBar','NavBar@display');
-Route::add('Admin/addNavBar','NavBar@addNavBar');
-Route::add('Admin/NavBar/getNavBarById/(\d+)', 'NavBar@getNavBarById');
-Route::add('Admin/customizeNavBar','NavBar@customizeNavBar');
-Route::add('Admin/deleteNavBar','NavBar@deleteNavBar');
-Route::add('Admin/sortNavbarItem','NavBar@sortNavbarItem');
-Route::add('Admin/fetchChildCategories','NavBar@fetchChildCategories');
-Route::add('Admin/editChildItems','Navbar@editChildItems');
-
-//Category
-Route::add('Admin/Category','Category@display');
-Route::add('Admin/addCategory','Category@addCategory');
-Route::add('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
-Route::add('Admin/customizeCategory','Category@customizeCategory');
-Route::add('Admin/deleteCategory','Category@deleteCategory');
-
-
-
+Route::get('Admin/Data', 'Data@display');
+Route::post('Admin/addData','Data@addData');
+Route::post('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
+Route::post('Admin/customizeData','Data@customizeData');
+Route::post('Admin/deleteData','Data@deleteData');
 ?>

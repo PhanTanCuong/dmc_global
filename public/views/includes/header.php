@@ -4,20 +4,17 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <?php
-    if (mysqli_num_rows($header["head"]) > 0) {
-        while ($row = mysqli_fetch_assoc($header["head"])) {
-    ?>
+    <?php if (mysqli_num_rows($header["head"]) > 0): ?>
+        <?php while ($row = mysqli_fetch_assoc($header["head"])): ?>
             <title><?= $row['title'] ?></title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <!-- Favicon -->
             <link rel="icon" href="/dmc_global/public/images/<?= $row['image'] ?>" type="image/x-icon">
-    <?php
-        }
-    }
-    ?>
+        <?php endwhile; ?>
+    <?php endif; ?>
     <!-- .css file -->
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/header.css?v=<?= microtime() ?>">
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/about.css?v=<?= microtime() ?>">
@@ -37,7 +34,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
     <!-- Font-awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -47,7 +46,7 @@
             width: 100%;
             height: auto;
         }
-</style>
+    </style>
 </head>
 
 <body>

@@ -6,6 +6,7 @@ use Core\Controller;
 use Core\Exception;
 use Core\Auth;
 use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 class Data extends Controller
 {
     public function __construct()
@@ -58,7 +59,7 @@ class Data extends Controller
                 $description = $_POST['data_description'];
                 $image = $_FILES["data_image"]['name'];
                 $data = $this->model('DataModel');
-                if (Image::isImageFile($_FILES["data_image"]) === false) {
+                if (ImageHelper::isImageFile($_FILES["data_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:Data');
                     die();
@@ -121,7 +122,7 @@ class Data extends Controller
 
                 if (!empty($_FILES["data_image"]['name'])) {
                     $image = $_FILES["data_image"]['name'];
-                    if (Image::isImageFile($_FILES["data_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["data_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Data');
                         die();

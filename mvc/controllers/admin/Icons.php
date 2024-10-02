@@ -5,7 +5,7 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\Image;
+use Mvc\Utils\ImageHelper;
 
 class Icons extends Controller
 {
@@ -20,7 +20,7 @@ class Icons extends Controller
         try {
             if (isset($_POST["addIconsBtn"])) {
                 $image = $_FILES["icons_image"]['name'];
-                if (Image::isImageFile($_FILES["icons_image"]) === false) {
+                if (ImageHelper::isImageFile($_FILES["icons_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type.';
                     header('Location:Customize');
                     die();
@@ -79,7 +79,7 @@ class Icons extends Controller
 
                 //Check image is null
                 if (!empty($_FILES["icons_image"]['name'])) {
-                    if (Image::isImageFile($_FILES["icons_image"]) === false) {
+                    if (ImageHelper::isImageFile($_FILES["icons_image"]) === false) {
                         $_SESSION['status'] = 'Incorrect image type ';
                         header('Location:Customize');
                         die();

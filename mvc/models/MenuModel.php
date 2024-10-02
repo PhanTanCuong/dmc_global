@@ -3,6 +3,11 @@ use Core\DB;
 
 class MenuModel extends DB
 {
+
+    
+    public function __construct(){
+        parent ::__construct(); //khởi tạo lớp cha
+    }
     public function addMenu($slug, $type, $preference_id)
     {
         try {
@@ -32,7 +37,7 @@ class MenuModel extends DB
     public function getMenuBySlug($slug)
     {
         try {
-            $query = "SELECT * FROM menu WHERE slug=?";
+            $query = "SELECT type,preference_id FROM menu WHERE slug=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
             return ($stmt->execute()) ? $stmt->get_result()->fetch_assoc() : null;

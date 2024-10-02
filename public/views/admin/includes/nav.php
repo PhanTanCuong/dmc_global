@@ -45,7 +45,7 @@
     <li class="nav-item">
         <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/Account');">
             <i class="fas fa-fw fa-user"></i>
-            <span>Admin Profiles</span>
+            <span>Account</span>
         </a>
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -60,8 +60,8 @@
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
                     Layouts
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID('23','public/Admin/Data');">Data</a>
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setparentID('23','public/Admin/Slider');">Banner</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
@@ -287,7 +287,7 @@
                         </a>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                                <!-- <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="..."> -->
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div>
@@ -356,7 +356,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <form action="../Signout" method="POST">
+                        <form action=<?=$_ENV['BASE_URL']."/logout"?> method="POST">
                             <button type="submit" name="logout_btn" class="btn btn-primary" name="" href="../View/login.php">Logout</button>
                         </form>
 

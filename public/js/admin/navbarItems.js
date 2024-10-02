@@ -21,6 +21,7 @@ function sortable(sortableClass, url) {
         type: 'POST',
         success: function (data) {
           console.log('Navbar item sorted successfully');
+          console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error('AJAX Error: ' + textStatus + ': ' + errorThrown);
@@ -81,15 +82,6 @@ $('#cancelEdit').click(function () {
   // Hide the edit form and show the add form
   $('#editNavbarForm').hide();
   $('#addNavbarForm').show();
-});
-
-
-//Selections
-$(function () {
-  $("#navbar_link").selectmenu();
-});
-$(function () {
-  $("#navbar_status").selectmenu();
 });
 
 //Child Items
