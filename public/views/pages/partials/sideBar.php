@@ -1,52 +1,5 @@
-<style>
-    
-    .box-item {
-        border: 1px solid #ddd;
-        margin-bottom: 20px;
-    }
+<link rel="stylesheet" type="text/css" href="/dmc_global/public/css/sidebar.css?v=<?= microtime() ?>">
 
-    .box-item :is(h5, a, p) {
-        letter-spacing: .3px;
-    }
-
-    .box__title h5 {
-        background-color: #b4171b;
-        color: #fff;
-        text-align: center;
-        padding: 10px 20px;
-        text-transform: uppercase;
-        font-weight: 700;
-    }
-
-    .box__infor {
-        padding: 10px 20px;
-    }
-
-    .sticky-sidebar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 10px;
-    }
-
-    .box-item ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .box-item li {
-        margin-bottom: 10px;
-    }
-
-    .box-item a {
-        color: unset;
-        text-decoration: none;
-    }
-
-    .social-icons {
-        display: flex;
-        gap: 10px;
-    }
-</style>
 <!-- Right Section: Sidebar -->
 <?php $sideBar = $footerController->fetchFooterData(); ?>
 

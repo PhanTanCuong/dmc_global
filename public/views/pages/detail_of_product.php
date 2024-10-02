@@ -78,10 +78,7 @@
         margin-top: 10px;
     }
 
-    /* Sidebar */
-    .sidebar {
-        padding-left: 20px;
-    }
+    
 
 
 

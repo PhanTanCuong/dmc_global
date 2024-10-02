@@ -4,7 +4,7 @@ namespace Mvc\Controllers;
 use Core\Controller;
 use Core\Exception;
 use Mvc\Utils\SlugHelper;
-class Post extends Controller
+class News extends Controller
 {
     function display()
     {

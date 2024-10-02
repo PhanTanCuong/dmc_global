@@ -9,7 +9,9 @@ Route::post('/Product/fetchProductCategory', 'Product@fetchProductCategory');
 Route::get('product-categories/([a-zA-Z0-9_-]+)', 'Product@display');
 Route::get('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
 Route::get('list-product-by-category/([a-zA-Z0-9_-]+)', 'Product@displayListOfProductByCategory');
-Route::get('about-us/([a-zA-Z0-9_-]+)', 'Post@displayAbout');
+Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
+Route::get('news/([a-zA-Z0-9_-]+)', 'News@display');
+Route::get('business-services', 'Service@display');
 
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');
