@@ -14,8 +14,8 @@ class Media extends Controller
     // News2
     function display()
     {
-        if(!isset($_COOKIE['parent_id'])){
-            $_SESSION['status']="Direct Error";
+        if (!isset($_COOKIE['parent_id'])) {
+            $_SESSION['status'] = "Direct Error";
             header("Location: Admin/dashboard");
             die();
         }
@@ -28,24 +28,26 @@ class Media extends Controller
         //View
         $this->view("admin/home", [
             "news" => $post_data,
-            "display"=>$this->matchParentId(),
-            "name"=>$this->setPostName(),
+            "display" => $this->matchParentId(),
+            "name" => $this->setPostName(),
             "page" => "displayMedia"
         ]);
     }
 
-    function matchParentId(){
-        return  match((int)$_COOKIE['parent_id']){
-            32,44=>'none',
+    function matchParentId()
+    {
+        return match ((int) $_COOKIE['parent_id']) {
+            32 => 'none',
             default => 'block',
         };
     }
 
-    function setPostName(){
-        return match((int)$_COOKIE['parent_id']){
-            32=> 'abouts',
-            43=>'news',
-            44=>'business services',
+    function setPostName()
+    {
+        return match ((int) $_COOKIE['parent_id']) {
+            32 => 'abouts',
+            43 => 'news',
+            44 => 'business services',
             default => '',
         };
     }
@@ -60,8 +62,8 @@ class Media extends Controller
         }
         $this->view("admin/home", [
             "product_categories" => $categories,
-            "name"=>$this->setPostName(),
-            "display"=>$this->matchParentId(),
+            "name" => $this->setPostName(),
+            "display" => $this->matchParentId(),
             "page" => "addPost"
         ]);
     }
@@ -81,8 +83,8 @@ class Media extends Controller
         $this->view("admin/home", [
             "news" => $news,
             "product_categories" => $categories,
-            "name"=>$this->setPostName(),
-            "display"=>$this->matchParentId(),
+            "name" => $this->setPostName(),
+            "display" => $this->matchParentId(),
             "page" => "editPost"
         ]);
     }
@@ -103,19 +105,19 @@ class Media extends Controller
                 $image = $_FILES["news_image"]['name'];
 
                 //Check if image is an image file
-                if ($_COOKIE['parent_id']!=32 && ImageHelper::isImageFile($_FILES["news_image"]) === false) {
+                if ($_COOKIE['parent_id'] != 32 && ImageHelper::isImageFile($_FILES["news_image"]) === false) {
                     $_SESSION['status'] = 'Incorrect image type';
                     header('Location:../News');
                     die();
                 }
 
-                if (isset($_COOKIE['parent_id'])) {
-                    $type_id = (int) $_COOKIE['parent_id'];
-                } else {
+                if (!isset($_COOKIE['parent_id'])) {
                     $_SESSION['status'] = "ID isexpired";
                     header('Location:Add');
                     die();
-                }
+                   
+                } 
+                $type_id = (int) $_COOKIE['parent_id'];
 
                 //Model
                 $news = $this->model("MediaModel");
@@ -131,11 +133,11 @@ class Media extends Controller
                     $category_id,
                     $type_id
                 );
-                
+
                 if (is_numeric($preference_id) && $preference_id > 0) {
 
                     //add to slug center
-                    $this->model('MenuModel')->addMenu($slug,'post', $preference_id);
+                    $this->model('MenuModel')->addMenu($slug, 'post', $preference_id);
 
                     //Upload image data vào folder upload
                     move_uploaded_file(
@@ -178,16 +180,19 @@ class Media extends Controller
                 $stored_image = mysqli_fetch_array($data);
 
                 //Check image is null
-                if (!empty($_FILES["news_image"]['name'])) {
-                    if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type';
-                        header('Location:../News');
-                        die();
-                    }
-                    $image = $_FILES["news_image"]['name'];
-                } else {
+                if (empty($_FILES["news_image"]['name'])) {
                     $image = $stored_image['image'];
                 }
+
+                if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
+                    $_SESSION['status'] = 'Incorrect image type';
+                    header('Location:../News');
+                    die();
+                }
+                $image = $_FILES["news_image"]['name'];
+
+
+
                 $success = $news->editNews(
                     $id,
                     $title,

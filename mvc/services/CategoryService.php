@@ -22,23 +22,25 @@ class CategoryService extends DB
     public function preferenceCategoryId($category_id)
     {
         try {
-            $subCategory = $this->categoryModel->getCategoryById($category_id);
+            $subCategory = mysqli_fetch_assoc($this->categoryModel->getCategoryById($category_id));
 
-            if ($subCategory) {
-                foreach ($subCategory as $field) {
-                    $table_name = $field['type'];
-                    $id = $field['id'];
-                }
-                $query = "SELECT title,description,slug,image FROM $table_name WHERE category_id=?";
-                $stmt = $this->connection->prepare($query);
-                $stmt->bind_param("i", $id);
-                if ($stmt->execute()) {
-                    $result = $stmt->get_result();
-                    return $result->fetch_all(MYSQLI_ASSOC); ;
-                }
+            if (!$subCategory) {
+                return null;
             }
 
-            return null;
+            $table_name = $subCategory['type'];
+            $id = $subCategory['id'];
+
+            $query = "SELECT title,description,slug,image FROM $table_name WHERE category_id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+
+            if (!$stmt->execute()) {
+                return null;
+            }
+
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
 
         } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
@@ -49,11 +51,10 @@ class CategoryService extends DB
         try {
             // Lấy danh mục cha dựa trên slug
             $parent_category = $this->menuModel->directPage($slug);
-            foreach ($parent_category as $field) {
-                $parent_id = $field['id'];
-            }
+            $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
+            $parent_id = $parent_category['id'];
 
-            unset($field);// Xóa biến để tránh xung đột
+            // unset($field);// Xóa biến để tránh xung đột
 
             $subCategories = $this->categoryModel->getCategory($parent_id);
 
@@ -74,6 +75,7 @@ class CategoryService extends DB
                     'items' => $itemData // Các sản phẩm hoặc bài viết thuộc danh mục con
                 ];
             }
+
             unset($subCategory);
 
             return $subCategoriesData;

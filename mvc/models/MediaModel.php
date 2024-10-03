@@ -153,10 +153,14 @@ class MediaModel extends DB
     public function deleteNews($id)
     {
         try {
-            $query_run = "DELETE FROM post WHERE id='$id'";
-            return mysqli_query($this->connection, $query_run);
+            $query = "DELETE FROM post WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+    
+            return $stmt->execute(); 
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
+    
 }
