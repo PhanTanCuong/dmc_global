@@ -16,13 +16,15 @@ class PaginationService extends DB
         $this->categoryModel = $categoryModel;
     }
 
-    public function fetchPaginationRows($slug, $offset, $limit)
+    public function fetchPaginationRows($slug, $page, $limit)
     {
         try {
 
             $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $table_name = $parent_category['type'];
             $preference_id = $parent_category['id'];
+
+            $offset = ($page - 1) * $limit;
 
             $query = "SELECT title,description,slug,image FROM $table_name WHERE type_id=? LIMIT ?,?";
             $stmt = $this->connection->prepare($query);
@@ -42,7 +44,7 @@ class PaginationService extends DB
             $table_name = $parent_category['type'];
             $preference_id = $parent_category['id'];
 
-            $query = "SELECT COUNT(*) AS total FROM $table_name WHERE category_id=?";
+            $query = "SELECT COUNT(*) AS total FROM $table_name WHERE type_id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $preference_id);
 

@@ -12,6 +12,7 @@ Route::get('list-product-by-category/([a-zA-Z0-9_-]+)', 'Product@displayListOfPr
 Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
 Route::get('news/([a-zA-Z0-9_-]+)', 'News@display');
 Route::get('business-services', 'Service@display');
+// Route::get('business-services', 'Service@display');
 
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');

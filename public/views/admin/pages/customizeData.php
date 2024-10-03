@@ -96,20 +96,13 @@
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
         </div>
-        <?php
-        if (mysqli_num_rows($data["product_categories"]) > 0) {
-          while ($row = mysqli_fetch_array($data["product_categories"])) {
-            ?>
-            <form action="Data" method="GET">
-              <input type="hidden" name="product_category_id" value="<?= $row['id']; ?>">
-              <button type="submit" class="list-group-item list-group-item-action">
-                <?= $row['name']; ?>
-              </button>
-            </form>
-            <?php
-          }
-        }
-        ?>
+        <?php if (mysqli_num_rows($data["product_categories"]) > 0): ?>
+          <?php while ($row = mysqli_fetch_array($data["product_categories"])): ?>
+            <a href="Data?product_category_id=<?= $row['id']; ?>" class="list-group-item list-group-item-action">
+              <?= $row['name']; ?>
+            </a>
+          <?php endwhile; ?>
+        <?php endif; ?>
       </div>
     </div>
 

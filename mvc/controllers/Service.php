@@ -11,15 +11,24 @@ class Service extends Controller
     function display()
     {
         try {
-            $slug=SlugHelper::getSlugFromURL();
+            $slug = SlugHelper::getSlugFromURL();
+
             $menuModel = $this->model('MenuModel');
             $categoryModel = $this->model('CategoryModel');
+
             $paginayionService = new PaginationService($menuModel, $categoryModel);
-            $service_data=$paginayionService->fetchPaginationRows($slug,0,1);
-            $total_page=$paginayionService->getTotalPage($slug,12); 
+
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+            $service_data = $paginayionService->fetchPaginationRows($slug, (int) $page, 12);
+            $total_page = $paginayionService->getTotalPage($slug, 12);
+
             $this->view('home', [
+                'current_page'=>$page,
                 'service' => $service_data,
                 'total_page' => $total_page,
+                'next_page' => SlugHelper::Next($page, $total_page),
+                'previous_page' => SlugHelper::Previous($page),
                 'page' => 'services',
             ]);
 

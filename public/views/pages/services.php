@@ -13,9 +13,42 @@
         align-self: center;
     }
 
-    .service_text {
-        padding: 20px;
+    /* Styling for the card background */
+    .service-card {
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        transition: box-shadow 0.3s ease;
     }
+
+    /* Styling for the content area */
+    .service_text {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 0 8px 8px 0;
+    }
+
+    /* Styling for the image */
+    .service_image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.4s ease;
+    }
+
+    /* Hover effect for the card - shadow effect */
+    .service-card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hover effect for image */
+    .service-card:hover .service_image img {
+        transform: scale(1.05);
+        /* Enlarge the image on hover */
+    }
+
+
+
 
 
     .btn-custom {
@@ -70,11 +103,14 @@
                 <div class="grid-container flex-column">
                     <!-- Card 1 -->
                     <?php foreach ($data['service'] as $rows): ?>
-                        <div class="card flex-row">
-                            <div class="service_image col-5"> <img src="<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?>"
-                                    alt="Service Picture">
+                        <div class="card flex-row service-card">
+                            <div class="service_image col-5">
+                                <a href="<?= $_ENV['NEWS_URL'] . '/' . $rows['slug'] ?>">
+                                    <img src="<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?>" alt="Service Picture"
+                                        class="img-responsive">
+                                </a>
                             </div>
-                            <div class="service_content col-7">
+                            <div class="service_content col-7 bg-white">
                                 <div class="service_text">
                                     <h3><?= $rows['title'] ?></h3>
                                     <p><?= $rows['description'] ?></p>
@@ -84,14 +120,9 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
+
                     <!-- Repeat for other cards -->
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item"><a class="page-link" href="#" id="prev-page">&lt;</a></li>
-                        <li class="page-item"><a class="page-link" href="#" id="page-1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#" id="page-2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#" id="page-3">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#" id="next-page">&gt;</a></li>
-                    </ul>
+                    <?php include('partials/pagination.php') ?>
                 </div>
             </div>
             <?php include('partials/sideBar.php') ?>
