@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/footer.css?v=<?= microtime() ?>">
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/breadcrumb.css?v=<?= microtime() ?>">
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/news_button.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/services.css?v=<?= microtime() ?>">
 
     <!-- lib -->
     <!-- WoW -->

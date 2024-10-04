@@ -12,99 +12,11 @@
         gap:20px;
     }
 
-
-    /* Styling for the card background */
-    .service-card {
+    .service-card{
         background-color: #f5f5f5;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-bottom: 20px;
-        transition: box-shadow 0.3s ease;
     }
 
-    /* Styling for the content area */
-    .service_text {
-        background-color: #fff;
-        padding: 15px;
-        border-radius: 0 8px 8px 0;
-    }
-
-    /* Styling for the image */
-    .service_image img {
-        width: 100%;
-        height: auto;
-        transition: transform 0.4s ease;
-    }
-
-    /* Hover effect for the card - shadow effect */
-    .service-card:hover {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Hover effect for image */
-    .service-card:hover .service_image img {
-        transform: scale(1.05);
-        /* Enlarge the image on hover */
-    }
-
-    @media (max-width: 992px) {
-        .service_image {
-            width: 100%;
-            /* Make image take full width on smaller screens */
-            padding: 0;
-        }
-
-        .service_content {
-            padding: 20px;
-            align-self: flex-start;
-        }
-
-        .service_text {
-            border-radius: 8px;
-        }
-
-        .service-card {
-            flex-direction: column;
-            /* Stack content vertically */
-            text-align: center;
-        }
-
-        .service_image img {
-            border-radius: 8px 8px 0 0;
-        }
-    }
-
-    @media (max-width: 720px) {
-        .service-card {
-            flex-direction: column;
-            /* Ensure cards stack vertically on small devices */
-        }
-
-        .service_image {
-            width: 100%;
-            padding: 0;
-        }
-
-        .service_image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .service_content {
-            width: 100%;
-            padding: 20px;
-        }
-
-        .btn-custom {
-            font-size: 10px;
-            padding: 8px 15px;
-        }
-
-        .sidebar{
-            display: none;
-        }
-    }
+   
 </style>
 <main>
     <div class="container">

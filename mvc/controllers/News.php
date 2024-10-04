@@ -38,16 +38,34 @@ class News extends Controller
     function displayAbout()
     {
         try {
-            $post = $this->model('MenuModel');
+            $menu = $this->model('MenuModel');
 
-            $post_data = $post->directPage(SlugHelper::getSlugFromURL());
+            $post = $menu->directPage(SlugHelper::getSlugFromURL());
 
             $this->view('home', [
-                'about' => $post_data,
+                'about' => $post,
                 'page' => 'about',
             ]);
 
         } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+    }
+
+    function displayNewsByCategory(){
+        try{
+            $menu =$this->model('MenuModel');
+
+            $news_category = mysqli_fetch_assoc($menu->directPage(SlugHelper::getSlugFromURL()));
+
+            $news=$this->model('MediaModel');
+
+            // $news_data=$news->get
+
+
+
+                    
+        }catch(Exception $exception){
             echo $exception->getMessage();
         }
     }

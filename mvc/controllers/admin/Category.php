@@ -88,9 +88,9 @@ class Category extends Controller
 
                 $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level, $type);
                 if ($success) {
-                    // if ($level < 3) {
-                    //     $this->model('MenuModel')->addMenu($slug, 'category', $id);
-                    // }
+                    if ($level <= 3) {
+                        $this->model('MenuModel')->addMenu($slug, 'category', $id);
+                    }
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');
                 } else {
