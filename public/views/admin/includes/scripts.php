@@ -44,7 +44,7 @@
 
   $(document).ready(function () {
     $('.summernote').summernote({
-      height: 250
+      height: 1000
     });
     $('#myTable').DataTable();
   });

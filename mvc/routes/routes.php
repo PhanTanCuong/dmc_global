@@ -13,6 +13,7 @@ Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
 Route::get('news/([a-zA-Z0-9_-]+)', 'News@display');
 Route::get('business-services', 'Service@display');
 Route::get('product', 'Product@displayListOfProduct');
+Route::get('cooperation', 'Cooperation@display');
 
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');
@@ -49,6 +50,7 @@ Route::post('Admin/deleteNews', 'Media@deleteNews');
 Route::post('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
 Route::post('Admin/News/editNews', 'Media@editNews');
 
+
 // Admin quản lý slide
 Route::get('Admin/Slider', 'Slider@display');
 Route::post('Admin/addBanner', 'Slider@addBanner');
@@ -71,6 +73,9 @@ Route::post('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::post('Admin/customizeCategory', 'Category@customizeCategory');
 Route::post('Admin/deleteCategory', 'Category@deleteCategory');
 
+Route::get('Admin/Cooperation', 'Cooperation@display');
+Route::post('Admin/editCooperation', 'Cooperation@editCooperation');
+
 //Setting
 Route::get('Admin/Customize', 'Customize@display');
 Route::post('Admin/customizeTab', 'Customize@customizeTab');
@@ -83,4 +88,7 @@ Route::post('Admin/addData','Data@addData');
 Route::post('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
 Route::post('Admin/customizeData','Data@customizeData');
 Route::post('Admin/deleteData','Data@deleteData');
+
+
+
 ?>

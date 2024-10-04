@@ -17,7 +17,7 @@
                         <?php if($sidebar_data['title']==='PRODUCT'):   ?>
                         <ul>
                             <?php foreach(json_decode($sidebar_data['json_data'],true) as $link ):?>
-                            <li><a href="<?=$_ENV["PRODUCT_URL"].'/'.$link['id']?>"><?=$link['name']?></a></li>
+                            <li><a href="<?=$_ENV["BASE_URL"].'/product-categories'.'/' .$link['id']?>"><?=$link['name']?></a></li>
                             <?php endforeach; ?>
                             <?php unset($link)?>
                             <?php $breakLoop=true; ?>

@@ -110,16 +110,14 @@
         <section id="media">
             <?php if (mysqli_num_rows($data["bg_stat"]) > 0): ?>
                 <?php while ($rows = mysqli_fetch_array($data["bg_stat"])): ?>
-                    <?= $stat_bg = $rows['image']; ?>
-                    <?= $image_path = $imageUrl . '/' . $stat_bg; ?>
                     <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)): ?>
-                        <section class="stats" style="background:url(<?= $image_path ?>); ">
+                        <section class="stats" style="background:url(<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?>); ">
                             <div class="stat-grid wow fadeI">
                                 <?php if (mysqli_num_rows($data["stats"]) > 0): ?>
                                     <?php while ($rows = mysqli_fetch_array($data["stats"])): ?>
                                         <div class="stat">
                                             <div class="stat-ic wow flipInY">
-                                                <img class="flash" src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="Icon">
+                                                <img class="flash" src="<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?> ?>" alt="Icon">
                                             </div>
                                             <div class="stat-text wow fadeInDown">
                                                 <h3><?= $rows['title'] ?></h3>

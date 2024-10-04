@@ -59,7 +59,7 @@ if (mysqli_num_rows($footer["bg_footer"]) > 0):
                             </h3>
                             <ul id="product-category">
                                 <?php foreach ($links[2] as $category): ?>
-                                    <li><a href="<?= $_ENV["BASE_URL"] . '/category'.'/' . $category['id']; ?>"><?= $category['name']; ?></a></li>
+                                    <li><a href="<?= $_ENV["BASE_URL"] . '/product-categories'.'/' . $category['id']; ?>"><?= $category['name']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>

@@ -37,6 +37,7 @@
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">News</a>
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(32,'public/Admin/News');">Abouts</a>
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(44,'public/Admin/News');">Business Services</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(73,'public/Admin/Cooperation');">Cooperation</a>
 
             </div>
         </div>
