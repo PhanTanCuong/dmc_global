@@ -15,13 +15,15 @@ class News extends Controller
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
             foreach ($post_data as $row) {
-                $news = $category->getCategoryById($row['type_id']);
+                $selectedCategory=$category->getCategoryById($row['type_id']);
+                $news = mysqli_fetch_assoc($selectedCategory);
                 $news_category = $category->getCategoryById($row['category_id']);
             }
 
             $this->view('home', [
                 'post' => $post_data,
-                'breadcrumb_data' => $news,
+                'category_info'=>$selectedCategory,
+                'breadcrumb_data' => $news['name'],
                 'category' => $news_category,
                 'page' => 'post',
             ]);

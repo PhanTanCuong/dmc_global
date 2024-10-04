@@ -11,11 +11,17 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT * FROM product";
-          return $this->connection->query($query);
+            return $this->connection->query($query);
 
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function getAllProduct()
+    {
+        $query ="SELECT title, description,slug,image FROM product";
+        return $this->connection->query($query);
     }
 
     public function getRelatedProducts()
@@ -45,7 +51,7 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT * FROM product where id=?";
-            $stmt= $this->connection->prepare($query);
+            $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
         } catch (mysqli_sql_exception $e) {
@@ -142,7 +148,7 @@ class ProductModel extends DB
     {
         try {
             $query = "SELECT image FROM product WHERE id='$id'";
-          return $this->connection->query($query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -181,7 +187,7 @@ class ProductModel extends DB
     {
         try {
             $query = "UPDATE product SET visible='$visible' WHERE id ='$id'";
-          return $this->connection->query($query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -192,7 +198,7 @@ class ProductModel extends DB
     {
         try {
             $query = "DELETE FROM product WHERE visible=1";
-          return $this->connection->query($query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

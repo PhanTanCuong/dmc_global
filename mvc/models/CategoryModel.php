@@ -21,7 +21,7 @@ class CategoryModel extends DB
     public function getInforParentCategory()
     {
         try {
-            $query = "SELECT id,name,level FROM category_tree WHERE level <2";
+            $query = "SELECT id,name,level FROM category_tree WHERE level <3";
             return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

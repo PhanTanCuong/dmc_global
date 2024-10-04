@@ -28,7 +28,5 @@
       <a class="btn2 text-center" href="<?=$_ENV['BASE_URL'].'/list-product-by-category'.'/'.SlugHelper::getSlugFromURL()?>"><b>View more</b></a>
     </div>
   </div>
-  </div>
-  </div>
 
 </section>

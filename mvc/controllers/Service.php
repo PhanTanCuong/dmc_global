@@ -20,8 +20,8 @@ class Service extends Controller
 
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-            $service_data = $paginayionService->fetchPaginationRows($slug, (int) $page, 12);
-            $total_page = $paginayionService->getTotalPage($slug, 12);
+            $service_data = $paginayionService->fetchPaginationRows($slug, (int) $page, 3);
+            $total_page = $paginayionService->getTotalPage($slug, 3);
 
             $this->view('home', [
                 'current_page'=>$page,

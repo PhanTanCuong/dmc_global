@@ -1,9 +1,11 @@
 /*Product*/
 
-.product1 button {
+.product1 .btn {
+  text-transform: uppercase;
+  font-weight: 600;
   color: white;
   background-color: transparent;
-  padding: 10px 10px;
+  padding: 10px 20px;
   border-color: white;
   border-radius: 6px;
   font-size: 14px;

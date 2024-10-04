@@ -35,9 +35,9 @@ class Category extends Controller
                 $type = $_POST['category_type'];
                 $item = $this->model('CategoryModel');
 
-                $level = $item->traceParent($parent_id);
+                $level = ($parent_id !== 0) ? $item->traceParent($parent_id) : 1;
 
-                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level,$type);
+                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level, $type);
                 if ($success) {
                     $_SESSION['success'] = 'Your data is added';
                     header('Location:Category');
@@ -86,11 +86,11 @@ class Category extends Controller
 
                 $level = $item->traceParent($parent_id);
 
-                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level,$type);
+                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level, $type);
                 if ($success) {
-                    if($level<3){
-                        $this->model('MenuModel')->addMenu($slug,'category',$id);
-                    }
+                    // if ($level < 3) {
+                    //     $this->model('MenuModel')->addMenu($slug, 'category', $id);
+                    // }
                     $_SESSION['success'] = 'Your data is updated';
                     header('Location:Category');
                 } else {

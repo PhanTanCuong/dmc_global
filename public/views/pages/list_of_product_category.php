@@ -1,30 +1,71 @@
 <style>
-    .product2{
+    .product2 {
         margin-bottom: 0px;
     }
+
     .grid {
         grid-template-columns: repeat(4, 1fr);
         padding: 4em 2em;
-        
+
     }
-    .title{
-        margin:unset !important;
-        padding :2rem 0;
+
+    /* Đặt mặc định */
+    .product2 {
+        margin-bottom: 0px;
     }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 4em 2em;
+        gap: 2rem;
+    }
+
+    .title {
+        margin: unset !important;
+        padding: 2rem 0;
+        font-size: 2rem;
+        position: relative;
+    }
+
+    .pseudo {
+        width: 3rem;
+        height: 3px;
+        background: #b4171b;
+        position: absolute;
+        bottom: -1rem;
+    }
+
+    /* Media Queries cho iPad */
+    @media only screen and (max-width: 1024px) {
+        .grid {
+            grid-template-columns: repeat(3, 1fr);
+            padding: 3em 1em;
+        }
+
+        .title {
+            font-size: 1.75rem;
+            padding: 1.5rem 0;
+        }
+    }
+
+    /* Media Queries cho Mobile */
     @media only screen and (max-width: 720px) {
-        .pseudo {
-            width: 1.5rem;
-            height: 3px;
-            bottom: -2rem;
+        .grid {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 2em 1em;
+            gap: 1.5rem;
         }
 
         .title {
             font-size: 1.5rem;
-            margin:2.5rem 0;
+            margin: 2.5rem 0;
         }
 
-        .grid {
-            grid-template-columns: repeat(2, 1fr);
+        .pseudo {
+            width: 2rem;
+            height: 2px;
+            bottom: -1.5rem;
         }
     }
 </style>

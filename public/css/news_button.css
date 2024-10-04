@@ -1,0 +1,45 @@
+.btn-custom {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #333;
+    border: 2px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.btn-custom:hover {
+    background-color: #fff;
+    color: #b4171b;
+    border-color: #b4171b;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+
+}
+
+.btn-custom::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: all 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.btn-custom:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Ensure text is above the effect */
+.btn-custom span {
+    position: relative;
+    z-index: 1;
+}

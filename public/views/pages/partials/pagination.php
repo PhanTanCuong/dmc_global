@@ -1,9 +1,10 @@
+<?php use Mvc\Utils\SlugHelper ?>
 <style>
     /* Pagination container styling */
-    .pagination {
+    /* .pagination {
         margin-top: 20px;
         margin-bottom: 20px;
-    }
+    } */
 
     /* Pagination links */
     .pagination .page-link {
@@ -93,7 +94,8 @@
     <?php $page = (int) $data['current_page'] ?>
     <!-- Nút Previous -->
     <li class="page-item <?= ($page > 1) ? '' : 'disabled' ?>">
-        <a class="page-link" href="<?= $_ENV['BASE_URL'] . '/business-services?page=' . $data['previous_page'] ?>"
+        <a class="page-link"
+            href="<?= $_ENV['BASE_URL'] . '/' . SlugHelper::getSlugFromURL() . '?page=' . $data['previous_page'] ?>"
             id="prev-page">&lt;</a>
     </li>
 
@@ -101,14 +103,15 @@
 
     <?php for ($i = 1; $i <= $count; $i++): ?>
         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-            <a class="page-link" href="<?= $_ENV['BASE_URL'] . '/business-services?page=' . $i ?>"
+            <a class="page-link" href="<?= $_ENV['BASE_URL'] . '/' . SlugHelper::getSlugFromURL() . '?page=' . $i ?>"
                 id="page-<?= $i ?>"><?= $i ?></a>
         </li>
     <?php endfor; ?>
 
     <!-- Nút Next -->
     <li class="page-item <?= ($page < $count) ? '' : 'disabled' ?>">
-        <a class="page-link" href="<?= $_ENV['BASE_URL'] . '/business-services?page=' . $data['next_page'] ?>"
+        <a class="page-link"
+            href="<?= $_ENV['BASE_URL'] . '/' . SlugHelper::getSlugFromURL() . '?page=' . $data['next_page'] ?>"
             id="next-page">&gt;</a>
     </li>
 </ul>
