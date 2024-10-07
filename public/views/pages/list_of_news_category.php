@@ -24,7 +24,7 @@
             <div class="col-lg-9 services">
                 <div class="grid-container flex-column">
                     <!-- Card 1 -->
-                    <?php foreach ($data['service'] as $rows): ?>
+                    <?php foreach ($data['news_data'] as $rows): ?>
                         <div class="card flex-xl-row flex-lg-row service-card">
                             <div class="service_image col-5">
                                 <a href="<?= $_ENV['NEWS_URL'] . '/' . $rows['slug'] ?>">

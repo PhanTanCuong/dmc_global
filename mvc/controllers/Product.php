@@ -62,7 +62,8 @@ class Product extends Controller
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
-            $product_category = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+            $product_category_json = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+            $product_category=json_decode($product_category_json, true);
             $selectedCategory = $menuModel->directPage(SlugHelper::getSlugFromURL());
             foreach ($selectedCategory as $row) {
                 $breadcrumb_data = mysqli_fetch_assoc($categoryModel->getCategoryById($row['id']));

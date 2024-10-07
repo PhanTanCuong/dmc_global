@@ -38,9 +38,6 @@ class PaginationService extends DB
                 $stmt->bind_param("ii", $offset, $limit);
             }
 
-
-
-
             return ($stmt->execute()) ? $stmt->get_result() : false;
 
         } catch (Exception $e) {

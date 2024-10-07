@@ -4,6 +4,7 @@ namespace Mvc\Controllers;
 use Core\Controller;
 use Core\Exception;
 use Mvc\Utils\SlugHelper;
+use Mvc\Services\CategoryService as CategoryService;
 class News extends Controller
 {
     function display()
@@ -54,14 +55,17 @@ class News extends Controller
 
     function displayNewsByCategory(){
         try{
-            $menu =$this->model('MenuModel');
+            $menuModel = $this->model('MenuModel');
+            $categoryModel = $this->model('CategoryModel');
+            $categoryService = new CategoryService($menuModel, $categoryModel);
+            
+            $news_category_json= $categoryService->getDataByCategory(SlugHelper::getSlugFromURL());
+            $news_category_data=json_decode($news_category_json,true);
 
-            $news_category = mysqli_fetch_assoc($menu->directPage(SlugHelper::getSlugFromURL()));
-
-            $news=$this->model('MediaModel');
-
-            // $news_data=$news->get
-
+            $this->view('home',[
+                'news_data'=> $news_category_data,
+                'page'=> 'list_of_news_category'
+            ]);
 
 
                     

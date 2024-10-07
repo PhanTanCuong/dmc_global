@@ -25,7 +25,7 @@ class CategoryService extends DB
             $subCategory = mysqli_fetch_assoc($this->categoryModel->getCategoryById($category_id));
 
             if (!$subCategory) {
-                return null;
+                return json_encode(null);
             }
 
             $table_name = $subCategory['type'];
@@ -36,14 +36,16 @@ class CategoryService extends DB
             $stmt->bind_param("i", $id);
 
             if (!$stmt->execute()) {
-                return null;
+                return json_encode(null);
             }
 
             $result = $stmt->get_result();
-            return $result->fetch_all(MYSQLI_ASSOC);
+            // $result->fetch_all(MYSQLI_ASSOC);
+
+            return json_encode($result->fetch_all(MYSQLI_ASSOC));
 
         } catch (\mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
+            return json_encode(['error' => $e->getMessage()]);
         }
     }
     public function getSubCategoryData($slug)
@@ -54,15 +56,13 @@ class CategoryService extends DB
             $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $parent_id = $parent_category['id'];
 
-            // unset($field);// Xóa biến để tránh xung đột
-
             $subCategories = $this->categoryModel->getCategory($parent_id);
 
             $subCategoriesData = []; // giá trị cuối cùng
 
             foreach ($subCategories as $subCategory) {
 
-                $items = $this->preferenceCategoryId($subCategory['id']);
+                $items = json_decode($this->preferenceCategoryId($subCategory['id']),true);
 
                 //Tạo mảng item của danh mục con sản phẩm/bài viết
                 $itemData = [];
@@ -78,9 +78,21 @@ class CategoryService extends DB
 
             unset($subCategory);
 
-            return $subCategoriesData;
+            return json_encode($subCategoriesData);
 
         } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getDataByCategory($slug){
+        try{
+            $category = $this->menuModel->directPage($slug);
+            $category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
+            $preference_id = $category['id'];
+
+            return $this->preferenceCategoryId($preference_id);
+        }catch(\Exception $e){
             echo $e->getMessage();
         }
     }
