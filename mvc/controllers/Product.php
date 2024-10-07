@@ -14,6 +14,7 @@ class Product extends Controller
 
         //Model
         $product = $this->model("ProductModel");
+        $menuModel = $this->model('MenuModel');
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
@@ -42,6 +43,7 @@ class Product extends Controller
         try {
 
             $product = $this->model('MenuModel');
+            $menuModel = $this->model('MenuModel');
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
 
             $this->view('home', [
@@ -82,10 +84,10 @@ class Product extends Controller
     function displayListOfProduct()
     {
         try {
-            $slug = SlugHelper::getSlugFromURL();
 
             $menuModel = $this->model('MenuModel');
             $categoryModel = $this->model('CategoryModel');
+            $slug = SlugHelper::getSlugFromURL();
 
             $paginayionService = new PaginationService($menuModel, $categoryModel);
 

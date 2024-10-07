@@ -1,6 +1,7 @@
 <?php
 
 namespace Mvc\Utils;
+use mysqli_sql_exception;
 
 class SlugHelper
 {
@@ -15,10 +16,40 @@ class SlugHelper
         // Tách các thành phần của URL theo dấu /
         $url_component = explode("/", $url);
 
+        $slug = end($url_component);
+
+        $isSlugValid = self::isSlugExists($slug);
+
+        if (!$isSlugValid) {
+            // abort(404); Laravel
+            header("Location:" . $_ENV['BASE_URL'] . "/404");
+            exit();
+        }
+
         // Lấy phần cuối cùng của URL, là slug cần lấy
-        return end($url_component);
+        return $slug;
     }
 
+
+
+
+    protected static function isSlugExists($slug)
+    {
+        try {
+            $menuModel = new \MenuModel();
+
+            $query = "SELECT COUNT(*) FROM menu WHERE slug=?";
+            $stmt = $menuModel->connection->prepare($query);
+            $stmt->bind_param("s", $slug);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+
+            return $count > 0;
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
 
     public static function next($page, $total_page)
     {

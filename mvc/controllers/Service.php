@@ -11,10 +11,9 @@ class Service extends Controller
     function display()
     {
         try {
-            $slug = SlugHelper::getSlugFromURL();
-
             $menuModel = $this->model('MenuModel');
             $categoryModel = $this->model('CategoryModel');
+            $slug = SlugHelper::getSlugFromURL();
 
             $paginayionService = new PaginationService($menuModel, $categoryModel);
 

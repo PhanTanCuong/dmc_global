@@ -1,0 +1,66 @@
+.not_found_container{
+    background-color: #f5f5f5;
+    padding-bottom: 20vh;
+}
+
+
+.text_not_found {
+    text-align: center; /* Căn giữa văn bản */
+    padding: 0 35%;
+}
+
+.error {
+    font-size: 10rem; 
+    font-weight: bold; 
+    color: #e74a3b; 
+    position: relative; 
+}
+
+
+.lead {
+    font-size: 1.5rem; 
+    color: #5a5c69; 
+}
+
+.text-gray-500 {
+    color: #6c757d; 
+    padding-bottom: 10px;
+}
+
+.btn_not_found {
+    padding: 10px 20px; 
+    background-color: #4e73df; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease; 
+}
+
+.btn_not_found:hover {
+    background-color: #2e59d9; /* Màu khi hover */
+}
+
+@media (max-width: 768px) {
+    .error {
+        font-size: 6rem; /* Kích thước giảm cho màn hình nhỏ */
+    }
+
+    .lead {
+        font-size: 1.25rem; /* Kích thước giảm cho văn bản chính */
+    }
+}
+
+@media (max-width: 576px) {
+    .error {
+        font-size: 4rem; /* Kích thước giảm cho màn hình nhỏ hơn */
+    }
+
+    .lead {
+        font-size: 1rem; /* Kích thước giảm cho văn bản chính */
+    }
+
+    .btn_not_found {
+        padding: 8px 16px; /* Padding giảm cho nút */
+    }
+}
