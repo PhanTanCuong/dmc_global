@@ -73,16 +73,17 @@ Route::post('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::post('Admin/customizeCategory', 'Category@customizeCategory');
 Route::post('Admin/deleteCategory', 'Category@deleteCategory');
 
+// Admin quản lý trang cooperation
 Route::get('Admin/Cooperation', 'Cooperation@display');
 Route::post('Admin/editCooperation', 'Cooperation@editCooperation');
 
-//Setting
+//Admin quản lý thiết lập
 Route::get('Admin/Customize', 'Customize@display');
 Route::post('Admin/customizeTab', 'Customize@customizeTab');
 Route::post('Admin/customizeLogo', 'Customize@customizeLogo');
 Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterLogo');
 
-//Data
+//Admin quản lý layout
 Route::get('Admin/Data', 'Data@display');
 Route::post('Admin/addData','Data@addData');
 Route::post('Admin/Data/getDataById/(\d+)', 'Data@getDataById');

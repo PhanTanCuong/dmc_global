@@ -225,8 +225,13 @@
   }
 } 
 @media only screen and (max-width: 720px) {
+  
+  .banner{
+    background-color: #c92027;
+  }
   .about3 {
     margin: 4rem 1rem;
+    border-radius: 20px;
   }
   .txt2-container  {
     text-align: center;

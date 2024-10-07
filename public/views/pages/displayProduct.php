@@ -67,7 +67,7 @@
                             style="background:url(<?= $imageUrl . '/' . $rows['image'] ?>)">
                             <div class="image-container" data-wow-delay="400ms">
                                 <div class="image">
-                                    <img src="<?= $imageUrl . $rows['image'] ?>" alt="img">
+                                    <img src="<?= $imageUrl .'/'. $rows['image'] ?>" alt="img">
                                 </div>
                             </div>
                             <div class="txt2-container" data-wow-delay="400ms"
