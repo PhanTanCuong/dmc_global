@@ -88,6 +88,11 @@ Route::get('Admin/Customize', 'Customize@display');
 Route::post('Admin/customizeTab', 'Customize@customizeTab');
 Route::post('Admin/customizeLogo', 'Customize@customizeLogo');
 Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterLogo');
+Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterBackground');
+Route::post('Admin/Customize/getDataById/(\d+)', 'Customize@getDataById');
+Route::post('Admin/editFooterData', 'Customize@editFooterData');
+Route::post('Admin/customizeQuickLink', 'Customize@customizeQuickLink');
+
 
 //Admin quản lý layout
 Route::get('Admin/Data', 'Data@display');

@@ -73,8 +73,9 @@ class Route
                 return;
             }
         }
-        header("Location:" . $_ENV['BASE_URL'] . "/404");
-        exit();
+
+        // header('Location:dmc_global/public/views/404.php');
+        echo '404 - Page not found';
     }
 }
 
