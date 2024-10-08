@@ -1,9 +1,9 @@
 <?php
 $imageUrl = $_ENV["PICTURE_URL"];
-use Mvc\Controllers\Footer;
-$footerController = new Footer();
+use Mvc\Controllers\Setting;
+$headerController = new Setting();
 
-$header = $footerController->fetchHeaderData();
+$header = $headerController->fetchHeaderData();
 include('admin/includes/header.php');
 ?>
 <div class="container">

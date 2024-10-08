@@ -8,7 +8,8 @@
             "Mvc\\Controllers\\": "mvc/controllers/",
             "Mvc\\Controllers\\Admin\\":"mvc/controllers/admin/",
             "Mvc\\Utils\\": "mvc/utils/",
-            "Mvc\\Services\\": "mvc/services/"
+            "Mvc\\Services\\": "mvc/services/",
+            "Mvc\\Models\\":"mvc/models/"
         }
     }
 }

@@ -17,8 +17,7 @@ class Customize extends Controller
     {
         $item = $this->model('SettingModel');
         $icons = $this->model('IconsModel');
-        $category = $this->model('CategoryModel');
-        $navbar_item = $this->model('NavbarModel');
+
 
         $this->view('admin/home', [
             "page" => 'customizeContent',

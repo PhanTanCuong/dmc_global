@@ -43,12 +43,14 @@ class Product extends Controller
         try {
 
             $product = $this->model('MenuModel');
-            $menuModel = $this->model('MenuModel');
+            $categoryModel = $this->model('CategoryModel');
+            $categoryService = new CategoryService($product, $categoryModel);
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
 
             $this->view('home', [
                 'product_data' => $product_data,
                 'product' => $this->model('ProductModel')->getRelatedProducts(),
+                'product_category'=>$categoryService->getProductCategory(SlugHelper::getSlugFromURL()),
                 'page' => 'detail_of_product',
             ]);
         } catch (\Exception $e) {

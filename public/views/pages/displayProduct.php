@@ -67,7 +67,7 @@
                             style="background:url(<?= $imageUrl . '/' . $rows['image'] ?>)">
                             <div class="image-container" data-wow-delay="400ms">
                                 <div class="image">
-                                    <img src="<?= $imageUrl .'/'. $rows['image'] ?>" alt="img">
+                                    <img src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="img">
                                 </div>
                             </div>
                             <div class="txt2-container" data-wow-delay="400ms"
@@ -103,6 +103,8 @@
             <h1 class="title  wow slideInLeft">products
                 <p class="pseudo"></p>
             </h1>
+            <?php use Mvc\Utils\SlugHelper ?>
+            <?php $product_url = $_ENV['BASE_URL'] . '/list-product-by-category' . '/' . SlugHelper::getSlugFromURL(); ?>
             <?php include('partials/product_items.php') ?>
 
             </div>

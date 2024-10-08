@@ -1,6 +1,4 @@
-
-
-  <section class='product2' id="product2">
+<section class='product2' id="product2">
   <div class="container">
 
 
@@ -24,8 +22,7 @@
       <?php endif; ?>
     </div>
     <div class="btn2-container">
-      <?php use Mvc\Utils\SlugHelper?>
-      <a class="btn2 text-center" href="<?=$_ENV['BASE_URL'].'/list-product-by-category'.'/'.SlugHelper::getSlugFromURL()?>"><b>View more</b></a>
+      <a class="btn2 text-center" href="<?= $product_url ?>"><b>View more</b></a>
     </div>
   </div>
 

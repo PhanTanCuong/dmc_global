@@ -68,11 +68,8 @@
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
                     Category
                 </div>
-                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">
                     Menu
-                    <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">Items</a>
-                    </div>
                 </div>
                 <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('public/Admin/Customize');">
                     Setting

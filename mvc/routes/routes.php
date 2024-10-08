@@ -94,6 +94,14 @@ Route::post('Admin/editFooterData', 'Customize@editFooterData');
 Route::post('Admin/customizeQuickLink', 'Customize@customizeQuickLink');
 
 
+//Admin quản lý icons
+Route::post('Admin/deleteIcons', 'Icons@deleteIcons');
+Route::post('Admin/customizeIcons', 'Icons@customizeIcons');
+Route::post('Admin/addIcons', 'Icons@addIcons');
+Route::post('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
+
+
+
 //Admin quản lý layout
 Route::get('Admin/Data', 'Data@display');
 Route::post('Admin/addData','Data@addData');

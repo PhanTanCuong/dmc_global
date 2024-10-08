@@ -3,7 +3,8 @@
 namespace Mvc\Controllers;
 
 use Core\Controller;
-class Footer extends Controller
+use Mvc\Services\SidebarService;
+class Setting extends Controller
 {
     function fetchFooterData()
     {
@@ -31,6 +32,21 @@ class Footer extends Controller
                 "head" => $headerData->getHeadInfor(),
                 "menu_items" => $headerData->getNavBarItem()
             ];
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function fetchSideBarData()
+    {
+        try {
+            $sidebarService = new SidebarService();
+            $footerData = $this->model("SettingModel");
+            return [
+                "sidebar_data"  => $sidebarService->getSidebarData(),
+                "icon" => $footerData->getFooterIconInfor(),
+            ];
+
         } catch (\Exception $e) {
             echo $e->getMessage();
         }

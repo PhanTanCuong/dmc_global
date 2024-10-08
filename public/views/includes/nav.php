@@ -28,7 +28,8 @@
                   $url = $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']);
                 } else {
                   $url = '#';
-                } ?>
+                } 
+                ?>
                 <a href="<?= $url ?>"><?= htmlspecialchars($row['name']) ?>
                 </a>
                 <?php if (!empty($row['child_items'])): ?>
