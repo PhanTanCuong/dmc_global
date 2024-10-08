@@ -22,7 +22,7 @@ class NavBar extends Controller
         $this->view('admin/home', [
             'page' => 'customizeNavbar',
             'item' => $item->getInforNavBar(),
-            'links'=> $item->getLinkList(),
+            'links' => $item->getLinkList(),
             'parent_categories' => $category->getParentCategories(),
             'category' => $category->getInforCategory(),
         ]);
@@ -76,8 +76,8 @@ class NavBar extends Controller
                             if (is_array($child_items)) {
                                 $row['child_items'] = $child_items; // Thêm mảng này vào kết quả trả về
                             }
-                        }else{
-                            $row['child_items'] = []; 
+                        } else {
+                            $row['child_items'] = [];
                         }
 
 

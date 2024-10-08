@@ -72,6 +72,8 @@ Route::post('Admin/customizeNavBar', 'NavBar@customizeNavBar');
 Route::post('Admin/deleteNavBar', 'NavBar@deleteNavBar');
 Route::post('Admin/sortNavbarItem', 'NavBar@sortNavbarItem');
 Route::post('Admin/editChildItems', 'NavBar@editChildItems');
+Route::post('Admin/fetchChildCategories', 'NavBar@fetchChildCategories');
+
 
 
 // Admin quản lý danh mục
