@@ -99,14 +99,14 @@
                             <!-- Available Child Items -->
                             <div class="col-md-6">
                                 <label>Available Child Items</label>
-                                <ul id="availableItems" class="list-group"
+                                <ul id="availableItems" class="list-group draggable-item"
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                                 </ul>
                             </div>
                             <!-- Drop Area for Child Items -->
                             <div class="col-md-6">
                                 <label>Selected Child Items</label>
-                                <ul id="selectedItems" class="list-group drag-n-drop-box"
+                                <ul id="selectedItems" class="list-group drag-n-drop-box draggable-item"
                                     style="min-height: 200px; border: 1px solid #ccc; padding: 10px;">
                                 </ul>
                             </div>
@@ -176,7 +176,7 @@
 <script>
     $(document).ready(function () {
         //sortable
-        sortable('.sortable', 'Admin/sortNavbarItem');
+        sortable('.sortable', 'sortNavbarItem');
         attachDragEvents();
         initDragAndDrop('draggable-item', 'availableItems', 'selectedItems');
         setupDragAndSubmit('editChildItemBtn','selectedItems','edit_child_item_id','editChildItems')
