@@ -9,7 +9,9 @@
           $image_path = $imageUrl . '/' . $header_icon;
           if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)): ?>
             <div class="logo_ic">
-              <img src="<?= $image_path ?>" class="img-fluid" alt="DMC Global">
+              <a href="<?=$_ENV['BASE_URL'].'/'?>">
+                <img src="<?= $image_path ?>" class="img-fluid" alt="DMC Global">
+              </a>
             </div>
           <?php endif; ?>
         <?php endwhile; ?>
@@ -28,7 +30,7 @@
                   $url = $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']);
                 } else {
                   $url = '#';
-                } 
+                }
                 ?>
                 <a href="<?= $url ?>"><?= htmlspecialchars($row['name']) ?>
                 </a>

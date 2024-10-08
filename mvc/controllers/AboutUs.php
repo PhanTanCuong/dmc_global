@@ -13,7 +13,7 @@ class AboutUs extends Controller
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
 
-            $this->view('home', [
+            $this->view("index", [
                 'about' => $post_data,
                 'page' => 'about',
             ]);

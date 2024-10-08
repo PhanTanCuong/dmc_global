@@ -13,7 +13,7 @@ class NotFound extends Controller
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
 
-            $this->view('home', [
+            $this->view("index", [
                 'page' => '404',
             ]);
 

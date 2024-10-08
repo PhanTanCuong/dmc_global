@@ -9,7 +9,7 @@ class Cooperation extends Controller{
         $menu = $this->model('MenuModel');
         $post=$menu->directPage(SlugHelper::getSlugFromURL());
 
-        $this->view('home',[
+        $this->view("index",[
             'post'=>$post,
             'page'=>'cooperation'
         ]);
