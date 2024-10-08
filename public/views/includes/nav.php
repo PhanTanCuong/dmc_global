@@ -23,15 +23,21 @@
 
           <?php if (!empty($header["menu_items"])): ?>
             <?php foreach ($header["menu_items"] as $row): ?>
-              <li><a
-                  href="<?= $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']) ?>"><?= htmlspecialchars($row['name']) ?>
+              <li>
+                <?php if ($row['status'] === 'active') {
+                  $url = $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']);
+                } else {
+                  $url = '#';
+                } 
+                ?>
+                <a href="<?= $url ?>"><?= htmlspecialchars($row['name']) ?>
                 </a>
                 <?php if (!empty($row['child_items'])): ?>
                   <i class="fa fa-caret-down"></i>
                   <ul class="dropdown">
                     <?php foreach ($childItems = json_decode($row['child_items'], true) as $childItem): ?>
                       <li><a
-                          href="<?= $_ENV["BASE_URL"] . '/' .  htmlspecialchars($row['slug']) .'/'. ($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
+                          href="<?= $_ENV["BASE_URL"] . '/' . htmlspecialchars($row['slug']) . '/' . ($childItem['id']) ?>"><?= htmlspecialchars($childItem['name']) ?></a>
                       </li>
                     <?php endforeach; ?>
                   </ul>

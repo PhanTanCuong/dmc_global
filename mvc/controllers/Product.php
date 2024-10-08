@@ -5,9 +5,7 @@ namespace Mvc\Controllers;
 use Core\Controller;
 use Mvc\Utils\SlugHelper;
 use Mvc\Services\CategoryService;
-use MenuModel;
-use CategoryModel;
-
+use Mvc\Services\PaginationService;
 class Product extends Controller
 {
 
@@ -16,6 +14,7 @@ class Product extends Controller
 
         //Model
         $product = $this->model("ProductModel");
+        $menuModel = $this->model('MenuModel');
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
@@ -44,11 +43,14 @@ class Product extends Controller
         try {
 
             $product = $this->model('MenuModel');
+            $categoryModel = $this->model('CategoryModel');
+            $categoryService = new CategoryService($product, $categoryModel);
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
 
             $this->view('home', [
                 'product_data' => $product_data,
                 'product' => $this->model('ProductModel')->getRelatedProducts(),
+                'product_category'=>$categoryService->getProductCategory(SlugHelper::getSlugFromURL()),
                 'page' => 'detail_of_product',
             ]);
         } catch (\Exception $e) {
@@ -58,24 +60,54 @@ class Product extends Controller
 
     function displayListOfProductByCategory()
     {
-        try{
+        try {
 
             $menuModel = $this->model('MenuModel');
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
-            $product_category = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+            $product_category_json = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+            $product_category=json_decode($product_category_json, true);
             $selectedCategory = $menuModel->directPage(SlugHelper::getSlugFromURL());
             foreach ($selectedCategory as $row) {
-                $breadcrumb_data = $categoryModel->getCategoryById($row['id']);
+                $breadcrumb_data = mysqli_fetch_assoc($categoryModel->getCategoryById($row['id']));
             }
-            $this->view('home',[
+            $this->view('home', [
                 'product_category' => $product_category,
-                'breadcrumb_data' => $breadcrumb_data,
-                'page'=>'list_of_product_category'
+                'breadcrumb_data' => $breadcrumb_data['name'],
+                'page' => 'list_of_product_category'
             ]);
 
-        }catch(\Exception $exception){
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
+        }
+    }
+
+    function displayListOfProduct()
+    {
+        try {
+
+            $menuModel = $this->model('MenuModel');
+            $categoryModel = $this->model('CategoryModel');
+            $slug = SlugHelper::getSlugFromURL();
+
+            $paginayionService = new PaginationService($menuModel, $categoryModel);
+
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+            $product = $paginayionService->fetchPaginationRows($slug, (int) $page, 10);
+            $total_page = $paginayionService->getTotalPage($slug, 10);
+
+            $this->view('home', [
+                'product' => $product,
+                'current_page' => $page,
+                'total_page' => $total_page,
+                'next_page' => SlugHelper::Next($page, $total_page),
+                'previous_page' => SlugHelper::Previous($page),
+                'breadcrumb_data' => 'Product',
+                'page' => 'list_of_product',
+            ]);
+        } catch (\Exception $exception) {
             echo $exception->getMessage();
         }
     }

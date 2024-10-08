@@ -1,10 +1,10 @@
 <?php
-// session_start();
-//Hàm khởi động các sessions
-//Muốn các file chứa biến toàn cục(global variables) liến kết với nhau thì các file đó phải có session_start()
-//Nên đặt đầu tiền của file php.
-// include('../Controller/controller.php');
-include_once ('admin/includes/header.php');
+$imageUrl = $_ENV["PICTURE_URL"];
+use Mvc\Controllers\Setting;
+$headerController = new Setting();
+
+$header = $headerController->fetchHeaderData();
+include_once('admin/includes/header.php');
 ?>
 <div class="container">
 
@@ -22,13 +22,13 @@ include_once ('admin/includes/header.php');
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     <?php
-                                     if (isset($_SESSION['status']) &&  $_SESSION['status']!="") {
-                                        echo '<h2 class="bg-danger text-white">'.$_SESSION['status'].'</h2>';
+                                    if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
+                                        echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
                                         unset($_SESSION['status']);
-                                     }
+                                    }
                                     ?>
                                 </div>
-                                <form class="user" action="login" method="POST">
+                                <form class="user" action=<?= $_ENV['BASE_URL'] . "/login" ?> method="POST">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" name="email"
                                             aria-describedby="emailHelp" placeholder="Enter Email Address...">
@@ -44,7 +44,8 @@ include_once ('admin/includes/header.php');
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="javascript:void(0)" onclick="redirectTo('public/Register/')">Create an Account!</a>
+                                    <a class="small" href="javascript:void(0)"
+                                        onclick="redirectTo('public/Register')">Create an Account!</a>
                                 </div>
                             </div>
                         </div>
@@ -59,5 +60,5 @@ include_once ('admin/includes/header.php');
 </div>
 
 <?php
-include_once ('admin/includes/scripts.php');
+include_once('admin/includes/scripts.php');
 ?>

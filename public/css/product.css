@@ -1,9 +1,11 @@
 /*Product*/
 
-.product1 button {
+.product1 .btn {
+  text-transform: uppercase;
+  font-weight: 600;
   color: white;
   background-color: transparent;
-  padding: 10px 10px;
+  padding: 10px 20px;
   border-color: white;
   border-radius: 6px;
   font-size: 14px;
@@ -96,7 +98,7 @@
   color: #c92027;
   text-align: center;
   font-size: 50px;
-  margin: 2em 0 1em 0em;
+  margin: 2rem 0 4rem;
   position: relative;
   display: flex;
   justify-content: center;
@@ -250,7 +252,7 @@ product3 */
   }
 
   .pseudo {
-    width: 1.2em;
+    width: 1.2rem;
     height: 4px;
   }
 
@@ -273,13 +275,13 @@ product3 */
 
   .title {
     font-size: 2.5rem;
-    margin: 1rem 0;
+    margin: 3rem 0; 
   }
 
   .pseudo {
     width: 2.5rem;
     height: 3px;
-    bottom: -2em;
+    bottom: -2rem;
   }
 
   .comp {

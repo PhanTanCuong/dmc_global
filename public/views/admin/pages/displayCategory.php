@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="category_type">Type</label>
-                        <select class="form-control" id="edit_navbar_status" name="edit_navbar_status" required>
+                        <select class="form-control" id="category_type" name="category_type" required>
                             <option value="post">Post</option>
                             <option value="product">Product</option>
                         </select>

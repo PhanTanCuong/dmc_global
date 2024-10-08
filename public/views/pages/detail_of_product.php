@@ -78,10 +78,7 @@
         margin-top: 10px;
     }
 
-    /* Sidebar */
-    .sidebar {
-        padding-left: 20px;
-    }
+    
 
 
 
@@ -155,6 +152,7 @@
         <h1 class="title  wow slideInLeft"> related products
             <p class="pseudo"></p>
         </h1>
+        <?php $product_url=$_ENV['BASE_URL'] . '/list-product-by-category' . '/' . $data['product_category']?>
         <?php include('partials/product_items.php') ?>
     </section>
 </main>

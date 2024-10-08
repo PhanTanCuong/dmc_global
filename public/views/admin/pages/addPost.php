@@ -6,7 +6,7 @@
 <div class="card shadow mb-4 mx-4">
     <form action="addNews" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
-            <div class="form-group" style="display:<?= $data['display'] ?>">
+            <div class="form-group" style="display:<?= (int)$_COOKIE['parent_id'] === 44 ? "none" : "block" ?>">
                 <label for="category">Category</label>
                 <select class="form-control " name="category" id="news_category">
                     <?php foreach ($data["product_categories"] as $category): ?>

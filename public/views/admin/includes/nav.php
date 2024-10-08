@@ -36,7 +36,8 @@
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Product');">Products</a>
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">News</a>
                 <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(32,'public/Admin/News');">Abouts</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(44,'public/Admin/News');">Services</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(44,'public/Admin/News');">Business Services</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(73,'public/Admin/Cooperation');">Cooperation</a>
 
             </div>
         </div>
@@ -67,11 +68,8 @@
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
                     Category
                 </div>
-                <div class="collapse-item" data-toggle="collapse" data-target="#collapse-others" aria-expanded="false">
+                <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">
                     Menu
-                    <div id="collapse-others" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">Items</a>
-                    </div>
                 </div>
                 <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('public/Admin/Customize');">
                     Setting

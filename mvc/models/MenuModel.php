@@ -63,7 +63,8 @@ class MenuModel extends DB
                 }
             }
 
-            return null;
+            return false;
+
 
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();

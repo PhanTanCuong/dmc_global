@@ -16,6 +16,8 @@
                             <a href="<?= $links ?>"><?= $rows['title'] ?></a>
                         </h3>
                         <p class="description"><?= $rows['description'] ?></p>
+                        <a href="<?= $_ENV["NEWS_URL"] . '/' . $rows['slug'] ?>" class="btn-custom">Read
+                            more</a>
                     </div>
                 <?php endwhile; ?>
             <?php endif; ?>

@@ -3,15 +3,14 @@
     <section id="about">
         <section class="about1">
 
-            <div class="slideshow-container">
-                <?php
-                if (mysqli_num_rows($data["banner"]) > 0) {
-                    while ($rows = mysqli_fetch_array($data["banner"])) {
+            <div class="slideshow-container"> <?php
+            if (mysqli_num_rows($data["banner"]) > 0) {
+                while ($rows = mysqli_fetch_array($data["banner"])) {
 
-                        $banner_pic = $rows['image'];
-                        $image_path = $_ENV["PICTURE_URL"] . '/' . $banner_pic;
-                        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
-                            ?>
+                    $banner_pic = $rows['image'];
+                    $image_path = $_ENV["PICTURE_URL"] . '/' . $banner_pic;
+                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
+                        ?>
                             <div class="item" style="position:relative;">
                                 <img src="<?= $image_path ?>" class="img-fluid">
                                 <div class="text-banner">
@@ -21,18 +20,16 @@
                                 </div>
                             </div>
                             <?php
-                        }
                     }
                 }
-                ?>
+            }
+            ?>
 
         </section>
         <section class="about2">
             <div class="container">
-                <?php
-                if (mysqli_num_rows($data["about2Infor"]) > 0) {
-                    while ($rows = mysqli_fetch_array($data["about2Infor"])) {
-                        ?>
+                <?php if (mysqli_num_rows($data["about2Infor"]) > 0): ?>
+                    <?php while ($rows = mysqli_fetch_array($data["about2Infor"])): ?>
                         <div class="grid-container wow fadeInRight" data-wow-delay="400ms">
                             <div class="image img-container">
                                 <img src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="image">
@@ -46,10 +43,8 @@
                                 <button>View more</button>
                             </div>
                         </div>
-                        <?php
-                    }
-                }
-                ?>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
         </section>
         <section class="about3">
@@ -72,7 +67,7 @@
                             style="background:url(<?= $imageUrl . '/' . $rows['image'] ?>)">
                             <div class="image-container" data-wow-delay="400ms">
                                 <div class="image">
-                                    <img src="<?= $imageUrl . $rows['image'] ?>" alt="img">
+                                    <img src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="img">
                                 </div>
                             </div>
                             <div class="txt2-container" data-wow-delay="400ms"
@@ -98,7 +93,9 @@
                         <div class="our-products wow pulse">
                             <h1><?= $rows['title'] ?></h1>
                             <p><?= $rows['description'] ?></p>
-                            <button>VIEW MORE</button>
+                            <a href="<?= $_ENV["BASE_URL"] . '/product' ?>" class="btn btn-custom">
+                                VIEW MORE
+                            </a>
                         </div>
                     </section>
                 <?php endwhile; ?>
@@ -106,43 +103,36 @@
             <h1 class="title  wow slideInLeft">products
                 <p class="pseudo"></p>
             </h1>
+            <?php use Mvc\Utils\SlugHelper ?>
+            <?php $product_url = $_ENV['BASE_URL'] . '/list-product-by-category' . '/' . SlugHelper::getSlugFromURL(); ?>
             <?php include('partials/product_items.php') ?>
 
             </div>
         </section>
         <section id="media">
-            <?php
-            if (mysqli_num_rows($data["bg_stat"]) > 0) {
-                while ($rows = mysqli_fetch_array($data["bg_stat"])) {
-                    $stat_bg = $rows['image'];
-                    $image_path = $imageUrl . '/' . $stat_bg;
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)) {
-                        ?>
-                        <section class="stats" style="background:url(<?= $image_path ?>); ">
+            <?php if (mysqli_num_rows($data["bg_stat"]) > 0): ?>
+                <?php while ($rows = mysqli_fetch_array($data["bg_stat"])): ?>
+                    <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . $image_path)): ?>
+                        <section class="stats" style="background:url(<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?>); ">
                             <div class="stat-grid wow fadeI">
-                                <?php
-                                if (mysqli_num_rows($data["stats"]) > 0) {
-                                    while ($rows = mysqli_fetch_array($data["stats"])) {
-                                        ?>
+                                <?php if (mysqli_num_rows($data["stats"]) > 0): ?>
+                                    <?php while ($rows = mysqli_fetch_array($data["stats"])): ?>
                                         <div class="stat">
                                             <div class="stat-ic wow flipInY">
-                                                <img class="flash" src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="Icon">
+                                                <img class="flash" src="<?= $_ENV['PICTURE_URL'] . '/' . $rows['image'] ?> ?>" alt="Icon">
                                             </div>
                                             <div class="stat-text wow fadeInDown">
                                                 <h3><?= $rows['title'] ?></h3>
                                                 <p><?= $rows['description'] ?></p>
                                             </div>
                                         </div>
-                                        <?php
-                                    }
-                                }
-                                ?>
+                                    <?php endwhile; ?>
+                                <?php endif; ?>
                         </section>
-                        <?php
-                    }
-                }
-            }
-            ?>
-        </section>
-        <?php include('partials/post_items.php') ?>
+                    </section>
+                <?php endif; ?>
+            <?php endwhile; ?>
+        <?php endif; ?>
+    </section>
+    <?php include('partials/post_items.php') ?>
 </main>

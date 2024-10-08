@@ -65,7 +65,7 @@ class Product extends Controller
         try {
             if (isset($_POST['addProductBtn'])) {
                 //Input fields
-                $category_id = $_POST['category'];
+                $category_id = (int)$_POST['category'];
                 $title = $_POST['product_title'];
                 $slug = $_POST['product_slug'];
                 $short_description = $_POST['product_description'];

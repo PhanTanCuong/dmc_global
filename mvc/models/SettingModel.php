@@ -1,6 +1,6 @@
 <?php
-
 use Core\DB;
+
 
 class SettingModel extends DB
 {
@@ -36,7 +36,7 @@ class SettingModel extends DB
                         WHERE icon.block_id = 1
             ";
             $stmt=$this->connection->prepare($query);
-            return ($stmt->execute([$name,$image]))?$stmt->get_result():false;
+            return $stmt->execute([$name,$image]);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -55,15 +55,7 @@ class SettingModel extends DB
         }
     }
 
-    // public function getCategory()
-    // {
-    //     try {
-    //         $query = "SELECT * FROM product_category";
-    //       return $this->connection->query($query);
-    //     } catch (mysqli_sql_exception $e) {
-    //         echo $e->getMessage();
-    //     }
-    // }
+   
 
     public function getNavBarItem()
     {

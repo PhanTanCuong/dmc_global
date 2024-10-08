@@ -22,26 +22,30 @@ class CategoryService extends DB
     public function preferenceCategoryId($category_id)
     {
         try {
-            $subCategory = $this->categoryModel->getCategoryById($category_id);
+            $subCategory = mysqli_fetch_assoc($this->categoryModel->getCategoryById($category_id));
 
-            if ($subCategory) {
-                foreach ($subCategory as $field) {
-                    $table_name = $field['type'];
-                    $id = $field['id'];
-                }
-                $query = "SELECT title,description,slug,image FROM $table_name WHERE category_id=?";
-                $stmt = $this->connection->prepare($query);
-                $stmt->bind_param("i", $id);
-                if ($stmt->execute()) {
-                    $result = $stmt->get_result();
-                    return $result->fetch_all(MYSQLI_ASSOC); ;
-                }
+            if (!$subCategory) {
+                return json_encode(null);
             }
 
-            return null;
+            $table_name = $subCategory['type'];
+            $id = $subCategory['id'];
+
+            $query = "SELECT title,description,slug,image FROM $table_name WHERE category_id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+
+            if (!$stmt->execute()) {
+                return json_encode(null);
+            }
+
+            $result = $stmt->get_result();
+            // $result->fetch_all(MYSQLI_ASSOC);
+
+            return json_encode($result->fetch_all(MYSQLI_ASSOC));
 
         } catch (\mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
+            return json_encode(['error' => $e->getMessage()]);
         }
     }
     public function getSubCategoryData($slug)
@@ -49,11 +53,10 @@ class CategoryService extends DB
         try {
             // Lấy danh mục cha dựa trên slug
             $parent_category = $this->menuModel->directPage($slug);
-            foreach ($parent_category as $field) {
-                $parent_id = $field['id'];
-            }
+            $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
+            $parent_id = $parent_category['id'];
 
-            unset($field);// Xóa biến để tránh xung đột
+            $categoryModel= new CategoryModel();
 
             $subCategories = $this->categoryModel->getCategory($parent_id);
 
@@ -61,7 +64,7 @@ class CategoryService extends DB
 
             foreach ($subCategories as $subCategory) {
 
-                $items = $this->preferenceCategoryId($subCategory['id']);
+                $items = json_decode($this->preferenceCategoryId($subCategory['id']),true);
 
                 //Tạo mảng item của danh mục con sản phẩm/bài viết
                 $itemData = [];
@@ -74,11 +77,35 @@ class CategoryService extends DB
                     'items' => $itemData // Các sản phẩm hoặc bài viết thuộc danh mục con
                 ];
             }
+
             unset($subCategory);
 
-            return $subCategoriesData;
+            return json_encode($subCategoriesData);
 
         } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getDataByCategory($slug){
+        try{
+            $category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
+            $preference_id = $category['id'];
+
+            return $this->preferenceCategoryId($preference_id);
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function getProductCategory($slug){
+        try{
+            $product = mysqli_fetch_assoc($this->menuModel->directPage($slug));
+            $type_id=$product['type_id'];
+
+            $category =mysqli_fetch_assoc($this->categoryModel->getCategoryById($type_id));
+            return $category['slug'];
+        }catch(\Exception $e){
             echo $e->getMessage();
         }
     }

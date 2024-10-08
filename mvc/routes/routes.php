@@ -5,11 +5,21 @@ use Core\Route;
 Route::get('/', 'Home@display');
 
 // Sản phẩm và danh mục
-Route::post('/Product/fetchProductCategory', 'Product@fetchProductCategory');
+Route::post('Product/fetchProductCategory', 'Product@fetchProductCategory');
 Route::get('product-categories/([a-zA-Z0-9_-]+)', 'Product@display');
 Route::get('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
 Route::get('list-product-by-category/([a-zA-Z0-9_-]+)', 'Product@displayListOfProductByCategory');
-Route::get('about-us/([a-zA-Z0-9_-]+)', 'Post@displayAbout');
+Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
+Route::get('news/([a-zA-Z0-9_-]+)', 'News@displayNewsDetail');
+Route::get('news', 'News@display');
+
+Route::get('business-services', 'Service@display');
+Route::get('product', 'Product@displayListOfProduct');
+Route::get('cooperation', 'Cooperation@display');
+Route::get('list-news-by-category/([a-zA-Z0-9_-]+)-news', 'News@displayNewsByCategory');
+Route::get('404', 'NotFound@display');
+
+
 
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');
@@ -46,6 +56,7 @@ Route::post('Admin/deleteNews', 'Media@deleteNews');
 Route::post('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
 Route::post('Admin/News/editNews', 'Media@editNews');
 
+
 // Admin quản lý slide
 Route::get('Admin/Slider', 'Slider@display');
 Route::post('Admin/addBanner', 'Slider@addBanner');
@@ -60,6 +71,8 @@ Route::post('Admin/NavBar/getNavBarById/(\d+)', 'NavBar@getNavBarById');
 Route::post('Admin/customizeNavBar', 'NavBar@customizeNavBar');
 Route::post('Admin/deleteNavBar', 'NavBar@deleteNavBar');
 Route::post('Admin/sortNavbarItem', 'NavBar@sortNavbarItem');
+Route::post('Admin/editChildItems', 'NavBar@editChildItems');
+
 
 // Admin quản lý danh mục
 Route::get('Admin/Category', 'Category@display');
@@ -68,16 +81,36 @@ Route::post('Admin/Category/getCategoryById/(\d+)', 'Category@getCategoryById');
 Route::post('Admin/customizeCategory', 'Category@customizeCategory');
 Route::post('Admin/deleteCategory', 'Category@deleteCategory');
 
-//Setting
+// Admin quản lý trang cooperation
+Route::get('Admin/Cooperation', 'Cooperation@display');
+Route::post('Admin/editCooperation', 'Cooperation@editCooperation');
+
+//Admin quản lý thiết lập
 Route::get('Admin/Customize', 'Customize@display');
 Route::post('Admin/customizeTab', 'Customize@customizeTab');
 Route::post('Admin/customizeLogo', 'Customize@customizeLogo');
 Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterLogo');
+Route::post('Admin/customizeFooterLogo', 'Customize@customizeFooterBackground');
+Route::post('Admin/Customize/getDataById/(\d+)', 'Customize@getDataById');
+Route::post('Admin/editFooterData', 'Customize@editFooterData');
+Route::post('Admin/customizeQuickLink', 'Customize@customizeQuickLink');
 
-//Data
+
+//Admin quản lý icons
+Route::post('Admin/deleteIcons', 'Icons@deleteIcons');
+Route::post('Admin/customizeIcons', 'Icons@customizeIcons');
+Route::post('Admin/addIcons', 'Icons@addIcons');
+Route::post('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
+
+
+
+//Admin quản lý layout
 Route::get('Admin/Data', 'Data@display');
 Route::post('Admin/addData','Data@addData');
 Route::post('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
 Route::post('Admin/customizeData','Data@customizeData');
 Route::post('Admin/deleteData','Data@deleteData');
+
+
+
 ?>
