@@ -9,16 +9,18 @@ Route::post('Product/fetchProductCategory', 'Product@fetchProductCategory');
 Route::get('product-categories/([a-zA-Z0-9_-]+)', 'Product@display');
 Route::get('product/([a-zA-Z0-9_-]+)', 'Product@displayProductDetail');
 Route::get('list-product-by-category/([a-zA-Z0-9_-]+)', 'Product@displayListOfProductByCategory');
-Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
+Route::get('list-news-by-category/([a-zA-Z0-9_-]+)-news', 'News@displayNewsByCategory');
+Route::get('product', 'Product@displayListOfProduct');
 Route::get('news/([a-zA-Z0-9_-]+)', 'News@displayNewsDetail');
 Route::get('news', 'News@display');
 
 //pages
 Route::get('business-services', 'Service@display');
-Route::get('product', 'Product@displayListOfProduct');
 Route::get('cooperation', 'Cooperation@display');
-Route::get('list-news-by-category/([a-zA-Z0-9_-]+)-news', 'News@displayNewsByCategory');
+Route::get('media', 'Media@display');
+Route::get('contact-us', 'Contact@display');
 Route::get('404', 'NotFound@display');
+Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
 Route::get('', 'Home@display');
 
 

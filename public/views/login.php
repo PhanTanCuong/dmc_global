@@ -21,12 +21,7 @@ include_once('admin/includes/header.php');
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    <?php
-                                    if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
-                                        echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';
-                                        unset($_SESSION['status']);
-                                    }
-                                    ?>
+                                    <?php include('admin/includes/Notification.php')?>
                                 </div>
                                 <form class="user" action=<?= $_ENV['BASE_URL'] . "/login" ?> method="POST">
                                     <div class="form-group">

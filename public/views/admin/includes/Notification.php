@@ -24,6 +24,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != "") {
     position: fixed;
     z-index: 1;
     right: 0;
+    bottom: 0;
     padding-right: 30px;
     margin-bottom: 20px;
   }
