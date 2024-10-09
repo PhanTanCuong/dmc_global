@@ -17,6 +17,7 @@ return array(
     'Mvc\\Utils\\' => array($baseDir . '/mvc/utils'),
     'Mvc\\Services\\' => array($baseDir . '/mvc/services'),
     'Mvc\\Models\\' => array($baseDir . '/mvc/models'),
+    'Mvc\\Middleware\\' => array($baseDir . '/mvc/middleware'),
     'Mvc\\Controllers\\Admin\\' => array($baseDir . '/mvc/controllers/admin'),
     'Mvc\\Controllers\\' => array($baseDir . '/mvc/controllers'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),

@@ -37,6 +37,7 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
             'Mvc\\Utils\\' => 10,
             'Mvc\\Services\\' => 13,
             'Mvc\\Models\\' => 11,
+            'Mvc\\Middleware\\' => 15,
             'Mvc\\Controllers\\Admin\\' => 22,
             'Mvc\\Controllers\\' => 16,
         ),
@@ -98,6 +99,10 @@ class ComposerStaticInit7422faf8f33d1f1cdfca8767e0ffc0f4
         'Mvc\\Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/mvc/models',
+        ),
+        'Mvc\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/mvc/middleware',
         ),
         'Mvc\\Controllers\\Admin\\' => 
         array (
