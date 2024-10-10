@@ -58,11 +58,6 @@
                     ?>
                         <div class="item" style="position:relative;">
                             <img src="<?= $image_path ?>" class="img-fluid">
-                            <div class="text-banner">
-                                <h1><?= $rows['title'] ?></h1>
-                                <p><?= $rows['description'] ?></p>
-                                <button>View more</button>
-                            </div>
                         </div>
                         <?php
                 }

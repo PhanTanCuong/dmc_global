@@ -12,7 +12,7 @@ class Home extends Controller
         $about= $this->model("SettingModel");
         $product=$this->model("ProductModel");
         $this->view("index", [
-            "banner"=>$banner->getInforBanner(1),
+            "banner"=>$banner->getInforBanner(0),
             "about2Infor"=>$about->getLayoutbyId(3,1),
             "product"=>$product->getProductByProductCategory(1),
             "media"=>$product->getProductByProductCategory(1),

@@ -32,9 +32,7 @@
         grid-template-columns: 1fr 1fr;
     }
 
-    .col-md-6 input,
-    .col-md-12 input,
-    .col-md-12 textarea {
+    :is(input, textarea) {
         width: 100%;
         padding: 8px 15px;
     }
@@ -49,7 +47,7 @@
         justify-items: center;
     }
 
-    .section__map{
+    .section__map {
         padding-bottom: 2rem;
     }
 
@@ -70,7 +68,7 @@
         /* Tỷ lệ khung hình 16:9 */
     }
 
-     iframe {
+    iframe {
         position: absolute;
         top: 0;
         left: 0;
@@ -79,7 +77,7 @@
     }
 
     @media only screen and (max-width: 768px) {
-        .section__contact .grid {
+        :is(.section__connect, .section__contact) .grid {
             grid-template-columns: 1fr;
         }
 
