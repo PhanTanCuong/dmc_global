@@ -21,27 +21,34 @@ class AccountModel extends DB
     //Total number of user
     public function totalUser()
     {
-        try{
+        try {
             $query = "SELECT id FROM register ORDER BY id";
             $result = mysqli_query($this->connection, $query);
-    
+
             // Check for query execution error
             if (!$result) {
                 die('Query failed: ' . mysqli_error($this->connection));
             }
             $total = mysqli_num_rows($result);
             return $total;
-        }catch(mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
-        
+
     }
 
     //get account infor by id
     public function getAccountbyId($id)
     {
-        $query_run = "SELECT * FROM register where id='$id'";
-        return mysqli_query($this->connection, $query_run);
+        try {
+            $query = "SELECT * FROM register where id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            return $stmt->get_result();
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     //add user account function
@@ -82,8 +89,10 @@ class AccountModel extends DB
     public function deleteAccount($id)
     {
         try {
-            $query_run = "DELETE FROM register WHERE id='$id'";
-            return mysqli_query($this->connection, $query_run);
+            $query = "DELETE FROM register WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

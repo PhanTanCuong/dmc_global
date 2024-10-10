@@ -13,5 +13,5 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // echo $id->uuid4();
 
 // environment variables
-\Dotenv\Dotenv::createImmutable(__DIR__."/../")->load();
+\Dotenv\Dotenv::createImmutable(__DIR__."/.."."/")->load();
 

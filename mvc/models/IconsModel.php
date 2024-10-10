@@ -8,9 +8,12 @@ class IconsModel extends DB
     {
         try {
             $query = "SELECT * FROM icon
-                        WHERE block_id = '$id'
+                        WHERE block_id = ?
                         AND image <> 'footer.png'";
-          return $this->connection->query($query);
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -23,7 +26,7 @@ class IconsModel extends DB
             $stmt = $this->connection->prepare($query);
             $id = 7;
             $stmt->bind_param("is", $id, $image);
-             if ($stmt->execute()) {
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
@@ -35,8 +38,11 @@ class IconsModel extends DB
     public function getIconsById($id)
     {
         try {
-            $query = "SELECT * FROM icon WHERE id='$id'";
-          return $this->connection->query($query);
+            $query = "SELECT * FROM icon WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -47,7 +53,7 @@ class IconsModel extends DB
             $query = "UPDATE icon SET image=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $image, $id);
-             if ($stmt->execute()) {
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
@@ -55,11 +61,13 @@ class IconsModel extends DB
             echo $e->getMessage();
         }
     }
-        public function deleteIcons($id)
+    public function deleteIcons($id)
     {
         try {
-            $query = "DELETE FROM icon WHERE id='$id'";
-          return $this->connection->query($query);
+            $query = "DELETE FROM icon WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

@@ -4,6 +4,7 @@ namespace Mvc\Controllers;
 
 use Core\Controller;
 use Mvc\Services\SidebarService;
+use Core\Container;
 class Setting extends Controller
 {
     function fetchFooterData()
@@ -40,10 +41,11 @@ class Setting extends Controller
     function fetchSideBarData()
     {
         try {
-            $sidebarService = new SidebarService();
+           
             $footerData = $this->model("SettingModel");
             return [
-                "sidebar_data"  => $sidebarService->getSidebarData(),
+                // "sidebar_data"  => (new Container())->get(SidebarService::class)->getSidebarData(),
+                "sidebar_data"=>(new SidebarService())->getSidebarData(),
                 "icon" => $footerData->getFooterIconInfor(),
             ];
 

@@ -20,7 +20,7 @@ class ProductModel extends DB
 
     public function getAllProduct()
     {
-        $query ="SELECT title, description,slug,image FROM product";
+        $query = "SELECT title, description,slug,image FROM product";
         return $this->connection->query($query);
     }
 
@@ -147,8 +147,10 @@ class ProductModel extends DB
     public function getCurrentProductImages($id)
     {
         try {
-            $query = "SELECT image FROM product WHERE id='$id'";
-            return $this->connection->query($query);
+            $query = "SELECT image FROM product WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -158,8 +160,10 @@ class ProductModel extends DB
     public function deleteProduct($id)
     {
         try {
-            $query_run = "DELETE FROM product WHERE id='$id'";
-            return mysqli_query($this->connection, $query_run);
+            $query = "DELETE FROM product WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -186,8 +190,10 @@ class ProductModel extends DB
     public function toggleCheckboxDelete($id, $visible)
     {
         try {
-            $query = "UPDATE product SET visible='$visible' WHERE id ='$id'";
-            return $this->connection->query($query);
+            $query = "UPDATE product SET visible=? WHERE id =?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("si", $visible, $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
