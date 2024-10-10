@@ -11,6 +11,7 @@ class SliderModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

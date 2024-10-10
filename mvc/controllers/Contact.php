@@ -11,6 +11,8 @@ class Contact extends Controller
             $contact = $this->model('ProductModel');
             
             $this->view("index",[
+                "about_us"=>$this->model('CategoryModel')->getCategory(32),
+                "infor_mail"=>(new \Mvc\Services\SidebarService())->getSidebarData(),
                 "connect"=>$contact->getProductByProductCategory(1),
                 "contact"=>$contact->getProductByProductCategory(1),
                 "page" => "contact"

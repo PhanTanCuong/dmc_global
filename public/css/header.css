@@ -1,6 +1,6 @@
 /* 
 Kiểm tra vỡ màn hình */
- /* * {
+/* * {
   outline: 1px solid red;
 }
 
@@ -12,25 +12,24 @@ li {
   list-style: none;
 } */
 
-root{
+root {
   font-size: 16px;
 }
 body,
 html {
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
 }
 
 body {
   background: #f5f5f5 none repeat scroll 0 0;
   color: #363636;
   font-family: var(--primary-font), sans-serif;
-  font-size: 16px
+  font-size: 16px;
 }
-
 
 h1,
 h2,
@@ -38,68 +37,67 @@ h3,
 h4,
 h5,
 h6 {
-    color: #292b2c
+  color: #292b2c;
 }
 
 p {
-    color: #474747;
-    line-height: 1.5em;
-    margin-bottom: 15px
+  color: #474747;
+  line-height: 1.5em;
+  margin-bottom: 15px;
 }
 
 a {
-    color: #292b2c;
-    transition: all .3s ease-in-out
+  color: #292b2c !important;
+  transition: all 0.3s ease-in-out;
 }
 
 a,
 a:hover {
-    text-decoration: none !important;
-    color:unset;
+  text-decoration: none !important;
 }
 
 a:hover {
-    color: var(--color-1st)
+  color: #c92027;
 }
 
 a:focus {
-    outline: none
+  outline: none;
 }
 
 img {
-    max-width: 100%
+  max-width: 100%;
 }
 
 button {
-    transition: all .3s ease-in-out
+  transition: all 0.3s ease-in-out;
 }
 
 li,
 ol,
 ul {
-    margin: 0;
-    padding: 0
+  margin: 0;
+  padding: 0;
 }
 ul {
   list-style-type: none;
 }
 label {
-    color: #6c757d
+  color: #6c757d;
 }
 
 input:focus,
 textarea:focus {
-    box-shadow: none;
-    outline: none
+  box-shadow: none;
+  outline: none;
 }
 
 iframe {
-    border: 0;
-    display: block
+  border: 0;
+  display: block;
 }
 
-.image{
-  width:100%;
+.image {
+  width: 100%;
 }
 /* Header */
 header {
@@ -113,7 +111,7 @@ h1 {
   margin: 0;
 }
 
-section{
+section {
   background-color: #f5f5f5 !important;
 }
 
@@ -187,7 +185,7 @@ nav ul li button {
 }
 
 nav ul li a:hover {
-  color: #c92027;
+  color: #c92027 !important;
 }
 
 /* btn search */
