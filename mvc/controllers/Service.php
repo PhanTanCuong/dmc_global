@@ -11,7 +11,7 @@ class Service extends Controller
     function display()
     {
         try {
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $slug = SlugHelper::getSlugFromURL();
 

@@ -14,7 +14,7 @@ class Product extends Controller
 
         //Model
         $product = $this->model("ProductModel");
-        $menuModel = $this->model('MenuModel');
+        $menuModel = $this->model("PageModel");
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
@@ -42,7 +42,7 @@ class Product extends Controller
     {
         try {
 
-            $product = $this->model('MenuModel');
+            $product = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($product, $categoryModel);
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
@@ -62,7 +62,7 @@ class Product extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
@@ -87,7 +87,7 @@ class Product extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $slug = SlugHelper::getSlugFromURL();
 

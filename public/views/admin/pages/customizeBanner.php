@@ -87,7 +87,7 @@
           <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
         </div>
         <form action="Slider" method="GET">
-          <input type="hidden" name="product_category_id" value="0">
+          <input type="hidden" name="page" value="0">
           <button type="submit" class="list-group-item list-group-item-action">
             <?= 'Home' ?>
           </button>
@@ -95,7 +95,7 @@
         <?php if (mysqli_num_rows($data["product_categories"]) > 0): ?>
           <?php while ($row = mysqli_fetch_array($data["product_categories"])): ?>
             <form action="Slider" method="GET">
-              <input type="hidden" name="product_category_id" value="<?= $row['id']; ?>">
+              <input type="hidden" name="page" value="<?= $row['id']; ?>">
               <button type="submit" class="list-group-item list-group-item-action">
                 <?= $row['name']; ?>
               </button>

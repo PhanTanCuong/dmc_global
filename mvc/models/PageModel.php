@@ -1,7 +1,7 @@
 <?php
 use Core\DB;
 
-class MenuModel extends DB
+class PageModel extends DB
 {
 
     

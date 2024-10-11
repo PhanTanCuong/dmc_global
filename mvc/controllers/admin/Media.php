@@ -137,7 +137,7 @@ class Media extends Controller
                 if (is_numeric($preference_id) && $preference_id > 0) {
 
                     //add to slug center
-                    $this->model('MenuModel')->addMenu($slug, 'post', $preference_id);
+                    $this->model("PageModel")->addMenu($slug, 'post', $preference_id);
 
                     //Upload image data vào folder upload
                     move_uploaded_file(
@@ -205,7 +205,7 @@ class Media extends Controller
                 );
                 if ($success) {
 
-                    // $this->model('MenuModel')->updateMenu($category_id,$id);
+                    // $this->model("PageModel")->updateMenu($category_id,$id);
 
                     move_uploaded_file(
                         $_FILES["news_image"]["tmp_name"],
@@ -237,7 +237,7 @@ class Media extends Controller
 
                 $result = $news->deleteNews($id);
                 if ($result) {
-                    $this->model('MenuModel')->deleteMenu($id);
+                    $this->model("PageModel")->deleteMenu($id);
                     $_SESSION['success'] = 'Your data is deleted';
                     header('Location:News');
                 } else {

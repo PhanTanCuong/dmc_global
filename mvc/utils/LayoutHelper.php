@@ -39,12 +39,12 @@ class LayoutHelper{
 
     public static function getCategoryIdSlider(){
         try{
-            if (isset($_GET['product_category_id'])) {
+            if (isset($_GET['page'])) {
                 setcookie("product_category_id", "", time() - 3600);
-                setcookie("product_category_id", $_GET['product_category_id'], time() + 3600);
-                $product_category_id = $_GET['product_category_id'];
+                setcookie("product_category_id", $_GET['page'], time() + 3600);
+                $product_category_id = $_GET['page'];
             } else {
-                $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
+                $product_category_id = isset($_COOKIE['page']) ? $_COOKIE['page'] : 1;
             }
 
             return $product_category_id;

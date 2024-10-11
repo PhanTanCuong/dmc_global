@@ -1,6 +1,6 @@
 <?php
 namespace Mvc\Services;
-use MenuModel;
+use PageModel;
 use CategoryModel;
 use Core\DB;
 
@@ -8,7 +8,7 @@ class CategoryService extends DB
 {
 
     public function __construct(
-        protected MenuModel $menuModel,
+        protected PageModel $menuModel,
         protected CategoryModel $categoryModel
     ) {
         parent::__construct();

@@ -12,7 +12,7 @@ class News extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
@@ -37,7 +37,7 @@ class News extends Controller
     function displayAbout()
     {
         try {
-            $menu = $this->model('MenuModel');
+            $menu = $this->model("PageModel");
 
             $post = $menu->directPage(SlugHelper::getSlugFromURL());
 
@@ -54,7 +54,7 @@ class News extends Controller
     function displayNewsByCategory()
     {
         try {
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
@@ -77,7 +77,7 @@ class News extends Controller
     {
         try {
 
-            $post = $this->model('MenuModel');
+            $post = $this->model("PageModel");
             $category = $this->model('CategoryModel');
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());

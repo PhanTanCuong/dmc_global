@@ -1,14 +1,14 @@
 <?php
 namespace Mvc\Services;
 use Exception;
-use MenuModel;
+use PageModel;
 use CategoryModel;
 use Core\DB;
 
 class PaginationService extends DB
 {
     public function __construct(
-        protected MenuModel $menuModel,
+        protected PageModel $menuModel,
         protected CategoryModel $categoryModel
     ) {
         parent::__construct();

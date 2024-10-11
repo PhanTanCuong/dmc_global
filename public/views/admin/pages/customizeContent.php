@@ -3,12 +3,6 @@ include("partials/headerInformation.php");
 include("partials/Logo.php");
 include("partials/footerBackground.php");
 ?>
-<!-- <style>
-    .drag-n-drop-box{
-        height: 35vh;
-    }
-</style> -->
-<!-- Footer background -->
 
 <div class="modal fade" id="editData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

@@ -47,7 +47,7 @@ p {
 }
 
 a {
-  color: #292b2c !important;
+  color: #292b2c ;
   transition: all 0.3s ease-in-out;
 }
 

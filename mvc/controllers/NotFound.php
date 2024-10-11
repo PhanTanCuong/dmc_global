@@ -9,7 +9,7 @@ class NotFound extends Controller
     function display()
     {
         try {
-            $post = $this->model('MenuModel');
+            $post = $this->model("PageModel");
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
 

@@ -120,5 +120,7 @@ Route::post('Admin/customizeData','Data@customizeData');
 Route::post('Admin/deleteData','Data@deleteData');
 
 
+//Admin quản lý layout
+Route::get('Admin/layout','Layout@display');
 
 ?>
