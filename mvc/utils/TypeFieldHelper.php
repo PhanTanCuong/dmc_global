@@ -1,5 +1,8 @@
 <?php
+declare(strict_types=1);
 namespace Mvc\Utils;
+
+use Mvc\Utils\ImageHelper as ImageHelper;
 
 class TypeFieldHelper
 {
@@ -16,6 +19,20 @@ class TypeFieldHelper
 
         } catch (\Exception $e) {
             throw new \Exception("Error setting field type: " . $e->getMessage());
+        }
+    }
+
+    public static function trim(string $value){
+        try{
+            if(! empty($value) && is_string($value)){
+                return trim($value);
+            }
+
+            
+
+
+        }catch(\Exception $e){
+            throw new \Exception("Error trim: ".$e->getMessage());
         }
     }
 }

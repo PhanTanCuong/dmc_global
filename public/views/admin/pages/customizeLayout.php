@@ -11,25 +11,33 @@
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Layout</h6>
         </div>
-        <div class="form-group">
-          <label for="page">Page</label>
-          <select name="page" id="page-selector" class="form-control">
-            <?php foreach ($data["selected_page"] as $page): ?>
-              <option value="<?= $page["id"] ?>"><?= $page["name"] ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div id="layout-container" class="form-group">
-          <label for="layout">Layout</label>
-          <select name="layout" id="layout-selector" class="form-control">
-            <?php if (mysqli_num_rows($data["layout"]) > 0): ?>
-              <?php while ($row = mysqli_fetch_array($data["layout"])): ?>
-                <option value="<?= $row["block_id"] ?>"><?= $row["name"] ?></option>
-              <?php endwhile; ?>
-            <?php endif; ?>
-          </select>
+        <form id="layout-form" action="layout" method="GET">
+          <div class="form-group">
+            <label for="page">Page</label>
+            <select name="page" id="page-selector" class="form-control">
+              <?php foreach ($data["selected_page"] as $page): ?>
+                <option value="<?= $page["id"] ?>" <?= (isset($_GET['page']) && $_GET['page'] == $page["id"]) ? 'selected' : '' ?>>
+                  <?= str_repeat('|---', $page["level"]) . $page["name"] ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div id="layout-container" class="form-group">
+            <label for="layout">Layout</label>
+            <select name="layout" id="layout-selector" class="form-control">
+              <?php if (mysqli_num_rows($data["layout"]) > 0): ?>
+                <?php while ($row = mysqli_fetch_array($data["layout"])): ?>
+                  <option value="<?= $row["block_id"] ?>" <?= (isset($_GET['layout']) && $_GET['layout'] == $row["block_id"]) ? 'selected' : '' ?>><?= $row["name"] ?></option>
+                <?php endwhile; ?>
+              <?php endif; ?>
+            </select>
+          </div>
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary" style="margin: 0 20px 10px;">Submit</button>
+        </form>
 
-        </div>
+        <div id="response-container"></div>
+
         <!-- <button class="btn btn-add btn-primary"><i class="fas fa-plus"></i></button> -->
       </div>
     </div>
@@ -40,7 +48,9 @@
       <form action="addContent" method="POST" enctype="multipart/form-data">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Basic Container</h3>
+            <h3 class="m-0 font-weight-bold text-primary">
+              Content
+            </h3>
           </div>
           <div class="card-body">
             <!-- Title Field -->
@@ -61,9 +71,8 @@
               <label for="image">Image</label>
               <input type="file" class="form-control-file" id="image" name="image">
             </div>
-
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button name="addContentBtn" type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </form>
@@ -88,7 +97,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button name="addContentBtn" type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </form>
@@ -118,39 +127,6 @@
               <input type="file" class="form-control-file" id="link" name="image">
             </div>
 
-            <!-- Optional Link Field -->
-            <div class="form-group">
-              <label for="image_link">Link (optional)</label>
-              <input type="url" class="form-control" id="image_link" name="link"
-                placeholder="Enter link (optional)">
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </form>
-
-      <!-- Text Container -->
-      <form action="addContent" method="POST" enctype="multipart/form-data">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">Text Container</h3>
-          </div>
-          <div class="card-body">
-            <!-- Button Text Field -->
-            <div class="form-group">
-              <label for="button_name">Text</label>
-              <input type="text" class="form-control" id="button_name" name="title" placeholder="Enter button name">
-            </div>
-
-            <!-- Button SubText Field -->
-            <div class="form-group">
-              <label for="button_link">Description</label>
-              <input type="text" class="form-control" id="button_link" name="description"
-                placeholder="Enter button link">
-            </div>
-
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
@@ -167,15 +143,18 @@
 <script>
   $(document).ready(function () {
     // Function to add a new option
-    $(".btn-add").click(function () {
-      const newOption = `
-               <a class="list-group-item list-group-item-action"></a>`;
-      $('#layout-container').append(newOption);
-    });
+    // $(".btn-add").click(function () {
+    //   const newOption = `
+    //            <a class="list-group-item list-group-item-action"></a>`;
+    //   $('#layout-container').append(newOption);
+    // });
 
     // Function to remove an option
     // $(document).on("click", ".btn-remove", function () {
     //   $(this).closest('.option-item').remove();
     // });
+
+
+
   });
 </script>
