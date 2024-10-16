@@ -64,10 +64,14 @@ class ImageHelper
         }
     }
 
-    public static function isImageFile($file)
+    public static function isImageFile( $file)
     {
-        if (isset($file) && file_exists($file['tmp_name'])) {
-            $info = getimagesize($file['tmp_name']);
+        $fileName= $file['tmp_name'];
+        if(is_array($fileName)){
+            $fileName=(string)$fileName['image'];
+        }
+        if (isset($file) && file_exists($fileName)) {
+            $info = getimagesize($fileName);
             if ($info === false) {
                 return false;
             }

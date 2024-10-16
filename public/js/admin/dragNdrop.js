@@ -56,7 +56,10 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
             success: function(response) {
                 toastr.success('Success ! Your data is updated.');            
             },
-            error: function(xhr, status, error) {
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
                 toastr.error('Error! Your data is NOT updated');
             }
         });

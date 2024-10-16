@@ -5,47 +5,67 @@ class LayoutService
 {
     public function __construct(protected \ContentModel $contentModel)
     {
-
     }
 
     public function addContent(array $array, int $layoutId)
     {
-        foreach ($_POST as $key => $field) {
-            //Ktra có cùng loại không 
-            $type = TypeFieldHelper::setFieldType($key);
+        foreach ($array as $key => $field) {
 
-            if ($type == null) {
-                break;
+            //gán biến container
+            $container = TypeFieldHelper::gettringBeforeBracket($key);
+            if (isset($_FILES[$key]['name']) && $_FILES[$key]['name']['image'] !=='') {
+                $image = $_FILES[$key]['name'];
+                $this->addImageField((string)$image["image"], $layoutId, $container);
             }
 
-            //gán  data
-            $data = TypeFieldHelper::trim($field);
+            foreach ($field as $name => $value) {
 
-            $this->contentModel->addContent($layoutId, $type, $data, 'content');
+              
+                
+                //Ktra có cùng loại không 
+                $sanitizeType = preg_replace('/[^a-z]/', '', $name);
+                $type = TypeFieldHelper::setFieldType($sanitizeType);
+
+                if ($type == null) {
+                    continue;
+                }
+
+                //gán  data
+                $data = TypeFieldHelper::trim($value);
+
+                if ($data !== null) {
+                    $this->contentModel->addContent($layoutId, $type, $data, $container);
+                }
+            }
+
         }
 
         return true;
     }
 
 
-    public function addImageField(string $fileName, int $layoutId)
+
+
+    public function addImageField(string $fileName, int $layoutId, string $container)
     {
         try {
-            $image = $_ENV['PICTURE_URL'] . '/' . $_FILES["image"]["name"];
+            $image = $_ENV['PICTURE_URL'] . '/' . $fileName;
             $type = 'image';
-            if (\Mvc\Utils\ImageHelper::isImageFile($_FILES["image"]) === false) {
+            if (\Mvc\Utils\ImageHelper::isImageFile($_FILES[(string)$container]) === false) {
                 $_SESSION['status'] = 'Incorrect image type';
-                header('Location:../layout');
+                header('Location:../Admin/layout');
                 die();
             }
 
-            $result = $this->contentModel->addContent($layoutId, $type, $image, 'content');
+            $result = $this->contentModel->addContent($layoutId, $type, $image, $container);
 
+            $imageUpload=$_FILES[$container]["tmp_name"];
+            
             if ($result) {
                 $filepath = dirname(__DIR__, 3) . "\public\images\\" . $fileName;
                 move_uploaded_file(
-                    $_FILES["image"]["tmp_name"],
-                    $filepath
+                    $fileName,
+                    $imageUpload['image']
                 ) . '';
             }
             return true;

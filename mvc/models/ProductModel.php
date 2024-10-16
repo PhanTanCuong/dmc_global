@@ -150,7 +150,8 @@ class ProductModel extends DB
             $query = "SELECT image FROM product WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
-            return $stmt->execute();
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

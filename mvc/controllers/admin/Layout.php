@@ -13,13 +13,13 @@ class Layout extends Controller
     {
         $layout = $this->model("LayoutModel");
         if (isset($_GET['page'])) {
-            setcookie("page_id", "", time() - 3600);
-            setcookie("page_id", $_GET['page'], time() + 3600);
+            setcookie("page_id", "", time() - 60*60*1000);
+            setcookie("page_id", $_GET['page'], time() + 60*60*1000);
         }
 
         if (isset($_GET['layout'])) {
-            setcookie("layout_id", "", time() - 3600);
-            setcookie("layout_id", $_GET['layout'], time() + 3600);
+            setcookie("layout_id", "", time() - 60*60*1000);
+            setcookie("layout_id", $_GET['layout'], time() + 60*60*1000);
         }
 
         $this->view("admin/home", [
@@ -32,38 +32,31 @@ class Layout extends Controller
     function addContent()
     {
         try {
-            if (!isset($_POST["addContentBtn"])) {
-                throw new Exception("Layout not found");
-            }
             $pageId = (int) $_COOKIE["page_id"];
             $layoutId = (int) $_COOKIE["layout_id"];
 
             $LayoutService = new LayoutService($this->model('ContentModel'));
 
             $result = false;
-            //add input fields except image field
+      
             $result = $LayoutService->addContent($_POST, $layoutId);
 
             //add image fields
-            if (isset($_FILES["image"]['name'])) {
-                $image = $_FILES["image"]['name'];
-                $result = $LayoutService->addImageField($image, $layoutId);
-            }
 
 
-            $result = $this->model("LayoutModel")->addPagelayout($pageId, $layoutId);
+            $saveResult = $this->model("LayoutModel")->addPagelayout($pageId, $layoutId);
 
-            if ($result === true) {
-                $_SESSION['success'] = "Data saved successfully";
-                header("Location: layout");
+            if ($result === true && $saveResult === true) {
+                // Nếu thành công
+                echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
             } else {
-                $_SESSION['status'] = "Data  did NOT save successfully";
-                header("Location: layout");
+                // Nếu lỗi
+                echo json_encode(['success' => false, 'message' => 'Data did not save successfully']);
             }
 
 
         } catch (Exception $e) {
-            echo $e->getMessage();
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
 
