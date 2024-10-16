@@ -136,10 +136,6 @@
     </div>
   </div>
 
-  <!-- jQuery và Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
   <!-- AJAX Script -->
   <script>
     $(document).ready(function() {
@@ -157,18 +153,18 @@
           processData: false,
           dataType: 'json',
           success: function(response) {
-            if (response.success) {
-              
+            // if (response.success===true) {
+              toastr.success(response.message);
               // Có thể reset form hoặc cập nhật UI tùy ý
               $('#combined-form')[0].reset();
               $('.collapse').collapse('hide');
-            } else {
-              alert(response.message);
-            }
+            // } else {
+            //   toastr.error(response.message);
+            // }
           },
           error: function(xhr, status, error) {
             console.error(xhr.responseText);
-            alert('Có lỗi xảy ra khi gửi dữ liệu.');
+            toastr.error('Có lỗi xảy ra khi gửi dữ liệu.');
           }
         });
       });

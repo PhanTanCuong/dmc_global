@@ -35,24 +35,23 @@ class Layout extends Controller
             $pageId = (int) $_COOKIE["page_id"];
             $layoutId = (int) $_COOKIE["layout_id"];
 
-            $LayoutService = new LayoutService($this->model('ContentModel'));
+            $contentModel=$this->model('ContentModel');
+            $layoutModel=$this->model('LayoutModel');
 
-            $result = false;
+            $LayoutService = new LayoutService($contentModel,$layoutModel);
       
-            $result = $LayoutService->addContent($_POST, $layoutId);
+            $result = $LayoutService->addContent($_POST, $layoutId,$pageId);
 
             //add image fields
 
-
-            $saveResult = $this->model("LayoutModel")->addPagelayout($pageId, $layoutId);
-
-            if ($result === true && $saveResult === true) {
-                // Nếu thành công
-                echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
-            } else {
+            if (! $result) {
                 // Nếu lỗi
                 echo json_encode(['success' => false, 'message' => 'Data did not save successfully']);
-            }
+                die();
+            } 
+
+            echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
+
 
 
         } catch (Exception $e) {

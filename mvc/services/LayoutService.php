@@ -3,11 +3,11 @@ namespace Mvc\Services;
 use Mvc\Utils\TypeFieldHelper;
 class LayoutService
 {
-    public function __construct(protected \ContentModel $contentModel)
+    public function __construct(protected \ContentModel $contentModel, protected \LayoutModel $layoutModel)
     {
     }
 
-    public function addContent(array $array, int $layoutId)
+    public function addContent(array $array, int $layoutId, int $pageId)
     {
         foreach ($array as $key => $field) {
 
@@ -19,8 +19,6 @@ class LayoutService
             }
 
             foreach ($field as $name => $value) {
-
-              
                 
                 //Ktra có cùng loại không 
                 $sanitizeType = preg_replace('/[^a-z]/', '', $name);
@@ -39,6 +37,10 @@ class LayoutService
             }
 
         }
+
+        if(! $this->layoutModel->addPagelayout($pageId, $layoutId)){
+            return false;
+        };
 
         return true;
     }

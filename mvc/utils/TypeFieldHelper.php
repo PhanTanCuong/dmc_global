@@ -13,7 +13,7 @@ class TypeFieldHelper
             $types = ['title', 'description', 'subtitle', 'image', 'link', 'button'];
 
             if (in_array($key, $types)) {
-                return $key;
+                    return $key;
             }
 
             return null;
