@@ -19,9 +19,9 @@ class Home extends Controller
         $this->view("index", [
             "banner"=>$banner->getInforBanner(0),
             "about2Infor"=>$LayoutService->fetchLayout(3),
-            "product"=>$product->getProductByProductCategory(1),
-            "media"=>$product->getProductByProductCategory(1),
-            "contact"=>$about->getLayoutbyId(5,1),
+            "product"=>$LayoutService->fetchLayout(5),
+            "media"=>$LayoutService->fetchLayout(8),
+            "vision"=>$LayoutService->fetchLayout(11),
             "page" => "home"
         ]); 
     }

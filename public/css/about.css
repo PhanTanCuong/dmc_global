@@ -265,6 +265,8 @@
   }
   .grid-container {
     flex-direction: column;
+    padding: 0;
+    gap: unset;
   }
   .chld-img-container {
     width: 38%;
@@ -274,9 +276,6 @@
     border-bottom-right-radius: 60px;
   }
 
-  .grid-container {
-    padding: 0;
-  }
 
   /* about 3 */
   .grid2-container {

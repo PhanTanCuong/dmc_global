@@ -87,6 +87,13 @@
                         placeholder="Enter description"></textarea>
                     </div>
 
+                    <!-- Link Field -->
+                    <div class="form-group">
+                      <label for="content_description">Description</label>
+                      <input class="form-control" id="content_link  " name="content[0][link]"
+                        placeholder="Enter link"></input>
+                    </div>
+
                     <!-- Image Field -->
                     <div class="form-group">
                       <label for="content_image">Image</label>
