@@ -11,5 +11,17 @@ class ContentModel extends DB{
             echo "Error: ". $e->getMessage();
         }
     }
+
+    public function getContentByBlockId($block_id){
+        try{
+            $query ="SELECT * FROM content WHERE block_id=?";
+            $stmt= $this->connection->prepare($query);
+            $stmt->bind_param("i",$block_id);
+            $stmt->execute();
+            return $stmt->get_result();
+        }catch(mysqli_sql_exception $e){
+            echo $e->getMessage();
+        }
+    }
 }
 ?>

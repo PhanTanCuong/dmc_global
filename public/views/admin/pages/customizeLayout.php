@@ -165,7 +165,7 @@
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" name="action" value="addContent" class="btn btn-primary"
+              <button type="submit" name="action" value="addContent" class="btn btn-primary ml-3"
                 id="addContentBtn">Submit</button>
             </div>
           </div>
