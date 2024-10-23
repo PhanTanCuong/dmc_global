@@ -66,10 +66,8 @@ class ImageHelper
 
     public static function isImageFile( $file)
     {
-        $fileName= $file['tmp_name'];
-        if(is_array($fileName)){
-            $fileName=(string)$fileName['image'];
-        }
+        $fileName=$file['tmp_name'];
+
         if (isset($file) && file_exists($fileName)) {
             $info = getimagesize($fileName);
             if ($info === false) {
@@ -83,5 +81,31 @@ class ImageHelper
         }
 
         return false;
+    }
+    
+    public static function isImageField($file){
+        $total=count($file['tmp_name']);
+
+        for($i=0;$i<$total;$i++){
+            $fileName=$file['tmp_name'][$i]['image'];
+            if($fileName===null){
+                continue;
+            }
+            if (isset($file) && file_exists($fileName)) {
+                $info = getimagesize($fileName);
+                if ($info === false) {
+                    return false;
+                }
+    
+                $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (in_array($info['mime'], $validMimeTypes)) {
+                    return true;
+                }
+            }
+    
+            return false;
+        }
+
+        return true;
     }
 }

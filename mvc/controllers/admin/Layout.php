@@ -32,6 +32,7 @@ class Layout extends Controller
     function addContent()
     {
         try {
+
             $pageId = (int) $_COOKIE["page_id"];
             $layoutId = (int) $_COOKIE["layout_id"];
 
@@ -51,9 +52,6 @@ class Layout extends Controller
             } 
 
             echo json_encode(['success' => true, 'message' => 'Data saved successfully']);
-
-
-
         } catch (Exception $e) {
             echo json_encode(['error' => $e->getMessage()]);
         }

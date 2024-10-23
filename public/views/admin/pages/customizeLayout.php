@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dynamic Content Management</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .form-group {
-      padding: 10px 20px 0;
-    }
-  </style>
-</head>
+<style>
+  .form-group {
+    padding: 10px 20px 0;
+  }
+
+  .btn-control {
+    /* border-top: 3px solid #007bff; */
+  }
+</style>
+
 <body>
   <div class="container-fluid">
     <div class="row">
@@ -58,77 +55,118 @@
               <h3 class="m-0 font-weight-bold text-primary">Content Management</h3>
             </div>
             <div class="card-body">
-              <!-- Content Container -->
+              <!-- Title Container -->
               <div class="form-group">
-                <input type="checkbox" id="contentContainer"  value="content" data-toggle="collapse" data-target="#contentContainerContent">
-                <label for="contentContainer">Include Content Container</label>
+                <label for="content_title">Title</label>
+                <input type="text" class="form-control" id="title" name="title[0][title]" placeholder="Enter title">
+              </div>
+              <!-- Content Container -->
+              <div class="btn-control d-flex flex-row  justify-content-between align-items-center">
+                <div class="form-group">
+                  <input type="checkbox" id="contentContainer" value="content" data-toggle="collapse"
+                    data-target="#contentContainerContent">
+                  <label for="contentContainer">Include Content Container</label>
+                </div>
+                <button type="button" class="btn btn-primary mr-3" id="duplicateContentBtn"><i
+                    class="fa fa-plus"></i></button>
               </div>
               <div id="contentContainerContent" class="collapse">
-                <!-- Title Field -->
-                <div class="form-group">
-                  <label for="content_title">Title</label>
-                  <input type="text" class="form-control" id="content_title" name="content[title]" placeholder="Enter title">
-                </div>
+                <div id="formContainerContent">
+                  <div id="contentTemplate">
+                    <!-- Title Field -->
+                    <div class="form-group">
+                      <label for="content_title">Title</label>
+                      <input type="text" class="form-control" id="content_title" name="content[0][title]"
+                        placeholder="Enter title">
+                    </div>
 
-                <!-- Description Field -->
-                <div class="form-group">
-                  <label for="content_description">Description</label>
-                  <textarea class="form-control" id="content_description" name="content[description]" rows="3" placeholder="Enter description"></textarea>
-                </div>
+                    <!-- Description Field -->
+                    <div class="form-group">
+                      <label for="content_description">Description</label>
+                      <textarea class="form-control" id="content_description" name="content[0][description]" rows="3"
+                        placeholder="Enter description"></textarea>
+                    </div>
 
-                <!-- Image Field -->
-                <div class="form-group">
-                  <label for="content_image">Image</label>
-                  <input type="file" class="form-control-file" id="content_image" name="content[image]">
+                    <!-- Image Field -->
+                    <div class="form-group">
+                      <label for="content_image">Image</label>
+                      <input type="file" class="form-control-file" id="content_image" name="content[0][image]">
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <!-- Button Container -->
-              <div class="form-group">
-                <input type="checkbox" id="buttonContainer"  value="button" data-toggle="collapse" data-target="#buttonContainerContent">
-                <label for="buttonContainer">Include Button Container</label>
+              <div class="btn-control d-flex flex-row  justify-content-between align-items-center">
+                <div class="form-group">
+                  <input type="checkbox" id="buttonContainer" value="button" data-toggle="collapse"
+                    data-target="#buttonContainerContent">
+                  <label for="buttonContainer">Include Button Container</label>
+                </div>
               </div>
               <div id="buttonContainerContent" class="collapse">
                 <!-- Button Name Field -->
                 <div class="form-group">
                   <label for="button_name">Button Name</label>
-                  <input type="text" class="form-control" id="button_name" name="button[title]" placeholder="Enter button name">
+                  <input type="text" class="form-control" id="button_name" name="button[0][title]"
+                    placeholder="Enter button name">
                 </div>
 
                 <!-- Button Link Field -->
                 <div class="form-group">
                   <label for="button_link">Button Link</label>
-                  <input type="url" class="form-control" id="button_link" name="button[link]" placeholder="Enter button link">
+                  <input type="text" class="form-control" id="button_link" name="button[0][link]"
+                    placeholder="Enter button link">
                 </div>
               </div>
 
               <!-- Icon Container -->
-              <div class="form-group">
-                <input type="checkbox" id="iconContainer"  value="icon" data-toggle="collapse" data-target="#iconContainerContent">
-                <label for="iconContainer">Include Icon Container</label>
+              <div class="btn-control d-flex flex-row  justify-content-between align-items-center">
+                <div class="form-group">
+                  <input type="checkbox" id="iconContainer" value="icon" data-toggle="collapse"
+                    data-target="#iconContainerContent">
+                  <label for="iconContainer">Include Icon Container</label>
+                </div>
+                <button type="button" class="btn btn-primary mr-3" id="duplicateIconBtn"><i
+                    class="fa fa-plus"></i></button>
               </div>
+
               <div id="iconContainerContent" class="collapse">
-                <!-- Title Field -->
-                <div class="form-group">
-                  <label for="icon_title">Title</label>
-                  <input type="text" class="form-control" id="icon_title" name="icon[title]" placeholder="Enter title">
-                </div>
+                <div id="formIconContainer">
+                  <div id="iconTemplate">
+                    <!-- Title Field -->
+                    <div class="form-group">
+                      <label for="icon_title">Title</label>
+                      <input type="text" class="form-control" id="icon_title" name="icon[0][title]"
+                        placeholder="Enter title">
+                    </div>
 
-                <!-- Subtitle Field -->
-                <div class="form-group">
-                  <label for="icon_subtitle">Subtitle</label>
-                  <input type="text" class="form-control" id="icon_subtitle" name="icon[subtitle]" placeholder="Enter subtitle">
-                </div>
+                    <!-- Subtitle Field -->
+                    <div class="form-group">
+                      <label for="icon_subtitle">Subtitle</label>
+                      <input type="text" class="form-control" id="icon_subtitle" name="icon[0][subtitle]"
+                        placeholder="Enter subtitle">
+                    </div>
 
-                <!-- Image Field -->
-                <div class="form-group">
-                  <label for="icon_image">Image</label>
-                  <input type="file" class="form-control-file" id="icon_image" name="icon[image]">
+                    <!-- Description Field -->
+                    <div class="form-group">
+                      <label for="icon_subtitle">Subtitle</label>
+                      <input type="text" class="form-control" id="icon_subtitle" name="icon[0][description]"
+                        placeholder="Enter subtitle">
+                    </div>
+
+                    <!-- Image Field -->
+                    <div class="form-group">
+                      <label for="icon_image">Image</label>
+                      <input type="file" class="form-control-file" id="icon_image" name="icon[0][image]">
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" name="action" value="addContent" class="btn btn-primary"
+                id="addContentBtn">Submit</button>
             </div>
           </div>
         </form>
@@ -137,9 +175,12 @@
   </div>
 
   <!-- AJAX Script -->
+  <script type="text/javascript" src="/dmc_global/public/js/admin/duplicateItem.js?v=<?= microtime() ?>"></script>
   <script>
-    $(document).ready(function() {
-      $('#combined-form').on('submit', function(e) {
+    $(document).ready(function () {
+      //Nhân đôi 
+
+      $('#combined-form').on('submit', function (e) {
         e.preventDefault();
 
         // Tạo đối tượng FormData để bao gồm cả file
@@ -152,23 +193,29 @@
           contentType: false,
           processData: false,
           dataType: 'json',
-          success: function(response) {
-            // if (response.success===true) {
-              toastr.success(response.message);
-              // Có thể reset form hoặc cập nhật UI tùy ý
-              $('#combined-form')[0].reset();
-              $('.collapse').collapse('hide');
-            // } else {
-            //   toastr.error(response.message);
-            // }
+          success: function (response) {
+            if (response.success===true) {
+            toastr.success(response.message);
+            // reset form
+            $('#combined-form')[0].reset();
+            $('.collapse').collapse('hide');
+            } else {
+              toastr.error(response.message);
+            }
           },
-          error: function(xhr, status, error) {
+          error: function (xhr, status, error) {
             console.error(xhr.responseText);
             toastr.error('Có lỗi xảy ra khi gửi dữ liệu.');
           }
         });
       });
+      duplicateTemplate('#duplicateContentBtn', 'formContainerContent', 'contentTemplate')
+      duplicateTemplate('#duplicateIconBtn', 'formIconContainer', 'iconTemplate')
+
+
+
     });
   </script>
 </body>
+
 </html>

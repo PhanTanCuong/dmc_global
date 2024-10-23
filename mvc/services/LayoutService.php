@@ -9,38 +9,32 @@ class LayoutService
 
     public function addContent(array $array, int $layoutId, int $pageId)
     {
-        foreach ($array as $key => $field) {
-
-            //gán biến container
-            $container = TypeFieldHelper::gettringBeforeBracket($key);
-            if (isset($_FILES[$key]['name']) && $_FILES[$key]['name']['image'] !=='') {
-                $image = $_FILES[$key]['name'];
-                $this->addImageField((string)$image["image"], $layoutId, $container);
-            }
-
-            foreach ($field as $name => $value) {
+        foreach ($array as $container => $content) {
+            foreach ($content as $index => $item) {
                 
-                //Ktra có cùng loại không 
-                $sanitizeType = preg_replace('/[^a-z]/', '', $name);
-                $type = TypeFieldHelper::setFieldType($sanitizeType);
+                if (isset($_FILES[$container]['name']) && $_FILES[$container]['name'][$index]['image'] !== '') {
+                    $image = $_FILES[$container]['name'];
+                    $this->addImageField((string) $image[$index]["image"], $layoutId, $container, $index);
+                }
+                
+                foreach ($item as $type => $value) {
+                    if ($value === "") {
+                        continue;
+                    }
+                    //gán  data
+                    $this->contentModel->addContent($layoutId, $type, $value, $container, $index);
 
-                if ($type == null) {
-                    continue;
+                  
                 }
 
-                //gán  data
-                $data = TypeFieldHelper::trim($value);
 
-                if ($data !== null) {
-                    $this->contentModel->addContent($layoutId, $type, $data, $container);
-                }
             }
 
         }
 
-        if(! $this->layoutModel->addPagelayout($pageId, $layoutId)){
+        if (!$this->layoutModel->addPagelayout($pageId, $layoutId)) {
             return false;
-        };
+        }
 
         return true;
     }
@@ -48,21 +42,21 @@ class LayoutService
 
 
 
-    public function addImageField(string $fileName, int $layoutId, string $container)
+    public function addImageField(string $fileName, int $layoutId, string $container, int $item)
     {
         try {
             $image = $_ENV['PICTURE_URL'] . '/' . $fileName;
             $type = 'image';
-            if (\Mvc\Utils\ImageHelper::isImageFile($_FILES[(string)$container]) === false) {
+            if (\Mvc\Utils\ImageHelper::isImageField($_FILES[(string) $container]) === false) {
                 $_SESSION['status'] = 'Incorrect image type';
                 header('Location:../Admin/layout');
                 die();
             }
 
-            $result = $this->contentModel->addContent($layoutId, $type, $image, $container);
+            $result = $this->contentModel->addContent($layoutId, $type, $image, $container, $item);
 
-            $imageUpload=$_FILES[$container]["tmp_name"];
-            
+            $imageUpload = $_FILES[$container]["tmp_name"][$item];
+
             if ($result) {
                 $filepath = dirname(__DIR__, 3) . "\public\images\\" . $fileName;
                 move_uploaded_file(

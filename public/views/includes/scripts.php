@@ -33,22 +33,6 @@
         new WOW().init();
     })
 </script>
-<!-- <script>
-    $(document).ready(function() {
-      ScrollReveal().reveal('.logo');
-      ScrollReveal().reveal('.grid-container', {
-        delay: 500
-      });
-      ScrollReveal().reveal('.comp', {
-        delay: 200
-      });
-      ScrollReveal().reveal('.news-item ', {
-        delay: 200
-      });
-
-    })
-  </script> -->
-
 <script>
     $(document).ready(function() {
         $('.toogle').click(function() {

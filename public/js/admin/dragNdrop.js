@@ -1,46 +1,46 @@
 
 function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
-  // Sự kiện khi bắt đầu kéo
-  $('.' + draggableItem).on('dragstart', function(event) {
-      event.originalEvent.dataTransfer.setData('text', event.target.dataset.id);
-  });
+    // Sự kiện khi bắt đầu kéo
+    $('.' + draggableItem).on('dragstart', function (event) {
+        event.originalEvent.dataTransfer.setData('text', event.target.dataset.id);
+    });
 
-  // Sự kiện khi thả vào vùng availableItems
-  $('#' + availableItemsId).on('dragover', function(event) {
-      event.preventDefault();
-  }).on('drop', function(event) {
-      event.preventDefault();
-      var data = event.originalEvent.dataTransfer.getData('text');
-      var draggedItem = $('[data-id="' + data + '"]');
-      $('#' + availableItemsId).append(draggedItem);
-  });
+    // Sự kiện khi thả vào vùng availableItems
+    $('#' + availableItemsId).on('dragover', function (event) {
+        event.preventDefault();
+    }).on('drop', function (event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData('text');
+        var draggedItem = $('[data-id="' + data + '"]');
+        $('#' + availableItemsId).append(draggedItem);
+    });
 
-  // Sự kiện khi thả vào vùng selectedItems
-  $('#' + selectedItemsId).on('dragover', function(event) {
-      event.preventDefault();
-  }).on('drop', function(event) {
-      event.preventDefault();
-      var data = event.originalEvent.dataTransfer.getData('text');
-      var draggedItem = $('[data-id="' + data + '"]');
-      $('#' + selectedItemsId).append(draggedItem);
-  });
+    // Sự kiện khi thả vào vùng selectedItems
+    $('#' + selectedItemsId).on('dragover', function (event) {
+        event.preventDefault();
+    }).on('drop', function (event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData('text');
+        var draggedItem = $('[data-id="' + data + '"]');
+        $('#' + selectedItemsId).append(draggedItem);
+    });
 }
 
-  function setupDragAndSubmit(submitButtonId, selectedItemsId, quickLinkInputId, url) {
-    $('#' + submitButtonId).on('click', function(event){
+function setupDragAndSubmit(submitButtonId, selectedItemsId, quickLinkInputId, url) {
+    $('#' + submitButtonId).on('click', function (event) {
         event.preventDefault();
 
         // Mảng dữ liệu được chọn 
         var selectedItems = [];
 
-        $('#' + selectedItemsId + ' .draggable-item').each(function() {
+        $('#' + selectedItemsId + ' .draggable-item').each(function () {
             // Đưa thông tin từng draggable items vào mảng
             selectedItems.push({
                 id: $(this).data('id').trim().replace(/\//g, ''),  // Loại bỏ các dấu "/" nếu có
                 name: $(this).text().trim().replace(/^[^\w\/]+|[^\w\/]+$/g, '')  // Xóa ký tự đặc biệt đầu và cuối
             });
         });
-        
+
 
         // Lấy giá trị của quick_link_id từ input hidden
         var quickLinkId = $('#' + quickLinkInputId).val();
@@ -53,10 +53,10 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
                 selectedItems: JSON.stringify(selectedItems),
                 quick_link_id: quickLinkId
             },
-            success: function(response) {
-                toastr.success('Success ! Your data is updated.');            
+            success: function (response) {
+                toastr.success('Success ! Your data is updated.');
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(errorThrown);
@@ -66,4 +66,3 @@ function initDragAndDrop(draggableItem, availableItemsId, selectedItemsId) {
     });
 }
 
-  

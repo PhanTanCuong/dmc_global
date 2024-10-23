@@ -1,35 +1,4 @@
-var content_container = `
-<form action="addContent" method="POST" enctype="multipart/form-data" class="add-content">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h3 class="m-0 font-weight-bold text-primary">
-              Content
-            </h3>
-          </div>
-          <div class="card-body">
-            <!-- Title Field -->
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
-            </div>
 
-            <!-- Description Field -->
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3"
-                placeholder="Enter description"></textarea>
-            </div>
-
-            <!-- Image Field -->
-            <div class="form-group">
-              <label for="image">Image</label>
-              <input type="file" class="form-control-file" id="image" name="image">
-            </div>
-            <!-- Submit Button -->
-          </div>
-        </div>
-      </form>
-`;
 
 var icon_container = `
   <!-- Icon Container -->
