@@ -4,8 +4,9 @@ use Core\DB;
 
 class CategoryModel extends DB
 {
-    public function __construct(){
-        parent ::__construct();
+    public function __construct()
+    {
+        parent::__construct();
     }
     //Product Category
     public function getInforCategory()
@@ -67,24 +68,24 @@ class CategoryModel extends DB
         }
     }
 
-    public function addCategoryInfor($name, $slug, $parent_id, $level,$type)
+    public function addCategoryInfor($name, $slug, $parent_id, $level, $type)
     {
         try {
             $query = "INSERT INTO category (name,slug,parent_id,level,type) VALUES (?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssiis", $name, $slug, $parent_id, $level,$type);
+            $stmt->bind_param("ssiis", $name, $slug, $parent_id, $level, $type);
             return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function customizeInforCategory($id, $name, $slug, $parent_id, $level,$type)
+    public function customizeInforCategory($id, $name, $slug, $parent_id, $level, $type)
     {
         try {
             $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=?,type=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("ssiisi", $name, $slug, $parent_id, $level,$type, $id);
+            $stmt->bind_param("ssiisi", $name, $slug, $parent_id, $level, $type, $id);
             return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -95,8 +96,10 @@ class CategoryModel extends DB
     public function deleteCategory($id)
     {
         try {
-            $query = "DELETE FROM category WHERE id='$id'";
-            return $this->connection->query($query);
+            $query = "DELETE FROM category WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -169,20 +172,20 @@ class CategoryModel extends DB
             $stmt->bind_param("s", $slug);
             $stmt->execute();
             $result = $stmt->get_result();
-    
+
             // Kiểm tra kết quả trả về và lấy hàng đầu tiên
             if ($row = $result->fetch_assoc()) {
                 return $row['id'];
             }
-    
+
             // Trả về null nếu không tìm thấy
             return null;
-    
+
         } catch (mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-    
+
 }
 
 ?>

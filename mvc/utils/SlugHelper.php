@@ -36,7 +36,7 @@ class SlugHelper
     protected static function isSlugExists($slug)
     {
         try {
-            $menuModel = new \MenuModel();
+            $menuModel = new \PageModel();
 
             $query = "SELECT COUNT(*) FROM menu WHERE slug=?";
             $stmt = $menuModel->connection->prepare($query);

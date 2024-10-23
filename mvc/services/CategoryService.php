@@ -1,20 +1,17 @@
 <?php
 namespace Mvc\Services;
-use MenuModel;
+use PageModel;
 use CategoryModel;
 use Core\DB;
 
 class CategoryService extends DB
 {
-    private $menuModel;
-    private $categoryModel;
 
-
-    public function __construct(MenuModel $menuModel, CategoryModel $categoryModel)
-    {
+    public function __construct(
+        protected PageModel $menuModel,
+        protected CategoryModel $categoryModel
+    ) {
         parent::__construct();
-        $this->menuModel = $menuModel; //Dependency Injection design pattern
-        $this->categoryModel = $categoryModel;
     }
 
 
@@ -56,7 +53,7 @@ class CategoryService extends DB
             $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $parent_id = $parent_category['id'];
 
-            $categoryModel= new CategoryModel();
+            $categoryModel = new CategoryModel();
 
             $subCategories = $this->categoryModel->getCategory($parent_id);
 
@@ -64,7 +61,7 @@ class CategoryService extends DB
 
             foreach ($subCategories as $subCategory) {
 
-                $items = json_decode($this->preferenceCategoryId($subCategory['id']),true);
+                $items = json_decode($this->preferenceCategoryId($subCategory['id']), true);
 
                 //Tạo mảng item của danh mục con sản phẩm/bài viết
                 $itemData = [];
@@ -87,25 +84,27 @@ class CategoryService extends DB
         }
     }
 
-    public function getDataByCategory($slug){
-        try{
+    public function getDataByCategory($slug)
+    {
+        try {
             $category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $preference_id = $category['id'];
 
             return $this->preferenceCategoryId($preference_id);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getProductCategory($slug){
-        try{
+    public function getProductCategory($slug)
+    {
+        try {
             $product = mysqli_fetch_assoc($this->menuModel->directPage($slug));
-            $type_id=$product['type_id'];
+            $type_id = $product['type_id'];
 
-            $category =mysqli_fetch_assoc($this->categoryModel->getCategoryById($type_id));
+            $category = mysqli_fetch_assoc($this->categoryModel->getCategoryById($type_id));
             return $category['slug'];
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             echo $e->getMessage();
         }
     }

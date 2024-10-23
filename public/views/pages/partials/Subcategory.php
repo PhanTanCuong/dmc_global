@@ -1,3 +1,8 @@
+<style>
+  .item-infor{
+    text-align: left !important;
+  }
+</style>
 <div class="comp wow fadeIn">
   <a href="<?= $_ENV["PRODUCT_URL"] . '/' . $items['slug'] ?>">
     <img src=<?= $imageUrl . '/' . $items['image'] ?> alt="Image">

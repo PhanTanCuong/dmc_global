@@ -40,11 +40,11 @@ class Signin extends Controller
                     header("Location: " . $_ENV['BASE_URL'] . "/Admin/dashboard");
                     break;
                 case 'user':
-                    header("Location: " . $_ENV['BASE_URL'] . "/product-categories/base-oil");
+                    header("Location: " . $_ENV['BASE_URL'] . "/");
                     break;
                 default:
-                    $_SESSION['status'] = 'Something went wrong!!!';
-                    header("Location: " . $_ENV['BASE_URL'] . "/Sigin");
+                    $_SESSION['status'] = 'Wrong email or password!!!';
+                    header("Location: " . $_ENV['BASE_URL'] . "/Signin");
                     break;
             }
 

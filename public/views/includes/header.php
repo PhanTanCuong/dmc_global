@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/news_button.css?v=<?= microtime() ?>">
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/services.css?v=<?= microtime() ?>">
     <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/404.css?v=<?= microtime() ?>">
+    <link rel="stylesheet" type="text/css" href="/dmc_global/public/css/post.css?v=<?= microtime() ?>">
 
 
     <!-- lib -->

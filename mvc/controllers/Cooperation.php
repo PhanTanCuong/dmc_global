@@ -6,10 +6,10 @@ use Mvc\Utils\SlugHelper;
 class Cooperation extends Controller{
     function display(){
 
-        $menu = $this->model('MenuModel');
+        $menu = $this->model("PageModel");
         $post=$menu->directPage(SlugHelper::getSlugFromURL());
 
-        $this->view('home',[
+        $this->view("index",[
             'post'=>$post,
             'page'=>'cooperation'
         ]);

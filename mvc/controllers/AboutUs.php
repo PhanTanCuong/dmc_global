@@ -9,11 +9,11 @@ class AboutUs extends Controller
     function display()
     {
         try {
-            $post = $this->model('MenuModel');
+            $post = $this->model("PageModel");
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
 
-            $this->view('home', [
+            $this->view("index", [
                 'about' => $post_data,
                 'page' => 'about',
             ]);

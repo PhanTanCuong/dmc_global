@@ -11,7 +11,7 @@ class Service extends Controller
     function display()
     {
         try {
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $slug = SlugHelper::getSlugFromURL();
 
@@ -22,7 +22,7 @@ class Service extends Controller
             $service_data = $paginayionService->fetchPaginationRows($slug, (int) $page, 3);
             $total_page = $paginayionService->getTotalPage($slug, 3);
 
-            $this->view('home', [
+            $this->view("index", [
                 'current_page'=>$page,
                 'service' => $service_data,
                 'total_page' => $total_page,

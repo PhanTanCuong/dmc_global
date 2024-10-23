@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <label for="category_slug">Slug</label>
                         <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug"
-                            required>
+                            >
                     </div>
                     <div class="form-group">
                         <label for="category_parent">Parent</label>

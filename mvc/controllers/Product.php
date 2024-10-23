@@ -14,7 +14,7 @@ class Product extends Controller
 
         //Model
         $product = $this->model("ProductModel");
-        $menuModel = $this->model('MenuModel');
+        $menuModel = $this->model("PageModel");
         $news = $this->model("MediaModel");
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
@@ -25,7 +25,7 @@ class Product extends Controller
 
 
         //View
-        $this->view("home", [
+        $this->view("index", [
             "banner" => $banner->getInforBanner($product_category_id),
             "product" => $product->getProductByProductCategory($product_category_id),
             "news" => $news->getNewsByProductCategory($news_category_id),
@@ -42,12 +42,12 @@ class Product extends Controller
     {
         try {
 
-            $product = $this->model('MenuModel');
+            $product = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($product, $categoryModel);
             $product_data = $product->directPage(SlugHelper::getSlugFromURL());
 
-            $this->view('home', [
+            $this->view("index", [
                 'product_data' => $product_data,
                 'product' => $this->model('ProductModel')->getRelatedProducts(),
                 'product_category'=>$categoryService->getProductCategory(SlugHelper::getSlugFromURL()),
@@ -62,7 +62,7 @@ class Product extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
@@ -72,7 +72,7 @@ class Product extends Controller
             foreach ($selectedCategory as $row) {
                 $breadcrumb_data = mysqli_fetch_assoc($categoryModel->getCategoryById($row['id']));
             }
-            $this->view('home', [
+            $this->view("index", [
                 'product_category' => $product_category,
                 'breadcrumb_data' => $breadcrumb_data['name'],
                 'page' => 'list_of_product_category'
@@ -87,7 +87,7 @@ class Product extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $slug = SlugHelper::getSlugFromURL();
 
@@ -98,7 +98,7 @@ class Product extends Controller
             $product = $paginayionService->fetchPaginationRows($slug, (int) $page, 10);
             $total_page = $paginayionService->getTotalPage($slug, 10);
 
-            $this->view('home', [
+            $this->view("index", [
                 'product' => $product,
                 'current_page' => $page,
                 'total_page' => $total_page,

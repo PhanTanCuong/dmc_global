@@ -14,17 +14,17 @@ class Slider extends Controller
     function display()
     {
         $item = $this->model('SliderModel');
-        if (isset($_COOKIE["parent_id"])) {
-            $parent_id = (int) $_COOKIE["parent_id"];
-            $product_category = $this->model('CategoryModel')->getCategory($parent_id);
+        if (!isset($_COOKIE["parent_id"])) {
+            $_SESSION["status"] = "Invalid parent id cookie";
+            header("Location: " . $_ENV['BASE_URL'] . "/Admin/dashboard");
+            die();
         }
-        if (isset($_GET['product_category_id'])) {
-            setcookie("product_category_id", "", time() - 3600);
-            setcookie("product_category_id", $_GET['product_category_id'], time() + 3600);
-            $product_category_id = $_GET['product_category_id'];
-        } else {
-            $product_category_id = isset($_COOKIE['product_category_id']) ? $_COOKIE['product_category_id'] : 1;
-        }
+
+        $parent_id = (int) $_COOKIE["parent_id"];
+        $product_category = $this->model('CategoryModel')->getCategory($parent_id);
+
+
+        $product_category_id = (new \Mvc\Utils\LayoutHelper())->getCategoryIdSlider();
 
         $this->view('admin/home', [
             'product_categories' => $product_category,
@@ -116,7 +116,7 @@ class Slider extends Controller
 
 
                 $success = $item->customizeInforBanner($id, $title, $description, $image);
-                
+
                 if ($success) {
                     move_uploaded_file(
                         $_FILES["banner_image"]["tmp_name"],

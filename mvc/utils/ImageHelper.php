@@ -64,10 +64,12 @@ class ImageHelper
         }
     }
 
-    public static function isImageFile($file)
+    public static function isImageFile( $file)
     {
-        if (isset($file) && file_exists($file['tmp_name'])) {
-            $info = getimagesize($file['tmp_name']);
+        $fileName=$file['tmp_name'];
+
+        if (isset($file) && file_exists($fileName)) {
+            $info = getimagesize($fileName);
             if ($info === false) {
                 return false;
             }
@@ -79,5 +81,31 @@ class ImageHelper
         }
 
         return false;
+    }
+    
+    public static function isImageField($file){
+        $total=count($file['tmp_name']);
+
+        for($i=0;$i<$total;$i++){
+            $fileName=$file['tmp_name'][$i]['image'];
+            if($fileName===null){
+                continue;
+            }
+            if (isset($file) && file_exists($fileName)) {
+                $info = getimagesize($fileName);
+                if ($info === false) {
+                    return false;
+                }
+    
+                $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (in_array($info['mime'], $validMimeTypes)) {
+                    return true;
+                }
+            }
+    
+            return false;
+        }
+
+        return true;
     }
 }

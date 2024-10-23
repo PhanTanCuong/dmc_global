@@ -119,13 +119,13 @@
             <form action="Data" method="GET">
               <div class="form-group" style="display: flex; gap: 10px; align-items: center;">
                 <input type="radio" name="radio_option" value="3" <?= ($data['radio_button'] == '3') ? 'checked' : ''; ?>
-                  onclick="this.form.submit();"> About2
+                  onclick="this.form.submit();"> Overview
                 <input type="radio" name="radio_option" value="4" <?= ($data['radio_button'] == '4') ? 'checked' : ''; ?>
-                  onclick="this.form.submit();"> About3
+                  onclick="this.form.submit();"> Content Banner
                 <input type="radio" name="radio_option" value="5" <?= ($data['radio_button'] == '5') ? 'checked' : ''; ?>
-                  onclick="this.form.submit();"> Product1
+                  onclick="this.form.submit();"> Product Showcase
                 <input type="radio" name="radio_option" value="6" <?= ($data['radio_button'] == '6') ? 'checked' : ''; ?>
-                  onclick="this.form.submit();"> Stat
+                  onclick="this.form.submit();"> Statictis
               </div>
             </form>
           </div>
@@ -144,11 +144,9 @@
                 </tr>
               </thead>
               <tbody>
-                <?php
-                if (mysqli_num_rows($data["item"]) > 0) {
-                  $counter = 1;
-                  while ($row = mysqli_fetch_array($data["item"])) {
-                    ?>
+                <?php if (mysqli_num_rows($data["item"]) > 0): ?>
+                  <?php $counter = 1; ?>
+                  <?php while ($row = mysqli_fetch_array($data["item"])): ?>
                     <tr>
                       <td><?= $counter++; ?></td>
                       <td><?= $row['title'] ?></td>
@@ -175,10 +173,8 @@
                         </div>
                       </td>
                     </tr>
-                    <?php
-                  }
-                }
-                ?>
+                  <?php endwhile; ?>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>

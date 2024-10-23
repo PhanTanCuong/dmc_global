@@ -8,7 +8,7 @@ class BackgroundModel extends DB
     {
         try {
             $query = "SELECT * FROM background";
-          return $this->connection->query($query);
+            return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -20,7 +20,7 @@ class BackgroundModel extends DB
             $query = "INSERT INTO background (image) VALUES (?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $image);
-             if ($stmt->execute()) {
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
@@ -28,11 +28,15 @@ class BackgroundModel extends DB
             echo $e->getMessage();
         }
     }
-    
-    public function getBackgroundById($id){
+
+    public function getBackgroundById($id)
+    {
         try {
-            $query = "SELECT * FROM background WHERE id='$id'";
-          return $this->connection->query($query);
+            $query = "SELECT * FROM background WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -43,7 +47,7 @@ class BackgroundModel extends DB
             $query = "UPDATE icon SET image=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $image, $id);
-             if ($stmt->execute()) {
+            if ($stmt->execute()) {
                 return true;
             }
             return false;
@@ -55,18 +59,12 @@ class BackgroundModel extends DB
     public function getCurrentBackgroundImages($id)
     {
         try {
-            $query = "SELECT image FROM background WHERE id='$id'";
-          return $this->connection->query($query);
+            $query = "SELECT image FROM background WHERE id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    public function deleteBackground($id){
-        try{
-            $query = "UPDATE background SET image='' WHERE id='$id'";
-          return $this->connection->query($query);
-        }catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }

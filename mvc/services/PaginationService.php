@@ -1,19 +1,17 @@
 <?php
 namespace Mvc\Services;
 use Exception;
-use MenuModel;
+use PageModel;
 use CategoryModel;
 use Core\DB;
 
 class PaginationService extends DB
 {
-    private $menuModel;
-    private $categoryModel;
-    public function __construct(MenuModel $menuModel, CategoryModel $categoryModel)
-    {
+    public function __construct(
+        protected PageModel $menuModel,
+        protected CategoryModel $categoryModel
+    ) {
         parent::__construct();
-        $this->menuModel = $menuModel;
-        $this->categoryModel = $categoryModel;
     }
 
     public function fetchPaginationRows($slug, $page, $limit)

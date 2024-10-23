@@ -80,7 +80,7 @@
   width: 11em;
   text-transform: uppercase;
   font-weight: 200;
-  color: white;
+  color: #fff !important;
   justify-content: center;
   background-color: #cc0000;
   border-radius: 4px;
@@ -89,8 +89,8 @@
 }
 
 .btn2:hover {
-  background-color: #990000; 
-  transform: scale(1.05); 
+  background-color: #990000 !important;
+  transform: scale(1.05);
 }
 
 .title {
@@ -147,8 +147,8 @@
   -webkit-box-orient: vertical;
 }
 
-.item-title a{
-  color:#292b2c;
+.item-title a {
+  color: #292b2c;
   text-decoration: none;
 }
 .description {
@@ -179,8 +179,6 @@
   font-size: 24px;
   transform: scaleX(1.5);
 }
-
-
 
 .comp:hover {
   box-shadow: 1px -1px 17px #88888830;
@@ -274,8 +272,8 @@ product3 */
   }
 
   .title {
-    font-size: 2.5rem;
-    margin: 3rem 0; 
+    font-size: 2rem;
+    margin: 3rem 0;
   }
 
   .pseudo {

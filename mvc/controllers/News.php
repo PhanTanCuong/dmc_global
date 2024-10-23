@@ -12,7 +12,7 @@ class News extends Controller
     {
         try {
 
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
@@ -22,7 +22,7 @@ class News extends Controller
             foreach ($selectedCategory as $row) {
                 $breadcrumb_data = mysqli_fetch_assoc($categoryModel->getCategoryById($row['id']));
             }
-            $this->view('home', [
+            $this->view("index", [
                 'news' => $news_category,
                 'breadcrumb_data' => $breadcrumb_data['name'],
                 'page' => 'list_of_news'
@@ -37,11 +37,11 @@ class News extends Controller
     function displayAbout()
     {
         try {
-            $menu = $this->model('MenuModel');
+            $menu = $this->model("PageModel");
 
             $post = $menu->directPage(SlugHelper::getSlugFromURL());
 
-            $this->view('home', [
+            $this->view("index", [
                 'about' => $post,
                 'page' => 'about',
             ]);
@@ -54,14 +54,14 @@ class News extends Controller
     function displayNewsByCategory()
     {
         try {
-            $menuModel = $this->model('MenuModel');
+            $menuModel = $this->model("PageModel");
             $categoryModel = $this->model('CategoryModel');
             $categoryService = new CategoryService($menuModel, $categoryModel);
 
             $news_category_json = $categoryService->getDataByCategory(SlugHelper::getSlugFromURL());
             $news_category_data = json_decode($news_category_json, true);
 
-            $this->view('home', [
+            $this->view("index", [
                 'news_data' => $news_category_data,
                 'page' => 'list_of_news_category'
             ]);
@@ -77,7 +77,7 @@ class News extends Controller
     {
         try {
 
-            $post = $this->model('MenuModel');
+            $post = $this->model("PageModel");
             $category = $this->model('CategoryModel');
 
             $post_data = $post->directPage(SlugHelper::getSlugFromURL());
@@ -87,7 +87,7 @@ class News extends Controller
                 $news_category = $category->getCategoryById($row['category_id']);
             }
 
-            $this->view('home', [
+            $this->view("index", [
                 'post' => $post_data,
                 'category_info' => $selectedCategory,
                 'breadcrumb_data' => $news['name'],
