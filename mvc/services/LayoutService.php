@@ -23,19 +23,12 @@ class LayoutService
                     }
                     //gán  data
                     $this->contentModel->addContent($layoutId, $type, $value, $container, $index);
-
-                  
                 }
-
-
             }
-
         }
-
         if (!$this->layoutModel->addPagelayout($pageId, $layoutId)) {
             return false;
         }
-
         return true;
     }
 
@@ -66,6 +59,32 @@ class LayoutService
             }
             return true;
         } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function fetchLayout($block_id){
+        try{
+            $result =$this->contentModel->getContentByBlockId($block_id);
+
+            if($result->num_rows>0 ){
+                $output=[];
+
+                while($row = $result->fetch_assoc()){
+                    $container=$row['container'];
+                    $type = $row['type'];
+                    $item =$row['item'];
+                    $output[$container][$item][$type]=$row['data'];
+                }
+
+                return json_encode($output);
+            }else{
+                return json_encode([]);
+            }
+
+           
+            
+        }catch (\Exception $e){
             echo $e->getMessage();
         }
     }

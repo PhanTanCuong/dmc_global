@@ -1,50 +1,4 @@
-<style>
-    .img-container img{
-        border-radius: 20px;
-    }
-    .txt-container {
-        flex: 0 0 45%;
-    }
-
-    .image-container {
-        position: relative;
-    }
-
-    .item-title {
-        position: absolute;
-        bottom: 2em;
-        left: .5em;
-    }
-
-    .item-title a {
-        color: #fff !important;
-
-    }
-
-    .item-title a:hover {
-        text-decoration: underline !important;
-    }
-
-    .section__contact .our-products h2 {
-        color: #fff
-    }
-
-    .section__contact .our-products p {
-        font-size: unset !important;
-    }
-
-    .section__contact {
-        padding: 0 10vw;
-    }
-
-    .section__contact .product1 {
-        border-radius: 20px;
-    }
-
-    .media__items:first-child{
-        grid-row: span 2;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="/dmc_global/public/css/home.css?v=<?= microtime() ?>">
 <main>
     <section class="about1">
 
@@ -65,112 +19,132 @@
         }
         ?>
 
+            <!-- Overview section  -->
     </section>
-    <section class="about2">
+    <section class="about2 my-6">
+        <?php $arrayData = json_decode($data["about2Infor"], true) ?>
         <div class="container">
-            <?php if (mysqli_num_rows($data["about2Infor"]) > 0): ?>
-                <?php while ($rows = mysqli_fetch_array($data["about2Infor"])): ?>
-                    <div class="grid-container flex-xl-row-reverse flex-column mb-3 wow fadeInRight" data-wow-delay="400ms">
-                        <div class="image img-container col-xl-6 col-12">
-                            <img src="<?= $imageUrl . '/' . $rows['image'] ?>" alt="image">
-                            <div class="chld-img-container">
-                                <img src="<?= $imageUrl . '/5-canh.gif' ?>" class="lazy img-fluid" alt="image">
-                            </div>
-                        </div>
-                        <div class="txt-container col-xl-6 col-12 wow pulse" data-wow-delay="400ms">
-                            <h2><?= $rows['title'] ?></h2>
-                            <p><?= $rows['description'] ?></p>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            <?php endif; ?>
-            <div>
-                <div class="section_icon d-flex flex-wrap align-items-center justify-content-around">
-                    <div class="icon_items d-grid text-center">
-                        <h5>Base Oil</h5>
-                        <img src="" alt="icon image">
-                    </div>
-                    <div class="icon_items d-grid text-center">
-                        <h5>Base Oil</h5>
-                        <img src="" alt="icon image">
-                    </div>
-                    <div class="icon_items d-grid text-center">
-                        <h5>Base Oil</h5>
-                        <img src="" alt="icon image">
+            <div class="grid-container flex-xl-row-reverse flex-column mb-3 wow fadeInRight " data-wow-delay="400ms">
+                <div class="image img-container col-xl-6 col-12">
+                    <img src="<?= $arrayData['content'][0]['image'] ?>" alt="image">
+                    <div class="chld-img-container">
+                        <img src="<?= $imageUrl . '/5-canh.gif' ?>" class="lazy img-fluid" alt="image">
                     </div>
                 </div>
+                <div class="txt-container col-xl-6 col-12 wow pulse" data-wow-delay="400ms">
+                    <h2><?= $arrayData['content'][0]['title'] ?></h2>
+                    <p><?= $arrayData['content'][0]['description'] ?></p>
+                </div>
             </div>
+
+            <div>
+                <div
+                    class="section_icon d-flex flex-wrap align-items-center justify-content-around gap-xl-2 gap-3 mb-xl-0 mb-3">
+                    <?php foreach ($arrayData['icon'] as $icon): ?>
+                        <div
+                            class="icon_items d-grid text-center d-flex flex-column justify-content-center align-items-center ">
+                            <img src="<?= $icon['image'] ?>" alt="icon image">
+                            <h5><?= $icon['title'] ?></h5>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
         </div>
+    </section>
+    <!-- End overview section  -->
+
+    <!-- product showcase section -->
+    <?php $arrayData = json_decode($data["product"], true) ?>
+    <?php foreach ($arrayData as $container => $rows): ?>
         <section class="section__product">
-            <h1 class="title  wow slideInLeft">products
-                <p class="pseudo"></p>
-            </h1>
-            <?php $product_url = $_ENV['BASE_URL'] . '/product'; ?>
-            <section class='product2' id="product2">
-                <div class="container">
-                    <div class="grid">
-                        <?php if (mysqli_num_rows($data["product"]) > 0): ?>
-                            <?php while ($rows = mysqli_fetch_array($data["product"])): ?>
+            <?php if ($container === 'title'): ?>
+                <h1 class="title  wow slideInLeft"><?= $rows[0]['title'] ?>
+                    <p class="pseudo"></p>
+                </h1>
+            <?php endif; ?>
+            <?php if ($container === 'content'): ?>
+                <?php $total = count($rows) ?>
+                <section class='product2' id="product2">
+                    <div class="container container-xl">
+                        <div class="grid">
+                            <?php for ($i = 0; $i < $total; $i++): ?>
                                 <div class="comp wow fadeIn">
                                     <div class="image-container">
-                                        <img src=<?= $imageUrl . '/' . $rows['image'] ?> alt="Image">
+                                        <img src=<?= $rows[$i]['image'] ?> alt="Image">
                                         <div class="item-infor">
                                             <h3 class="item-title">
                                                 <a
-                                                    href="<?= $_ENV["PRODUCT_URL"] . '/' . $rows['slug'] ?>"><?= $rows['title'] ?></a>
+                                                    href="<?= $_ENV["BASE_URL"] . '/' . $rows[$i]['link'] ?>"><?= $rows[$i]['title'] ?></a>
                                             </h3>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endwhile; ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="btn2-container">
-                        <a class="btn2 text-center" href="<?= $product_url ?>"><b>View more</b></a>
-                    </div>
+                            <?php endfor; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($container === 'button'): ?>
+                        <div class="btn2-container ">
+                            <a class="btn2 text-center"
+                                href="<?= $_ENV["BASE_URL"] . $rows[0]['link'] ?>"><b><?= $rows[0]['title'] ?></b></a>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </section>
         </section>
-    </section>
+    <?php endforeach; ?>
+    <?php unset($rows); ?>
+    <!-- end product showcase section -->
+
+    <!-- media section -->
+
     <section class="section__media">
-        <h1 class="title  wow slideInLeft">media
-            <p class="pseudo"></p>
-        </h1>
-        <?php $product_url = $_ENV['BASE_URL'] . '/product'; ?>
-        <section class='product2' id="product2">
-            <div class="container">
-                <div class="grid">
-                    <?php if (mysqli_num_rows($data["media"]) > 0): ?>
-                        <?php while ($rows = mysqli_fetch_array($data["media"])): ?>
-                            <div class="comp media__items wow fadeIn">
-                                <div class="image-container">
-                                    <img src=<?= $imageUrl . '/' . $rows['image'] ?> alt="Image">
+        <?php $arrayData = json_decode($data["media"], true) ?>
+        <?php foreach ($arrayData as $container => $rows): ?>
+            <?php if ($container === 'title'): ?>
+                <h2 class="title  wow slideInLeft"><?= $rows[0]['title'] ?>
+                </h2>
+            <?php endif; ?>
+            <?php if ($container === 'content'): ?>
+                <?php $total = count($rows) ?>
+                <section class='product2' id="product2">
+                    <div class="container">
+                        <div class="grid">
+                            <?php for ($i = 0; $i < $total; $i++): ?>
+                                <div class="comp media__items wow fadeIn">
+                                    <div class="image-container">
+                                        <a href="<?= $rows[$i]['link'] ?>">
+                                            <img src=<?= $rows[$i]['image'] ?> alt="Image">
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endwhile; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </section>
-
-
-    </section>
-    <section class="section__contact">
-        <?php if (mysqli_num_rows($data["contact"]) > 0): ?>
-            <?php while ($rows = mysqli_fetch_array($data["contact"])): ?>
-                <section class="product1" id="product1"
-                    style="background-image:url(/dmc_global/public/images/<?= $rows['image'] ?>)">
-                    <div class="our-products wow pulse">
-                        <h2><?= $rows['title'] ?></h2>
-                        <p><?= $rows['description'] ?></p>
-                        <a href="<?= $_ENV["BASE_URL"] . '/contact' ?>" class="btn btn-custom">
-                            VIEW MORE
-                        </a>
+                            <?php endfor; ?>
+                        </div>
                     </div>
                 </section>
-            <?php endwhile; ?>
-        <?php endif; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php unset($rows) ?>
+        <!-- end media section -->
+
+        <!-- Vision section  -->
+        <?php $arrayData = json_decode($data['vision'], true) ?>
+        <section class="section__contact">
+            <section class="product1" id="product1"
+                style="background-image:url(<?= $arrayData['content'][0]['image'] ?>)">
+                <div class="our-products wow pulse">
+                    <h2><?= $arrayData['content'][0]['title'] ?></h2>
+                    <p><?= $arrayData['content'][0]['description'] ?></p>
+                    <a href="<?= $_ENV["BASE_URL"] . $arrayData['button'][0]['link'] ?>" class="btn btn-custom">
+                        <?= $arrayData['button'][0]['title'] ?>
+                    </a>
+                </div>
+            </section>
+        </section>
+        <!-- end vision section -->
+
+        <!-- Second overrview section -->
         <section class="text__contact">
             <div>
                 <h1></h1>
@@ -211,5 +185,5 @@
                 </div>
             </div>
         </section>
-    </section>
+        <!-- End second overview section -->
 </main>

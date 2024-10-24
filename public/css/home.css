@@ -1,0 +1,51 @@
+<style > .img-container img {
+  border-radius: 20px;
+}
+
+.txt-container {
+  flex: 0 0 45%;
+}
+
+.image-container {
+  position: relative;
+}
+
+.item-title {
+  position: absolute;
+  bottom: 0.2rem;
+  left: 0.5rem;
+}
+
+.section_icon h5 {
+  font-weight: 400;
+}
+
+.item-title a {
+  color: #fff !important;
+}
+
+.item-title a:hover {
+  text-decoration: underline !important;
+}
+
+.section__contact .our-products h2 {
+  color: #fff;
+}
+
+.section__contact .our-products p {
+  font-size: unset !important;
+}
+
+.section__contact {
+  padding: 0 10vw;
+}
+
+.section__contact .product1 {
+  border-radius: 20px;
+}
+
+.media__items:first-child {
+  grid-row: span 2;
+}
+
+
