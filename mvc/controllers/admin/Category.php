@@ -20,7 +20,7 @@ class Category extends Controller
             'page' => 'displayCategory',
             'item' => $item->getInforCategory(),
             'edit_slug_parent' => $item->getInforParentCategory(),
-            'slug_parent' => $item->getInforParentCategory(),
+            'slug_parent' => $item->getInforParentCategory(3),
 
         ]);
     }

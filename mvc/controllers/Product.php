@@ -15,7 +15,7 @@ class Product extends Controller
         //Model
         $product = $this->model("ProductModel");
         $menuModel = $this->model("PageModel");
-        $news = $this->model("MediaModel");
+        $news = $this->model("PostMedia");
         $banner = $this->model("SliderModel");
         $item = $this->model("SettingModel");
         $category = $this->model("CategoryModel");

@@ -2,7 +2,7 @@
 
 use Core\DB;
 
-class MediaModel extends DB
+class PostModel extends DB
 {
 
     //get List of post function

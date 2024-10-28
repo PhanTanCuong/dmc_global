@@ -17,7 +17,7 @@ Route::get('news', 'News@display');
 //pages
 Route::get('business-services', 'Service@display');
 Route::get('cooperation', 'Cooperation@display');
-Route::get('media', 'Media@display');
+Route::get('media', 'Post@display');
 Route::get('contact-us', 'Contact@display');
 Route::get('404', 'NotFound@display');
 Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
@@ -53,14 +53,14 @@ Route::post('Admin/deleteProduct', 'Product@deleteProduct');
 Route::post('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
 Route::post('Admin/Product/editProduct', 'Product@editProduct');
 
-// Admin quản lý bài viết (News/Media)
-Route::get('Admin/News', 'Media@display');
-Route::get('Admin/News/Add', 'Media@displayAddNews');
-Route::post('Admin/News/Update', 'Media@Update');
-Route::post('Admin/News/addNews', 'Media@addNews');
-Route::post('Admin/deleteNews', 'Media@deleteNews');
-Route::post('Admin/News/getNewsById/(\d+)', 'Media@getNewsById');
-Route::post('Admin/News/editNews', 'Media@editNews');
+// Admin quản lý bài viết (News/Post)
+Route::get('Admin/News', 'Post@display');
+Route::get('Admin/News/Add', 'Post@displayAddNews');
+Route::post('Admin/News/Update', 'Post@Update');
+Route::post('Admin/News/addNews', 'Post@addNews');
+Route::post('Admin/deleteNews', 'Post@deleteNews');
+Route::post('Admin/News/getNewsById/(\d+)', 'Post@getNewsById');
+Route::post('Admin/News/editNews', 'Post@editNews');
 
 
 // Admin quản lý slide

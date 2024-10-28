@@ -5,11 +5,24 @@ use Core\Controller;
 use Core\Exception;
 use Core\Auth;
 use Mvc\Utils\ImageHelper;
-class Media extends Controller
+class Post extends Controller
 {
+
+    protected $postModel,
+    $categoryModel,
+    $categories,
+    $parent_id,
+    $navbarModel;
     public function __construct()
     {
         Auth::checkAdmin();
+        $this->postModel = $this->model("PostModel");
+        $this->categoryModel = $this->model("CategoryModel");
+        $this->navbarModel = $this->model("NavbarModel");
+        // if (isset($_COOKIE['parent_id'])) {
+        //     $this->parent_id = (int) $_COOKIE['parent_id'];
+        //     $this->categories = $this->categoryModel->getCategory($this->parent_id);
+        // }
     }
     // News2
     function display()
@@ -21,70 +34,60 @@ class Media extends Controller
         }
 
         $parent_id = $_COOKIE['parent_id'];
-        //Model
-        $post = $this->model("MediaModel");
-        $post_data = $post->getNewsByType($parent_id);
 
         //View
         $this->view("admin/home", [
-            "news" => $post_data,
-            "display" => $this->matchParentId(),
-            "name" => $this->setPostName(),
+            "news" => $this->postModel->getNewsByType($parent_id),
+            // "display" => $this->matchParentId(),
+            // "name" => $this->setPostName(),
             "page" => "displayMedia"
         ]);
     }
 
-    function matchParentId()
-    {
-        return match ((int) $_COOKIE['parent_id']) {
-            32 => 'none',
-            default => 'block',
-        };
-    }
+    // function matchParentId()
+    // {
+    //     return match ((int) $_COOKIE['parent_id']) {
+    //         32 => 'none',
+    //         default => 'block',
+    //     };
+    // }
 
-    function setPostName()
-    {
-        return match ((int) $_COOKIE['parent_id']) {
-            32 => 'abouts',
-            43 => 'news',
-            44 => 'business services',
-            default => '',
-        };
-    }
+    // function setPostName()
+    // {
+    //     return match ((int) $_COOKIE['parent_id']) {
+    //         32 => 'abouts',
+    //         43 => 'news',
+    //         44 => 'business services',
+    //         default => '',
+    //     };
+    // }
 
 
     function displayAddNews()
     {
 
-        if (isset($_COOKIE['parent_id'])) {
-            $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
-        }
         $this->view("admin/home", [
-            "product_categories" => $categories,
-            "name" => $this->setPostName(),
-            "display" => $this->matchParentId(),
-            "page" => "addPost"
+            "category" => $this->categoryModel->getInforParentCategory(2),
+            'item' => $this->navbarModel->getInforNavBar(),
+            // "name" => $this->setPostName(),
+            // "display" => $this->matchParentId(),
+            "page" => "addPost",
         ]);
     }
 
     function Update()
     {
-        if (isset($_COOKIE['parent_id'])) {
-            $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getCategory($parent_id);
-        }
 
         if (isset($_POST['checking_edit_btn'])) {
             $news_id = (int) $_POST['news_id'];
-            $news = $this->model('MediaModel')->getNewsbyId($news_id);
+            $news = $this->model('PostModel')->getNewsbyId($news_id);
         }
 
         $this->view("admin/home", [
             "news" => $news,
-            "product_categories" => $categories,
-            "name" => $this->setPostName(),
-            "display" => $this->matchParentId(),
+            "product_categories" => $this->categories,
+            // "name" => $this->setPostName(),
+            // "display" => $this->matchParentId(),
             "page" => "editPost"
         ]);
     }
@@ -115,14 +118,13 @@ class Media extends Controller
                     $_SESSION['status'] = "ID isexpired";
                     header('Location:Add');
                     die();
-                   
-                } 
+
+                }
                 $type_id = (int) $_COOKIE['parent_id'];
 
                 //Model
-                $news = $this->model("MediaModel");
 
-                $preference_id = $news->addNews(
+                $preference_id = $this->postModel->addNews(
                     $title,
                     $short_description,
                     $long_description,
@@ -174,9 +176,9 @@ class Media extends Controller
                 $meta_description = $_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
 
-                $news = $this->model('MediaModel');
 
-                $data = $news->getCurrentNewsImages($id);
+
+                $data = $this->postModel->getCurrentNewsImages($id);
                 $stored_image = mysqli_fetch_array($data);
 
                 //Check image is null
@@ -193,7 +195,7 @@ class Media extends Controller
 
 
 
-                $success = $news->editNews(
+                $success = $this->postModel->editNews(
                     $id,
                     $title,
                     $short_description,
@@ -233,9 +235,9 @@ class Media extends Controller
             if (isset($_POST["delete_news_btn"])) {
                 $id = $_POST['delete_news_id'];
 
-                $news = $this->model('MediaModel');
 
-                $result = $news->deleteNews($id);
+
+                $result = $this->postModel->deleteNews($id);
                 if ($result) {
                     $this->model("PageModel")->deleteMenu($id);
                     $_SESSION['success'] = 'Your data is deleted';
@@ -261,8 +263,8 @@ class Media extends Controller
             if (isset($_POST['search_data'])) {
                 $id = $_POST['id'];
                 $visible = $_POST['visible'];
-                $news = $this->model('MediaModel');
-                $news->toggleCheckboxDelete($id, $visible);
+
+                $this->postModel->toggleCheckboxDelete($id, $visible);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -274,8 +276,8 @@ class Media extends Controller
     {
         try {
             if (isset($_POST['delete-multiple-data'])) {
-                $news = $this->model('MediaModel');
-                $result = $news->multipleDeleteNews();
+
+                $result = $this->postModel->multipleDeleteNews();
                 if ($result) {
                     $_SESSION['success'] = 'Your products are deleted';
                     header('Location:News');

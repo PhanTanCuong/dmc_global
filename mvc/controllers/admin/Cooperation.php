@@ -7,9 +7,12 @@ use Mvc\Utils\ImageHelper;
 
 class Cooperation extends Controller
 {
+    protected $news ;
     function __contruct()
     {
         Auth::checkAdmin();
+
+        $this->news = $this->model('PostMedia');
     }
     function display()
     {
@@ -19,8 +22,7 @@ class Cooperation extends Controller
                 header('Location: ' . $_ENV['BASE_URL'] . '/Admin/dashboard');
             }
 
-            $news = $this->model('MediaModel');
-            $cooperation = $news->getNewsByType((int) $_COOKIE['parent_id']);
+            $cooperation = $this->news->getNewsByType((int) $_COOKIE['parent_id']);
 
             $this->view('admin/home', [
                 'cooperation' => $cooperation,
@@ -39,9 +41,8 @@ class Cooperation extends Controller
                 $title = $_POST['edit_cooperation_title'];
                 $long_description = $_POST['edit_cooperation_long_description'];
                 $meta_keyword = $_POST['edit_cooperation_meta_keyword'];
-                $news = $this->model('MediaModel');
 
-                $success = $news->editNews(
+                $success = $this->news->editNews(
                     42,
                     $title,
                     $title,

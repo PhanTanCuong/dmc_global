@@ -4,7 +4,7 @@
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">List of <?=$data['name']?>
+      <h6 class="m-0 font-weight-bold text-primary">Danh sách bài viết
         <div class="controll-btn">
           <a href="News/Add" class="btn btn-primary"><i class="fas fa-plus"></i></a>
           <form action="multipleDeleteNews" method="POST">
@@ -27,7 +27,7 @@
               <th>ID</th>
               <th>Title</th>
               <th>Description</th>
-              <th style="display:<?= $data['display'] ?>">Image</th>
+              <th>Image</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -43,7 +43,7 @@
                   <td><?= $counter++; ?></td>
                   <td><?= $row['title']; ?></td>
                   <td><?= $row['description']; ?></td>
-                  <td style="display:<?= $data['display'] ?>">
+                  <td>
                     <?= '<img src="/dmc_global/public/images/' . $row['image'] . '"alt="Product Img">' ?>
                   </td>
                   <td>

@@ -19,11 +19,14 @@ class CategoryModel extends DB
         }
     }
 
-    public function getInforParentCategory()
+    public function getInforParentCategory( int $level )
     {
         try {
-            $query = "SELECT id,name,level FROM category_tree WHERE level <3";
-            return $this->connection->query($query);
+            $query = "SELECT id,name,level FROM category_tree WHERE level <?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $level);
+            $stmt->execute();
+            return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
