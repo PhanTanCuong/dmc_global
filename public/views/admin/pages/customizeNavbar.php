@@ -4,19 +4,19 @@
         <!-- First Card (Add Navbar Item) -->
         <div id="addNavbarForm" class="card shadow mb-4 flex-fill mr-3">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Add Navigation Item Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thêm thông tin</h6>
             </div>
             <div class="card-body">
                 <form action="addNavBar" method="POST">
                     <div class="form-group">
-                        <label for="navbar_name">Item Name</label>
+                        <label for="navbar_name">Tên</label>
                         <input type="text" class="form-control" id="navbar_name" name="navbar_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="navbar_status">Status</label>
+                        <label for="navbar_status">Trạng thái</label>
                         <select class="form-control" id="navbar_status" name="navbar_status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="active">Hiễn thị</option>
+                            <option value="inactive">Ẩn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -35,7 +35,7 @@
                             <!-- Options will be added here dynamically based on the selected dynamic page -->
                         </select>
                     </div>
-                    <button type="submit" name="addNavbarItemBtn" class="btn btn-primary">Save</button>
+                    <button type="submit" name="addNavbarItemBtn" class="btn btn-primary">Lưu</button>
                 </form>
 
             </div>
@@ -43,20 +43,20 @@
         <!-- Edit Navbar Item Form (Initially hidden) -->
         <div id="editNavbarForm" class="card shadow mb-4 flex-fill mr-3" style="display:none;">
             <div class="edit-navbar card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Edit Navigation Item Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Cập nhật thông tin</h6>
             </div>
             <div class="card-body">
                 <form action="customizeNavBar" method="POST">
                     <input type="hidden" id="edit_navbar_id" name="edit_navbar_id" value="">
                     <div class="form-group">
-                        <label for="edit_navbar_name">Item Name</label>
+                        <label for="edit_navbar_name">Tên</label>
                         <input type="text" class="form-control" id="edit_navbar_name" name="edit_navbar_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="edit_navbar_status">Status</label>
+                        <label for="edit_navbar_status">Trạng thái</label>
                         <select class="form-control" id="edit_navbar_status" name="edit_navbar_status" required>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="active">Hiễn thị</option>
+                            <option value="inactive">Ẩn</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -68,8 +68,8 @@
                         <?php endforeach; ?>
                         </select>
                     </div>
-                    <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Update</button>
-                    <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
+                    <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Lưu</button>
+                    <button type="button" id="cancelEdit" class="btn btn-danger">Quay về</button>
                 </form>
                 <!-- Form for child items -->
                 <form id="childForm" action="editChildItems" class="mt-3" method="POST">
@@ -78,7 +78,7 @@
                     <!-- Checkbox for Child Item -->
                     <div class="form-group">
                         <input type="checkbox" id="childItemCheckbox" name="childItemCheckbox">
-                        <label for="childItemCheckbox">Child Items</label>
+                        <label for="childItemCheckbox">Danh mục</label>
                     </div>
 
                     <!-- Drag-and-drop container for Child Items -->
@@ -120,17 +120,17 @@
         </div>
         <!-- List of Navbar Items -->
         <div class="card shadow mb-4 flex-fill ml-3">
-            <div class="card-header py-3">
+            <!-- <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">List of NavBar Items</h6>
-            </div>
+            </div> -->
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Item</th>
-                                <th>Task</th>
+                                <th>#</th>
+                                <th>Tên</th>
+                                <th>Tác vụ</th>
                             </tr>
                         </thead>
                         <tbody class="sortable">
