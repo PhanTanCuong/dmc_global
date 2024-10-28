@@ -46,8 +46,8 @@ Route::post('Admin/editAccount', 'Account@editAccount');
 
 // Admin quản lý sản phẩm
 Route::get('Admin/Product', 'Product@display');
-Route::post('Admin/Product/Add', 'Product@displayAddProduct');
-Route::post('Admin/Product/Update', 'Product@Update');
+Route::get('Admin/Product/Add', 'Product@displayAddProduct');
+Route::get('Admin/Product/Update', 'Product@Update');
 Route::post('Admin/Product/addProduct', 'Product@addProduct');
 Route::post('Admin/deleteProduct', 'Product@deleteProduct');
 Route::post('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
