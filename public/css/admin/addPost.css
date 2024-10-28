@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    border-collapse: collapse; /* Loại bỏ khoảng trống giữa các ô */
+}
+
+table td, table th {
+    border: none; /* Loại bỏ đường viền bên trong các ô */
+    padding: 10px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Màu nhạt cho hàng lẻ */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e0e0e0; /* Màu đậm hơn cho hàng chẵn */
+}
+
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+button .fas {
+    pointer-events: none; /* Đảm bảo biểu tượng không nhận sự kiện chuột */
+}
+
+#addNavbarForm{
+    height:fit-content;
+}
+

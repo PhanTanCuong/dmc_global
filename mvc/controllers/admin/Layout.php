@@ -24,7 +24,7 @@ class Layout extends Controller
 
         $this->view("admin/home", [
             "layout" => $layout->getLayout(),
-            "selected_page" => $this->model("CategoryModel")->getInforParentCategory(),
+            "selected_page" => $this->model("CategoryModel")->getInforParentCategory(3),
             "page" => "customizeLayout",
         ]);
     }
