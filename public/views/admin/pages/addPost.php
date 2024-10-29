@@ -20,7 +20,7 @@
                                     <td><a href="javascript:void(0)" onclick="fetchInforBySlug()" class="item-link"
                                             data-slug="<?= $item['slug'] ?>"><?= $item['name'] ?></a>
                                     </td>
-                                    <td>
+                                    <td >
                                         <div class="action_column">
                                             <!-- <div> <input type="hidden" name="edit_id" class="edit_id">
                                                 <button href="#" type="button" name="edit_btn" id="edit_btn"
@@ -28,9 +28,9 @@
                                                     </i></i></button>
                                             </div> -->
                                             <div>
-                                                <input type="hidden" name="edit_id" class="edit_id">
-                                                <button href="#" type="button" name="edit_btn" id="edit_btn"
-                                                    class="btn btn-danger delete_btn" onClick="deleteRecord(this)"> <i
+                                                <input type="hidden" name="delete_id" class="delete_id">
+                                                <button  type="button" name="delete_btn" id="delete_btn" data-id="<?=$item['slug']?>"
+                                                    class="btn btn-danger delete_btn" "> <i
                                                         class="fas fa-trash"></i>
                                                     </i></i></button>
                                             </div>
@@ -122,6 +122,13 @@
             e.preventDefault();
             addRecord(this, 'addNews');
         });
+
+        //delete Record
+
+        $('#delete_btn').on('click', function(e){
+            e.preventDefault();
+            deleteRecord(this);
+        })
 
     })
 </script>

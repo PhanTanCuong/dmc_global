@@ -8,7 +8,7 @@ use Mvc\Utils\ImageHelper;
 class Post extends Controller
 {
 
-    protected $postService,$postModel,$categoryModel,$navbarModel;
+    protected $postService, $postModel, $categoryModel, $navbarModel;
     public function __construct()
     {
         Auth::checkAdmin();
@@ -21,7 +21,7 @@ class Post extends Controller
             $this->navbarModel,
             $this->categoryModel,
         );
- 
+
     }
     // News2
     function display()
@@ -91,10 +91,13 @@ class Post extends Controller
     {
         //Model
         try {
+            if (isset($_POST['action']) && $_POST['action'] === "add_data") {
                 header('Content-Type: application/json');
                 echo $this->postService->addPost();
+            }
+
         } catch (Exception $e) {
-            echo json_encode(['error'=>$e->getMessage()]);
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
 
@@ -162,6 +165,20 @@ class Post extends Controller
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
             header('Location:../News');
+        }
+    }
+
+    function deletePost(){
+        try{
+
+            if(isset($_GET['action']) && $_GET['action'] ==="delete_data"){
+                header('Content-Type: application/json');
+
+                echo $this->postService->deletePost($_GET['id']);
+            }
+
+        }catch(Exception $e){
+            echo json_encode(["error"=>$e->getMessage()]);
         }
     }
 
