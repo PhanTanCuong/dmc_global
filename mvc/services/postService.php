@@ -92,7 +92,7 @@ class postService
 
     //delete Post
 
-    public function deleteNavbar(string $slug)
+    public function deletePost(string $slug)
     {
         try {
 

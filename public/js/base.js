@@ -14,36 +14,72 @@ function refreshTable(tableElement, url) {
 }
 
 //Add record function
-function addRecord(addFrm){
-    var data =new FormData(addFrm);
+function addRecord(addFrm) {
+    var data = new FormData(addFrm);
     // console.log(data);
     $.ajax({
-        type:'POST',
+        type: 'POST',
         url: $(addFrm).attr('action'),
-        data:data,
-        cache : false,
+        data: {
+            action: add_record,
+            data: data
+        },
+        cache: false,
         contentType: false,
         processData: false,
         dataType: 'json',
-        success:function(response){
+        success: function (response) {
             // console.log(response);
-            if(response.success===true){
+            if (response.success === true) {
                 toastr.success(response.message);
-            }else{
+            } else {
                 toastr.error(response.message);
             }
         },
-        error:function(jqXHR, textStatus, errorThrown){
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log('Error:', textStatus, errorThrown);
-            console.log('Response:', jqXHR.responseText); 
+            console.log('Response:', jqXHR.responseText);
         },
         complete: function (data) {
             $(addFrm)[0].reset(); // reset lại các trường
 
             //Kiểm tra tồn tại phần tử summernote editor
             if ($('.summernote').length) {
-                $('.summernote').summernote('code', '<p><br></p>'); 
+                $('.summernote').summernote('code', '<p><br></p>');
             }
         }
     });
+}
+
+
+//Delete record 
+
+function deleteRecord(deleteBtn) {
+    var id = $('#delete_btn').attr("data-id");
+    console.log(id);
+
+    $.ajax({
+        type: 'GET',
+        url: $(deleteBtn).attr('href'),
+        data: {
+            action: "delete_data",
+            id: id
+        },
+        cache: false,
+        dataType: 'json',
+        success: function (response) {
+            // console.log(response);
+            if (response.success === true) {
+                toastr.success(response.message);
+                refreshTable('#table_id', 'your_api_url'); // Thay 'your_api_url' b��ng đư��ng d��n API của bạn
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('Error:', textStatus, errorThrown);
+            console.log('Response:', jqXHR.responseText);
+        }
+    });
+
 }
