@@ -36,9 +36,7 @@ class Post extends Controller
 
         //View
         $this->view("admin/home", [
-            "news" => $this->postModel->getNewsByType($parent_id),
-            // "display" => $this->matchParentId(),
-            // "name" => $this->setPostName(),
+            "news" => $this->postModel->getNews(),
             "page" => "displayMedia"
         ]);
     }
@@ -93,15 +91,10 @@ class Post extends Controller
     {
         //Model
         try {
-            if (isset($_POST['addNewsBtn'])) {
-
-
                 header('Content-Type: application/json');
                 echo $this->postService->addPost();
-            }
         } catch (Exception $e) {
-            $_POST['status'] = $e->getMessage();
-            header('Location:../News');
+            echo json_encode(['error'=>$e->getMessage()]);
         }
     }
 

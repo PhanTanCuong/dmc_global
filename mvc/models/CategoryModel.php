@@ -38,7 +38,8 @@ class CategoryModel extends DB
             $query = "SELECT * FROM category WHERE id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
-            return ($stmt->execute()) ? $stmt->get_result() : null;
+            $stmt->execute();
+            return $stmt->get_result()->fetch_assoc();
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

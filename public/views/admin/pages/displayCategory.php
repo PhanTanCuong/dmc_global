@@ -7,22 +7,22 @@
     <div class="d-flex flex-wrap justify-content-between">
         <div id="addCategoryForm" class="card shadow mb-4 flex-fill mr-3">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Add Category Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
             </div>
             <div class="card-body">
                 <form action="addCategory" method="POST">
                     <div class="form-group">
-                        <label for="category_name">Name</label>
+                        <label for="category_name">Tên danh mục</label>
                         <input type="text" class="form-control" id="category_name" name="category_name" required>
                     </div>
                     <div class="form-group">
-                        <label for="category_slug">Slug</label>
+                        <label for="category_slug">Đường dẫn</label>
                         <input type="text" class="form-control" id="category_slug" name="category_slug">
                     </div>
                     <div class="form-group">
-                        <label for="category_parent">Parent</label>
+                        <label for="category_parent">Danh mục cha</label>
                         <select name="category_parent" id="category_parent" class="form-control">
-                            <option value="0">None</option>
+                            <option value="0">Trống</option>
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0): ?>
                                 <?php while ($options = mysqli_fetch_array($data["slug_parent"])): ?>
                                     <option value="<?= $options['id'] ?>">
@@ -32,31 +32,31 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="category_type">Type</label>
+                        <label for="category_type">Loại</label>
                         <select class="form-control" id="category_type" name="category_type" required>
-                            <option value="post">Post</option>
-                            <option value="product">Product</option>
+                            <option value="post">Bài viết</option>
+                            <option value="product">Sản phẩm</option>
                         </select>
                     </div>
-                    <button type="submit" name="addCategoryBtn" class="btn btn-primary">Save</button>
+                    <button type="submit" name="addCategoryBtn" class="btn btn-primary">Lưu</button>
                 </form>
             </div>
         </div>
         <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3 " style="display:none;">
             <div class="edit-navbar card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Edit Category Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin danh mục</h6>
             </div>
 
             <div class="card-body">
                 <form action="customizeCategory" method="POST">
                     <input type="hidden" id="edit_category_id" name="edit_category_id" value="">
                     <div class="form-group">
-                        <label for="edit_category_name">Name</label>
+                        <label for="edit_category_name">Tên danh mục</label>
                         <input type="text" class="form-control" id="edit_category_name" name="edit_category_name"
                             required>
                     </div>
                     <div class="form-group">
-                        <label for="category_slug">Slug</label>
+                        <label for="category_slug">Đường dẫn</label>
                         <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug"
                             >
                     </div>
@@ -73,30 +73,30 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="edit_category_type">Type</label>
+                        <label for="edit_category_type">Loại</label>
                         <select class="form-control" id="edit_category_type" name="edit_category_type" required>
-                            <option value="post">Post</option>
-                            <option value="product">Product</option>
+                            <option value="post">Bài viết</option>
+                            <option value="product">Sản phẩm</option>
                         </select>
                     </div>
-                    <button type="submit" name="category_updatebtn" class="btn btn-primary">Update</button>
-                    <button type="button" id="cancelEdit" class="btn btn-danger">Back</button>
+                    <button type="submit" name="category_updatebtn" class="btn btn-primary">Cập nhật</button>
+                    <button type="button" id="cancelEdit" class="btn btn-danger">Quay về</button>
                 </form>
             </div>
         </div>
         <div class="card shadow mb-4 ml-3">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List of Category</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách danh mục</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Action</th>
+                                <th>#</th>
+                                <th>Tên danh mục</th>
+                                <th>Đường dẫn</th>
+                                <th>Tác vụ</th>
                             </tr>
                         </thead>
                         <tbody>
