@@ -22,11 +22,11 @@
                                     </td>
                                     <td>
                                         <div class="action_column">
-                                            <div> <input type="hidden" name="edit_id" class="edit_id">
+                                            <!-- <div> <input type="hidden" name="edit_id" class="edit_id">
                                                 <button href="#" type="button" name="edit_btn" id="edit_btn"
                                                     class="btn btn-warning edit_btn" onClick=""> <i class="fas fa-edit"></i>
                                                     </i></i></button>
-                                            </div>
+                                            </div> -->
                                             <div>
                                                 <input type="hidden" name="edit_id" class="edit_id">
                                                 <button href="#" type="button" name="edit_btn" id="edit_btn"
@@ -55,7 +55,8 @@
                         <div class="form-group">
                             <label for="category">Danh mục cha</label>
                             <select class="form-control " name="category" id="news_category">
-                                    <?php foreach ($data["category"] as $category): ?>
+                                <option value="0">Trống</option>
+                                <?php foreach ($data["category"] as $category): ?>
                                     <option value="<?= $category['id'] ?>">
                                         <?= str_repeat('|---', $category['level']) . $category['name'] ?>
                                     </option>
@@ -71,9 +72,9 @@
                             <input type="text" name="news_slug" id="news_slug" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label>Mô tả ngắn</label>
-                            <textarea name="news_description" id="news_description" class="form-control"
-                                placeholder="Enter Small Description" rows="3" required></textarea>
+                            <label>Mô tả chung</label>
+                            <textarea name="news_description" id="news_description" class="form-control" rows="3"
+                                required></textarea>
 
                         </div>
                         <div class="form-group">
@@ -83,8 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>
-                            <input type="file" name="news_image" id="news_image" class="form-control"
-                                placeholder="Enter Meta Description">
+                            <input type="file" name="news_image" id="news_image" class="form-control">
                         </div>
                         <h5 class="modal-title" id="exampleModalLabel">SEO</h5>
                         <div class="form-group">
@@ -94,7 +94,8 @@
                         </div>
                         <div class="form-group">
                             <label>Mô tả SEO</label>
-                            <textarea id="news_meta_description" name="news_meta_description"class="form-control" rows="3"></textarea>
+                            <textarea id="news_meta_description" name="news_meta_description" class="form-control"
+                                rows="3"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -116,11 +117,11 @@
         generateToMeta('news_title', 'news_meta_keyword');
         generateToMeta('news_description', 'news_meta_description');
 
-        //addRecord
-        // $(document).on('click', '[name="addNewsBtn"]', function (e) {
-        //     e.preventDefault();
-        //     addRecord('form[action="addNews"]', 'addNews');
-        // });
+        // addRecord
+        $(document).on('submit', 'form[action="addNews"]', function (e) {
+            e.preventDefault();
+            addRecord(this, 'addNews');
+        });
 
     })
 </script>

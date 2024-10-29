@@ -24,11 +24,11 @@
           <thead>
             <tr>
               <!-- <th>Check</th> -->
-              <th>ID</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Image</th>
-              <th>Action</th>
+              <th>#</th>
+              <th>Tên bài viết</th>
+              <th>Giới thiệu bài viết</th>
+              <th>Hình ảnh</th>
+              <th>Tác vụ</th>
             </tr>
           </thead>
           <tbody>

@@ -19,7 +19,7 @@ class CategoryService extends DB
     public function preferenceCategoryId($category_id)
     {
         try {
-            $subCategory = mysqli_fetch_assoc($this->categoryModel->getCategoryById($category_id));
+            $subCategory = $this->categoryModel->getCategoryById($category_id);
 
             if (!$subCategory) {
                 return json_encode(null);
@@ -102,7 +102,7 @@ class CategoryService extends DB
             $product = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $type_id = $product['type_id'];
 
-            $category = mysqli_fetch_assoc($this->categoryModel->getCategoryById($type_id));
+            $category = $this->categoryModel->getCategoryById($type_id);
             return $category['slug'];
         } catch (\Exception $e) {
             echo $e->getMessage();

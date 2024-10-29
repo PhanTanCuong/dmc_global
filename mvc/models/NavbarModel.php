@@ -23,18 +23,21 @@ class NavBarModel extends DB
             echo $e->getMessage();
         }
     }
-    public function addNavBarInfor($name, $slug, $status)
+    public function addNavBarInfor($name, $slug, $status, $parent_id)
     {
         try {
             // Get the current maximum display_order value
-            $query = "SELECT IFNULL(MAX(display_order), 0) + 1 as new_display_order FROM navbar";
-            $result = $this->connection->query($query);
+            $query = "SELECT COUNT(*) AS count FROM navbar WHERE parent_id = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("i", $parent_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-            $new_display_order = $row['new_display_order'];
+            $list_order = $row['count'] + 1;
 
             // Insert the new navbar item with the calculated display_order
-            $stmt = $this->connection->prepare("INSERT INTO navbar (name, slug,status, display_order) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("sssi", $name, $slug, $status, $new_display_order);
+            $stmt = $this->connection->prepare("INSERT INTO navbar (name, slug,status, display_order,parent_id) VALUES (?, ?, ?, ?,?)");
+            $stmt->bind_param("sssii", $name, $slug, $status, $list_order, $parent_id);
             if ($stmt->execute()) {
                 return true;
             }
@@ -93,82 +96,93 @@ class NavBarModel extends DB
             echo $e->getMessage();
         }
     }
+
+
+    public function findSlugNavbar($slug)
+    {
+        $sql = "SELECT COUNT(*) FROM menu WHERE slug = ?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bind_param('s', $slug);
+        return $stmt->execute();
+     
+    }
+
     //Child NavBar
-    public function storedSelectedChildItems($selectedItems, $id)
-    {
-        try {
-            $selectedItems = json_encode($selectedItems);
+    // public function storedSelectedChildItems($selectedItems, $id)
+    // {
+    //     try {
+    //         $selectedItems = json_encode($selectedItems);
 
-            $query = "UPDATE navbar SET child_items=CAST(? AS JSON) WHERE id=?";
+    //         $query = "UPDATE navbar SET child_items=CAST(? AS JSON) WHERE id=?";
 
-            $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("si", $selectedItems, $id);
-            if (!$stmt->execute()) {
-                return false;
-            }
-            return true;
-        } catch (mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+    //         $stmt = $this->connection->prepare($query);
+    //         $stmt->bind_param("si", $selectedItems, $id);
+    //         if (!$stmt->execute()) {
+    //             return false;
+    //         }
+    //         return true;
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+    // }
 
-    public function fetchNavbarSelectedItems($id)
-    {
-        try {
-            $stmt = $this->connection->prepare(
-                "SELECT 
-                            selected_items.id AS slug,
-                            selected_items.name
-                            FROM navbar,
-                                JSON_TABLE(
-                                    child_items,
-                                    '$[*]' COLUMNS(
-                                        id VARCHAR(255) PATH '$.id',
-                                        name VARCHAR(255) PATH '$.name'
-                                    )
-                                ) AS selected_items
-                            WHERE navbar.id =?"
-            );
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+    // public function fetchNavbarSelectedItems($id)
+    // {
+    //     try {
+    //         $stmt = $this->connection->prepare(
+    //             "SELECT 
+    //                         selected_items.id AS slug,
+    //                         selected_items.name
+    //                         FROM navbar,
+    //                             JSON_TABLE(
+    //                                 child_items,
+    //                                 '$[*]' COLUMNS(
+    //                                     id VARCHAR(255) PATH '$.id',
+    //                                     name VARCHAR(255) PATH '$.name'
+    //                                 )
+    //                             ) AS selected_items
+    //                         WHERE navbar.id =?"
+    //         );
+    //         $stmt->bind_param("i", $id);
+    //         $stmt->execute();
+    //         return $stmt->get_result();
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+    // }
 
-    public function getAvailableItems($category_id, $data_id)
-    {
-        try {
-            $query = "SELECT * FROM category WHERE parent_id=?";
-            $stmt = $this->connection->prepare($query);
-            $stmt->bind_param("i", $category_id);
-            $stmt->execute();
+    // public function getAvailableItems($category_id, $data_id)
+    // {
+    //     try {
+    //         $query = "SELECT * FROM category WHERE parent_id=?";
+    //         $stmt = $this->connection->prepare($query);
+    //         $stmt->bind_param("i", $category_id);
+    //         $stmt->execute();
 
-            $category = $stmt->get_result();
+    //         $category = $stmt->get_result();
 
-            $selected_items = $this->fetchNavbarSelectedItems($data_id);
+    //         $selected_items = $this->fetchNavbarSelectedItems($data_id);
 
-            $selectedArray = [];
+    //         $selectedArray = [];
 
-            while ($selectedRows = mysqli_fetch_assoc($selected_items)) {
-                $selectedArray[] = $selectedRows['slug'];
-            }
+    //         while ($selectedRows = mysqli_fetch_assoc($selected_items)) {
+    //             $selectedArray[] = $selectedRows['slug'];
+    //         }
 
-            $availableItems = [];
+    //         $availableItems = [];
 
-            while ($availableRows = mysqli_fetch_assoc($category)) {
-                if (!in_array($availableRows['slug'], $selectedArray)) {
-                    $availableItems[] = [
-                        'name' => $availableRows['name'],
-                        'slug' => $availableRows['slug']
-                    ];
-                }
-            }
+    //         while ($availableRows = mysqli_fetch_assoc($category)) {
+    //             if (!in_array($availableRows['slug'], $selectedArray)) {
+    //                 $availableItems[] = [
+    //                     'name' => $availableRows['name'],
+    //                     'slug' => $availableRows['slug']
+    //                 ];
+    //             }
+    //         }
 
-            return $availableItems;
-        } catch (mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+    //         return $availableItems;
+    //     } catch (mysqli_sql_exception $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+    // }
 }
