@@ -8,21 +8,20 @@ use Mvc\Utils\ImageHelper;
 class Post extends Controller
 {
 
-    protected $postModel,
-    $categoryModel,
-    $categories,
-    $parent_id,
-    $navbarModel;
+    protected $postService,$postModel,$categoryModel,$navbarModel;
     public function __construct()
     {
         Auth::checkAdmin();
-        $this->postModel = $this->model("PostModel");
-        $this->categoryModel = $this->model("CategoryModel");
-        $this->navbarModel = $this->model("NavbarModel");
-        // if (isset($_COOKIE['parent_id'])) {
-        //     $this->parent_id = (int) $_COOKIE['parent_id'];
-        //     $this->categories = $this->categoryModel->getCategory($this->parent_id);
-        // }
+        $this->postModel = $this->model('PostModel');
+        $this->categoryModel = $this->model('CategoryModel');
+        $this->navbarModel = $this->model('NavbarModel');
+        $this->postService = new \Mvc\Services\PostService(
+            $this->postModel,
+            $this->model('PageModel'),
+            $this->navbarModel,
+            $this->categoryModel,
+        );
+ 
     }
     // News2
     function display()
@@ -69,8 +68,6 @@ class Post extends Controller
         $this->view("admin/home", [
             "category" => $this->categoryModel->getInforParentCategory(2),
             'item' => $this->navbarModel->getInforNavBar(),
-            // "name" => $this->setPostName(),
-            // "display" => $this->matchParentId(),
             "page" => "addPost",
         ]);
     }
@@ -85,7 +82,7 @@ class Post extends Controller
 
         $this->view("admin/home", [
             "news" => $news,
-            "product_categories" => $this->categories,
+            "category" => $this->categoryModel->getInforParentCategory(3),
             // "name" => $this->setPostName(),
             // "display" => $this->matchParentId(),
             "page" => "editPost"
@@ -97,63 +94,10 @@ class Post extends Controller
         //Model
         try {
             if (isset($_POST['addNewsBtn'])) {
-                //Input fields
-                $category_id = $_POST['category'];
-                $title = $_POST['news_title'];
-                $slug = $_POST['news_slug'];
-                $short_description = $_POST['news_description'];
-                $long_description = $_POST['news_long_description'];
-                $meta_keyword = $_POST['news_meta_keyword'];
-                $meta_description = $_POST['news_meta_description'];
-                $image = $_FILES["news_image"]['name'];
 
-                //Check if image is an image file
-                if ($_COOKIE['parent_id'] != 32 && ImageHelper::isImageFile($_FILES["news_image"]) === false) {
-                    $_SESSION['status'] = 'Incorrect image type';
-                    header('Location:../News');
-                    die();
-                }
 
-                if (!isset($_COOKIE['parent_id'])) {
-                    $_SESSION['status'] = "ID isexpired";
-                    header('Location:Add');
-                    die();
-
-                }
-                $type_id = (int) $_COOKIE['parent_id'];
-
-                //Model
-
-                $preference_id = $this->postModel->addNews(
-                    $title,
-                    $short_description,
-                    $long_description,
-                    $slug,
-                    $image,
-                    $meta_description,
-                    $meta_keyword,
-                    $category_id,
-                    $type_id
-                );
-
-                if (is_numeric($preference_id) && $preference_id > 0) {
-
-                    //add to slug center
-                    $this->model("PageModel")->addMenu($slug, 'post', $preference_id);
-
-                    //Upload image data vào folder upload
-                    move_uploaded_file(
-                        $_FILES["news_image"]["tmp_name"],
-                        "./public/images/" . $_FILES["news_image"]["name"]
-                    ) . '';
-                    $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
-                    ImageHelper::resize_image($filepath, 389, 389);
-                    $_SESSION['success'] = "News is added successfully";
-                    header('Location:../News');
-                } else {
-                    $_SESSION['status'] = "News is NOT added";
-                    header('Location:../News');
-                }
+                header('Content-Type: application/json');
+                echo $this->postService->addPost();
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
