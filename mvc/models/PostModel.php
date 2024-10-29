@@ -62,17 +62,16 @@ class PostModel extends DB
         $meta_description,
         $meta_keyword,
         $category_id,
-        $type_id
     ) {
         try {
 
             $query = "INSERT INTO post 
-                                        (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) 
+                                        (title,description,long_description,slug,image,meta_description,meta_keyword,category_id) 
                                     VALUES 
-                                        (?,?,?,?,?,?,?,?,?)";
+                                        (?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param(
-                "sssssssii",
+                "sssssssi",
                 $title,
                 $short_description,
                 $long_description,
@@ -81,7 +80,6 @@ class PostModel extends DB
                 $meta_description,
                 $meta_keyword,
                 $category_id,
-                $type_id
             );
             return ($stmt->execute()) ? $this->connection->insert_id : false;
         } catch (mysqli_sql_exception $e) {
