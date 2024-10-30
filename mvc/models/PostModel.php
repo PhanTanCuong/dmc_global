@@ -50,7 +50,8 @@ class PostModel extends DB
             $stmt->execute();
             return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -129,7 +130,8 @@ class PostModel extends DB
             return ($stmt->execute()) ? true : false;
 
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -146,7 +148,8 @@ class PostModel extends DB
             $stmt->bind_param("i", $id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -160,7 +163,8 @@ class PostModel extends DB
 
             return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 

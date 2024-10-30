@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/dmc_global/public/css/admin/addPost.css?v=<?= microtime() ?>">
 <div class="container-fluid">
-    <div class="d-flex flex-wrap justify-content-between">
+    <div class="row justify-content-between">
         <!-- First Card (Add Navbar Item) -->
-        <div id="addNavbarForm" class="card shadow mb-4 flex-5 mr-3">
+        <div id="addNavbarForm" class="card shadow mb-4 col-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Danh mục</h6>
             </div>
@@ -28,9 +28,8 @@
                                                     </i></i></button>
                                             </div> -->
                                             <div>
-                                                <input type="hidden" name="delete_id" class="delete_id">
                                                 <button  type="button" name="delete_btn" id="delete_btn" data-id="<?=$item['slug']?>"
-                                                    class="btn btn-danger delete_btn" "> <i
+                                                    class="btn btn-danger delete_btn"> <i
                                                         class="fas fa-trash"></i>
                                                     </i></i></button>
                                             </div>
@@ -45,7 +44,7 @@
             </div>
         </div>
         <!-- List of Navbar Items -->
-        <div class="card shadow mb-4 flex-fill ml-3">
+        <div class="card shadow mb-4 col-8">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Thông tin bài viết</h6>
             </div>
@@ -55,7 +54,7 @@
                         <div class="form-group">
                             <label for="category">Danh mục cha</label>
                             <select class="form-control " name="category" id="news_category">
-                                <option value="0">Trống</option>
+                                <option value="0">None</option>
                                 <?php foreach ($data["category"] as $category): ?>
                                     <option value="<?= $category['id'] ?>">
                                         <?= str_repeat('|---', $category['level']) . $category['name'] ?>
@@ -125,9 +124,9 @@
 
         //delete Record
 
-        $('#delete_btn').on('click', function(e){
+        $('.nav_table').on('click','#delete_btn', function(e){
             e.preventDefault();
-            deleteRecord(this);
+            deleteRecord(this,'deletePost','.nav_table','Admin/News/Add');
         })
 
     })

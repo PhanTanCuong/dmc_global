@@ -4,12 +4,12 @@
         <!-- First Card (Add Navbar Item) -->
         <div id="addNavbarForm" class="card shadow mb-4 flex-fill mr-3">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Thêm thông tin</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin danh mục</h6>
             </div>
             <div class="card-body">
                 <form action="addNavBar" method="POST">
                     <div class="form-group">
-                        <label for="navbar_name">Tên</label>
+                        <label for="navbar_name">Tên danh mục</label>
                         <input type="text" class="form-control" id="navbar_name" name="navbar_name" required>
                     </div>
                     <div class="form-group">
@@ -20,13 +20,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="navbar_link">Link</label>
-                        <select class="form-control" id="navbar_link" name="navbar_link" required>
-                        <option value="">None</option>
-                        <?php foreach ($data['links'] as $page): ?>
-                            <option value="<?= $page['slug']; ?>"><?= $page['name']; ?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <label for="edit_navbar_link">Đường dẫn</label>
+                        <input type="text" class="form-control" id="navbar_link" name="navbar_link" required>
                     </div>
                     <!-- Container for the additional selectmenu -->
                     <div class="form-group" id="dynamic_field_container" style="display:none;">
@@ -60,13 +55,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="edit_navbar_link">Link</label>
-                        <select class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
-                        <option value="">None</option>
-                        <?php foreach ($data['links'] as $page): ?>
-                            <option value="<?= $page['slug']; ?>"><?= $page['name']; ?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <label for="edit_navbar_link">Đường dẫn</label>
+                        <input type="text" class="form-control" id="edit_navbar_link" name="edit_navbar_link" required>
                     </div>
                     <button type="submit" name="editNavbarItemBtn" class="btn btn-primary">Lưu</button>
                     <button type="button" id="cancelEdit" class="btn btn-danger">Quay về</button>
@@ -171,10 +161,14 @@
 </div>
 <script style="text/javascript" src="/dmc_global/public/js/admin/NavbarItems.js?<?= microtime(); ?>"></script>
 <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?= microtime(); ?>"></script>
+<script type="text/javascript" src="/dmc_global/public/js/admin/slug.js?v=<?= microtime() ?>"></script>
+
 
 
 <script>
     $(document).ready(function () {
+        generateToSlug('navbar_name', 'navbar_link');
+        
         //sortable
         sortable('.sortable', 'sortNavbarItem');
         attachDragEvents();

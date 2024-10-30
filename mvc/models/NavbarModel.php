@@ -106,6 +106,19 @@ class NavBarModel extends DB
         }
     }
 
+    public function deleteNavBarBySlug($slug)
+    {
+        try {
+            $query = "DELETE FROM navbar WHERE slug = ?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $slug);
+            return $stmt->execute();
+        } catch (mysqli_sql_exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
     public function sortNavbarItem($id, $display_order)
     {
         try {

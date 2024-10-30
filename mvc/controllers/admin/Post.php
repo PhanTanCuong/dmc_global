@@ -70,6 +70,10 @@ class Post extends Controller
         ]);
     }
 
+    // function fetchNavbarItems(){
+    //     $this->
+    // }
+
     function Update()
     {
 
@@ -115,8 +119,6 @@ class Post extends Controller
                 $meta_keyword = $_POST['edit_news_meta_keyword'];
                 $meta_description = $_POST['edit_news_meta_description'];
                 $id = $_POST['edit_news_id'];
-
-
 
                 $data = $this->postModel->getCurrentNewsImages($id);
                 $stored_image = mysqli_fetch_array($data);

@@ -78,7 +78,7 @@ class CategoryModel extends DB
             $query = "INSERT INTO category (name,slug,parent_id,level,type) VALUES (?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssiis", $name, $slug, $parent_id, $level, $type);
-            return ($stmt->execute()) ? true : false;
+            return ($stmt->execute()) ? $this->connection->insert_id : false;
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
