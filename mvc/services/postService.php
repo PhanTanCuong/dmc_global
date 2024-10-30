@@ -67,8 +67,8 @@ class postService
                 if ($checkStrlen > 40) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Tiêu đề bài viết vượt quá kích thước cho phép']);
                 }
-
-                $navbar = $this->navbarModel->getNavBarBySlug($slug);
+                $category = $this->categoryModel->getCategoryById($category_id);
+                $navbar = $this->navbarModel->getNavBarBySlug($category['slug']);
                 $parent_id = $navbar['id'];
                 if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $parent_id))) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
@@ -85,8 +85,6 @@ class postService
                 $meta_keyword,
                 $category_id,
             );
-
-
 
             if (is_numeric($preference_id) && $preference_id > 0) {
 
@@ -139,7 +137,7 @@ class postService
                 return json_encode(['success' => false, 'message' => 'Lỗi! Xóa trang']);
             }
 
-            if (!$this->navbarModel->deleteNavbar($slug)) {
+            if (!$this->navbarModel->deleteNavBarBySlug($slug)) {
                 return json_encode(['success' => false, 'message' => 'Xóa dữ liệu không thành công']);
             }
 
@@ -148,7 +146,8 @@ class postService
 
 
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 

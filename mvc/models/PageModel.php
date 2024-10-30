@@ -14,9 +14,10 @@ class PageModel extends DB
             $query = "INSERT INTO menu (slug,type,preference_id) VALUES(?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssi", $slug, $type, $preference_id);
-            return ($stmt->execute()) ? true : false;
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
-            echo json_encode(['error' => $e->getMessage()]);
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -26,9 +27,10 @@ class PageModel extends DB
             $query = "DELETE FROM menu WHERE preference_id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $preference_id);
-            return ($stmt->execute()) ? true : false;
+            return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
-            echo "Error" . $e->getMessage();
+          error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -42,7 +44,8 @@ class PageModel extends DB
             $stmt->bind_param("s", $slug);
             return ($stmt->execute()) ? $stmt->get_result()->fetch_assoc() : null;
         } catch (mysqli_sql_exception $e) {
-            echo "Error" . $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -67,7 +70,8 @@ class PageModel extends DB
 
 
         } catch (mysqli_sql_exception $e) {
-            echo "Error: " . $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 }

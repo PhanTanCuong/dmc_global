@@ -34,6 +34,7 @@
                     <div class="form-group">
                         <label for="category_type">Loại</label>
                         <select class="form-control" id="category_type" name="category_type" required>
+                            <option value="category">Danh mục</option>
                             <option value="post">Bài viết</option>
                             <option value="product">Sản phẩm</option>
                         </select>

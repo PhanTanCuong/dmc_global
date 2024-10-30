@@ -58,6 +58,7 @@ Route::get('Admin/News', 'Post@display');
 Route::get('Admin/News/Add', 'Post@displayAddNews');
 Route::post('Admin/News/Update', 'Post@Update');
 Route::post('Admin/News/addNews', 'Post@addNews');
+Route::get('Admin/News/deletePost', 'Post@deletePost');
 Route::post('Admin/deleteNews', 'Post@deleteNews');
 Route::post('Admin/News/getNewsById/(\d+)', 'Post@getNewsById');
 Route::post('Admin/News/editNews', 'Post@editNews');

@@ -5,7 +5,7 @@ function refreshTable(tableElement, url) {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            $(tableElement).html(response);
+            $(tableElement).html(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('Error:', textStatus, errorThrown);
@@ -16,7 +16,7 @@ function refreshTable(tableElement, url) {
 //Add record function
 function addRecord(addFrm) {
     var data = new FormData(addFrm);
-    data.append('action','add_record')
+    data.append('action', 'add_record')
     console.log(data);
     $.ajax({
         type: 'POST',
@@ -52,13 +52,13 @@ function addRecord(addFrm) {
 
 //Delete record 
 
-function deleteRecord(deleteBtn) {
-    var id = $('#delete_btn').attr("data-id");
+function deleteRecord(deleteBtn, uri, tableElement, reloadApi) {
+    var id = $(deleteBtn).attr("data-id");
     console.log(id);
 
     $.ajax({
         type: 'GET',
-        url: $(deleteBtn).attr('href'),
+        url: uri,
         data: {
             action: "delete_data",
             id: id
@@ -69,7 +69,7 @@ function deleteRecord(deleteBtn) {
             // console.log(response);
             if (response.success === true) {
                 toastr.success(response.message);
-                refreshTable('#table_id', 'your_api_url'); // Thay 'your_api_url' b��ng đư��ng d��n API của bạn
+                refreshTable(tableElement, url);
             } else {
                 toastr.error(response.message);
             }

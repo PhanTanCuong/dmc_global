@@ -12,7 +12,7 @@ class Route
         $uri = "#^" . $uri . "$#";
         self::$routes[] = [
             'method' => strtoupper($method), // Xác định phương thức HTTP
-            'uri' => $uri, 
+            'uri' => $uri,
             'controller' => $controller
         ];
     }
