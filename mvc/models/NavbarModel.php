@@ -10,7 +10,8 @@ class NavBarModel extends DB
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
             return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -20,7 +21,8 @@ class NavBarModel extends DB
             $query = "SELECT name,slug FROM category_tree WHERE level = 0";
             return $this->connection->query($query);
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
     public function addNavBarInfor($name, $slug, $status, $parent_id)
@@ -43,7 +45,8 @@ class NavBarModel extends DB
             }
             return false;
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -56,9 +59,25 @@ class NavBarModel extends DB
             $stmt->execute();
             return $stmt->get_result();
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
+
+    public function getNavBarBySlug($slug)
+    {
+        try {
+            $query = "SELECT * FROM navbar WHERE slug=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("s", $slug);
+            $stmt->execute();
+            return $stmt->get_result()->fetch_assoc();
+        } catch (mysqli_sql_exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
     public function customizeInforNavBar($id, $name, $status, $slug)
     {
         try {
@@ -70,7 +89,8 @@ class NavBarModel extends DB
             }
             return false;
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
     public function deleteNavBar($id)
@@ -81,7 +101,8 @@ class NavBarModel extends DB
             $stmt->bind_param("i", $id);
             return $stmt->execute();
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -93,18 +114,28 @@ class NavBarModel extends DB
             $stmt->bind_param("ii", $display_order, $id);
             return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
 
     public function findSlugNavbar($slug)
     {
-        $sql = "SELECT COUNT(*) FROM menu WHERE slug = ?";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bind_param('s', $slug);
-        return $stmt->execute();
-     
+        try {
+            $sql = "SELECT COUNT(*) FROM navbar WHERE slug = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param('s', $slug);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+            return $count > 0;
+        } catch (mysqli_sql_exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+
     }
 
     //Child NavBar
@@ -121,31 +152,6 @@ class NavBarModel extends DB
     //             return false;
     //         }
     //         return true;
-    //     } catch (mysqli_sql_exception $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-    // }
-
-    // public function fetchNavbarSelectedItems($id)
-    // {
-    //     try {
-    //         $stmt = $this->connection->prepare(
-    //             "SELECT 
-    //                         selected_items.id AS slug,
-    //                         selected_items.name
-    //                         FROM navbar,
-    //                             JSON_TABLE(
-    //                                 child_items,
-    //                                 '$[*]' COLUMNS(
-    //                                     id VARCHAR(255) PATH '$.id',
-    //                                     name VARCHAR(255) PATH '$.name'
-    //                                 )
-    //                             ) AS selected_items
-    //                         WHERE navbar.id =?"
-    //         );
-    //         $stmt->bind_param("i", $id);
-    //         $stmt->execute();
-    //         return $stmt->get_result();
     //     } catch (mysqli_sql_exception $e) {
     //         echo "Error: " . $e->getMessage();
     //     }

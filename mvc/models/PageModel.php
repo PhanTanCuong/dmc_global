@@ -16,7 +16,7 @@ class PageModel extends DB
             $stmt->bind_param("ssi", $slug, $type, $preference_id);
             return ($stmt->execute()) ? true : false;
         } catch (mysqli_sql_exception $e) {
-            echo "Error" . $e->getMessage();
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
 
@@ -49,7 +49,7 @@ class PageModel extends DB
     public function directPage($slug)
     {
         try {
-            $menu = $this->getMenuBySlug($slug);
+            $menu = $this->getMenuBySlug(slug: $slug);
 
             if ($menu) {
                 $table_name = $menu['type'];

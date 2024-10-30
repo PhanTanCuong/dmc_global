@@ -16,14 +16,12 @@ function refreshTable(tableElement, url) {
 //Add record function
 function addRecord(addFrm) {
     var data = new FormData(addFrm);
-    // console.log(data);
+    data.append('action','add_record')
+    console.log(data);
     $.ajax({
         type: 'POST',
         url: $(addFrm).attr('action'),
-        data: {
-            action: add_record,
-            data: data
-        },
+        data: data,
         cache: false,
         contentType: false,
         processData: false,
@@ -31,6 +29,14 @@ function addRecord(addFrm) {
         success: function (response) {
             // console.log(response);
             if (response.success === true) {
+
+                $(addFrm)[0].reset(); // reset lại các trường
+
+                //Kiểm tra tồn tại phần tử summernote editor
+                if ($('.summernote').length) {
+                    $('.summernote').summernote('code', '<p><br></p>');
+                }
+
                 toastr.success(response.message);
             } else {
                 toastr.error(response.message);
@@ -40,14 +46,6 @@ function addRecord(addFrm) {
             console.log('Error:', textStatus, errorThrown);
             console.log('Response:', jqXHR.responseText);
         },
-        complete: function (data) {
-            $(addFrm)[0].reset(); // reset lại các trường
-
-            //Kiểm tra tồn tại phần tử summernote editor
-            if ($('.summernote').length) {
-                $('.summernote').summernote('code', '<p><br></p>');
-            }
-        }
     });
 }
 
