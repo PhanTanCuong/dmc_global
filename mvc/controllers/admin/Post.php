@@ -91,7 +91,7 @@ class Post extends Controller
     {
         //Model
         try {
-            if (isset($_POST['action']) && $_POST['action'] === "add_data") {
+            if (isset($_POST['action']) && $_POST['action'] === "add_record") {
                 header('Content-Type: application/json');
                 echo $this->postService->addPost();
             }
@@ -173,7 +173,6 @@ class Post extends Controller
 
             if(isset($_GET['action']) && $_GET['action'] ==="delete_data"){
                 header('Content-Type: application/json');
-
                 echo $this->postService->deletePost($_GET['id']);
             }
 

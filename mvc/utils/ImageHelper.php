@@ -60,7 +60,7 @@ class ImageHelper
                 return ['success' => false, 'message' => 'File không tồn tại'];
             }
         } catch (\Exception $e) {
-            echo "Message:" . $e->getMessage();
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
 

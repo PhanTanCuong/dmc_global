@@ -31,20 +31,47 @@ class postService
     {
         try {
             //Input fields
-            $category_id = (int)$_POST['category'] ?? null;
-            $title = (string)$_POST['news_title'] ?? '';
-            $slug = (string)$_POST['news_slug'] ?? '';
-            $short_description = (string)$_POST['news_description'] ?? '';
+            $category_id = (int) $_POST['category'] ?? null;
+            $title = (string) $_POST['news_title'] ?? '';
+            $slug = (string) $_POST['news_slug'] ?? '';
+            $short_description = (string) $_POST['news_description'] ?? '';
             $long_description = $_POST['news_long_description'] ?? '';
-            $meta_keyword = (string)$_POST['news_meta_keyword'] ?? '';
-            $meta_description = (string)$_POST['news_meta_description'] ?? '';
-            $image = $_FILES["news_image"]['name'] ?? '';
-
+            $meta_keyword = (string) $_POST['news_meta_keyword'] ?? '';
+            $meta_description = (string) $_POST['news_meta_description'] ?? '';
+            $image = isset($_FILES["news_image"]) && $_FILES["news_image"]['error'] === UPLOAD_ERR_OK
+                ? $_FILES["news_image"]['name']
+                : null;
             //Kiểm tra ảnh có được upload 
             if (isset($_FILES["news_image"]) && $_FILES["news_image"]["error"] === UPLOAD_ERR_OK) {
                 // Kiểm tra định dạng ảnh
                 if (\Mvc\Utils\ImageHelper::isImageFile($_FILES["news_image"]) === false) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Sai định dạng hình ảnh!!!']);
+                }
+            }
+
+
+            $checkStrlen = strlen($title);
+
+
+            if ($category_id === 0) {
+                if ($checkStrlen > 40) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Tiêu đề bài viết vượt quá kích thước cho phép']);
+                }
+
+                if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $category_id))) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
+                }
+            }
+
+            if ($category_id !== 0 && $this->isMenuItem($category_id)) {
+                if ($checkStrlen > 40) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Tiêu đề bài viết vượt quá kích thước cho phép']);
+                }
+
+                $navbar = $this->navbarModel->getNavBarBySlug($slug);
+                $parent_id = $navbar['id'];
+                if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $parent_id))) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
                 }
             }
 
@@ -59,11 +86,7 @@ class postService
                 $category_id,
             );
 
-            if($category_id ===0 || $this->isMenuItem($category_id)){
-                if(!($this->navbarModel->addNavBarInfor($title,$slug,'active',$category_id))){
-                    return json_encode(['success'=>false,'message'=>'Lỗi! Không lưu được danh mục']);
-                }
-            }
+
 
             if (is_numeric($preference_id) && $preference_id > 0) {
 
@@ -79,13 +102,14 @@ class postService
                         return json_encode(['success' => false, 'message' => 'Lỗi! Không thể lưu file ảnh']);
                     }
                 }
-    
+
                 return json_encode(['success' => true, 'message' => 'Lưu bài viết thành công']);
             } else {
                 return json_encode(['success' => false, 'message' => 'Lỗi ! không thể lưu bài viết']);
             }
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -129,8 +153,9 @@ class postService
     }
 
 
-    protected function isMenuItem(int $category_id){
-        $category=$this->categoryModel->getCategoryById($category_id);
+    protected function isMenuItem(int $category_id)
+    {
+        $category = $this->categoryModel->getCategoryById($category_id);
         return $this->navbarModel->findSlugNavbar($category['slug']);
     }
 }
