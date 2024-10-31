@@ -1,4 +1,6 @@
 <?php
+namespace Mvc\Model;
+
 use Core\DB;
 class ContentModel extends DB{
     public function addContent($block_id,$type,$data,$container,$item){
@@ -7,7 +9,7 @@ class ContentModel extends DB{
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("isssi",$block_id,$type,$data,$container,$item);
             return $stmt->execute();
-        }catch(mysqli_sql_exception $e){
+        }catch(\mysqli_sql_exception $e){
             echo "Error: ". $e->getMessage();
         }
     }
@@ -19,7 +21,7 @@ class ContentModel extends DB{
             $stmt->bind_param("i",$block_id);
             $stmt->execute();
             return $stmt->get_result();
-        }catch(mysqli_sql_exception $e){
+        }catch(\mysqli_sql_exception $e){
             echo $e->getMessage();
         }
     }

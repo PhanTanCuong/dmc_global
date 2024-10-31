@@ -15,64 +15,16 @@ class Post extends Controller
         $this->postModel = $this->model('PostModel');
         $this->categoryModel = $this->model('CategoryModel');
         $this->navbarModel = $this->model('NavbarModel');
-        $this->postService = new \Mvc\Services\PostService(
-            $this->postModel,
-            $this->model('PageModel'),
-            $this->navbarModel,
-            $this->categoryModel,
-        );
-
     }
     // News2
     function display()
     {
-        if (!isset($_COOKIE['parent_id'])) {
-            $_SESSION['status'] = "Direct Error";
-            header("Location: Admin/dashboard");
-            die();
-        }
-
-        $parent_id = $_COOKIE['parent_id'];
-
         //View
         $this->view("admin/home", [
             "news" => $this->postModel->getNews(),
             "page" => "displayMedia"
         ]);
     }
-
-    // function matchParentId()
-    // {
-    //     return match ((int) $_COOKIE['parent_id']) {
-    //         32 => 'none',
-    //         default => 'block',
-    //     };
-    // }
-
-    // function setPostName()
-    // {
-    //     return match ((int) $_COOKIE['parent_id']) {
-    //         32 => 'abouts',
-    //         43 => 'news',
-    //         44 => 'business services',
-    //         default => '',
-    //     };
-    // }
-
-
-    function displayAddNews()
-    {
-
-        $this->view("admin/home", [
-            "category" => $this->categoryModel->getInforParentCategory(2),
-            'item' => $this->navbarModel->getInforNavBar(),
-            "page" => "addPost",
-        ]);
-    }
-
-    // function fetchNavbarItems(){
-    //     $this->
-    // }
 
     function Update()
     {
@@ -90,20 +42,7 @@ class Post extends Controller
             "page" => "editPost"
         ]);
     }
-    //Add new product function
-    function addNews()
-    {
-        //Model
-        try {
-            if (isset($_POST['action']) && $_POST['action'] === "add_record") {
-                header('Content-Type: application/json');
-                echo $this->postService->addPost();
-            }
-
-        } catch (Exception $e) {
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-    }
+    
 
     //Edit product function
 

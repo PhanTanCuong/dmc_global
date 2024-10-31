@@ -1,12 +1,16 @@
 <?php
-class LayoutModel extends \Core\DB
+namespace Mvc\Model;
+
+use \Core\DB;
+
+class LayoutModel extends DB
 {
     public function getLayout()
     {
         try {
             $query = "SELECT * FROM block";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -18,7 +22,7 @@ class LayoutModel extends \Core\DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $name);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
 
         }
     }
@@ -39,7 +43,7 @@ class LayoutModel extends \Core\DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("iii", $page_id, $layout_id, $list_order);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }

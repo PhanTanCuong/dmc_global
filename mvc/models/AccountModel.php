@@ -1,4 +1,5 @@
 <?php
+namespace Mvc\Model;
 
 use Core\DB;
 class AccountModel extends DB
@@ -31,7 +32,7 @@ class AccountModel extends DB
             }
             $total = mysqli_num_rows($result);
             return $total;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
 
@@ -46,7 +47,7 @@ class AccountModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -65,7 +66,7 @@ class AccountModel extends DB
             $stmt->close();
 
             return $result;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -80,7 +81,7 @@ class AccountModel extends DB
             $result = $stmt->execute();
             $stmt->close();
             return $result;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -93,7 +94,7 @@ class AccountModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param('i', $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -119,7 +120,7 @@ class AccountModel extends DB
             } else {
                 return false;
             }
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }

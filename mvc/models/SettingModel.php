@@ -1,7 +1,7 @@
 <?php
+namespace Mvc\Model;
+
 use Core\DB;
-
-
 class SettingModel extends DB
 {
 
@@ -22,7 +22,7 @@ class SettingModel extends DB
                             icon.block_id = 1;
 ";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -37,7 +37,7 @@ class SettingModel extends DB
             ";
             $stmt = $this->connection->prepare($query);
             return $stmt->execute([$name, $image]);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -50,7 +50,7 @@ class SettingModel extends DB
                         AND image LIKE '%ic%'";
 
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -62,7 +62,7 @@ class SettingModel extends DB
         try {
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -88,7 +88,7 @@ class SettingModel extends DB
             }
 
             return $menu_items; //return  menu items's associative array
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -101,7 +101,7 @@ class SettingModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -114,7 +114,7 @@ class SettingModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $image, $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -126,7 +126,7 @@ class SettingModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -138,7 +138,7 @@ class SettingModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $image, $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -152,7 +152,7 @@ class SettingModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -162,7 +162,7 @@ class SettingModel extends DB
         try {
             $query = "SELECT * FROM footer WHERE block_id=7";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -174,7 +174,7 @@ class SettingModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssi", $title, $description, $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -187,7 +187,7 @@ class SettingModel extends DB
             $stmt->bind_param("ii", $block_id, $page_id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -206,8 +206,8 @@ class SettingModel extends DB
                 return null;
             }
 
-        } catch (mysqli_sql_exception $e) {
-            throw new Exception($e->getMessage());
+        } catch (\mysqli_sql_exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -229,8 +229,8 @@ class SettingModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
-            throw new Exception($e->getMessage());
+        } catch (\mysqli_sql_exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -270,7 +270,7 @@ class SettingModel extends DB
 
             return $availableItems;
 
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -301,7 +301,7 @@ class SettingModel extends DB
             }
 
             return $availableItems;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error:" . $e->getMessage();
         }
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Mvc\Services;
-use PageModel;
-use CategoryModel;
+use Mvc\Model\PageModel;
+use Mvc\Model\CategoryModel;
 use Core\DB;
 
 class CategoryService extends DB
@@ -53,7 +53,7 @@ class CategoryService extends DB
             $parent_category = mysqli_fetch_assoc($this->menuModel->directPage($slug));
             $parent_id = $parent_category['id'];
 
-            $categoryModel = new CategoryModel();
+            // $categoryModel = new CategoryModel();
 
             $subCategories = $this->categoryModel->getCategory($parent_id);
 

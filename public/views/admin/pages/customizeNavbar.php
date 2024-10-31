@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="edit_navbar_link">Đường dẫn</label>
-                        <input type="text" class="form-control" id="navbar_link" name="navbar_link" required>
+                        <input type="text" class="form-control" id="navbar_link" name=" navbar_link" required>
                     </div>
                     <!-- Container for the additional selectmenu -->
                     <div class="form-group" id="dynamic_field_container" style="display:none;">

@@ -1,12 +1,15 @@
 <?php
 namespace Mvc\Services;
 
+use Mvc\Model\NavBarModel,
+Mvc\Model\CategoryModel,
+Mvc\Model\PageModel;
 class NavbarService
 {
     public function __construct(
-        protected \NavbarModel $navbarModel,
-        protected \CategoryModel $categoryModel,
-        protected \PageModel $pageModel
+        protected NavbarModel $navbarModel,
+        protected CategoryModel $categoryModel,
+        protected PageModel $pageModel
     ) {
 
     }

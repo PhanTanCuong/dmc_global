@@ -1,9 +1,12 @@
 <?php
 namespace Mvc\Services;
 use Mvc\Utils\TypeFieldHelper;
+use Mvc\Utils\ImageHelper;
+use \Mvc\Model\ContentModel;
+use \Mvc\Model\LayoutModel;
 class LayoutService
 {
-    public function __construct(protected \ContentModel $contentModel, protected \LayoutModel $layoutModel)
+    public function __construct(protected ContentModel $contentModel, protected LayoutModel $layoutModel)
     {
     }
 
@@ -40,7 +43,7 @@ class LayoutService
         try {
             $image = $_ENV['PICTURE_URL'] . '/' . $fileName;
             $type = 'image';
-            if (\Mvc\Utils\ImageHelper::isImageField($_FILES[(string) $container]) === false) {
+            if (ImageHelper::isImageField($_FILES[(string) $container]) === false) {
                 $_SESSION['status'] = 'Incorrect image type';
                 header('Location:../Admin/layout');
                 die();

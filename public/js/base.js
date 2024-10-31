@@ -1,11 +1,38 @@
 // Reload table
 function refreshTable(tableElement, url) {
+    console.log(tableElement);
     $.ajax({
         url: url,
         method: 'GET',
+        cache: false,
+        contentType: false,
+        processData: false,
         dataType: 'json',
         success: function (data) {
+            
             $(tableElement).html(data);
+            console.log('refresh table successfully');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('Error:', textStatus, errorThrown);
+        }
+    })
+}
+
+//Reload div
+function reloadDiv(divElement,url){
+    console.log('divElement');
+    $.ajax({
+        url: url,
+        method: 'GET',
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (data) {
+           
+            $(divElement).html(data);
+            console.log('refresh div element successfully');
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('Error:', textStatus, errorThrown);
@@ -14,10 +41,10 @@ function refreshTable(tableElement, url) {
 }
 
 //Add record function
-function addRecord(addFrm) {
+function addRecord(addFrm,callback) {
     var data = new FormData(addFrm);
     data.append('action', 'add_record')
-    console.log(data);
+    // console.log(data);
     $.ajax({
         type: 'POST',
         url: $(addFrm).attr('action'),
@@ -29,17 +56,12 @@ function addRecord(addFrm) {
         success: function (response) {
             // console.log(response);
             if (response.success === true) {
-
-                $(addFrm)[0].reset(); // reset lại các trường
-
-                //Kiểm tra tồn tại phần tử summernote editor
-                if ($('.summernote').length) {
-                    $('.summernote').summernote('code', '<p><br></p>');
-                }
-
                 toastr.success(response.message);
+                if(callback && typeof callback === 'function'){
+                    callback(response);
+                }
             } else {
-                toastr.error(response.message);
+                toastr.error(response.message || 'Xảy ra lỗi!');
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -52,13 +74,13 @@ function addRecord(addFrm) {
 
 //Delete record 
 
-function deleteRecord(deleteBtn, uri, tableElement, reloadApi) {
+function deleteRecord(deleteBtn, url, callback) {
     var id = $(deleteBtn).attr("data-id");
     console.log(id);
 
     $.ajax({
         type: 'GET',
-        url: uri,
+        url: url,
         data: {
             action: "delete_data",
             id: id
@@ -69,7 +91,9 @@ function deleteRecord(deleteBtn, uri, tableElement, reloadApi) {
             // console.log(response);
             if (response.success === true) {
                 toastr.success(response.message);
-                refreshTable(tableElement, url);
+                if(callback && typeof callback === 'function'){
+                    callback(response);
+                }
             } else {
                 toastr.error(response.message);
             }

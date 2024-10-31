@@ -1,4 +1,5 @@
 <?php
+namespace Mvc\Model;
 
 use Core\DB;
 
@@ -11,7 +12,7 @@ class PostModel extends DB
         try {
             $query = "SELECT * FROM post";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -25,7 +26,7 @@ class PostModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -37,7 +38,7 @@ class PostModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $type_id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -49,7 +50,7 @@ class PostModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -85,7 +86,7 @@ class PostModel extends DB
                 $category_id,
             );
             return ($stmt->execute()) ? $this->connection->insert_id : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -129,7 +130,7 @@ class PostModel extends DB
             );
             return ($stmt->execute()) ? true : false;
 
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -142,12 +143,12 @@ class PostModel extends DB
             $stmt = $this->connection->prepare($query);
 
             if ($stmt === false) {
-                throw new Exception('Statement preparation failed: ' . $this->connection->error);
+                throw new \Exception('Statement preparation failed: ' . $this->connection->error);
             }
 
             $stmt->bind_param("i", $id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -162,7 +163,7 @@ class PostModel extends DB
             $stmt->bind_param('i', $id);
 
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
