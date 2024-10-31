@@ -1,13 +1,20 @@
 <?php
 namespace Mvc\Services;
 
+use Mvc\Model\PostModel,
+Mvc\Model\PageModel,
+Mvc\Model\NavbarModel,
+Mvc\Model\CategoryModel;
+
+use \Mvc\Utils\ImageHelper;
+
 class postService
 {
     public function __construct(
-        protected \PostModel $postModel,
-        protected \PageModel $pageModel,
-        protected \NavbarModel $navbarModel,
-        protected \CategoryModel $categoryModel
+        protected PostModel $postModel,
+        protected PageModel $pageModel,
+        protected NavbarModel $navbarModel,
+        protected CategoryModel $categoryModel
     ) {
 
     }
@@ -44,19 +51,24 @@ class postService
             //Kiểm tra ảnh có được upload 
             if (isset($_FILES["news_image"]) && $_FILES["news_image"]["error"] === UPLOAD_ERR_OK) {
                 // Kiểm tra định dạng ảnh
-                if (\Mvc\Utils\ImageHelper::isImageFile($_FILES["news_image"]) === false) {
+                if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Sai định dạng hình ảnh!!!']);
                 }
             }
 
 
+            $level = ($category_id !== 0) ? $this->categoryModel->traceParent($category_id) : 1;
             $checkStrlen = strlen($title);
 
+            if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
+                return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
+            }
 
             if ($category_id === 0) {
                 if ($checkStrlen > 40) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Tiêu đề bài viết vượt quá kích thước cho phép']);
                 }
+
 
                 if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $category_id))) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
@@ -75,6 +87,8 @@ class postService
                 }
             }
 
+
+
             $preference_id = $this->postModel->addNews(
                 $title,
                 $short_description,
@@ -86,15 +100,18 @@ class postService
                 $category_id,
             );
 
+
+
+
             if (is_numeric($preference_id) && $preference_id > 0) {
 
                 //add to slug center
                 $this->pageModel->addMenu($slug, 'post', $preference_id);
 
                 if (isset($_FILES["news_image"]) && $_FILES["news_image"]["error"] === UPLOAD_ERR_OK) {
-                    if (\Mvc\Utils\ImageHelper::moveUploadedFile('news_image')) {
+                    if (ImageHelper::moveUploadedFile('news_image')) {
                         $filepath = dirname(__DIR__, 3) . "\dmc_global\public\images\\" . $image;
-                        \Mvc\Utils\ImageHelper::resize_image($filepath, 389, 389);
+                        ImageHelper::resize_image($filepath, 389, 389);
                         return json_encode(['success' => true, 'message' => 'Lưu bài viết thành công']);
                     } else {
                         return json_encode(['success' => false, 'message' => 'Lỗi! Không thể lưu file ảnh']);

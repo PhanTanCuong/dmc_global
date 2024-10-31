@@ -1,4 +1,6 @@
 <?php
+namespace Mvc\Model;
+
 use Core\DB;
 
 class PageModel extends DB
@@ -15,7 +17,7 @@ class PageModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssi", $slug, $type, $preference_id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -28,7 +30,7 @@ class PageModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $preference_id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
           error_log($e->getMessage());
             return false;
         }
@@ -43,7 +45,7 @@ class PageModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
             return ($stmt->execute()) ? $stmt->get_result()->fetch_assoc() : null;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -69,7 +71,7 @@ class PageModel extends DB
             return false;
 
 
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }

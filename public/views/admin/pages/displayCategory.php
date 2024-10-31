@@ -4,8 +4,8 @@
     }
 </style>
 <div class="container-fluid">
-    <div class="d-flex flex-wrap justify-content-between">
-        <div id="addCategoryForm" class="card shadow mb-4 flex-fill mr-3">
+    <div class="row justify-content-between">
+        <div id="addCategoryForm" class="card shadow mb-4 col-4 mr-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
             </div>
@@ -43,7 +43,7 @@
                 </form>
             </div>
         </div>
-        <div id="editCategoryForm" class="card shadow mb-4 flex-fill mr-3 " style="display:none;">
+        <div id="editCategoryForm" class="card shadow mb-4 col mr-3 " style="display:none;">
             <div class="edit-navbar card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Thông tin danh mục</h6>
             </div>

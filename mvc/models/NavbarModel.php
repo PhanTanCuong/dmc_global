@@ -1,4 +1,5 @@
 <?php
+namespace Mvc\Model;
 
 use Core\DB;
 
@@ -9,7 +10,7 @@ class NavBarModel extends DB
         try {
             $query = "SELECT * FROM navbar ORDER BY display_order ASC";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -20,7 +21,7 @@ class NavBarModel extends DB
         try {
             $query = "SELECT name,slug FROM category_tree WHERE level = 0";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -44,7 +45,7 @@ class NavBarModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -58,7 +59,7 @@ class NavBarModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -72,7 +73,7 @@ class NavBarModel extends DB
             $stmt->bind_param("s", $slug);
             $stmt->execute();
             return $stmt->get_result()->fetch_assoc();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -88,7 +89,7 @@ class NavBarModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -100,7 +101,7 @@ class NavBarModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -113,7 +114,7 @@ class NavBarModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -126,7 +127,7 @@ class NavBarModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ii", $display_order, $id);
             return ($stmt->execute()) ? true : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -144,7 +145,7 @@ class NavBarModel extends DB
             $stmt->fetch();
             $stmt->close();
             return $count > 0;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -165,7 +166,7 @@ class NavBarModel extends DB
     //             return false;
     //         }
     //         return true;
-    //     } catch (mysqli_sql_exception $e) {
+    //     } catch (\mysqli_sql_exception $e) {
     //         echo "Error: " . $e->getMessage();
     //     }
     // }
@@ -200,7 +201,7 @@ class NavBarModel extends DB
     //         }
 
     //         return $availableItems;
-    //     } catch (mysqli_sql_exception $e) {
+    //     } catch (\mysqli_sql_exception $e) {
     //         echo "Error: " . $e->getMessage();
     //     }
     // }

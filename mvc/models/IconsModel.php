@@ -1,5 +1,7 @@
 <?php
 
+namespace Mvc\Model;
+
 use Core\DB;
 
 class IconsModel extends DB
@@ -14,7 +16,7 @@ class IconsModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -30,7 +32,7 @@ class IconsModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -43,7 +45,7 @@ class IconsModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -57,7 +59,7 @@ class IconsModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -68,7 +70,7 @@ class IconsModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param('i', $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }

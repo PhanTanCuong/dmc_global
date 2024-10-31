@@ -23,10 +23,6 @@ Route::get('404', 'NotFound@display');
 Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
 Route::get('', 'Home@display');
 
-
-
-
-
 // Đăng nhập/Đăng ký
 Route::get('Signin', 'Signin@display');
 Route::post('login', 'Signin@login');
@@ -55,9 +51,9 @@ Route::post('Admin/Product/editProduct', 'Product@editProduct');
 
 // Admin quản lý bài viết (News/Post)
 Route::get('Admin/News', 'Post@display');
-Route::get('Admin/News/Add', 'Post@displayAddNews');
+Route::get('Admin/News/Add', 'AddPost@display');
 Route::post('Admin/News/Update', 'Post@Update');
-Route::post('Admin/News/addNews', 'Post@addNews');
+Route::post('Admin/News/addNews', 'AddPost@addNews');
 Route::get('Admin/News/deletePost', 'Post@deletePost');
 Route::post('Admin/deleteNews', 'Post@deleteNews');
 Route::post('Admin/News/getNewsById/(\d+)', 'Post@getNewsById');
@@ -115,13 +111,13 @@ Route::post('Admin/Icons/getIconsById/(\d+)', 'Icons@getIconsById');
 
 //Admin quản lý layout
 Route::get('Admin/Data', 'Data@display');
-Route::post('Admin/addData','Data@addData');
+Route::post('Admin/addData', 'Data@addData');
 Route::post('Admin/Data/getDataById/(\d+)', 'Data@getDataById');
-Route::post('Admin/customizeData','Data@customizeData');
-Route::post('Admin/deleteData','Data@deleteData');
+Route::post('Admin/customizeData', 'Data@customizeData');
+Route::post('Admin/deleteData', 'Data@deleteData');
 
 
 //Admin quản lý layout
-Route::get('Admin/layout','Layout@display');
-Route::post('Admin/addContent','Layout@addContent');
+Route::get('Admin/layout', 'Layout@display');
+Route::post('Admin/addContent', 'Layout@addContent');
 ?>

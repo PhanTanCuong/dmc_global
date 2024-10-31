@@ -43,7 +43,7 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
   <!-- toast -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" href="/dmc_global/public/lib/toastr/css/toastr.min.css">
   
   <!-- css -->
   <link rel="stylesheet" href="/dmc_global/public/css/admin/media1.css?v=<?= microtime() ?>">

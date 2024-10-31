@@ -1,8 +1,8 @@
 <?php
 namespace Mvc\Services;
 use Exception;
-use PageModel;
-use CategoryModel;
+use Mvc\Model\PageModel;
+use Mvc\Model\CategoryModel;
 use Core\DB;
 
 class PaginationService extends DB

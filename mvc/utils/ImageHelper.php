@@ -98,29 +98,29 @@ class ImageHelper
 
     }
 
-    // public static function isImageField($file){
-    //     $total=count($file['tmp_name']);
+    public static function isImageField($file){
+        $total=count($file['tmp_name']);
 
-    //     for($i=0;$i<$total;$i++){
-    //         $fileName=$file['tmp_name'][$i]['image'];
-    //         if($fileName===null){
-    //             continue;
-    //         }
-    //         if (isset($file) && file_exists($fileName)) {
-    //             $info = getimagesize($fileName);
-    //             if ($info === false) {
-    //                 return false;
-    //             }
+        for($i=0;$i<$total;$i++){
+            $fileName=$file['tmp_name'][$i]['image'];
+            if($fileName===null){
+                continue;
+            }
+            if (isset($file) && file_exists($fileName)) {
+                $info = getimagesize($fileName);
+                if ($info === false) {
+                    return false;
+                }
 
-    //             $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    //             if (in_array($info['mime'], $validMimeTypes)) {
-    //                 return true;
-    //             }
-    //         }
+                $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (in_array($info['mime'], $validMimeTypes)) {
+                    return true;
+                }
+            }
 
-    //         return false;
-    //     }
+            return false;
+        }
 
-    //     return true;
-    // }
+        return true;
+    }
 }

@@ -22,11 +22,6 @@
                                     </td>
                                     <td >
                                         <div class="action_column">
-                                            <!-- <div> <input type="hidden" name="edit_id" class="edit_id">
-                                                <button href="#" type="button" name="edit_btn" id="edit_btn"
-                                                    class="btn btn-warning edit_btn" onClick=""> <i class="fas fa-edit"></i>
-                                                    </i></i></button>
-                                            </div> -->
                                             <div>
                                                 <button  type="button" name="delete_btn" id="delete_btn" data-id="<?=$item['slug']?>"
                                                     class="btn btn-danger delete_btn"> <i
@@ -51,13 +46,13 @@
             <div class="card-body">
                 <form action="addNews" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group category_selection">
                             <label for="category">Danh mục cha</label>
                             <select class="form-control " name="category" id="news_category">
                                 <option value="0">None</option>
                                 <?php foreach ($data["category"] as $category): ?>
                                     <option value="<?= $category['id'] ?>">
-                                        <?= str_repeat('|---', $category['level']) . $category['name'] ?>
+                                        <?= str_repeat('|---', $category['level']-1) . $category['name'] ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -119,14 +114,28 @@
         // addRecord
         $(document).on('submit', 'form[action="addNews"]', function (e) {
             e.preventDefault();
-            addRecord(this, 'addNews');
+            addRecord(this, function(){
+                console.log('1');
+                refreshTable('.nav_table','Add');
+                console.log('2');
+                reloadDiv('.category_selection','Add')
+                console.log('3');
+                $('form[action="addNews"]')[0].reset(); // reset lại các trường
+                $('.summernote').summernote('code', '<p><br></p>');
+            });
         });
 
         //delete Record
 
         $('.nav_table').on('click','#delete_btn', function(e){
             e.preventDefault();
-            deleteRecord(this,'deletePost','.nav_table','Admin/News/Add');
+            deleteRecord(this,'deletePost',function(){
+                console.log('1');
+                refreshTable('.nav_table','Add');
+                console.log('2');
+                reloadDiv('.category_selection','Add')
+                console.log('3');
+            });
         })
 
     })

@@ -1,5 +1,8 @@
 <?php
 
+namespace Mvc\Model;
+
+
 use Core\DB;
 
 class DataModel extends DB
@@ -12,7 +15,7 @@ class DataModel extends DB
             $stmt->bind_param('ii', $block_id,$page_id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -33,7 +36,7 @@ class DataModel extends DB
             $stmt->close();
 
             return $result;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
 
             echo "Error: " . $e->getMessage();
         }
@@ -48,7 +51,7 @@ class DataModel extends DB
             $result = $stmt->execute();
             $stmt->close();
             return $result;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
 
             echo "Error: " . $e->getMessage();
         }
@@ -61,7 +64,7 @@ class DataModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param('i', $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
 
             echo "Error: " . $e->getMessage();
         }
@@ -75,7 +78,7 @@ class DataModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -85,7 +88,7 @@ class DataModel extends DB
         try {
             $query = "SELECT * FROM block WHERE block_id<7";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -103,7 +106,7 @@ class DataModel extends DB
                 return false;
             }
             return true;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }

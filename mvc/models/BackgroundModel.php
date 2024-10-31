@@ -1,5 +1,7 @@
 <?php
 
+namespace Mvc\Model;
+
 use Core\DB;
 
 class BackgroundModel extends DB
@@ -9,7 +11,7 @@ class BackgroundModel extends DB
         try {
             $query = "SELECT * FROM background";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -24,7 +26,7 @@ class BackgroundModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -37,7 +39,7 @@ class BackgroundModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -51,7 +53,7 @@ class BackgroundModel extends DB
                 return true;
             }
             return false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -64,7 +66,7 @@ class BackgroundModel extends DB
             $stmt->bind_param('i', $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }

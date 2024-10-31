@@ -1,7 +1,7 @@
 <?php
 
 namespace Mvc\Utils;
-use mysqli_sql_exception;
+use Mvc\Model\PageModel;
 
 class SlugHelper
 {
@@ -36,7 +36,7 @@ class SlugHelper
     protected static function isSlugExists($slug)
     {
         try {
-            $menuModel = new \PageModel();
+            $menuModel = new PageModel();
 
             $query = "SELECT COUNT(*) FROM menu WHERE slug=?";
             $stmt = $menuModel->connection->prepare($query);
@@ -46,7 +46,7 @@ class SlugHelper
             $stmt->fetch();
 
             return $count > 0;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
