@@ -81,6 +81,20 @@ class AddPost extends Controller
         }
     }
 
+
+    //Edit Post
+    function editPost(){
+        try{
+            if(isset($_POST['action']) && $_POST['action']==="edit_record"){
+                header('Content-Type:application/json');
+                echo $this->postService->updatePost();
+            }
+        }catch(\Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    //Fetch post
     function fetchPost()
     {
         try {
