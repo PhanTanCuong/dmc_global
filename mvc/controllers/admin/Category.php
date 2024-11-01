@@ -59,44 +59,18 @@ class Category extends Controller
             $result_array = [];
             $item = $this->model('CategoryModel');
             $result = $item->getCategoryById($item_id);
-            if (mysqli_num_rows($result) > 0) {
-                foreach ($result as $row) {
-                    array_push($result_array, $row);
-                    header('Content-Type: application/json');
-                    echo json_encode($result_array);
-                }
-            }
+
+            // dd($result);
+            header('Content-Type: application/json');
+            echo json_encode($result);
+
         }
     }
     function customizeCategory()
     {
         try {
             if (isset($_POST["category_updatebtn"])) {
-                $id = (int) $_POST['edit_category_id'];
-                $name = strip_tags($_POST['edit_category_name']);
-                $slug = strip_tags($_POST['edit_category_slug']);
-                $parent_id = (int) $_POST['edit_category_parent'];
-                $type = strip_tags($_POST['edit_category_type']);
-                if ($id === $parent_id) {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Category');
-                    die();
-                }
-                $item = $this->model('CategoryModel');
-
-                $level = $item->traceParent($parent_id);
-
-                $success = $item->customizeInforCategory($id, $name, $slug, $parent_id, $level, $type);
-                if ($success) {
-                    if ($level <= 3) {
-                        $this->model("PageModel")->addMenu($slug, 'category', $id);
-                    }
-                    $_SESSION['success'] = 'Your data is updated';
-                    header('Location:Category');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:Category');
-                }
+              
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();

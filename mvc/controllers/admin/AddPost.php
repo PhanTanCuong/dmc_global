@@ -26,13 +26,23 @@ class AddPost extends Controller
     {
         $category = $this->categoryModel->getCategoryByType('post');
 
-         // Kiểm tra nếu yêu cầu là AJAX
+
+        // Kiểm tra nếu yêu cầu là AJAX
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            // dd($category);
             // Nếu là AJAX, trả về dữ liệu JSON để refresh bảng
             header('Content-Type: application/json');
-            echo json_encode([
-                "category" => $category
-            ]);
+            // Chuyển dữ liệu thành JSON, kiểm tra lỗi JSON trước khi gửi
+            $jsonData = json_encode(["category" => $category]);
+            // dd($jsonData);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                echo $jsonData;
+            } else {
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Error encoding JSON data."
+                ]);
+            }
             return;
         }
 
@@ -43,7 +53,7 @@ class AddPost extends Controller
         ]);
     }
 
-    //Add new product function
+    //Add news function
     function addNews()
     {
         //Model
@@ -55,6 +65,32 @@ class AddPost extends Controller
 
         } catch (\Exception $e) {
             echo json_encode(['error' => $e->getMessage()]);
+        }
+    }
+
+    //Delete news function
+    function deletePost()
+    {
+        try {
+            if (isset($_GET['action']) && $_GET['action'] === "delete_data") {
+                header('Content-Type: application/json');
+                echo $this->postService->deletePost($_GET['id']);
+            }
+        } catch (\Exception $e) {
+            echo json_encode(["error" => $e->getMessage()]);
+        }
+    }
+
+    function fetchPost()
+    {
+        try {
+            if (isset($_POST['slug'])) {
+                //send JSON response back to AJAX
+                header('Content-Type: application/json');
+                echo $this->postService->fetchPage($_POST['slug']);
+            }
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
         }
     }
 }

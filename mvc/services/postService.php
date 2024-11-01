@@ -56,13 +56,8 @@ class postService
                 }
             }
 
-
             $level = ($category_id !== 0) ? $this->categoryModel->traceParent($category_id) : 1;
             $checkStrlen = strlen($title);
-
-            if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
-                return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
-            }
 
             if ($category_id === 0) {
                 if ($checkStrlen > 40) {
@@ -86,6 +81,12 @@ class postService
                     return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
                 }
             }
+
+            if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
+                return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
+            }
+
+
 
 
 
@@ -137,24 +138,36 @@ class postService
 
             if (!isset($slug) && $slug !== '')
                 return false;
+
             $page = $this->pageModel->getMenuBySlug($slug);
 
-            $preference_id = (int) $page['preference_id'];
+            if ($page === null || $page['preference_id'] === null) {
+                return json_encode(['success' => false, 'message' => 'Trang không tồn tại']);
+            }
+
+
+            // dd($page['preference_id']);
+            $preference_id = $page['preference_id'];
+
+            $result=$this->postModel->deleteNews($preference_id);
             if ($page['type'] === 'post') {
-                if (!$this->postModel->deleteNews($preference_id)) {
+                if (!$result) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Xóa bài viết']);
                 }
             }
 
-            if (!$this->categoryModel->deleteCategory($slug)) {
+            $result=$this->categoryModel->deleteCategoryBySlug($slug);
+            if (!$result) {
                 return json_encode(['success' => false, 'message' => 'Lỗi! Xóa danh mục']);
             }
 
-            if (!$this->pageModel->deleteMenu($preference_id)) {
+            $result= $this->pageModel->deleteMenu($preference_id);
+            if (!$result) {
                 return json_encode(['success' => false, 'message' => 'Lỗi! Xóa trang']);
             }
 
-            if (!$this->navbarModel->deleteNavBarBySlug($slug)) {
+            $result=$this->navbarModel->deleteNavBarBySlug($slug);
+            if (!$result) {
                 return json_encode(['success' => false, 'message' => 'Xóa dữ liệu không thành công']);
             }
 
@@ -174,5 +187,6 @@ class postService
         $category = $this->categoryModel->getCategoryById($category_id);
         return $this->navbarModel->findSlugNavbar($category['slug']);
     }
+
 }
 ?>

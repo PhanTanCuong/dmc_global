@@ -6,9 +6,10 @@ use Core\DB;
 class PageModel extends DB
 {
 
-    
-    public function __construct(){
-        parent ::__construct(); //khởi tạo lớp cha
+
+    public function __construct()
+    {
+        parent::__construct(); //khởi tạo lớp cha
     }
     public function addMenu($slug, $type, $preference_id)
     {
@@ -31,7 +32,21 @@ class PageModel extends DB
             $stmt->bind_param("i", $preference_id);
             return $stmt->execute();
         } catch (\mysqli_sql_exception $e) {
-          error_log($e->getMessage());
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+
+    public function updateMenu($slug, $type, $preference_id)
+    {
+        try {
+            $query ="UPDATE FROM menu SET slug=?, type=? WHERE preference_id=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param("ssi", $slug, $type, $preference_id);
+            return $stmt->execute();
+        } catch (\mysqli_sql_exception $e) {
+            error_log($e->getMessage());
             return false;
         }
     }
@@ -44,6 +59,7 @@ class PageModel extends DB
             $query = "SELECT type,preference_id FROM menu WHERE slug=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $slug);
+            // dd($stmt->get_result()->fetch_assoc());
             return ($stmt->execute()) ? $stmt->get_result()->fetch_assoc() : null;
         } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());

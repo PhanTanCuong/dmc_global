@@ -98,18 +98,7 @@ class NavBar extends Controller
         try {
 
             if (isset($_POST["editNavbarItemBtn"])) {
-                $id = $_POST['edit_navbar_id'];
-                $name = $_POST['edit_navbar_name'];
-                $status = $_POST['edit_navbar_status'];
-                $slug = $_POST['edit_navbar_link'];
-                $success = $this->navbarModel->customizeInforNavBar($id, $name, $status, $slug);
-                if ($success) {
-                    $_SESSION['success'] = 'Your data is updated';
-                    header('Location:NavBar');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:NavBar');
-                }
+               
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
@@ -125,10 +114,10 @@ class NavBar extends Controller
 
                 $success = $this->navbarModel->deleteNavBar($id);
                 if ($success) {
-                    $_SESSION['success'] = 'Your data is deleted';
+                    $_SESSION['success'] = 'Xóa thành công.';
                     header('Location:NavBar');
                 } else {
-                    $_SESSION['status'] = 'Your data is NOT deleted';
+                    $_SESSION['status'] = 'Lỗi!Không thể xóa.';
                     header('Location:NavBar');
                 }
             }
