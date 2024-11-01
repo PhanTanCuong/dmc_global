@@ -15,13 +15,14 @@ class CategoryModel extends DB
     {
         try {
             $query = "SELECT * FROM category_tree";
-            return $this->connection->query($query);
+            return $this->connection->query($query)->fetch_all(MYSQLI_ASSOC);
+            // return $this->connection->query($query);
         } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function getInforParentCategory( int $level )
+    public function getInforParentCategory(int $level)
     {
         try {
             $query = "SELECT id,name,level FROM category_tree WHERE level <?";
@@ -34,14 +35,18 @@ class CategoryModel extends DB
         }
     }
 
-    public function getCategoryByType(string $type){
-        try{
-            $query ="SELECT id,name,slug,level FROM category WHERE type=?";
-            $stmt = $this->connection->prepare($query); 
+    public function getCategoryByType(string $type)
+    {
+        try {
+
+            $query = "SELECT id,name,slug,level FROM category WHERE type=?";
+
+            $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $type);
             $stmt->execute();
-            return $stmt->get_result();
-        }catch(\mysqli_sql_exception $e){
+            // dd($stmt->get_result());
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -123,23 +128,34 @@ class CategoryModel extends DB
         }
     }
 
+    public function deleteCategoryBySlug($slug)
+    {
+        try {
+            $query = "DELETE FROM category WHERE slug=?";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param('s', $slug);
+            return $stmt->execute();
+        } catch (\mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function traceParent(int $category_id, int $level = 0)
     {
         //Find a atribute with id=parent_id
         $query = "SELECT * FROM category WHERE id = $category_id LIMIT 1";
-        $result = mysqli_query($this->connection, $query);
-        $category = mysqli_fetch_assoc($result);
-
+        $result = $this->connection->query($query)->fetch_assoc();
+        // dd($result);
         //category not found
-        if (!$category) {
-            return false;
+        if (!$result) {
+            return $level + 1;
         }
         // parent_id=0==>reached the root==>return the current level
-        if ($category['parent_id'] == 0) {
+        if ($result['parent_id'] == 0) {
             return $level + 1;
         } else {
             // parent_id <> 0, continue trace the parent category
-            return $this->traceParent($category['parent_id'], $level + 1);
+            return $this->traceParent($result['parent_id'], $level + 1);
         }
     }
 

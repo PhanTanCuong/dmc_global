@@ -26,7 +26,8 @@
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0): ?>
                                 <?php while ($options = mysqli_fetch_array($data["slug_parent"])): ?>
                                     <option value="<?= $options['id'] ?>">
-                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?></option>
+                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?>
+                                    </option>
                                 <?php endwhile; ?>
                             <?php endif; ?>
                         </select>
@@ -43,7 +44,7 @@
                 </form>
             </div>
         </div>
-        <div id="editCategoryForm" class="card shadow mb-4 col mr-3 " style="display:none;">
+        <div id="editCategoryForm" class="card shadow mb-4 col-4 mr-3 " style="display:none;">
             <div class="edit-navbar card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Thông tin danh mục</h6>
             </div>
@@ -58,26 +59,25 @@
                     </div>
                     <div class="form-group">
                         <label for="category_slug">Đường dẫn</label>
-                        <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug"
-                            >
+                        <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug">
                     </div>
                     <div class="form-group">
                         <label for="category_parent">Parent</label>
                         <select name="edit_category_parent" id="edit_category_parent" class="form-control">
                             <option value="0">None</option>
-                            <?php if (mysqli_num_rows($data["edit_slug_parent"]) > 0): ?>
-                                <?php while ($options = mysqli_fetch_array($data["edit_slug_parent"])): ?>
+                                <?php foreach($data["edit_slug_parent"] as $options ): ?>
                                     <option value="<?= $options['id'] ?>">
-                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?></option>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
+                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?>
+                                    </option>
+                                <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="edit_category_type">Loại</label>
                         <select class="form-control" id="edit_category_type" name="edit_category_type" required>
+                        <option value="category">Danh mục</option>
                             <option value="post">Bài viết</option>
-                            <option value="product">Sản phẩm</option>
+                            <option value="product">Sản phẩm</option>   
                         </select>
                     </div>
                     <button type="submit" name="category_updatebtn" class="btn btn-primary">Cập nhật</button>
@@ -85,7 +85,7 @@
                 </form>
             </div>
         </div>
-        <div class="card shadow mb-4 ml-3">
+        <div class="card shadow mb-4 col-7 ml-3">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Danh sách danh mục</h6>
             </div>
@@ -101,33 +101,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (mysqli_num_rows($data["item"]) > 0): ?>
-                                <?= $counter = 1; ?>
-                                <?php while ($row = mysqli_fetch_array($data["item"])): ?>
-                                    <tr>
-                                        <td><?= $counter++; ?></td>
-                                        <td><?= str_repeat('|---', $row['level']) . $row['name'] ?></td>
-                                        <td><?= $row['slug'] ?></td>
-                                        <td>
-                                            <div class="action_column">
-                                                <form action="getCategoryById" method="POST">
-                                                    <input type="hidden" name="edit_id" class="edit_id"
-                                                        value="<?= $row['id']; ?>">
-                                                    <button href="#" type="button" name="edit_btn"
-                                                        class="btn btn-warning edit_btn" data-toggle="modal"
-                                                        data-target="#editCategory"> <i class="fas fa-edit"></i>
-                                                        </i></i></button>
-                                                </form>
-                                                <form action="deleteCategory" method="POST">
-                                                    <input type="hidden" name="delete_category_id" value="<?= $row['id']; ?>">
-                                                    <button type="submit" name="delete_category_btn" class="btn btn-danger">
-                                                        <i class="fas fa-trash"></i></button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
+                            <?= $counter = 1; ?>
+                            <?php foreach ($data["item"] as $row): ?>
+                                <tr>
+                                    <td><?= $counter++; ?></td>
+                                    <td><?= str_repeat('|---', $row['level']-1) . $row['name'] ?></td>
+                                    <td><?= $row['slug'] ?></td>
+                                    <td>
+                                        <div class="action_column">
+                                            <form action="getCategoryById" method="POST">
+                                                <input type="hidden" name="edit_id" class="edit_id"
+                                                    value="<?= $row['id']; ?>">
+                                                <button href="#" type="button" name="edit_btn"
+                                                    class="btn btn-warning edit_btn" data-toggle="modal"
+                                                    data-target="#editCategory"> <i class="fas fa-edit"></i>
+                                                    </i></i></button>
+                                            </form>
+                                            <form action="deleteCategory" method="POST">
+                                                <input type="hidden" name="delete_category_id" value="<?= $row['id']; ?>">
+                                                <button type="submit" name="delete_category_btn" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+
                         </tbody>
                     </table>
 
@@ -154,16 +153,15 @@
                     'checking_edit_btn': true,
                     'category_id': category_id,
                 },
+                dataType: 'json',
                 success: function (response) {
                     if (response) {
-                        $.each(response, function (key, value) {
-                            $('#edit_category_id').val(value['id']);
-                            $('#edit_category_name').val(value['name'])
-                            $('#edit_category_slug').val(value['slug'])
-                            $('#edit_category_parent').val(value['parent_id'])
-                            $('#edit_category_type').val(value['type'])
+                        $('#edit_category_id').val(response.id);
+                        $('#edit_category_name').val(response.name)
+                        $('#edit_category_slug').val(response.slug)
+                        $('#edit_category_parent').val(response.parent_id)
+                        $('#edit_category_type').val(response.type)
 
-                        });
                         $('#addCategoryForm').hide();
                         $('#editCategoryForm').show();
                     } else {

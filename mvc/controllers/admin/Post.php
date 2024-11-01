@@ -109,18 +109,7 @@ class Post extends Controller
         }
     }
 
-    function deletePost(){
-        try{
-
-            if(isset($_GET['action']) && $_GET['action'] ==="delete_data"){
-                header('Content-Type: application/json');
-                echo $this->postService->deletePost($_GET['id']);
-            }
-
-        }catch(Exception $e){
-            echo json_encode(["error"=>$e->getMessage()]);
-        }
-    }
+    
 
     //delete invidual product function
     function deleteNews()

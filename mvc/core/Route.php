@@ -40,7 +40,7 @@ class Route
     public static function dispatch($uri)
     {
         // Lấy phương thức HTTP hiện tại
-        $method = $_SERVER['REQUEST_METHOD'];
+            $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes as $route) {
             // So khớp cả phương thức và URI
@@ -60,7 +60,7 @@ class Route
                     $controllerInstance = new $controllerClass();
 
                     // Kiểm tra xem phương thức có tồn tại không, nếu có thì gọi nó với các tham số
-                    if (method_exists($controllerInstance, $method)) {
+                        if (method_exists($controllerInstance, $method)) {
                         // Gọi phương thức với các tham số, nếu không có tham số thì truyền mảng rỗng
                         call_user_func_array([$controllerInstance, $method], $params);
                     } else {

@@ -52,12 +52,14 @@ Route::post('Admin/Product/editProduct', 'Product@editProduct');
 // Admin quản lý bài viết (News/Post)
 Route::get('Admin/News', 'Post@display');
 Route::get('Admin/News/Add', 'AddPost@display');
+Route::get('Admin/News/deletePost', 'AddPost@deletePost');
 Route::post('Admin/News/Update', 'Post@Update');
 Route::post('Admin/News/addNews', 'AddPost@addNews');
-Route::get('Admin/News/deletePost', 'Post@deletePost');
+Route::get('Admin/News/deleteNews', 'Post@deletePost');
 Route::post('Admin/deleteNews', 'Post@deleteNews');
 Route::post('Admin/News/getNewsById/(\d+)', 'Post@getNewsById');
 Route::post('Admin/News/editNews', 'Post@editNews');
+Route::post('Admin/News/fetchPage', 'AddPost@fetchPost');
 
 
 // Admin quản lý slide
