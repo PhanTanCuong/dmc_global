@@ -45,7 +45,7 @@ function reloadDiv(divElement, url) {
             // location.reload();
             // console.log('Div refreshed successfully');
 
-            $( divElement ).load( url+divElement );
+            $(divElement).load(url + divElement);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('Error:', textStatus, errorThrown);
@@ -116,5 +116,35 @@ function deleteRecord(deleteBtn, url, callback) {
             console.log('Response:', jqXHR.responseText);
         }
     });
+}
 
+//Edit record function
+function editRecord(editfrm, callback) {
+    var data = new FormData(editfrm);
+    data.append('action', 'edit_record')
+    // console.log(data);
+    $.ajax({
+        type: 'POST',
+        url: $(editfrm).attr('action'),
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (response) {
+            // console.log(response);
+            if (response.success === true) {
+                toastr.success(response.message);
+                if (callback && typeof callback === 'function') {
+                    callback(response);
+                }
+            } else {
+                toastr.error(response.message || 'Xảy ra lỗi!');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('Error:', textStatus, errorThrown);
+            console.log('Response:', jqXHR.responseText);
+        },
+    });
 }

@@ -128,7 +128,50 @@ class PostModel extends DB
                 $category_id,
                 $id
             );
-            return ($stmt->execute()) ? true : false;
+            return $stmt->execute();
+
+        } catch (\mysqli_sql_exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public function editPost(
+        $slug,
+        $title,
+        $short_description,
+        $long_description,
+        $image,
+        $meta_description,
+        $meta_keyword,
+        $category_id
+    ) {
+        try {
+            $query = "UPDATE post 
+                                SET 
+                                    title = ?, 
+                                    description = ?, 
+                                    long_description = ?, 
+                                    image = ?, 
+                                    meta_description = ?, 
+                                    meta_keyword = ?, 
+                                    category_id = ? 
+                                WHERE 
+                                    slug = ?;
+                                ";
+            $stmt = $this->connection->prepare($query);
+            $stmt->bind_param(
+                "ssssssis",
+                $title,
+                $short_description,
+                $long_description,
+                $image,
+                $meta_description,
+                $meta_keyword,
+                $category_id,
+                $slug
+            );
+            return $stmt->execute();
 
         } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());

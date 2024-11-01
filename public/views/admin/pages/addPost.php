@@ -46,6 +46,9 @@
                 <div class="card-body">
                     <form action="addNews" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
+                            <div class="form-group">
+                                <input type="hidden" name="news_id" id="news_id" class="form-control" required>
+                            </div>
                             <div class="form-group category_selection">
                                 <label for="category">Danh mục cha</label>
                                 <select class="form-control " name="category" id="news_category">
@@ -143,37 +146,58 @@
                 });
             })
 
+
+            //edit Record
+
+            $(document).on('submit', 'form[action="editNews"]', function (e) {
+                e.preventDefault();
+                editRecord (this, function(){
+                    console.log('1');
+                    // refreshTable('.nav_table','Add');
+
+                    $('.nav_table').load('Add'+ ' .nav_table')
+                    $('.category_selection').load('Add'+ ' .category_selection')
+                });
+            });
+           //fetch post 
             $('.item-link').on('click', function (event) {
-            event.preventDefault();
+                event.preventDefault();
 
-            var slug = $(this).data('slug');
-            // console.log(slug);
+                var slug = $(this).data('slug');
+                // console.log(slug);
 
-            $.ajax({
-                url: 'fetchPage',
-                type: 'POST',
-                data: {
-                    slug: slug,
-                },
-                success: function (response) {
-                    // console.log("Response from server: ", response);
+                $.ajax({
+                    url: 'fetchPage',
+                    type: 'POST',
+                    data: {
+                        slug: slug,
+                    },
+                    success: function (response) {
+                        // console.log("Response from server: ", response);
 
-                    const data = JSON.parse(JSON.stringify(response));
+                        const data = JSON.parse(JSON.stringify(response));
 
-                    $('#news_category').val(data.category_id);
-                    $('#news_title').val(data.title);
-                    $('#news_long_description').summernote('code', data.long_description);
-                    $('#news_slug').val(data.slug);
-                    $('#news_meta_keyword').val(data.meta_keyword);
-                    $('#news_meta_description').val(data.meta_description);
+                        $('#news_id').val(data.id);
+                        $('#news_category').val(data.category_id);
+                        $('#news_title').val(data.title);
+                        $('#news_description').val(data.description);
+                        if (typeof data.long_description !== 'undefined') {
+                            $('#news_long_description').summernote('code', data.long_description);
+                        }else{
+                            $('.summernote').summernote('code', '<p><br></p>'); 
+                        }
+                        $('#news_slug').val(data.slug);
+                        $('#news_meta_keyword').val(data.meta_keyword);
+                        $('#news_meta_description').val(data.meta_description);
+                        $('form[action="addNews"]').attr('action', 'editNews');
 
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
-                    console.log(status);
-                    console.log(error);
-                }
-            })
-        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                        console.log(status);
+                        console.log(error);
+                    }
+                })
+            });
         })
     </script>
