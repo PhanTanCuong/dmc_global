@@ -38,9 +38,7 @@ class CategoryModel extends DB
     public function getCategoryByType(string $type)
     {
         try {
-
-            $query = "SELECT id,name,slug FROM category_tree WHERE type=?";
-
+            $query = "SELECT id,name,slug FROM category_tree WHERE type=? AND level<2";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $type);
             $stmt->execute();
@@ -50,6 +48,9 @@ class CategoryModel extends DB
             echo $e->getMessage();
         }
     }
+
+    
+
 
     public function getCategoryById($id)
     {

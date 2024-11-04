@@ -17,7 +17,7 @@
                             <?php foreach ($data['item'] as $item): ?>
                                 <tbody>
                                     <tr>
-                                        <td><a href="javascript:void(0)" onclick="fetchInforBySlug()" class="item-link"
+                                        <td><a href="javascript:void(0)" class="item-link"
                                                 data-slug="<?= $item['slug'] ?>"><?= $item['name'] ?></a>
                                         </td>
                                         <td >
@@ -118,14 +118,12 @@
             $(document).on('submit', 'form[action="addNews"]', function (e) {
                 e.preventDefault();
                 addRecord(this, function(){
-                    console.log('1');
-                    // refreshTable('.nav_table','Add');
-
-                    $('.nav_table').load('Add'+ ' .nav_table')
-                    
+                    refreshTable('.nav_table','reloadTable');
                     console.log('2');
-                    $('.category_selection').load('Add'+ ' .category_selection')
-                    console.log('3');
+                    reloadDiv('#news_category','reloadDiv')
+                    
+                    // $('.category_selection').load('Add'+ ' .category_selection')
+                    // console.log('3');
                     $('form[action="addNews"]')[0].reset(); // reset lại các trường
                     $('.summernote').summernote('code', '<p><br></p>');
                 });
@@ -136,12 +134,11 @@
             $('.nav_table').on('click','#delete_btn', function(e){
                 e.preventDefault();
                 deleteRecord(this,'deletePost',function(){
-                    console.log('1');
-                    // refreshTable('.table-bordered','Add');
-                    $('.nav_table').load('Add'+ " .nav_table")
-                    
+                    refreshTable('.nav_table','reloadTable');
                     console.log('2');
-                    $('.category_selection').load('Add'+ ' .category_selection')
+                    reloadDiv('#news_category','reloadDiv')
+                    // console.log('2');
+                    // $('.category_selection').load('Add'+ ' .category_selection')
                     console.log('3');
                 });
             })
@@ -149,18 +146,18 @@
 
             //edit Record
 
-            $(document).on('submit', 'form[action="editNews"]', function (e) {
+            $(document).on('submit', 'form[action="editPost"]', function (e) {
                 e.preventDefault();
                 editRecord (this, function(){
                     console.log('1');
-                    // refreshTable('.nav_table','Add');
-
-                    $('.nav_table').load('Add'+ ' .nav_table')
+                    refreshTable('.nav_table','reloadTable');
+                    console.log('2');
+                    reloadDiv('#news_category','reloadDiv')
                     $('.category_selection').load('Add'+ ' .category_selection')
                 });
             });
            //fetch post 
-            $('.item-link').on('click', function (event) {
+            $('.nav_table').on('click','.item-link', function (event) {
                 event.preventDefault();
 
                 var slug = $(this).data('slug');
@@ -189,7 +186,7 @@
                         $('#news_slug').val(data.slug);
                         $('#news_meta_keyword').val(data.meta_keyword);
                         $('#news_meta_description').val(data.meta_description);
-                        $('form[action="addNews"]').attr('action', 'editNews');
+                        $('form[action="addNews"]').attr('action', 'editPost');
 
                     },
                     error: function (xhr, status, error) {

@@ -1,51 +1,34 @@
 // // Reload table
-// function refreshTable(tableElement, url) {
-//     console.log(tableElement);
-//     $.ajax({
-//         url: url,
-//         method: 'GET',
-//         cache: false,
-//         contentType: false,
-//         processData: false,
-//         dataType: 'json',
-//         success: function (data) {
-//             // let tableContent = dataFormatter(response);
-//             //    $(tableElement).html(data);
-//             // location.reload();
-//             // console.log('refresh table successfully');
-
-//             $( tableElement ).load( url+tableElement );
-//         },
-//         error: function (jqXHR, textStatus, errorThrown) {
-//             console.log('Error:', textStatus, errorThrown);
-//         }
-//     })
-// }
-
-
-//Reload div
-function reloadDiv(divElement, url) {
-    console.log('divElement');
+function refreshTable(tableElement, url) {
+    // console.log(tableElement);
     $.ajax({
         url: url,
         method: 'GET',
         cache: false,
         contentType: false,
         processData: false,
-        dataType: 'json',
-        success: function (data) {
+        success: function (response) {
+            $(tableElement).html(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('Error:', textStatus, errorThrown);
+        }
+    })
+}
 
-            // let htmlContent = ''; // Chuỗi để lưu HTML tạo từ dữ liệu
-            // data.category.forEach(item => {
-            //     htmlContent += `<p>${item.name}</p>`; // Chỉnh sửa HTML theo yêu cầu của bạn
-            // });
 
-            // // Gán lại nội dung cho phần tử div
-            // $(divElement).html(htmlContent);
-            // location.reload();
-            // console.log('Div refreshed successfully');
 
-            $(divElement).load(url + divElement);
+//Reload div
+function reloadDiv(divElement, url) {
+    // console.log('divElement');
+    $.ajax({
+        url: url,
+        method: 'GET',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            $(divElement).html(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('Error:', textStatus, errorThrown);

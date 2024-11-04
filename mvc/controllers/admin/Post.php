@@ -37,8 +37,6 @@ class Post extends Controller
         $this->view("admin/home", [
             "news" => $news,
             "category" => $this->categoryModel->getInforParentCategory(3),
-            // "name" => $this->setPostName(),
-            // "display" => $this->matchParentId(),
             "page" => "editPost"
         ]);
     }
