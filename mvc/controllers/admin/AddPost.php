@@ -25,8 +25,6 @@ class AddPost extends Controller
     function display()
     {
         $category = $this->categoryModel->getCategoryByType('post');
-
-
         // Kiểm tra nếu yêu cầu là AJAX
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             // dd($category);
@@ -47,8 +45,8 @@ class AddPost extends Controller
         }
 
         $this->view("admin/home", [
-            "category" => $category,
-            'item' => $category,
+            "category" => $this->categoryModel->getInforCategory(),
+            "item" => $category,
             "page" => "addPost",
         ]);
     }

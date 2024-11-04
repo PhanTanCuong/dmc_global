@@ -39,7 +39,7 @@ class CategoryModel extends DB
     {
         try {
 
-            $query = "SELECT id,name,slug,level FROM category WHERE type=?";
+            $query = "SELECT id,name,slug FROM category_tree WHERE type=?";
 
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $type);
@@ -109,7 +109,7 @@ class CategoryModel extends DB
             $query = "UPDATE category SET name=?,slug=?,parent_id=?,level=?,type=? WHERE id = ?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssiisi", $name, $slug, $parent_id, $level, $type, $id);
-            return ($stmt->execute()) ? true : false;
+            return $stmt->execute();
         } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }

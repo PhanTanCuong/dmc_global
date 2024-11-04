@@ -26,7 +26,7 @@
                             <?php if (mysqli_num_rows($data["slug_parent"]) > 0): ?>
                                 <?php while ($options = mysqli_fetch_array($data["slug_parent"])): ?>
                                     <option value="<?= $options['id'] ?>">
-                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?>
+                                        <?=$options['name'] ?>
                                     </option>
                                 <?php endwhile; ?>
                             <?php endif; ?>
@@ -62,12 +62,12 @@
                         <input type="text" class="form-control" id="edit_category_slug" name="edit_category_slug">
                     </div>
                     <div class="form-group">
-                        <label for="category_parent">Parent</label>
+                        <label for="category_parent">Danh mục cha</label>
                         <select name="edit_category_parent" id="edit_category_parent" class="form-control">
-                            <option value="0">None</option>
+                            <option value="0">---Trống---</option>
                                 <?php foreach($data["edit_slug_parent"] as $options ): ?>
                                     <option value="<?= $options['id'] ?>">
-                                        <?= str_repeat('|---', $options['level']) . $options['name'] ?>
+                                        <?=$options['name'] ?>
                                     </option>
                                 <?php endforeach; ?>
                         </select>
@@ -105,7 +105,7 @@
                             <?php foreach ($data["item"] as $row): ?>
                                 <tr>
                                     <td><?= $counter++; ?></td>
-                                    <td><?= str_repeat('|---', $row['level']-1) . $row['name'] ?></td>
+                                    <td><?= $row['name'] ?></td>
                                     <td><?= $row['slug'] ?></td>
                                     <td>
                                         <div class="action_column">
