@@ -19,7 +19,7 @@ class NavBarModel extends DB
     public function getLinkList()
     {
         try {
-            $query = "SELECT name,slug FROM category_tree WHERE level = 0";
+            $query = "SELECT name,slug FROM category_tree";
             return $this->connection->query($query);
         } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());

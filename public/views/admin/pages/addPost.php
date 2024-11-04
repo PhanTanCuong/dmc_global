@@ -55,7 +55,7 @@
                                     <option value="0">None</option>
                                     <?php foreach ($data[ "category"] as $category): ?>
                                         <option value="<?= $category['id'] ?>">
-                                            <?= str_repeat('|---', $category['level']-1) . $category['name'] ?>
+                                            <?= $category['name'] ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>

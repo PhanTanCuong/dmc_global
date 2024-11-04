@@ -7,9 +7,18 @@ use Core\Exception;
 use Core\Auth;
 class Category extends Controller
 {
+    protected $categoryService, $categoryModel, $pageModel;
+
     function __construct()
     {
         Auth::checkAdmin();
+        $this->categoryModel = $this->model("CategoryModel");
+        $this->pageModel = $this->model("PageModel");
+        $this->categoryService =
+            new \Mvc\Services\CategoryService(
+                $this->pageModel,
+                $this->categoryModel,
+            );
     }
 
     function display()
@@ -29,23 +38,7 @@ class Category extends Controller
     {
         try {
             if (isset($_POST['addCategoryBtn'])) {
-                $name = $_POST['category_name'];
-                $slug = $_POST['category_slug'];
-                $parent_id = (int) $_POST['category_parent'];
-                $type = $_POST['category_type'];
-                $item = $this->model('CategoryModel');
-
-                $level = ($parent_id !== 0) ? $item->traceParent($parent_id) : 1;
-
-                $success = $item->addCategoryInfor($name, $slug, $parent_id, $level, $type);
-                if ($success) {
-                    $_SESSION['success'] = 'Your data is added';
-                    header('Location:Category');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT added';
-                    header('Location:Category');
-                }
-
+                $this->categoryService->addCategory();
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
@@ -54,23 +47,24 @@ class Category extends Controller
     }
     function getCategoryById()
     {
-        if (isset($_POST['checking_edit_btn'])) {
-            $item_id = $_POST['category_id'];
-            $result_array = [];
-            $item = $this->model('CategoryModel');
-            $result = $item->getCategoryById($item_id);
-
-            // dd($result);
-            header('Content-Type: application/json');
-            echo json_encode($result);
-
+        try {
+            if (isset($_POST['checking_edit_btn'])) {
+                $item_id = $_POST['category_id'];
+                $result = $this->categoryModel->getCategoryById($item_id);
+                // dd($result);
+                header('Content-Type: application/json');
+                echo json_encode($result);
+            }
+        } catch (Exception $e) {
+            $_SESSION['status'] = $e->getMessage();
+            header('Location:Category');
         }
     }
     function customizeCategory()
     {
         try {
             if (isset($_POST["category_updatebtn"])) {
-              
+                $this->categoryService->editCategory();
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
@@ -82,21 +76,7 @@ class Category extends Controller
     {
         try {
             if (isset($_POST['delete_category_btn'])) {
-                $id = $_POST['delete_category_id'];
-                $item = $this->model('CategoryModel');
-                if ($item->hasChildren($id)) {
-                    $_SESSION['status'] = 'The category can NOT be deleted because it has child categories.';
-                    header('Location:Category');
-                    die();
-                }
-                $success = $item->deleteCategory($id);
-                if ($success) {
-                    $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:Category');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:Category');
-                }
+              $this->categoryService->deleteCategory($_POST['delete_category_id']);
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
