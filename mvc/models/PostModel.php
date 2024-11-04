@@ -10,14 +10,12 @@ class PostModel extends DB
     public function getNews()
     {
         try {
-            $query = "SELECT * FROM post";
+            $query = "SELECT * FROM post WHERE category_id != 0";
             return $this->connection->query($query);
         } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
-
-
 
     public function getNewsByProductCategory($category_id)
     {

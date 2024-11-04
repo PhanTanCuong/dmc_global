@@ -27,9 +27,7 @@ class postService
 
             return json_encode($data->fetch_assoc());
         }
-
         return json_encode([]);
-
     }
 
 
@@ -64,8 +62,11 @@ class postService
                     return json_encode(['success' => false, 'message' => 'Lỗi! Tiêu đề bài viết vượt quá kích thước cho phép']);
                 }
 
-
                 if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $category_id))) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
+                }
+
+                if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
                 }
             }
@@ -80,11 +81,13 @@ class postService
                 if (!($this->navbarModel->addNavBarInfor($title, $slug, 'active', $parent_id))) {
                     return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
                 }
+
+                if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
+                }
             }
 
-            if (!($this->categoryModel->addCategoryInfor($title, $slug, $category_id, $level, 'post'))) {
-                return json_encode(['success' => false, 'message' => 'Lỗi! Không lưu được danh mục']);
-            }
+
 
             $preference_id = $this->postModel->addNews(
                 $title,
@@ -179,16 +182,15 @@ class postService
         return $this->navbarModel->findSlugNavbar($category['slug']);
     }
 
-    //delete Post
+    //update Post
     public function updatePost()
     {
         try {
+            //Kiểm tra id có tồn tại
+            if ($_POST['news_id'] === null) {
+                return json_encode(['success' => false, 'message' => 'Lỗi! Bài viết không tồn tại']);
+            }
 
-              //Kiểm tra id có tồn tại
-              if ($_POST['news_id'] === null) {
-                return json_encode(['success'=>false, 'message'=>'Lỗi! Bài viết không tồn tại']);
-              }
-            
             //Input fields
             $category_id = (int) $_POST['category'] ?? null;
             $title = (string) $_POST['news_title'] ?? '';
@@ -197,11 +199,11 @@ class postService
             $long_description = $_POST['news_long_description'] ?? '';
             $meta_keyword = (string) $_POST['news_meta_keyword'] ?? '';
             $meta_description = (string) $_POST['news_meta_description'] ?? '';
-         
+
             $id = $_POST['news_id'] ?? null;
 
 
-          
+
 
             $data = $this->postModel->getCurrentNewsImages($id);
             $stored_image = mysqli_fetch_array($data);
@@ -211,13 +213,15 @@ class postService
                 $image = $stored_image['image'];
             }
 
-            if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
-                return json_encode(['success'=>false, 'message'=>'Lỗi! Hình ảnh không đúng định dạng']);
-            }
+            if (isset($_FILES["news_image"]) && $_FILES["news_image"]["error"] === UPLOAD_ERR_OK) {
+                if (ImageHelper::isImageFile($_FILES["news_image"]) === false) {
+                    return json_encode(['success' => false, 'message' => 'Lỗi! Hình ảnh không đúng định dạng']);
+                }
+            }   
 
             $image = isset($_FILES["news_image"]) && $_FILES["news_image"]['error'] === UPLOAD_ERR_OK
-            ? $_FILES["news_image"]['name']
-            : null;
+                ? $_FILES["news_image"]['name']
+                : null;
 
             $success = $this->postModel->editPost(
                 $slug,
@@ -239,9 +243,9 @@ class postService
                 ) . '';
                 $filepath = dirname(__DIR__, 3) . "\public\images\\" . $image;
                 ImageHelper::resize_image($filepath, 389, 389);
-                return json_encode(['success'=>true, 'message'=>'Cập nhật thành công']);
+                return json_encode(['success' => true, 'message' => 'Cập nhật thành công']);
             } else {
-               
+
             }
         } catch (\Exception $e) {
             error_log($e->getMessage());
