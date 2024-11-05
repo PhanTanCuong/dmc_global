@@ -31,7 +31,7 @@ class Post extends Controller
 
         if (isset($_POST['checking_edit_btn'])) {
             $news_id = (int) $_POST['news_id'];
-            $news = $this->model('PostModel')->getNewsbyId($news_id);
+            $news = $this->postModel->getNewsbyId($news_id);
         }
 
         $this->view("admin/home", [

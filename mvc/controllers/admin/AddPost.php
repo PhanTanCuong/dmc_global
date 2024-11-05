@@ -25,33 +25,14 @@ class AddPost extends Controller
     function display()
     {
         $category = $this->categoryModel->getCategoryByType('post');
-        // // Kiểm tra nếu yêu cầu là AJAX
-        // if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        //     // dd($category);
-        //     // Nếu là AJAX, trả về dữ liệu JSON để refresh bảng
-        //     header('Content-Type: application/json');
-        //     // Chuyển dữ liệu thành JSON, kiểm tra lỗi JSON trước khi gửi
-        //     $jsonData = json_encode(["category" => $category]);
-        //     // dd($jsonData);
-        //     if (json_last_error() === JSON_ERROR_NONE) {
-        //         echo $jsonData;
-        //     } else {
-        //         echo json_encode([
-        //             "success" => false,
-        //             "message" => "Error encoding JSON data."
-        //         ]);
-        //     }
-        //     return;
-        // }
 
         $this->view("admin/home", [
-            "category" => $this->categoryModel->getInforCategory(),
-            "item" => $category,
+            "category" => $category,
             "page" => "addPost",
         ]);
     }
 
-    public function reloadTable()
+    function reloadTable()
     {
         // Giả sử bạn có phương thức lấy danh sách items từ database
         $items = $this->categoryModel->getCategoryByType('post');
@@ -147,7 +128,7 @@ class AddPost extends Controller
             if (isset($_POST['slug'])) {
                 //send JSON response back to AJAX
                 header('Content-Type: application/json');
-                echo $this->postService->fetchPage($_POST['slug']);
+                echo $this->postService->fetchPage($_POST["slug"]);
             }
         } catch (\Exception $exception) {
             echo $exception->getMessage();

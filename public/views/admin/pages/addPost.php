@@ -1,7 +1,7 @@
     <link rel="stylesheet" href="/dmc_global/public/css/admin/addPost.css?v=<?= microtime() ?>">
     <div class="container-fluid">
         <div class="row justify-content-between">
-            <!-- First Card (Add Navbar Item) -->
+            <!-- Danh mục -->
             <div id="addNavbarForm" class="card shadow mb-4 col-3">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Danh mục</h6>
@@ -14,7 +14,7 @@
                     </div>
                     <div class="table-responsive nav_table">
                         <table class="table table-bordered" width="100%" cellspacing="0">
-                            <?php foreach ($data['item'] as $item): ?>
+                            <?php foreach ($data["category"] as $item): ?>
                                 <tbody>
                                     <tr>
                                         <td><a href="javascript:void(0)" class="item-link"
@@ -38,7 +38,7 @@
 
                 </div>
             </div>
-            <!-- List of Navbar Items -->
+            <!-- Form thông tin bài viết -->
             <div class="card shadow mb-4 col-8">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Thông tin bài viết</h6>
@@ -104,7 +104,6 @@
         </div>
     </div>
     <script style="text/javascript" src="/dmc_global/public/js/base.js?<?= microtime(); ?>"></script>
-    <script style="text/javascript" src="/dmc_global/public/js/admin/dragNdrop.js?<?= microtime(); ?>"></script>
     <script type="text/javascript" src="/dmc_global/public/js/admin/slug.js?v=<?= microtime() ?>"></script>
 
 
@@ -119,39 +118,27 @@
                 e.preventDefault();
                 addRecord(this, function(){
                     refreshTable('.nav_table','reloadTable');
-                    console.log('2');
                     reloadDiv('#news_category','reloadDiv')
-                    
-                    // $('.category_selection').load('Add'+ ' .category_selection')
-                    // console.log('3');
                     $('form[action="addNews"]')[0].reset(); // reset lại các trường
                     $('.summernote').summernote('code', '<p><br></p>');
                 });
             });
 
             //delete Record
-
             $('.nav_table').on('click','#delete_btn', function(e){
                 e.preventDefault();
                 deleteRecord(this,'deletePost',function(){
                     refreshTable('.nav_table','reloadTable');
-                    console.log('2');
                     reloadDiv('#news_category','reloadDiv')
-                    // console.log('2');
-                    // $('.category_selection').load('Add'+ ' .category_selection')
-                    console.log('3');
                 });
             })
 
 
             //edit Record
-
             $(document).on('submit', 'form[action="editPost"]', function (e) {
                 e.preventDefault();
                 editRecord (this, function(){
-                    console.log('1');
                     refreshTable('.nav_table','reloadTable');
-                    console.log('2');
                     reloadDiv('#news_category','reloadDiv')
                     $('.category_selection').load('Add'+ ' .category_selection')
                 });
@@ -159,9 +146,7 @@
            //fetch post 
             $('.nav_table').on('click','.item-link', function (event) {
                 event.preventDefault();
-
                 var slug = $(this).data('slug');
-                // console.log(slug);
 
                 $.ajax({
                     url: 'fetchPage',
@@ -170,8 +155,6 @@
                         slug: slug,
                     },
                     success: function (response) {
-                        // console.log("Response from server: ", response);
-
                         const data = JSON.parse(JSON.stringify(response));
 
                         $('#news_id').val(data.id);

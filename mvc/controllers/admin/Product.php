@@ -4,15 +4,12 @@ namespace Mvc\Controllers\Admin;
 use Core\Controller;
 use Core\Exception;
 use Core\Auth;
-use Mvc\Utils\ImageHelper;
 use Mvc\Services\ProductService;
 class Product extends Controller
 {
-
     private $category;
-    private $productModel, $categoryModel, $pageModel;
+    private $productModel, $categoryModel, $pageModel, $navbarModel;
     private $productService;
-    private $parent_id;
     public function __construct()
     {
         Auth::checkAdmin();
@@ -20,12 +17,13 @@ class Product extends Controller
         $this->productModel = $this->model("ProductModel");
         $this->categoryModel = $this->model("CategoryModel");
         $this->pageModel = $this->model("PageModel");
+        $this->navbarModel = $this->model("NavbarModel");
         $this->productService = new ProductService(
             $this->productModel,
+            $this->pageModel,
+            $this->navbarModel,
             $this->categoryModel,
-            $this->pageModel
         );
-        // $this->parent_id = isset($_COOKIE['parent_id']) ? (int) $_COOKIE['parent_id'] : 0;
         $this->category = $this->categoryModel->getCategoryByType("product");
     }
 
@@ -133,6 +131,37 @@ class Product extends Controller
             }
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    function reloadTable()
+    {
+        try {
+
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function reloaddiv()
+    {
+        try {
+
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function fetchProduct(){
+        try{
+
+            if (isset($_POST['slug'])) {
+                //send JSON response back to AJAX
+                header('Content-Type: application/json');
+                echo $this->productService->fetchPage($_POST["slug"]);
+            }
+        }catch (Exception $e) {
+            return json_encode(["error"=>$e->getMessage()]);
         }
     }
 }

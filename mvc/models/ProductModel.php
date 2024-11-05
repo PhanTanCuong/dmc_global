@@ -54,9 +54,9 @@ class ProductModel extends DB
             $query = "SELECT * FROM product where id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
-            $stmt ->execute();
+            $stmt->execute();
             // dd($stmt->get_result());
-            return $stmt->get_result();
+            return $stmt->get_result()->fetch_assoc();
         } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -73,17 +73,16 @@ class ProductModel extends DB
         $meta_description,
         $meta_keyword,
         $category_id,
-        $type_id
     ) {
         try {
 
             $query = "INSERT INTO product 
-                                        (title,description,long_description,slug,image,meta_description,meta_keyword,category_id,type_id) 
+                                        (title,description,long_description,slug,image,meta_description,meta_keyword,category_id) 
                                     VALUES 
-                                        (?,?,?,?,?,?,?,?,?)";
+                                        (?,?,?,?,?,?,?,?)";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param(
-                "sssssssii",
+                "sssssssi",
                 $title,
                 $short_description,
                 $long_description,
@@ -92,9 +91,9 @@ class ProductModel extends DB
                 $meta_description,
                 $meta_keyword,
                 $category_id,
-                $type_id
             );
-            return ($stmt->execute()) ? $this->connection->insert_id : false;
+            $stmt->execute();
+            return $this->connection->insert_id;
         } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
@@ -161,7 +160,7 @@ class ProductModel extends DB
     }
 
     //delete product function
-    public function deleteProduct($id)
+    public function deleteProduct(int $id)
     {
         try {
             $query = "DELETE FROM product WHERE id=?";

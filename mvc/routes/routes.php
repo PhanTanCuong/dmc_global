@@ -20,7 +20,7 @@ Route::get('cooperation', 'Cooperation@display');
 Route::get('media', 'Post@display');
 Route::get('contact-us', 'Contact@display');
 Route::get('404', 'NotFound@display');
-Route::get('about-us/([a-zA-Z0-9_-]+)', 'AboutUs@display');
+Route::get('([a-zA-Z0-9_-]+)', 'AboutUs@display');
 Route::get('', 'Home@display');
 
 // Đăng nhập/Đăng ký
@@ -48,6 +48,9 @@ Route::post('Admin/Product/addProduct', 'Product@addProduct');
 Route::post('Admin/deleteProduct', 'Product@deleteProduct');
 Route::post('Admin/Product/getProductById/(\d+)', 'Product@getProductById');
 Route::post('Admin/Product/editProduct', 'Product@editProduct');
+Route::post('Admin/Product/fetchPage', 'Product@fetchProduct');
+Route::get('Admin/Product/reloadTable', 'Product@reloadTable');
+Route::get('Admin/Product/reloadDiv', 'Product@reloadDiv');
 
 // Admin quản lý bài viết (News/Post)
 Route::get('Admin/News', 'Post@display');

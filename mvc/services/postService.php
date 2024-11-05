@@ -21,13 +21,17 @@ class postService
 
     public function fetchPage(string $slug)
     {
+      try{
         $page = $this->pageModel->getMenuBySlug($slug);
-        if ($page['type'] === 'post') {
-            $data = $this->postModel->getNewsbyId((int) $page['preference_id']);
-
-            return json_encode($data->fetch_assoc());
+        if ($page['type'] !== 'post') {
+            return json_encode([]);
         }
-        return json_encode([]);
+
+        $data = $this->postModel->getNewsbyId((int) $page['preference_id']);
+        return json_encode($data);
+      }catch(\Exception $e){
+        echo $e->getMessage();
+      }
     }
 
 

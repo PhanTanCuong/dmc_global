@@ -5,8 +5,6 @@ use Core\DB;
 
 class PageModel extends DB
 {
-
-
     public function __construct()
     {
         parent::__construct(); //khởi tạo lớp cha
@@ -50,8 +48,6 @@ class PageModel extends DB
             return false;
         }
     }
-
-
 
     public function getMenuBySlug($slug)
     {

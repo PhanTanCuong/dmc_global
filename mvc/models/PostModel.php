@@ -47,7 +47,8 @@ class PostModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
-            return $stmt->get_result();
+            // dd($stmt->get_result()->fetch_assoc());
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         } catch (\mysqli_sql_exception $e) {
             error_log($e->getMessage());
             return false;
