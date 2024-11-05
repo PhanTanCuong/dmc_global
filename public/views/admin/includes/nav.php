@@ -13,66 +13,77 @@
     <li class="nav-item active">
         <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/dashboard');">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Thanh điều khiển</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <!-- <div class="sidebar-heading">
         Interface
-    </div>
+    </div> -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Mục sản phẩm -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-list"></i>
-            <span>Items</span>
+            <i class="fab fa-product-hunt"></i>
+            <span>Quản Lý sản phẩm</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Item:</h6>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Product');">Products</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(43,'public/Admin/News');">News</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(32,'public/Admin/News');">Abouts</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(44,'public/Admin/News');">Business Services</a>
-                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(73,'public/Admin/Cooperation');">Cooperation</a>
-
+                <a class="collapse-item" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Product');">Sản phẩm</a>
+            <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Product/Add');">Danh mục</a>
             </div>
         </div>
     </li>
-    <!-- Nav Item - Admin Profies -->
+
+    <!-- Mục bài viết -->
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-edit"></i>
+            <span>Quản Lý bài viết</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="javascript:void(0);"onclick="setParentID(43,'public/Admin/News');">Bài Viết</a>
+                <a class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/News/Add');">Danh mục</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Mục quản lý tài khoản -->
     <li class="nav-item">
         <a class="nav-link" href="javascript:void(0);" onclick="redirectTo('public/Admin/Account');">
             <i class="fas fa-fw fa-user"></i>
-            <span>Account</span>
+            <span>Tài khoản người dùng</span>
         </a>
     </li>
-    <!-- Nav Item - Utilities Collapse Menu -->
+
+    <!-- Mục quản lý giao diện -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-pager"></i>
-            <span>Customize</span>
+            <span>Cài đặt chung</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
                 <div class="collapse-item" data-toggle="collapse" data-target="#collapse-about" aria-expanded="false">
-                    Layouts
+                    Giao diện
                     <div id="collapse-about" class="collapse">
-                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Data');">Data</a>
+                        <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Data');">Nội dung</a>
                         <a class="collapse-item-child" href="javascript:void(0);" onclick="setParentID(23,'public/Admin/Slider');">Banner</a>
                     </div>
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/Category');">
-                    Category
+                    Quản lý danh mục
                 </div>
                 <div class="collapse-item" href="javascript:void(0);" onclick="redirectTo('public/Admin/NavBar');">
-                    Menu
+                    Thanh Menu
                 </div>
                 <div class="collapse-item   " href="javascript:void(0);" onclick="redirectTo('public/Admin/Customize');">
-                    Setting
+                    Nội dung tĩnh
                 </div>
             </div>
         </div>

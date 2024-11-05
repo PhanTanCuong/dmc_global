@@ -80,7 +80,7 @@ class Icons extends Controller
                 //Check image is null
                 if (!empty($_FILES["icons_image"]['name'])) {
                     if (ImageHelper::isImageFile($_FILES["icons_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Customize');
                         die();
                     }

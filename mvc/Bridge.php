@@ -5,6 +5,7 @@ require_once "../mvc/core/DB.php";
 require_once "../mvc/core/Route.php";
 require_once "../mvc/core/Auth.php";
 require_once "../mvc/routes/routes.php";
+require_once "../mvc/utils/Helper.php";
 
 // autoload.php @generated  by Composer
 require_once __DIR__ . '/../vendor/autoload.php';

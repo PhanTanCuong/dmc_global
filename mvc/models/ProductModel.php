@@ -1,4 +1,5 @@
 <?php
+namespace Mvc\Model;
 
 use Core\DB;
 
@@ -13,7 +14,7 @@ class ProductModel extends DB
             $query = "SELECT * FROM product";
             return $this->connection->query($query);
 
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -29,7 +30,7 @@ class ProductModel extends DB
         try {
             $query = "SELECT * FROM product LIMIT 6";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
 
         }
@@ -41,7 +42,7 @@ class ProductModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $category_id);
             return ($stmt->execute()) ? $stmt->get_result() : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -53,8 +54,10 @@ class ProductModel extends DB
             $query = "SELECT * FROM product where id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
-            return ($stmt->execute()) ? $stmt->get_result() : false;
-        } catch (mysqli_sql_exception $e) {
+            $stmt ->execute();
+            // dd($stmt->get_result());
+            return $stmt->get_result();
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -92,7 +95,7 @@ class ProductModel extends DB
                 $type_id
             );
             return ($stmt->execute()) ? $this->connection->insert_id : false;
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -139,7 +142,7 @@ class ProductModel extends DB
             );
             return ($stmt->execute()) ? true : false;
 
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -152,7 +155,7 @@ class ProductModel extends DB
             $stmt->bind_param("i", $id);
             $stmt->execute();
             return $stmt->get_result();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -165,7 +168,7 @@ class ProductModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -181,7 +184,7 @@ class ProductModel extends DB
             while ($row = $result->fetch_assoc()) {
                 return $row['parent_id'];
             }
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -195,7 +198,7 @@ class ProductModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("si", $visible, $id);
             return $stmt->execute();
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
@@ -206,7 +209,7 @@ class ProductModel extends DB
         try {
             $query = "DELETE FROM product WHERE visible=1";
             return $this->connection->query($query);
-        } catch (mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }

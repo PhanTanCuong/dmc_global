@@ -47,7 +47,7 @@ class Customize extends Controller
                 }
                 if (!empty($_FILES["head_image"]["name"])) {
                     if (ImageHelper::isImageFile($_FILES["head_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Customize');
                         die();
                     }
@@ -87,7 +87,7 @@ class Customize extends Controller
                 }
                 if (!empty($_FILES["header_icon"]["name"])) {
                     if (ImageHelper::isImageFile($_FILES["header_icon"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Customize');
                         die();
                     }
@@ -124,7 +124,7 @@ class Customize extends Controller
                 }
                 if (!empty($_FILES["footer_icon"]["name"])) {
                     if (ImageHelper::isImageFile($_FILES["footer_icon"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Customize');
                         die();
                     }
@@ -163,7 +163,7 @@ class Customize extends Controller
                 }
                 if (!empty($_FILES["footer_bg_image"]["name"])) {
                     if (ImageHelper::isImageFile($_FILES["footer_bg_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Customize');
                         die();
                     }
@@ -177,10 +177,10 @@ class Customize extends Controller
                         $_FILES["footer_bg_image"]["tmp_name"],
                         "./public/images/" . $_FILES["footer_bg_image"]["name"]
                     ) . '';
-                    $_SESSION['success'] = 'Your data is updated';
+                    $_SESSION['success'] = 'Cập nhật thành công';
                     header('Location:Customize');
                 } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
+                    $_SESSION['status'] = 'Cập nhật thất bại';
                     header('Location:Customize');
                 }
             }

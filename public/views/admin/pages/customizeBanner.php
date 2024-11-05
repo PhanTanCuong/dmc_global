@@ -119,7 +119,6 @@
         </div>
 
         <div class="card-body">
-          <!-- <?php include_once('../includes/Notification.php'); ?> -->
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
               <thead>

@@ -5,7 +5,7 @@
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">List of products
         <div class="controll-btn">
-          <form action="Product/Add" method="POST" ><button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button></form>
+          <form action="Product/Add" method="GET" ><button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button></form>
           <!-- <a href="" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
           <form action="multipleDeleteProduct" method="POST">
             <button type="submit" name="delete-multiple-data" class="btn btn-danger"><i
@@ -42,7 +42,7 @@
                 </td>
                 <td>
                   <div class="action_column">
-                    <form action="Product/Update" method="POST">
+                    <form action="Product/Update" method="GET">
                       <input type="hidden" name="product_id" class="product_id" value="<?= $row['id']; ?>">
                       <button type="submit" name="checking_edit_btn" id="checking_edit_btn" class="btn btn-warning"> <i
                       class="fas fa-edit"></i></button>

@@ -21,7 +21,7 @@ class ImageHelper
                         $original_image = imagecreatefromgif($file);
                         break;
                     default:
-                        throw new \Exception('Unsupported image format');
+                        return ['success' => false, 'message' => 'Định dạng ảnh không được hỗ trợ'];
                 }
 
                 $original_width = imagesx($original_image);
@@ -57,16 +57,16 @@ class ImageHelper
                 imagedestroy($original_image);
                 imagedestroy($newImage);
             } else {
-                throw new \Exception('File does not exist');
+                return ['success' => false, 'message' => 'File không tồn tại'];
             }
         } catch (\Exception $e) {
-            echo "Message:" . $e->getMessage();
+            echo json_encode(['error' => $e->getMessage()]);
         }
     }
 
-    public static function isImageFile( $file)
+    public static function isImageFile($file)
     {
-        $fileName=$file['tmp_name'];
+        $fileName = $file['tmp_name'];
 
         if (isset($file) && file_exists($fileName)) {
             $info = getimagesize($fileName);
@@ -82,7 +82,22 @@ class ImageHelper
 
         return false;
     }
-    
+
+    public static function moveUploadedFile($inputName)
+    {
+
+        //Kiểm tra file có tồn tại không
+        if (!isset($_FILES[$inputName])) {
+            return json_encode(['success' => false, 'message' => 'Lỗi! File ảnh không tồn tại']);
+        }
+
+        $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '/dmc_global/public/images';
+        $tmp_name = $_FILES[$inputName]["tmp_name"];
+        $upload_file = $uploads_dir . '/' . basename($_FILES["news_image"]["name"]);
+        return move_uploaded_file($tmp_name, $upload_file);
+
+    }
+
     public static function isImageField($file){
         $total=count($file['tmp_name']);
 
@@ -96,13 +111,13 @@ class ImageHelper
                 if ($info === false) {
                     return false;
                 }
-    
+
                 $validMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 if (in_array($info['mime'], $validMimeTypes)) {
                     return true;
                 }
             }
-    
+
             return false;
         }
 

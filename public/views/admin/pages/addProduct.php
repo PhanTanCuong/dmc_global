@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product information</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Thông tin sản phẩm</h5>
     </div>
 </div>
 
@@ -8,53 +8,46 @@
     <form action="addProduct" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="form-group">
-                <label for="category">Category</label>
+                <label for="category">Danh mục</label>
                 <select class="form-control " name="category" id="product_category" required>
                     <?php foreach ($data["product_categories"] as $category): ?>
-                        <option value="<?= $category['id'] ?>"><?= str_repeat('|---',$category['level']-1).$category['name'] ?></option>
+                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
-                <label> Title </label>
-                <input type="text" name="product_title" id="product_title" class="form-control" placeholder="Enter Title" required>
+                <label> Tiêu đề </label>
+                <input type="text" name="product_title" id="product_title" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>URL/Domain</label>
-                <input type="text" name="product_slug" id ="product_slug" class="form-control" placeholder="Enter Url/Domain" required>
+                <label> Đường dẫn</label>
+                <input type="text" name="product_slug" id ="product_slug" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>Small Description</label>
-                <textarea name="product_description" id="product_description" class="form-control" placeholder="Enter Small Description" rows="3"
+                <label> Mô tả ngắn</label>
+                <textarea name="product_description" id="product_description" class="form-control" rows="3"
                      required></textarea>
 
             </div>
             <div class="form-group">
-                <label>Long Description</label>
+                <label> Mô tả chi tiết</label>
                 <textarea name="product_long_description" class="form-control summernote" rows="3"></textarea>
             </div>
+            <h5 class="modal-title" id="exampleModalLabel">SEO</h5>
             <div class="form-group">
-                <label>Image </label>
-                <input type="file" name="product_image" id="product_image" class="form-control"
-                    placeholder="Enter Meta Description" required>
-            </div>
-            <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
-            <div class="form-group">
-                <label>Meta Keyword</label>
-                <input type="text" name="product_meta_keyword" id="product_meta_keyword" class="form-control" placeholder="Enter Description"
-                    required>
+                <label>Từ khóa SEO</label>
+                <input type="text" name="product_meta_keyword" id="product_meta_keyword" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>Meta Description</label>
-                <textarea name="product_meta_description" id="product_meta_description" class="form-control"
-                    rows="3"></textarea>
+                <label>Mô tả SEO</label>
+                <textarea name="product_meta_description" id="product_meta_description" class="form-control" rows="3"></textarea>
             </div>
             
 
         </div>
         <div class="modal-footer">
-            <a href="../Product" class="btn btn-danger">Back</a>
-            <button type="submit" name="addProductBtn" class="btn btn-primary">Save</button>
+            <a href="../Product" class="btn btn-danger">Quay về</a>
+            <button type="submit" name="addProductBtn" class="btn btn-primary">Lưu</button>
         </div>
 </div>
 </form>

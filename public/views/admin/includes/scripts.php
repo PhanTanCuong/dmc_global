@@ -23,7 +23,7 @@
 <!-- Summernote Editor -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- Toast -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="/dmc_global/public/lib/toastr/js/toastr.min.js"></script>
 <script>
   function redirectTo(path) {
     // <!-- The link that will trigger the JavaScript function to redirect -->
@@ -44,7 +44,7 @@
 
   $(document).ready(function () {
     $('.summernote').summernote({
-      height: 1000
+      height: 500
     });
     $('#myTable').DataTable();
   });
