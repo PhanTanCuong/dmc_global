@@ -15,49 +15,49 @@
                         <?php foreach($data["product_categories"] as $category):?>
                         <option value="<?= $category['id']?>"
                             <?=($category['id']==$row['category_id'])?'selected':''?>>
-                            <?=str_repeat('|---',$category['level']-1).$category['name']?>
+                            <?=$category['name']?>
                         </option>
                         <?php endforeach;?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label> Title </label>
+                    <label> Tên sản phẩm </label>
                     <input type="text" name="edit_product_title" class="form-control" placeholder="Enter Title"
                         value="<?= $row['title'] ?>">
                 </div>
                 <div class="form-group">
-                    <label>URL/Domain</label>
+                    <label>Đường dẫn</label>
                     <input type="text" name="edit_product_slug" class="form-control" placeholder="Enter Url/Domain"
                         value="<?= $row['slug'] ?>">
                 </div>
                 <div class="form-group">
-                    <label>Small Description</label>
+                    <label>Mô tả ngắn</label>
                     <textarea type="text" name="edit_product_description" class="form-control"
                         placeholder="Enter Small Description"><?= $row['description'] ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Long Description</label>
+                    <label>Mô tả chi tiết</label>
                     <textarea name="edit_product_long_description" class="form-control summernote"
                         rows="3"><?= $row['long_description'] ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Current Image</label><br>
+                    <label>Hình ảnh hiện tại</label><br>
                     <img class="icon_logo" src="/dmc_global/public/images/<?= $row['image']; ?>" alt="Image"><br>
-                    <span>Current file: <?= $row['image']; ?></span>
+                    <span>File ảnh hiện tại: <?= $row['image']; ?></span>
                 </div>
                 <div class="form-group">
-                    <label>Image </label>
+                    <label>Hình ảnh đại diện</label>
                     <input type="file" name="product_image" id="product_image" class="form-control"
                         placeholder="Enter Meta Description">
                 </div>
-                <h5 class="modal-title" id="exampleModalLabel">SEO Settings</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Quản lý SEO</h5>
                 <div class="form-group">
-                    <label>Meta Keyword</label>
+                    <label>Từ khóa SEO</label>
                     <input type="text" name="edit_product_meta_keyword" class="form-control" placeholder="Enter Description"
                         value="<?= $row["meta_keyword"] ?>">
                 </div>
                 <div class="form-group">
-                    <label>Meta Description</label>
+                    <label>Mô tả SEO</label>
                     <textarea name="edit_product_meta_description" id="product_meta_description" class="form-control"
                         rows="3"><?= $row['meta_description'] ?></textarea>
                 </div>
@@ -65,8 +65,8 @@
 
         </div>
         <div class="modal-footer">
-            <a href="../Product" class="btn btn-danger">Back</a>
-            <button type="submit" name="product_updatebtn" class="btn btn-primary">Save</button>
+            <a href="../Product" class="btn btn-danger">Quay về</a>
+            <button type="submit" name="product_updatebtn" class="btn btn-primary">Lưu</button>
         </div>
 </div>
 </form>

@@ -54,7 +54,9 @@ class ProductModel extends DB
             $query = "SELECT * FROM product where id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("i", $id);
-            return ($stmt->execute()) ? $stmt->get_result() : false;
+            $stmt ->execute();
+            // dd($stmt->get_result());
+            return $stmt->get_result();
         } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }

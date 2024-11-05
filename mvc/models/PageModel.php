@@ -41,7 +41,7 @@ class PageModel extends DB
     public function updateMenu($slug, $type, $preference_id)
     {
         try {
-            $query ="UPDATE FROM menu SET slug=?, type=? WHERE preference_id=?";
+            $query ="UPDATE menu SET slug=?, type=? WHERE preference_id=?";
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("ssi", $slug, $type, $preference_id);
             return $stmt->execute();

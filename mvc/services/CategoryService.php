@@ -148,7 +148,8 @@ class CategoryService extends DB
             $level = $this->categoryModel->traceParent($parent_id);
             $success = $this->categoryModel->customizeInforCategory($id, $name, $slug, $parent_id, $level, $type);
             if ($success) {
-                if (! $this->menuModel->updateMenu($slug, 'category', $id)) {
+                if (!($this->menuModel->updateMenu($slug, $type, $id))) {
+                    // dd($this->menuModel->updateMenu($slug, 'category', $id));
                     $_SESSION['status'] = 'Lỗi! Không lưu được trang';
                     header('Location:Category');
                     exit();

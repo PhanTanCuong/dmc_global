@@ -6,34 +6,40 @@ use Core\Controller;
 use Mvc\Utils\SlugHelper;
 use Mvc\Services\CategoryService;
 use Mvc\Services\PaginationService;
+use Core\Auth;
 class Product extends Controller
 {
 
+    private $product,$news,$banner,$item,$category,$page;
+    private $categoryService,$paginationService;
+    private $slug;
+    public function __construct(){
+        $this->product= $this->model("ProductModel");
+        $this->news= $this->model("PostModel");
+        $this->banner= $this->model("SliderModel");
+        $this->item= $this->model("SettingModel");
+        $this->category= $this->model("CategoryModel");
+        $this->page=$this->model("PageModel");
+        $this->paginationService = new PaginationService($this->page, $this->category);
+        $this->categoryService = new CategoryService($this->page, $this->category);
+
+        $this->slug = SlugHelper::getSlugFromURL();
+    }
+    
     function display()
     {
-
-        //Model
-        $product = $this->model("ProductModel");
-        $menuModel = $this->model("PageModel");
-        $news = $this->model("PostMedia");
-        $banner = $this->model("SliderModel");
-        $item = $this->model("SettingModel");
-        $category = $this->model("CategoryModel");
-
-        $product_category_id = $category->getCategoryIdBySlug(SlugHelper::getSlugFromURL());
-        $news_category_id = $category->getCategoryIdBySlug(SlugHelper::getSlugFromURL() . "-news");
-
-
+        $product_category_id = $this->category->getCategoryIdBySlug($this->slug);
+        $news_category_id = $this->category->getCategoryIdBySlug($this->slug . "-news");
         //View
         $this->view("index", [
-            "banner" => $banner->getInforBanner($product_category_id),
-            "product" => $product->getProductByProductCategory($product_category_id),
-            "news" => $news->getNewsByProductCategory($news_category_id),
-            "about2Infor" => $item->getLayoutbyId(3, $product_category_id),
-            "about3Infor" => $item->getLayoutbyId(4, $product_category_id),
-            "product1" => $item->getLayoutbyId(5, $product_category_id),
-            "stats" => $item->getLayoutbyId(6, $product_category_id),
-            "bg_stat" => $item->getBackgroundbyId(7),
+            "banner" => $this->banner->getInforBanner($product_category_id),
+            "product" => $this->product->getProductByProductCategory($product_category_id),
+            "news" => $this->news->getNewsByProductCategory($news_category_id),
+            "about2Infor" => $this->item->getLayoutbyId(3, $product_category_id),
+            "about3Infor" => $this->item->getLayoutbyId(4, $product_category_id),
+            "product1" => $this->item->getLayoutbyId(5, $product_category_id),
+            "stats" => $this->item->getLayoutbyId(6, $product_category_id),
+            "bg_stat" => $this->item->getBackgroundbyId(7),
             "page" => "displayProduct"
         ]);
     }
@@ -41,16 +47,11 @@ class Product extends Controller
     function displayProductDetail()
     {
         try {
-
-            $product = $this->model("PageModel");
-            $categoryModel = $this->model('CategoryModel');
-            $categoryService = new CategoryService($product, $categoryModel);
-            $product_data = $product->directPage(SlugHelper::getSlugFromURL());
-
+            $product_data = $this->product->directPage($this->slug);
             $this->view("index", [
                 'product_data' => $product_data,
-                'product' => $this->model('ProductModel')->getRelatedProducts(),
-                'product_category'=>$categoryService->getProductCategory(SlugHelper::getSlugFromURL()),
+                'product' => $this->product->getRelatedProducts(),
+                'product_category'=>$this->categoryService->getProductCategory($this->slug),
                 'page' => 'detail_of_product',
             ]);
         } catch (\Exception $e) {
@@ -61,23 +62,17 @@ class Product extends Controller
     function displayListOfProductByCategory()
     {
         try {
-
-            $menuModel = $this->model("PageModel");
-            $categoryModel = $this->model('CategoryModel');
-            $categoryService = new CategoryService($menuModel, $categoryModel);
-
-            $product_category_json = $categoryService->getSubCategoryData(SlugHelper::getSlugFromURL());
+            $product_category_json = $this->categoryService->getSubCategoryData($this->slug);
             $product_category=json_decode($product_category_json, true);
-            $selectedCategory = $menuModel->directPage(SlugHelper::getSlugFromURL());
+            $selectedCategory = $this->page->directPage($this->slug);
             foreach ($selectedCategory as $row) {
-                $breadcrumb_data = mysqli_fetch_assoc($categoryModel->getCategoryById($row['id']));
+                $breadcrumb_data = mysqli_fetch_assoc($this->category->getCategoryById($row['id']));
             }
             $this->view("index", [
                 'product_category' => $product_category,
                 'breadcrumb_data' => $breadcrumb_data['name'],
                 'page' => 'list_of_product_category'
             ]);
-
         } catch (\Exception $exception) {
             echo $exception->getMessage();
         }
@@ -86,17 +81,9 @@ class Product extends Controller
     function displayListOfProduct()
     {
         try {
-
-            $menuModel = $this->model("PageModel");
-            $categoryModel = $this->model('CategoryModel');
-            $slug = SlugHelper::getSlugFromURL();
-
-            $paginayionService = new PaginationService($menuModel, $categoryModel);
-
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-            $product = $paginayionService->fetchPaginationRows($slug, (int) $page, 10);
-            $total_page = $paginayionService->getTotalPage($slug, 10);
+            $product = $this->paginationService->fetchPaginationRows($this->slug, (int) $page, 10);
+            $total_page = $this->paginationService->getTotalPage($this->slug, 10);
 
             $this->view("index", [
                 'product' => $product,

@@ -5,120 +5,68 @@ use Core\Controller;
 use Core\Exception;
 use Core\Auth;
 use Mvc\Utils\ImageHelper;
+use Mvc\Services\ProductService;
 class Product extends Controller
 {
 
+    private $category;
+    private $productModel, $categoryModel, $pageModel;
+    private $productService;
+    private $parent_id;
     public function __construct()
     {
         Auth::checkAdmin();
+
+        $this->productModel = $this->model("ProductModel");
+        $this->categoryModel = $this->model("CategoryModel");
+        $this->pageModel = $this->model("PageModel");
+        $this->productService = new ProductService(
+            $this->productModel,
+            $this->categoryModel,
+            $this->pageModel
+        );
+        // $this->parent_id = isset($_COOKIE['parent_id']) ? (int) $_COOKIE['parent_id'] : 0;
+        $this->category = $this->categoryModel->getCategoryByType("product");
     }
 
 
     //Load list of products layout
     function display()
     {
-        //Model
-        $product = $this->model("ProductModel");
-
-        //View
         $this->view("admin/home", [
-            "product" => $product->getProduct(),
+            "product" => $this->productModel->getProduct(),
             "page" => "displayProduct"
         ]);
     }
 
     function displayAddProduct()
     {
-
-        if (isset($_COOKIE['parent_id'])) {
-            $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
-        }
         $this->view("admin/home", [
-            "product_categories" => $categories,
+            "product_categories" => $this->category,
             "page" => "addProduct"
         ]);
     }
 
     function Update()
     {
-        if (isset($_COOKIE['parent_id'])) {
-            $parent_id = (int) $_COOKIE['parent_id'];
-            $categories = $this->model('CategoryModel')->getProductCategory($parent_id);
+        if (isset($_GET['checking_edit_btn'])) {
+            $product_id = (int) $_GET['product_id'];
+            $product = $this->productModel->getProductbyId($product_id);
         }
 
-        if (isset($_POST['checking_edit_btn'])) {
-            $product_id = (int) $_POST['product_id'];
-            $product = $this->model('ProductModel')->getProductbyId($product_id);
-        }
-
+        // dd($this->category);
         $this->view("admin/home", [
             "product" => $product,
-            "product_categories" => $categories,
+            "product_categories" => $this->category,
             "page" => "editProduct"
         ]);
     }
     //Add new product function
     function addProduct()
     {
-        //Model
         try {
             if (isset($_POST['addProductBtn'])) {
-                //Input fields
-                $category_id = (int)$_POST['category'];
-                $title = $_POST['product_title'];
-                $slug = $_POST['product_slug'];
-                $short_description = $_POST['product_description'];
-                $long_description = $_POST['product_long_description'];
-                $meta_keyword = $_POST['product_meta_keyword'];
-                $meta_description = $_POST['product_meta_description'];
-                $image = $_FILES["product_image"]['name'];
-
-                //Check if image is an image file
-                if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
-                    $_SESSION['status'] = 'Incorrect image type';
-                    header('Location:../Product');
-                    die();
-                }
-
-                $product = $this->model("ProductModel");
-
-                $category= $this->model('CategoryModel');
-                $result=$category->getCategoryById($category_id);
-
-
-                while($row=mysqli_fetch_assoc($result)){
-                    $type_id=$row['parent_id'];
-                }
-
-                $preference_id = $product->addProduct(
-                    $title,
-                    $short_description,
-                    $long_description,
-                    $slug,
-                    $image,
-                    $meta_description,
-                    $meta_keyword,
-                    $category_id,
-                    $type_id
-                );
-                if (is_numeric($preference_id) && $preference_id > 0) {
-
-                    //add to slug center
-                    $this->model("PageModel")->addMenu($slug, 'product', $preference_id);
-
-                    //Upload image data vào folder upload
-                    move_uploaded_file(
-                        $_FILES["product_image"]["tmp_name"],
-                        "./public/images/" . $_FILES["product_image"]["name"]
-                    ) . '';
-
-                    $_SESSION['success'] = "Product is added successfully";
-                    header('Location:../Product');
-                } else {
-                    $_SESSION['status'] = "Product is NOT added";
-                    header('Location:../Product');
-                }
+                $this->productService->addProduct();
             }
         } catch (Exception $e) {
             $_POST['status'] = $e->getMessage();
@@ -132,65 +80,7 @@ class Product extends Controller
     {
         try {
             if (isset($_POST["product_updatebtn"])) {
-                $category_id = (int) $_POST['category'];
-                $title = $_POST['edit_product_title'];
-                $short_description = $_POST['edit_product_description'];
-                $long_description = $_POST['edit_product_long_description'];
-                $meta_keyword = $_POST['edit_product_meta_keyword'];
-                $meta_description = $_POST['edit_product_meta_description'];
-                $id = $_POST['edit_product_id'];
-
-                $product = $this->model('ProductModel');
-
-                $data = $product->getCurrentProductImages($id);
-                $stored_image = mysqli_fetch_array($data);
-
-                //Check image is null
-                if (!empty($_FILES["product_image"]['name'])) {
-                    if (ImageHelper::isImageFile($_FILES["product_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type';
-                        header('Location:../Product');
-                        die();
-                    }
-                    $image = $_FILES["product_image"]['name'];
-                } else {
-                    $image = $stored_image['image'];
-                }
-
-                $category= $this->model('CategoryModel');
-                $result=$category->getCategoryById($category_id);
-
-
-                while($row=mysqli_fetch_assoc($result)){
-                    $type_id=$row['parent_id'];
-                }
-                
-                $success = $product->editProduct(
-                    $id,
-                    $title,
-                    $short_description,
-                    $long_description,
-                    $image,
-                    $meta_keyword,
-                    $meta_description,
-                    $category_id,
-                    $type_id
-                );
-                if ($success) {
-
-                    // $this->model("PageModel")->updateMenu($category_id,$id);
-
-                    move_uploaded_file(
-                        $_FILES["product_image"]["tmp_name"],
-                        "./public/images/" . $_FILES["product_image"]["name"]
-                    ) . '';
-
-                    $_SESSION['success'] = 'Your data is updated';
-                    header('Location:../Product');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT updated';
-                    header('Location:../Product');
-                }
+                $this->productService->updateProduct();
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
@@ -203,28 +93,13 @@ class Product extends Controller
     {
         try {
             if (isset($_POST["delete_product_btn"])) {
-                $id = $_POST['delete_product_id'];
-
-                $product = $this->model('ProductModel');
-
-                $result = $product->deleteProduct($id);
-                if ($result) {
-                    $this->model("PageModel")->deleteMenu($id);
-                    $_SESSION['success'] = 'Your data is deleted';
-                    header('Location:Product');
-                } else {
-                    $_SESSION['status'] = 'Your data is NOT deleted';
-                    header('Location:Product');
-                }
+                $this->productService->deleteProduct($_POST['delete_product_id']);
             }
         } catch (Exception $e) {
             $_SESSION['status'] = $e->getMessage();
             header('Location:Product');
         }
     }
-
-
-
 
     //delete multiple products functions
 
@@ -235,8 +110,7 @@ class Product extends Controller
             if (isset($_POST['search_data'])) {
                 $id = $_POST['id'];
                 $visible = $_POST['visible'];
-                $product = $this->model('ProductModel');
-                $product->toggleCheckboxDelete($id, $visible);
+                $this->productModel->toggleCheckboxDelete($id, $visible);
             }
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -248,8 +122,7 @@ class Product extends Controller
     {
         try {
             if (isset($_POST['delete-multiple-data'])) {
-                $product = $this->model('ProductModel');
-                $result = $product->multipleDeleteProduct();
+                $result = $this->productModel->multipleDeleteProduct();
                 if ($result) {
                     $_SESSION['success'] = 'Your products are deleted';
                     header('Location:Product');

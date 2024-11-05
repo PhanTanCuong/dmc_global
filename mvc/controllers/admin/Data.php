@@ -110,7 +110,7 @@ class Data extends Controller
                 if (!empty($_FILES["data_image"]['name'])) {
                     $image = $_FILES["data_image"]['name'];
                     if (ImageHelper::isImageFile($_FILES["data_image"]) === false) {
-                        $_SESSION['status'] = 'Incorrect image type ';
+                        $_SESSION['status'] = 'Lỗi! Sai định dạng hình ảnh!!! ';
                         header('Location:Data');
                         die();
                     }

@@ -42,7 +42,7 @@ class CategoryModel extends DB
             $stmt = $this->connection->prepare($query);
             $stmt->bind_param("s", $type);
             $stmt->execute();
-            // dd($stmt->get_result());
+            // dd($stmt->get_result()->fetch_all(MYSQLI_ASSOC));
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         } catch (\mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -86,7 +86,7 @@ class CategoryModel extends DB
             $likePattern = "%$parent_id%";
             $stmt->bind_param("s", $likePattern);
             $stmt->execute();
-            return $stmt->get_result();
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         } catch (\mysqli_sql_exception $e) {
             echo "Error: " . $e->getMessage();
         }
